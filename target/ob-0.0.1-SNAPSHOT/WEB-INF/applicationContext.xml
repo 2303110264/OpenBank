@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans   
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context   
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<!-- base-package 하위 class scan : 자동 객체 생성(@Controller @~) -->
+	<context:component-scan
+		base-package="kopo.aisw.hc" />
+		
+	<!-- Spring MVC 설정들을 애너태이션(annotation) 기반으로 처리 -->
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean
+				class="org.springframework.http.converter.StringHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/html; charset=utf-8</value>
+					</list>
+				</property>
+			</bean>
+			<bean
+				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/html; charset=UTF-8</value>
+						<value>application/json; charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+	<!-- 최대 업로드 파일 사이즈 : 10MB -->
+	<!-- 
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="10485760" />
+	</bean>
+	 -->
+	
+	<!-- /**: static 폴더 밑에 하위폴더를 찾아가겠다. 의미 -->
+	<!-- 모르겠어서 보류
+     <mvc:resources location="/static" mapping="/**" /> 
+	 -->
+	
+	
+	<mvc:default-servlet-handler />
+	<!-- 
+	<mvc:view-controller path="/file/uploadForm.do" view-name="file/fileUploadForm" />
+	-->
+	<mvc:view-resolvers>
+		<mvc:jsp prefix="/WEB-INF/views/" suffix=".jsp" />
+	</mvc:view-resolvers>
+
+</beans>
+<!-- src/resources = 환경 구성을 위한 xml 파일 -->
