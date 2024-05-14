@@ -46,9 +46,12 @@
 }
 
 html, body {
-  width: 100%;
-  height: 100vh;
-  margin: 0;
+	justify-content: center;
+    align-items: center;
+	width: 80%;
+	min-width: 800px;
+	height: 100vh;
+	margin: 0 auto;
 }
 
 body {
@@ -62,7 +65,13 @@ body {
 button, a {
   cursor: pointer;
 }
-
+a{
+  color: var(--main-color);
+	text-decoration: none;
+}
+form{
+	
+}
 .app-container {
   width: 100%;
   display: flex;
@@ -817,7 +826,42 @@ button, a {
   .search-input {
     font-size: 14px;
   }
+.form-wrapper {
+  padding: auto;
+  border-radius: 20px;
+  background-color: var(--search-area-bg);
+  /* 
+  padding-right: 12px;
+  */
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 600px;
+  color: var(--light-font);
+  box-shadow: 0 2px 6px 0 rgba(136, 148, 171, 0.2), 0 24px 20px -24px rgba(71, 82, 107, 0.1);
+  overflow: hidden;
+}
+.dark .login-form-wrapper {
+  box-shadow: none;
+}
 
+.login-form-input {
+  border: none;
+  flex: 1;
+  outline: none;
+  height: 100%;
+  padding: 0 20px;
+  font-size: 16px;
+  background-color: var(--search-area-bg);
+  color: var(--main-color);
+}
+.login-form-input:placeholder {
+  color: var(--main-color);
+  opacity: 0.6;
+}
   .messages-btn {
     top: 48px;
   }

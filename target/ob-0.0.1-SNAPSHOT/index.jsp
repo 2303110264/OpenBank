@@ -11,8 +11,7 @@
 	Spring Test Index
 	</h3>
 	<br>
-	<a href="<%=request.getContextPath()%>/ajax/resBody.do"> 문자열 응답 </a>
-	<br>
+<%-- 
 	<a href="<%=request.getContextPath()%>/ajax/resBody.json"> JSON 응답
 	</a>
 	<br>
@@ -20,11 +19,14 @@
 		VO 응답 </a>
 	<br>
 	<a href="<%=request.getContextPath()%>/ajax/resStringListBody.json">
-		JSON List(문자열) 응답 </a>
+		JSON List(문자열) 응답 </a> 
 	<br />
+--%>
 	<a href="<%=request.getContextPath()%>/ajax/resVOListBody.json"> JSON List(VO) 응답 </a>
 	<br />
-	<a href="<%=request.getContextPath()%>/sample/"> Sample Main page </a>
+	<a href="<%=request.getContextPath()%>/test"> log4j2 Test?? </a>
+	<br />
+	<a href="<%=request.getContextPath()%>/bank/"> Sample Main page </a>
 	<br />
 	
 </body>

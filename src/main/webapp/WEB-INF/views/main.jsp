@@ -8,5 +8,7 @@
 </head>
 <body>
 	Main Test
+	log.info가 어디 뜨는 거야?
 </body>
+<jsp:include page="footer.jsp"></jsp:include>
 </html>

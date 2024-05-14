@@ -9,18 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import kopo.aisw.hc.member.MemberVO;
+import kopo.aisw.hc.member.vo.MemberVO;
 
 @Controller
 @RequestMapping("/ajax")
 public class ResTestController {
-
-		@ResponseBody
-		@RequestMapping("/resBody.do")
-		public String resStringBody() {
-			return "OK, 성공";
-		}
-
+	/**
 		@ResponseBody
 		@RequestMapping("/resBody.json")
 		public Map<String, String> resJsonBody() {
@@ -49,14 +43,14 @@ public class ResTestController {
 			}
 			return list;
 		}
-
+	*/
 		@RequestMapping("/resVOListBody.json")
 		@ResponseBody
 		public List<MemberVO> resJsonVOListBody() {
 			List<MemberVO> list = new ArrayList<>();
 			for (int i = 1; i < 4; i++) {
 				MemberVO vo = new MemberVO();
-				vo.setId("hong");
+				vo.setUserId("userId");
 				vo.setName("홍길동");
 				vo.setPassword("1234");
 				list.add(vo);

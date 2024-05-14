@@ -9,7 +9,24 @@
     http://www.springframework.org/schema/context/spring-context.xsd
     http://www.springframework.org/schema/mvc
     http://www.springframework.org/schema/mvc/spring-mvc.xsd">
-
+	
+	<!-- Mybatis 설정 -->
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+		<property name="username" value="hr" />
+		<property name="password" value="hr" />
+	</bean>
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" value="classpath:mybatis-context.xml"/>
+		<property name="mapperLocations" value="classpath:/oracleSqlMap/*.xml"/>
+	 </bean>
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory"/>
+	</bean>
+	
 	<!-- base-package 하위 class scan : 자동 객체 생성(@Controller @~) -->
 	<context:component-scan
 		base-package="kopo.aisw.hc" />
@@ -37,6 +54,7 @@
 
 		</mvc:message-converters>
 	</mvc:annotation-driven>
+	
 	<!-- 최대 업로드 파일 사이즈 : 10MB -->
 	<!-- 
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

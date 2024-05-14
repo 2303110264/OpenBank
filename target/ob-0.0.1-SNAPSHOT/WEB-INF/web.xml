@@ -34,11 +34,12 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
-	<!-- 
 	<servlet-mapping>
 		<servlet-name>dispatcher</servlet-name>
 		<url-pattern>*.json</url-pattern>
 	</servlet-mapping> 
+
+	<!-- 
 	<servlet-mapping>
 		<servlet-name>dispatcher</servlet-name>
 		<url-pattern>*.do</url-pattern>
