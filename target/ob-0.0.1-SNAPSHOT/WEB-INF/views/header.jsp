@@ -51,7 +51,7 @@
         
         <!-- [우상단 프로필] -->
         <!-- link 단위로 가면됨 -->
-      <button class="profile-btn" onclick='location.href="/ob/signUp"'>
+      <button class="profile-btn" onclick='location.href="/ob/user/signUp"'>
         <img src="https://assets.codepen.io/3306515/IMG_2025.jpg" />
         <span>우상단프로필</span>
       </button>
