@@ -2,16 +2,16 @@ package kopo.aisw.hc.member.vo;
 
 import org.apache.logging.log4j.core.config.plugins.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import lombok.experimental.SuperBuilder;
 
 @NoArgsConstructor
-@SuperBuilder
 @AllArgsConstructor
 @Setter
 @Getter
@@ -35,7 +35,9 @@ public class MemberVO {
 	@NotBlank(message = "아이디를 입력해주세요")
 	@Size(min=3, message="아이디는 6~16자 사이만 가능합니다.")
 	private String userId;
+	@JsonIgnore
 	private String password;
+	@JsonIgnore
 	private String creditPassword;
 	private String name;
 	private String phoneNum;
