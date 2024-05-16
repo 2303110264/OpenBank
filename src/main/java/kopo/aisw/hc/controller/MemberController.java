@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import jakarta.validation.Valid;
-import kopo.aisw.hc.member.service.MemberService;
+import kopo.aisw.hc.member.service.MemberServiceImpl;
 import kopo.aisw.hc.member.vo.MemberVO;
 
 @Validated
@@ -18,7 +18,7 @@ import kopo.aisw.hc.member.vo.MemberVO;
 public class MemberController {
 	
 	@Autowired
-	private MemberService ms;
+	private MemberServiceImpl ms;
 	
 	@GetMapping("user/signUp")
 	public void signUp(Model model) {

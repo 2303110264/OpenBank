@@ -8,10 +8,11 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import kopo.aisw.hc.member.vo.MemberVO;
 
-@Controller
+@RestController
 @RequestMapping("/ajax")
 public class ResTestController {
 	/**
