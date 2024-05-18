@@ -13,9 +13,25 @@ public class BankController {
 		return "bankMain";
 	}
 	
-	@RequestMapping("home/")
-	public String home(HttpServletRequest request) throws Exception{
-		return "home";
+	@RequestMapping("about")
+	public String about(){
+		return "example/about";
+	}
+	@RequestMapping("work")
+	public String work(){
+		return "example/work";
+	}
+	@RequestMapping("work-single")
+	public String workSingle(){
+		return "example/work-single";
+	}
+	@RequestMapping("pricing")
+	public String pricing(){
+		return "example/pricing";
+	}
+	@RequestMapping("contact")
+	public String contact(){
+		return "example/contact";
 	}
 	
 }
