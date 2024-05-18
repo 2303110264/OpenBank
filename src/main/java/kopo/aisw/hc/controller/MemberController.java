@@ -16,7 +16,7 @@ import kopo.aisw.hc.member.vo.MemberVO;
 
 @Validated
 @Controller
-@RequestMapping("user/")
+@RequestMapping("/member/")
 public class MemberController {
 	
 	@Autowired
@@ -37,8 +37,13 @@ public class MemberController {
 	@PostMapping("signUp")
 	public String signUp(@Valid @ModelAttribute("m")MemberVO m, BindingResult res) throws Exception {
 		if(res.hasErrors()) return "user/signUp";
-		ms.signUp(m);
-		return "redirect:/bank/";
+		if(ms.signUp(m)) return "redirect:/bank/";
+		//실패 및 재시도 알림 띄워주고 싶은데 일단 고민중
+		else return "user/signUp";
 	}
 	
+	@RequestMapping("jusoPopup")
+	public String jusoPopup() {
+		return "user/jusoPopup";
+	}
 }

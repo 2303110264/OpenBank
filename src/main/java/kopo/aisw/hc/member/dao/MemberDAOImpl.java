@@ -3,9 +3,11 @@ package kopo.aisw.hc.member.dao;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import kopo.aisw.hc.member.vo.MemberVO;
 
+@Transactional
 @Repository
 public class MemberDAOImpl implements MemberDAO{
 
@@ -14,17 +16,20 @@ public class MemberDAOImpl implements MemberDAO{
 	
 	@Override
 	public void signIn(MemberVO m) throws Exception {
-		MemberVO in = sqlSession.selectOne("dao.MemberDAO.login", m);
+		MemberVO in = sqlSession.selectOne("dao.MemberDAO.signIn", m);
 		System.out.println(in);
 	}
 
 	@Override
-	public void signUp(MemberVO m) throws Exception {
+	public boolean signUp(MemberVO m) {
 		// 회원가입
 		// 인데 테스트용으로 로그인을 집어넣음
-		MemberVO in = sqlSession.selectOne("dao.MemberDAO.login", m);
-		System.out.println(m);
-		System.out.println(in);
+		try {
+			sqlSession.insert("dao.MemberDAO.signUp", m);
+			return true;
+		}catch(Exception e) {
+			return false;
+		}
 	}
 
 	@Override

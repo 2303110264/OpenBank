@@ -102,7 +102,7 @@
                 <div class="contact row mb-4">
                     <div class="contact-icon col-lg-3 col-3">
                         <div class="border py-3 mb-2 text-center border rounded text-secondary">
-                            <i class='bx bx-money display-6'></i>
+                            <i class='bx bx-won display-6'></i>
                         </div>
                     </div>
                     <ul class="contact-info list-unstyled col-lg-9 col-9 light-300">

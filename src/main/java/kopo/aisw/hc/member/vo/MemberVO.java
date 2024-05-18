@@ -31,10 +31,11 @@ public class MemberVO {
 	고객 유형	CUSTOMER_TYPE	NUMBER(3)
 	 
 	 */
-	private String customerId;
+	private int customerId;
 	@NotBlank(message = "아이디를 입력해주세요")
 	@Size(min=3, message="아이디는 6~16자 사이만 가능합니다.")
 	private String userId;
+	@NotBlank(message = "비밀번호를 입력해주세요")
 	@JsonIgnore
 	private String password;
 	@JsonIgnore
@@ -44,6 +45,8 @@ public class MemberVO {
 	private String email;
 	private int zipCode;
 	private String address;
-	private int rrn;
+	private String addressDetail; //상세주소
+	private String rrn;
 	private int customerType;
+	private int availableBalance;
 }
