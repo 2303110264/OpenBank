@@ -22,9 +22,5 @@ public class TestController {
 		log.info("Log4j2 Testing...");
 		return "main";
 	}
-//	@RequestMapping("/ob")
-//	public String testMain() {
-//		return "main";
-//	}
 	
 }

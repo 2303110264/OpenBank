@@ -23,7 +23,7 @@
 <body>
 
 <div class="app-container">
-  <jsp:include page="../header2.jsp"/>
+  <jsp:include page="../header.jsp"/>
   <div class="app-content">
  	<%@include file="../sidebar.jsp" %>
  	<div class="projects-section">
