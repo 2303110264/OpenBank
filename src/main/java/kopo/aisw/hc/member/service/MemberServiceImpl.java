@@ -18,8 +18,8 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public void signUp(MemberVO m) throws Exception {
-		mDao.signUp(m);
+	public boolean signUp(MemberVO m) throws Exception {
+		return mDao.signUp(m);
 	}
 
 	@Override

@@ -5,4 +5,21 @@ https://templatemo.com/tm-561-purple-buzz
 
 */
 
-
+/*signUp*/
+/*sign-up form 중앙정렬*/
+.sign-up{
+	justify-content: center !important;
+}
+/*submit 버튼 중앙정렬*/
+.text-center{
+	text-align:center !important;
+}
+/*signUp error msg*/
+.error{
+		color:red;
+		font-size:14px;
+		font-weight: bold;
+	}
+.margin-auto{
+	margin: auto;
+}

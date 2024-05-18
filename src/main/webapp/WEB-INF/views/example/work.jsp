@@ -225,7 +225,7 @@
     
     
 	<%-- Lightbox --%>
-    <script src="${path}/assetsjs/fslightbox.js"></script>
+    <script src="${path}/assets/js/fslightbox.js"></script>
     <script>
         fsLightboxInstances['gallery'].props.loadOnlyCurrentSource = true;
     </script>

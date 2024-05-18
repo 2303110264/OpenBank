@@ -3,9 +3,44 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.MemberDAO">
-	<select id="login" parameterType="memberVO" resultType="memberVO">
-		select id userid, password
-		from t_member2
-		where id=#{userId} and password=#{password}
+	<select id="signIn" parameterType="memberVO" resultType="memberVO">
+		select bank_id userid, phone_num phonenum, email, zip_code zipcode, address, rrn, customer_type customertype
+		from test_customer
+		where bank_id=#{userId} and password=#{password}
 	</select>
+	<insert id="signUp" parameterType="memberVO">
+		insert into test_customer 
+		values(test_member_seq.nextval, 
+		#{userId}, 
+		#{password}, 
+<!-- 
+  		#{creditPassword}, 
+ -->
+ 		'0000',
+		#{name}, 
+		#{phoneNum}, 
+		#{email}, 
+		#{zipCode}, 
+		#{address}, 
+		#{rrn}, 
+		0, 
+		0)
+	</insert>
 </mapper>
+<!--
+CREATE TABLE TEST_CUSTOMER(
+	CUSTOMER_ID NUMBER PRIMARY KEY
+	, BANK_ID VARCHAR2(20) UNIQUE
+	, PASSWORD VARCHAR2(256) 
+	, CREDIT_PASSWORD VARCHAR2(256) 
+	, NAME VARCHAR2(13) NOT NULL
+	, PHONE_NUM VARCHAR2(13) NOT NULL UNIQUE
+	, EMAIL VARCHAR2(30) NOT NULL
+	, ZIP_CODE NUMBER(5) NOT NULL
+	, ADDRESS VARCHAR2(300) NOT NULL
+	, RRN VARCHAR2(13) NOT NULL UNIQUE
+	, CUSTOMER_TYPE NUMBER(3) NOT NULL
+	, AVAILABLE_BALANCE	NUMBER(15) NOT NULL
+);
+CREATE SEQUENCE test_member_seq;
+ -->
