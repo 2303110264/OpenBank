@@ -20,4 +20,8 @@
 
 ## 24.5.14.
 > mybatis 세팅 및 테스트 완료 (테이블은 아직..)   
-> 
+   
+## 24.5.18.
+> 새 템플릿 적용 완료
+> TemplateMo 561 Purple Buzz   
+> https://templatemo.com/tm-561-purple-buzz
