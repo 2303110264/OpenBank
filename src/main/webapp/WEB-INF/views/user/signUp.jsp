@@ -84,15 +84,6 @@
 
                     <div class="col-lg-6 mb-4">
                         <div class="form-floating">
-                        	<input type="hidden" id="confmKey" name="confmKey" value=""  >
-                            <form:input  path="zipCode" type="text" class="form-control form-control-lg light-300" id="zipNo" name="zipNo" readonly="true" placeholder="zipCode"/>
-                            <label for="floatingZip light-300">Zip code</label>
-                            <form:errors path="zipCode" class="error"/>
-                        </div>
-                    </div><%-- End Input zipCode --%>
-
-                    <div class="col-lg-6 mb-4">
-                        <div class="form-floating">
                             <form:input path="phoneNum" type="text" class="form-control form-control-lg light-300" id="floatingPhone" name="phoneNum" placeholder="phoneNum"/>
                             <label for="floatingPhone light-300">Phone</label>
                             <form:errors path="phoneNum" class="error"/>
@@ -106,6 +97,15 @@
                             <form:errors path="rrn" class="error"/>
                         </div>
                     </div><%-- End Input phoneNum --%>
+
+                    <div class="col-lg-6 mb-4">
+                        <div class="form-floating">
+                        	<input type="hidden" id="confmKey" name="confmKey" value=""  >
+                            <form:input  path="zipCode" type="text" class="form-control form-control-lg light-300" id="zipNo" name="zipNo" readonly="true" placeholder="zipCode"/>
+                            <label for="floatingZip light-300">Zip code</label>
+                            <form:errors path="zipCode" class="error"/>
+                        </div>
+                    </div><%-- End Input zipCode --%>
 
                     <div class="col-12">
                         <div class="form-floating mb-4">
