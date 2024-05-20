@@ -29,8 +29,13 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	
+	<!-- 세션 유지시간 -->
+	<session-config>
+		<session-timeout>10</session-timeout>
+	</session-config>
+	
 	<!-- ERROR CONTROL -->
-	<error-page>
+	<!-- <error-page>
 		<error-code>404</error-code>
 		<location>/common/error.jsp</location>
 	</error-page>
@@ -38,6 +43,7 @@
 		<error-code>500</error-code>
 		<location>/common/error.jsp</location>
 	</error-page>
+	 -->
 	
 	<servlet-mapping>
 		<servlet-name>dispatcher</servlet-name>

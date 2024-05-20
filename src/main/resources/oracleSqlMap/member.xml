@@ -4,7 +4,17 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.MemberDAO">
 	<select id="signIn" parameterType="memberVO" resultType="memberVO">
-		select bank_id userid, phone_num phonenum, email, zip_code zipcode, address, rrn, customer_type customertype
+		select 
+		bank_id userid, 
+		phone_num phonenum, 
+		email, 
+		zip_code zipcode, 
+		address, 
+		address_detail addressDetail, 
+		rrn, 
+		customer_type customertype
+		, available_balance availablebalance
+		
 		from test_customer
 		where bank_id=#{userId} and password=#{password}
 	</select>
@@ -36,8 +46,9 @@ CREATE TABLE TEST_CUSTOMER(
 	, NAME VARCHAR2(13) NOT NULL
 	, PHONE_NUM VARCHAR2(13) NOT NULL UNIQUE
 	, EMAIL VARCHAR2(30) NOT NULL
-	, ZIP_CODE NUMBER(5) NOT NULL
+	, ZIP_CODE NUMBER(5) NOT NULL 
 	, ADDRESS VARCHAR2(300) NOT NULL
+	, ADDRESS_DETAIL VARCHAR2(300)
 	, RRN VARCHAR2(13) NOT NULL UNIQUE
 	, CUSTOMER_TYPE NUMBER(3) NOT NULL
 	, AVAILABLE_BALANCE	NUMBER(15) NOT NULL

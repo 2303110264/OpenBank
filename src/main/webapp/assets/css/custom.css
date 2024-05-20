@@ -23,3 +23,20 @@ https://templatemo.com/tm-561-purple-buzz
 .margin-auto{
 	margin: auto;
 }
+
+/*header*/
+body{
+	padding-top:80px;
+}
+header{
+	background: #f5b335;
+    height: 40px;
+    position: fixed;
+    top: 0;
+    transition: top 0.2s ease-in-out;
+    width: 100%;
+    z-index: 2303110264;
+}
+.nav-up{
+	top:-80px;
+}

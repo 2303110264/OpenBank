@@ -39,7 +39,7 @@
     <section class="container py-5 text-center">
 
         <h1 class="col-12 col-xl-8 h2 text-primary pt-3 margin-auto">Welcome!</h1>
-        <h2 class="col-12 col-xl-8 h4 regular-400 margin-auto">로그인 페이지는 단순해야 하는데. </h2>
+        <h2 class="col-12 col-xl-8 h4 regular-400 margin-auto">ID랑 PW는 왜 말썽인가.</h2>
         <p class="col-12 col-xl-8 text-muted pb-5 light-300 margin-auto">
             헤더랑 푸터를 날릴지 고민중
         </p>
@@ -52,7 +52,7 @@
 
                     <div class="col-lg-6 mb-4">
                         <div class="form-floating">
-                            <form:input path="userId" type="text" class="form-control form-control-lg light-300" id="floatingID" name="userId"/>
+                            <form:input path="userId" type="text" class="form-control form-control-lg light-300" id="floatingID" name="userId" placeholder="ID"/>
                             <label for="floatingID light-300">ID</label>
                             <form:errors path="userId" class="error"/>
                         </div>
@@ -60,7 +60,7 @@
 
                     <div class="col-lg-6 mb-4">
                         <div class="form-floating">
-                            <form:input path="password" type="password" class="form-control form-control-lg light-300" id="floatingPassword" name="password"/>
+                            <form:input path="password" type="password" class="form-control form-control-lg light-300" id="floatingPassword" name="password" placeholder="Password"/>
                             <label for="floatingPassword light-300">Password</label>
                             <form:errors path="password" class="error"/>
                         </div>
@@ -84,7 +84,7 @@
 
                     <div class="col-lg-6 mb-4">
                         <div class="form-floating">
-                            <form:input path="phoneNum" type="text" class="form-control form-control-lg light-300" id="floatingPhone" name="phoneNum" placeholder="phoneNum"/>
+                            <form:input path="phoneNum" type="text" class="form-control form-control-lg light-300" id="phoneNum" name="phoneNum" placeholder="phoneNum"/>
                             <label for="floatingPhone light-300">Phone</label>
                             <form:errors path="phoneNum" class="error"/>
                         </div>
@@ -92,7 +92,7 @@
 
                     <div class="col-lg-6 mb-4">
                         <div class="form-floating">
-                            <form:input path="rrn" type="text" class="form-control form-control-lg light-300" id="floatingrrn" name="rrn" placeholder="rrn"/>
+                            <form:input path="rrn" type="text" class="form-control form-control-lg light-300" id="rrn" name="rrn" placeholder="rrn"/>
                             <label for="floatingRrn light-300">RRN</label>
                             <form:errors path="rrn" class="error"/>
                         </div>
