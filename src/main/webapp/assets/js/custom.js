@@ -30,4 +30,4 @@
 		    
 		    document.form.zipNo.value = ""; // ^^ 0뜨는 거 보기 싫어서 JS로 해결!
 	}
-	
+
