@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<header class="nav-down" style="background:black;">
+<!-- 
+<header class="nav-down">
+ -->
+<header>
 	<nav id="main_nav" class="navbar navbar-expand-lg navbar-light bg-white shadow">
 	        <div class="container d-flex justify-content-between align-items-center">
-	            <a class="navbar-brand h1" href="index">
+	            <a class="navbar-brand h1" href="/ob/bank/">
 	                <i class='bx bx-money bx-sm text-dark'></i>
 	                <span class="text-dark h4">Open</span> <span class="text-primary h4">bank</span>
 	            </a>
@@ -34,13 +37,14 @@
 	                <div class="navbar align-self-center d-flex">
 	                    <a class="nav-link" href="#"><i class='bx bx-bell bx-sm bx-tada-hover text-primary'></i></a>
 	                    <a class="nav-link" href="#"><i class='bx bx-cog bx-sm text-primary'></i></a>
-	                    <a class="nav-link" href="${path}/ob/member/signUp"><i class='bx bx-user-circle bx-sm text-primary'></i></a>
+	                    <a class="nav-link" href="${path}/ob/member/signIn"><i class='bx bx-user-circle bx-sm text-primary'></i></a>
 	                </div>
 	            </div>
 	        </div>
 	 </nav>
 </header>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- 
 <script>
 	var didScroll;
 	var lastScrollTop = 0;
@@ -80,3 +84,4 @@
 	    lastScrollTop = st;
 	}
 </script>
+ -->

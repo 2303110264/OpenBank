@@ -3,14 +3,14 @@ package kopo.aisw.hc.member.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kopo.aisw.hc.member.dao.MemberDAOImpl;
+import kopo.aisw.hc.member.dao.MemberDAO;
 import kopo.aisw.hc.member.vo.MemberVO;
 
 @Service
 public class MemberServiceImpl implements MemberService{
 	
 	@Autowired
-	private MemberDAOImpl mDao;
+	private MemberDAO mDao;
 	
 	@Override
 	public void signIn(MemberVO m) throws Exception {
@@ -18,7 +18,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public boolean signUp(MemberVO m) throws Exception {
+	public boolean signUp(MemberVO m){
 		return mDao.signUp(m);
 	}
 
@@ -26,6 +26,11 @@ public class MemberServiceImpl implements MemberService{
 	public void logout() throws Exception {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public boolean IdDuplicationCheck(String userId) {
+		return mDao.IdDuplicationCheck(userId);
 	}
 	
 }

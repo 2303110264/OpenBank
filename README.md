@@ -16,12 +16,20 @@
 > *(수업과 메서드 및 어노테이션이 일부 다를 수 있음에 유의)*   
    
 ***빌드 후 실행해야할 파일***   
-> click_me_and_restart 파일을 따로 실행해서 2022-03 버전에 적용해주세요.   
-
-## 24.5.14.
-> mybatis 세팅 및 테스트 완료 (테이블은 아직..)   
+> click_me_and_restart 파일을 따로 실행해서 2022-03 버전에 적용해주세요.      
    
-## 24.5.18.
-> 새 템플릿 적용 완료
-> TemplateMo 561 Purple Buzz   
-> https://templatemo.com/tm-561-purple-buzz
+---   
+## Log
+
+24.5.21.   
+> Api Key 비공개 처리   
+> .gitignore 파일에 resources/application-API-KEY.properties 추가 바람   
+> *★ 해당 파일은 노션에 올려두었음!*   
+   
+24.5.18.   
+> 새 템플릿 적용 완료   
+TemplateMo 561 Purple Buzz   
+https://templatemo.com/tm-561-purple-buzz   
+   
+24.5.14.
+> mybatis 세팅 및 테스트 완료 (테이블은 아직..)      

@@ -24,19 +24,59 @@ https://templatemo.com/tm-561-purple-buzz
 	margin: auto;
 }
 
+/* Sign up 돌아가기 버튼 */
+.btn-3 {
+  color: #6266ea;
+  background-color: #ffffff;
+  border-color: #6266ea;
+}
+.btn-3:hover {
+  color: #7a7ded;
+  background-color: #e7e7e7;
+  border-color: #7a7ded;
+}
+/*sign in*/
+.sign-in{
+	justify-content: center !important;
+}
+.sign-in-btn{
+	min-width: 150px;
+	max-width: 250px;
+	width:30%;
+	height:45px;
+}
+.sign-in-div{
+	justify-content: center;
+	min-width:600px;
+}
+.sign-in-div2{
+	justify-content: center;
+	max-width:400px;
+	min-width:300px;
+	width:100%;
+}
+.sign-in-form{
+	display:block;
+	text-align: -webkit-center;
+	min-width:550px;
+	width:100%;
+}
 /*header*/
 body{
 	padding-top:80px;
 }
 header{
-	background: #f5b335;
     height: 40px;
     position: fixed;
     top: 0;
-    transition: top 0.2s ease-in-out;
+    transform: initial;
+    transition: transform 0.3s ease-in-out;
     width: 100%;
     z-index: 2303110264;
 }
-.nav-up{
-	top:-80px;
+header.scrollDown { 
+  transform: translate(0, -90px);
 }
+
+
+

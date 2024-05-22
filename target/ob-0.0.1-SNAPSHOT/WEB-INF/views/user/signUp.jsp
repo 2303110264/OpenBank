@@ -33,15 +33,16 @@
 </head>
 <body>
 
-  	<jsp:include page="../header.jsp"/>
-  	
 	<%-- Start Contact --%>
     <section class="container py-5 text-center">
-
-        <h1 class="col-12 col-xl-8 h2 text-primary pt-3 margin-auto">Welcome!</h1>
-        <h2 class="col-12 col-xl-8 h4 regular-400 margin-auto">ID랑 PW는 왜 말썽인가.</h2>
+        <h1 class="col-12 col-xl-8 h2 text-primary pt-3 margin-auto">
+		<a class="navbar-brand" href="${path}/bank/">
+        Open Bank
+		</a>
+        </h1>
+        <h2 class="col-12 col-xl-8 h4 regular-400 margin-auto">약관 넣어야하나</h2>
         <p class="col-12 col-xl-8 text-muted pb-5 light-300 margin-auto">
-            헤더랑 푸터를 날릴지 고민중
+            여긴 헤더랑 푸터를 날릴지 고민중
         </p>
 
         <div class="row pb-4 sign-up">
@@ -103,25 +104,28 @@
                         	<input type="hidden" id="confmKey" name="confmKey" value=""  >
                             <form:input  path="zipCode" type="text" class="form-control form-control-lg light-300" id="zipNo" name="zipNo" readonly="true" placeholder="zipCode"/>
                             <label for="floatingZip light-300">Zip code</label>
-                            <form:errors path="zipCode" class="error"/>
+                            <form:errors path="address" class="error"/>
                         </div>
                     </div><%-- End Input zipCode --%>
 
                     <div class="col-12">
                         <div class="form-floating mb-4">
-                            <form:input path="address" type="text" class="form-control form-control-lg light-300" id="roadAddrPart1" name="roadAddrPart1" placeholder="address"/>
+                            <form:input path="address" type="text" class="form-control form-control-lg light-300" id="roadAddrPart1" name="roadAddrPart1" readonly="true" placeholder="address"/>
                             <label for="floatingAddress light-300">Address</label>
                         </div>
                     </div><%-- End Input Address --%>
                     <div class="col-12">
                         <div class="form-floating mb-4">
-                            <form:input path="addressDetail" type="text" class="form-control form-control-lg light-300" id="addrDetail" name="addrDetail" placeholder="address detail"/>
+                            <form:input path="addressDetail" type="text" class="form-control form-control-lg light-300" id="addrDetail" name="roadAddrPart2" placeholder="address detail"/>
                             <label for="floatingAddress light-300">Address detail</label>
+                            <form:errors path="addressDetail" class="error"/>
                         </div>
                     </div><%-- End Input Address Detail --%>
 
                     <div class="col-md-12 col-12 m-auto text-center">
-                        <button type="submit" class="btn btn-secondary rounded-pill px-md-5 px-4 py-2 radius-0 text-light light-300">Sign Up</button>
+                    	<button type="button" onclick="location.href='${path}/bank/'" class="btn btn-3 rounded-pill px-md-5 px-4 py-2 radius-0 light-300">돌아가기</button>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="submit" class="btn btn-secondary rounded-pill px-md-5 px-4 py-2 radius-0 text-light light-300">회원가입</button>
                     </div>
 
                 </form:form>

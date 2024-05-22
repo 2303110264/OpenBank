@@ -31,6 +31,10 @@
 	<context:component-scan
 		base-package="kopo.aisw.hc" />
 		
+	<context:property-placeholder location="classpath:application-API-KEY.properties"/>
+    <bean class="kopo.aisw.hc.api.ApiConfig"/>
+		
+		
 	<!-- Spring MVC 설정들을 애너태이션(annotation) 기반으로 처리 -->
 	<mvc:annotation-driven>
 		<mvc:message-converters>

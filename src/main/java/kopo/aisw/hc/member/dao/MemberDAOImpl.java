@@ -22,8 +22,6 @@ public class MemberDAOImpl implements MemberDAO{
 
 	@Override
 	public boolean signUp(MemberVO m) {
-		// 회원가입
-		// 인데 테스트용으로 로그인을 집어넣음
 		try {
 			sqlSession.insert("dao.MemberDAO.signUp", m);
 			return true;
@@ -36,6 +34,12 @@ public class MemberDAOImpl implements MemberDAO{
 	public void logout() throws Exception {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public boolean IdDuplicationCheck(String userId) {
+		MemberVO idChk = sqlSession.selectOne("dao.MemberDAO.IdDuplicationCheck", userId);
+		return idChk!=null;
 	}
 
 }

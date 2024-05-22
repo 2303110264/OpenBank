@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jakarta.validation.Valid;
-import kopo.aisw.hc.member.service.MemberServiceImpl;
+import kopo.aisw.hc.api.Api;
+import kopo.aisw.hc.member.service.MemberService;
 import kopo.aisw.hc.member.vo.MemberVO;
 
 @Validated
@@ -20,30 +21,43 @@ import kopo.aisw.hc.member.vo.MemberVO;
 public class MemberController {
 	
 	@Autowired
-	private MemberServiceImpl ms;
+	private MemberService ms;
+	@Autowired
+    private Api api;
+    
+	@GetMapping("signIn")
+	public String signIn(Model model) {
+		MemberVO m = new MemberVO();
+		model.addAttribute("m", m);
+		
+		return "user/signIn";
+	}
 	
 	@GetMapping("signUp")
 	public String signUp(Model model) {
 		MemberVO m = new MemberVO();
 		model.addAttribute("m", m);
+		
 		return "user/signUp";
 	}
 	
-//	@RequestMapping("/login")
-//	public String Login() {
-//		return "user/login";
-//	}
-	
 	@PostMapping("signUp")
-	public String signUp(@Valid @ModelAttribute("m")MemberVO m, BindingResult res) throws Exception {
-		if(res.hasErrors()) return "user/signUp";
-		if(ms.signUp(m)) return "redirect:/bank/";
-		//실패 및 재시도 알림 띄워주고 싶은데 일단 고민중
-		else return "user/signUp";
+	public String signUp(@Valid @ModelAttribute("m")MemberVO m, BindingResult res, Model model) throws Exception {
+		//if(res.hasErrors()) return "user/signUp";
+		
+		//id 중복체크
+		if(ms.IdDuplicationCheck(m.getUserId())) model.addAttribute("IdDuplicationCheck", true);
+		// 주민번호+이름, 전화번호, 이메일 체크 남음
+		
+		// 가입 가능?
+		if(!ms.signUp(m)) model.addAttribute("signUp", false);
+		else model.addAttribute("signUp", true);
+		return "user/signUp";
 	}
 	
 	@RequestMapping("jusoPopup")
-	public String jusoPopup() {
+	public String jusoPopup(Model model) {
+		model.addAttribute("juso", api.getJuso());
 		return "user/jusoPopup";
 	}
 }

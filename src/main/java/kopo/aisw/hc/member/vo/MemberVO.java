@@ -1,10 +1,7 @@
 package kopo.aisw.hc.member.vo;
 
-import org.apache.logging.log4j.core.config.plugins.validation.constraints.NotBlank;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -35,37 +32,39 @@ public class MemberVO {
 	 */
 	private int customerId;
 	
-	@NotBlank(message = "아이디를 입력해주세요")
-	@Size(min=3, message="아이디는 6~16자 사이만 가능합니다")
-	@Pattern(regexp = "\"^[a-z-_]{3,50}$\"", 
-	message="아이디는 영어 소문자와 -또는 _로만 이루어져야 합니다")
+	@Size(min=6, message="아이디는 6~16자 사이로 입력해주세요")
+	@Pattern(regexp = "^[\\w-]{6,16}$", 
+	message="아이디는 영어와 숫자, 특수문자 -또는 _로만 이루어져야 합니다")
 	private String userId;
 	
-	@NotBlank(message = "비밀번호를 입력해주세요")
 	@JsonIgnore
-	@Pattern(regexp ="^(?=.*[a-z])(?=.*\\d)(?=.*[~!@#$%^&*()+|=])[A-Za-z\\d~!@#$%^&*()+|=]$", 
+	@Size(min=3, message="비밀번호는 8~20자 사이로 입력해주세요")
+	@Pattern(regexp ="^(?=.*[a-z])(?=.*\\d)(?=.*[~!@#$%^&*()+|=])[a-z\\d~!@#$%^&*()+|=]{8,20}$", 
 	message = "영문 소문자, 숫자, 특수문자(~!@#$%^&*()+|=])가 모두 포함되어야 합니다")
 	private String password;
 	
 	@JsonIgnore
 	private String creditPassword;
 	
-	@NotBlank(message="이름을 입력해주세요.")
+	@Size(min=1, max=6, message="이름을 입력해주세요(최대 6자)")
 	private String name;
 	
-	@Pattern(regexp="\"^[\\d]$\"")
+	@Pattern(regexp="^[\\d]{10,11}$", message = "전화번호를 입력해주세요")
 	private String phoneNum;
 	
-	@NotBlank(message="이메일을 입력해주세요.")
-	@Email
+	//@Pattern(regexp="^(?=.*[A-Za-z-_\\d])(?=.*[@])(?=.*[.])[A-Za-z\\d@-_.]$", message = "메일 형식이 아닙니다.")
+	@Pattern(regexp="^[\\w\\.-]+@[\\w\\.-]+\\.[a-zA-Z]{2,}$", message = "메일 형식이 아닙니다.")
 	private String email;
+	
 	private int zipCode;
 	
-	@NotBlank(message="주소를 입력해주세요")
+	@Size(min=3, message="주소를 입력해주세요")
 	private String address;
+	
+	@Size(min=1, message="상세 주소를 입력해주세요")
 	private String addressDetail; //상세주소
 	
-	@NotBlank(message="주민번호를 입력해주세요")
+	@Size(min=13, max=13, message="주민번호를 입력해주세요")
 	private String rrn;
 	private int customerType;
 	private int availableBalance;
