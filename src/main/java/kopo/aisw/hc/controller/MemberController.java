@@ -46,8 +46,12 @@ public class MemberController {
 		//if(res.hasErrors()) return "user/signUp";
 		
 		//id 중복체크
-		if(ms.IdDuplicationCheck(m.getUserId())) model.addAttribute("IdDuplicationCheck", true);
+		if(ms.idDuplicationCheck(m.getUserId())) model.addAttribute("idDuplicationCheck", true);
 		// 주민번호+이름, 전화번호, 이메일 체크 남음
+		// humanDC, phoneDC, mailDC
+		if(ms.humanDuplicationCheck(m)) model.addAttribute("humanDuplicationCheck", true);
+		if(ms.phoneDuplicationCheck(m.getPhoneNum())) model.addAttribute("phoneDuplicationCheck", true);
+		if(ms.mailDuplicationCheck(m.getEmail())) model.addAttribute("mailDuplicationCheck", true);
 		
 		// 가입 가능?
 		if(!ms.signUp(m)) model.addAttribute("signUp", false);

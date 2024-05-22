@@ -70,11 +70,11 @@
                     </div><%-- End Input Password --%>
 
                     <div class="col-md-12 col-12 m-auto text-center">
-                    	<button type="button" onclick="location.href='${path}/bank/'" class="btn btn-3 rounded-pill px-md-5 px-4 py-2 radius-0 light-300">돌아가기</button>
+                    	<button type="button" onclick="location.href='/ob/bank/'" class="btn btn-3 rounded-pill px-md-5 px-4 py-2 radius-0 light-300">돌아가기</button>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <button type="submit" class="btn sign-in-btn btn-secondary rounded-pill px-md-5 px-4 py-2 radius-0 text-light light-300">로그인</button>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    	<button type="button" onclick="location.href='${path}/member/signUp'" class="btn btn-3 rounded-pill px-md-5 px-4 py-2 radius-0 light-300">회원가입</button>
+                    	<button type="button" onclick="location.href='/ob/member/signUp'" class="btn btn-3 rounded-pill px-md-5 px-4 py-2 radius-0 light-300">회원가입</button>
                     </div>
 
                 </form:form>

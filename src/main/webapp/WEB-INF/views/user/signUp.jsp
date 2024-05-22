@@ -56,7 +56,7 @@
                             <form:input path="userId" type="text" class="form-control form-control-lg light-300" id="floatingID" name="userId" placeholder="ID"/>
                             <label for="floatingID light-300">ID</label>
                             <form:errors path="userId" class="error"/>
-                            <c:if test="${IdDuplicationCheck}">
+                            <c:if test="${idDuplicationCheck}">
                             	<span class='error'>다른 아이디를 써주세요</span>
                             </c:if>
                         </div>
@@ -75,6 +75,9 @@
                             <form:input path="name" type="text" class="form-control form-control-lg light-300" id="floatingname" name="name" placeholder="Name"/>
                             <label for="floatingname light-300">Name</label>
                             <form:errors path="name" class="error"/>
+                            <c:if test="${humanDuplicationCheck}">
+                            	<span class='error'>이름 또는 주민번호를 확인해주세요</span>
+                            </c:if>
                         </div>
                     </div><%-- End Input Name --%>
 
@@ -83,6 +86,9 @@
                             <form:input path="email" type="text" class="form-control form-control-lg light-300" id="floatingmail" name="email" placeholder="Phone"/>
                             <label for="floatingmail light-300">Email</label>
                             <form:errors path="email" class="error"/>
+                            <c:if test="${mailDuplicationCheck}">
+                            	<span class='error'>이미 등록된 이메일입니다</span>
+                            </c:if>
                         </div>
                     </div><%-- End Input Email --%>
 
@@ -91,6 +97,9 @@
                             <form:input path="phoneNum" type="text" class="form-control form-control-lg light-300" id="phoneNum" name="phoneNum" placeholder="phoneNum"/>
                             <label for="floatingPhone light-300">Phone</label>
                             <form:errors path="phoneNum" class="error"/>
+                            <c:if test="${phoneDuplicationCheck}">
+                            	<span class='error'>이미 등록된 전화번호입니다</span>
+                            </c:if>
                         </div>
                     </div><%-- End Input phoneNum --%>
 
@@ -100,6 +109,9 @@
                             <label for="floatingRrn light-300">RRN</label>
                             <form:errors path="rrn" class="error"/>
                             <span id="IDCheck" class="error"></span>
+                            <c:if test="${humanDuplicationCheck}">
+                            	<span class='error'>이름 또는 주민번호를 확인해주세요</span>
+                            </c:if>
                         </div>
                     </div><%-- End Input phoneNum --%>
 

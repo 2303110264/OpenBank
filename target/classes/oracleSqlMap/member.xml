@@ -42,13 +42,35 @@
 	</insert>
 	
 	<!-- id 중복체크 -->
-	<select id="IdDuplicationCheck" parameterType="String" resultType="memberVO">
+	<select id="idDuplicationCheck" parameterType="String" resultType="memberVO">
 		select bank_id userId
 		from test_customer
 		where bank_id = #{userId}
 	</select>
 	
+	<!-- human 중복체크 -->
+	<select id="humanDuplicationCheck" parameterType="memberVO" resultType="memberVO">
+		select name
+		from test_customer
+		where name = #{name} and rrn = #{rrn}
+	</select>
+
+	<!-- mail 중복체크 -->
+	<select id="mailDuplicationCheck" parameterType="String" resultType="memberVO">
+		select email
+		from test_customer
+		where email = #{email}
+	</select>
+
+	<!-- phone 중복체크 -->
+	<select id="phoneDuplicationCheck" parameterType="String" resultType="memberVO">
+		select phone_num phoneNum
+		from test_customer
+		where phone_num = #{phoneNum}
+	</select>
+	
 </mapper>
+
 <!--
 CREATE TABLE TEST_CUSTOMER(
 	CUSTOMER_ID NUMBER PRIMARY KEY

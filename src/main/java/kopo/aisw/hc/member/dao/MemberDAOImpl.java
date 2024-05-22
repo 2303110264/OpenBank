@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import jakarta.validation.Valid;
 import kopo.aisw.hc.member.vo.MemberVO;
 
 @Transactional
@@ -31,15 +32,28 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 
 	@Override
-	public void logout() throws Exception {
-		// TODO Auto-generated method stub
-		
+	public boolean idDuplicationCheck(String userId) {
+		MemberVO idChk = sqlSession.selectOne("dao.MemberDAO.idDuplicationCheck", userId);
+		return idChk!=null;
 	}
 
 	@Override
-	public boolean IdDuplicationCheck(String userId) {
-		MemberVO idChk = sqlSession.selectOne("dao.MemberDAO.IdDuplicationCheck", userId);
-		return idChk!=null;
+	public boolean humanDuplicationCheck(@Valid MemberVO m) {
+		if(m.getName()==null || m.getRrn()==null) return false;
+		m = sqlSession.selectOne("dao.MemberDAO.humanDuplicationCheck", m);
+		return m!=null;
+	}
+
+	@Override
+	public boolean mailDuplicationCheck(String email) {
+		MemberVO mailChk = sqlSession.selectOne("dao.MemberDAO.mailDuplicationCheck", email);
+		return mailChk!=null;
+	}
+
+	@Override
+	public boolean phoneDuplicationCheck(String phoneNum) {
+		MemberVO phoneChk = sqlSession.selectOne("dao.MemberDAO.phoneDuplicationCheck", phoneNum);
+		return phoneChk!=null;
 	}
 
 }
