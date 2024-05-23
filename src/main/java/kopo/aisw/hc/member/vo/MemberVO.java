@@ -28,6 +28,7 @@ public class MemberVO {
 	주소	ADDRESS	VARCHAR2(300)
 	주민번호	RRN	NUMBER(13)
 	고객 유형	CUSTOMER_TYPE	NUMBER(3)
+	일일이체한도	NUMBER(15) NOT NULL
 	 
 	 */
 	private int customerId;
@@ -52,7 +53,6 @@ public class MemberVO {
 	@Pattern(regexp="^[\\d]{10,11}$", message = "전화번호를 입력해주세요")
 	private String phoneNum;
 	
-	//@Pattern(regexp="^(?=.*[A-Za-z-_\\d])(?=.*[@])(?=.*[.])[A-Za-z\\d@-_.]$", message = "메일 형식이 아닙니다.")
 	@Pattern(regexp="^[\\w\\.-]+@[\\w\\.-]+\\.[a-zA-Z]{2,}$", message = "메일 형식이 아닙니다.")
 	private String email;
 	
