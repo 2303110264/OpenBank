@@ -42,7 +42,6 @@
     <jsp:include page="header.jsp"></jsp:include>
     <%-- Close Header --%>
 
-
     <%-- Start Banner Hero --%>
     <div class="banner-wrapper bg-light">
         <div id="index_banner" class="banner-vertical-center-index container-fluid pt-5">
@@ -272,10 +271,6 @@
     <%-- End Service --%>
 
 
-
-
-
-
     <%-- Start View Work --%>
     <section class="bg-secondary">
         <div class="container py-5">
@@ -386,12 +381,9 @@
     </section>
     <%-- End Recent Work --%>
 
-
-
     <%-- Start Footer --%>
     <jsp:include page="footer.jsp"></jsp:include>
     <%-- End Footer --%>
-
 
     <%-- Bootstrap --%>
     <script src="${path}/assets/js/bootstrap.bundle.min.js"></script>

@@ -40,9 +40,9 @@
         Open Bank
 		</a>
         </h1>
-        <h2 class="col-12 col-xl-8 h4 regular-400 margin-auto">약관 넣어야하나</h2>
+        <h2 class="col-12 col-xl-8 h4 regular-400 margin-auto">Login page</h2>
         <p class="col-12 col-xl-8 text-muted pb-5 light-300 margin-auto">
-            여긴 헤더랑 푸터를 날릴지 고민중
+            
         </p>
 
         <div class="row pb-4 sign-up">
@@ -53,7 +53,7 @@
 
                     <div class="col-lg-4 mb-4 sign-in-div2">
                         <div class="form-floating">
-                            <form:input path="userId" type="text" class="form-control form-control-lg light-300 " id="floatingID" name="userId" placeholder="ID"/>
+                            <form:input path="userId" type="text" class="form-control form-control-lg light-300 " id="floatingID" name="userId" placeholder="ID" required="true"/>
                             <label for="floatingID light-300">ID</label>
                             <form:errors path="userId" class="error"/>
                             <c:if test="${IdDuplicationCheck}">
@@ -63,7 +63,7 @@
                     </div><%-- End Input userId --%>
                     <div class="col-lg-4 mb-4 sign-in-div2">
                         <div class="form-floating">
-                            <form:input path="password" type="password" class="form-control form-control-lg light-300 " id="floatingPassword" name="password" placeholder="Password"/>
+                            <form:input path="password" type="password" class="form-control form-control-lg light-300 " id="floatingPassword" name="password" placeholder="Password" required="true"/>
                             <label for="floatingPassword light-300">Password</label>
                             <form:errors path="password" class="error"/>
                         </div>
@@ -91,6 +91,9 @@
     <%-- End Footer --%>
 	
 	<%-- Custom --%>
+	<script>
+		let login = ${loginChk}
+	</script>
 	<script src="${path}/assets/js/custom.js"></script>
 	<%-- Bootstrap --%>
     <script src="${path}/assets/js/bootstrap.bundle.min.js"></script>

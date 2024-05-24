@@ -5,7 +5,8 @@
 <mapper namespace="dao.MemberDAO">
 	<!-- 로그인 -->
 	<select id="signIn" parameterType="memberVO" resultType="memberVO">
-		select 
+		select customer_ID customerid
+		<!--  
 		bank_id userid, 
 		phone_num phonenum, 
 		email, 
@@ -15,7 +16,7 @@
 		rrn, 
 		customer_type customertype
 		, available_balance availablebalance
-		
+		 -->
 		from test_customer
 		where bank_id=#{userId} and password=#{password}
 	</select>
@@ -50,7 +51,7 @@
 	
 	<!-- human 중복체크 -->
 	<select id="humanDuplicationCheck" parameterType="memberVO" resultType="memberVO">
-		select name
+		select bank_id userid
 		from test_customer
 		where name = #{name} and rrn = #{rrn}
 	</select>

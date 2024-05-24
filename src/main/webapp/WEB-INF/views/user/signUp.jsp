@@ -76,7 +76,7 @@
                             <label for="floatingname light-300">Name</label>
                             <form:errors path="name" class="error"/>
                             <c:if test="${humanDuplicationCheck}">
-                            	<span class='error'>이름 또는 주민번호를 확인해주세요</span>
+                            	<span class='error'>이미 등록된 회원입니다.</span>
                             </c:if>
                         </div>
                     </div><%-- End Input Name --%>

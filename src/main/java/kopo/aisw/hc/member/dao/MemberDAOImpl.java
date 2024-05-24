@@ -16,9 +16,9 @@ public class MemberDAOImpl implements MemberDAO{
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public void signIn(MemberVO m) throws Exception {
+	public MemberVO signIn(MemberVO m) throws Exception {
 		MemberVO in = sqlSession.selectOne("dao.MemberDAO.signIn", m);
-		System.out.println(in);
+		return in;
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public class MemberDAOImpl implements MemberDAO{
 	public boolean humanDuplicationCheck(@Valid MemberVO m) {
 		if(m.getName()==null || m.getRrn()==null) return false;
 		m = sqlSession.selectOne("dao.MemberDAO.humanDuplicationCheck", m);
-		return m!=null;
+		return m.getUserId().length()>5;
 	}
 
 	@Override

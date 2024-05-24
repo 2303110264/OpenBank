@@ -7,7 +7,7 @@ import kopo.aisw.hc.member.vo.MemberVO;
 
 @Repository
 public interface MemberDAO {
-	public void signIn(MemberVO m) throws Exception;
+	public MemberVO signIn(MemberVO m) throws Exception;
 	public boolean signUp(MemberVO m);
 	public boolean idDuplicationCheck(String userId);
 	public boolean humanDuplicationCheck(@Valid MemberVO m);

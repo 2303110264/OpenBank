@@ -193,6 +193,8 @@
     </section>
     <!--End Pricing Horizontal Section-->
 
+
+<%-- 
     <section class="container py-5">
 
         <h1 class="h2 semi-bold-600 text-center pt-5">Pricing</h1>
@@ -271,6 +273,7 @@
             </div>
         </div>
     </section>
+--%>
 	
  	<%-- Start Footer --%>
     <jsp:include page="../footer.jsp"></jsp:include>

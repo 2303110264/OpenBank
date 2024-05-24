@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!-- 
-<header class="nav-down">
- -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    
 <header>
 	<nav id="main_nav" class="navbar navbar-expand-lg navbar-light bg-white shadow">
 	        <div class="container d-flex justify-content-between align-items-center">
@@ -27,7 +26,7 @@
 	                            <a class="nav-link btn-outline-primary rounded-pill px-3" href="${path}/ob/work">이체(Work)</a>
 	                        </li>
 	                        <li class="nav-item">
-	                            <a class="nav-link btn-outline-primary rounded-pill px-3" href="${path}/ob/pricing">상품가입(Pricing)</a>
+	                            <a class="nav-link btn-outline-primary rounded-pill px-3" href="${path}/ob/pricing">상품가입</a>
 	                        </li>
 	                        <li class="nav-item">
 	                            <a class="nav-link btn-outline-primary rounded-pill px-3" href="${path}/ob/contact">고객센터(Contact)</a>
@@ -35,53 +34,23 @@
 	                    </ul>
 	                </div>
 	                <div class="navbar align-self-center d-flex">
-	                    <a class="nav-link" href="#"><i class='bx bx-bell bx-sm bx-tada-hover text-primary'></i></a>
-	                    <a class="nav-link" href="#"><i class='bx bx-cog bx-sm text-primary'></i></a>
-	                    <a class="nav-link" href="${path}/ob/member/signIn"><i class='bx bx-user-circle bx-sm text-primary'></i></a>
+	                <c:choose>
+						<c:when test="${ not empty userVO }">
+		                    <a class="nav-link" href="#"><i class='bx bx-bell bx-sm bx-tada-hover text-primary'></i></a>
+		                    <!-- <a class="nav-link" href="#"><i class='bx bx-cog bx-sm text-primary'></i></a> -->
+		                    <a class="nav-link" href="${path}/ob/member/profile"><i class='bx bx-user-check bx-sm text-primary'></i></a>
+		                    <a class="nav-link" href="${path}/ob/member/logout"><i class='bx bx-door-open bx-sm text-primary'></i></a>
+	               		</c:when>
+	               		<c:otherwise>
+		                    <a class="nav-link" href="${path}/ob/member/signIn">
+		                    <i class='bx bx-key bx-sm text-primary'></i></a>
+		                    <a class="nav-link" href="${path}/ob/member/signUp">
+		                    <i class='bx bx-user-plus bx-sm text-primary'></i></a>
+	               		</c:otherwise>
+               		</c:choose> 
 	                </div>
 	            </div>
 	        </div>
 	 </nav>
 </header>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<!-- 
-<script>
-	var didScroll;
-	var lastScrollTop = 0;
-	var delta = 5;
-	var navbarHeight = $('header').outerHeight();
-	
-	$(window).scroll(function(event){
-	    didScroll = true;
-	});
-	
-	setInterval(function() {
-	    if (didScroll) {
-	        hasScrolled();
-	        didScroll = false;
-	    }
-	}, 250);
-	
-	function hasScrolled() {
-	    var st = $(this).scrollTop();
-	    
-	    // Make sure they scroll more than delta
-	    if(Math.abs(lastScrollTop - st) <= delta)
-	        return;
-	    
-	    // If they scrolled down and are past the navbar, add class .nav-up.
-	    // This is necessary so you never see what is "behind" the navbar.
-	    if (st > lastScrollTop && st > navbarHeight){
-	        // Scroll Down
-	        $('header').removeClass('nav-down').addClass('nav-up');
-	    } else {
-	        // Scroll Up
-	        if(st + $(window).height() < $(document).height()) {
-	            $('header').removeClass('nav-up').addClass('nav-down');
-	        }
-	    }
-	    
-	    lastScrollTop = st;
-	}
-</script>
- -->

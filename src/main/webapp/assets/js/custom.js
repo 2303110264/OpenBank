@@ -26,7 +26,7 @@
 	if(inputZip!=null){
 		let zip = document.form.zipNo;
 		
-		if (msg) {
+		if (msg!==undefined && msg) {
 	        alert("회원가입이 완료되었습니다! 로그인을 진행해주세요!");
 	        location.href="/ob/member/signIn"
 		}else if(zip.value<1){
@@ -64,4 +64,10 @@
 			inputZip.addEventListener('click', goPopup);
 		}
 		
+	}
+	
+//sign in
+	if(login!==undefined && !login){
+    	alert("아이디 또는 비밀번호가 다릅니다.");
+		login = true;
 	}
