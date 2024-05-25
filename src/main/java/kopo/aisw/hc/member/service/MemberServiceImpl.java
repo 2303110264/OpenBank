@@ -29,7 +29,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public boolean humanDuplicationCheck(@Valid MemberVO m) {
+	public boolean humanDuplicationCheck(MemberVO m) {
 		return mDao.humanDuplicationCheck(m);
 	}
 
@@ -41,6 +41,21 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public boolean mailDuplicationCheck(String email) {
 		return mDao.mailDuplicationCheck(email);
+	}
+
+	@Override
+	public boolean edit(MemberVO userVO) {
+		return mDao.edit(userVO);
+	}
+
+	@Override
+	public MemberVO getProfile(MemberVO userVO) {
+		return mDao.getProfile(userVO);
+	}
+
+	@Override
+	public boolean updateBankId(MemberVO m) {
+		return mDao.updateBankId(m);
 	}
 	
 }

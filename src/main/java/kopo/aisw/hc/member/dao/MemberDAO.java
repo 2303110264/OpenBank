@@ -10,7 +10,10 @@ public interface MemberDAO {
 	public MemberVO signIn(MemberVO m) throws Exception;
 	public boolean signUp(MemberVO m);
 	public boolean idDuplicationCheck(String userId);
-	public boolean humanDuplicationCheck(@Valid MemberVO m);
+	public boolean humanDuplicationCheck(MemberVO m);
 	public boolean mailDuplicationCheck(String email);
 	public boolean phoneDuplicationCheck(String phoneNum);
+	public boolean edit(MemberVO userVO);
+	public MemberVO getProfile(MemberVO userVO);
+	public boolean updateBankId(MemberVO m);
 }

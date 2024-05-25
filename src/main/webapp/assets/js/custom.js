@@ -23,10 +23,10 @@
 // Sign up
 	let inputZip = document.getElementById('zipNo');
 
-	if(inputZip!=null){
+	if(typeof inputZip!='undefined'){
 		let zip = document.form.zipNo;
 		
-		if (msg!==undefined && msg) {
+		if (typeof msg != 'undefined' && msg) {
 	        alert("회원가입이 완료되었습니다! 로그인을 진행해주세요!");
 	        location.href="/ob/member/signIn"
 		}else if(zip.value<1){
@@ -67,7 +67,7 @@
 	}
 	
 //sign in
-	if(login!==undefined && !login){
+	if(typeof login!='undefined' && !login){
     	alert("아이디 또는 비밀번호가 다릅니다.");
 		login = true;
 	}
