@@ -31,28 +31,28 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 
 	@Override
-	public boolean idDuplicationCheck(String userId) {
-		MemberVO idChk = sqlSession.selectOne("dao.MemberDAO.idDuplicationCheck", userId);
+	public boolean idDoubleCheck(String userId) {
+		MemberVO idChk = sqlSession.selectOne("dao.MemberDAO.idDoubleCheck", userId);
 		return idChk!=null;
 	}
 
 	@Override
-	public boolean humanDuplicationCheck(MemberVO m) {
+	public boolean humanDoubleCheck(MemberVO m) {
 		if(m.getName()==null || m.getRrn()==null) return false;
-		m = sqlSession.selectOne("dao.MemberDAO.humanDuplicationCheck", m);
+		m = sqlSession.selectOne("dao.MemberDAO.humanDoubleCheck", m);
 		if(m==null) return false;
 		return m.getUserId()!=null;
 	}
 
 	@Override
-	public boolean mailDuplicationCheck(String email) {
-		MemberVO mailChk = sqlSession.selectOne("dao.MemberDAO.mailDuplicationCheck", email);
+	public boolean mailDoubleCheck(String email) {
+		MemberVO mailChk = sqlSession.selectOne("dao.MemberDAO.mailDoubleCheck", email);
 		return mailChk!=null;
 	}
 
 	@Override
-	public boolean phoneDuplicationCheck(String phoneNum) {
-		MemberVO phoneChk = sqlSession.selectOne("dao.MemberDAO.phoneDuplicationCheck", phoneNum);
+	public boolean phoneDoubleCheck(String phoneNum) {
+		MemberVO phoneChk = sqlSession.selectOne("dao.MemberDAO.phoneDoubleCheck", phoneNum);
 		return phoneChk!=null;
 	}
 

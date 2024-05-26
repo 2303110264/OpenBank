@@ -95,14 +95,14 @@ public class MemberController {
 		//if(res.hasErrors()) return "user/signUp";
 		
 		//id 중복체크
-		if(ms.idDuplicationCheck(m.getUserId())) model.addAttribute("idDuplicationCheck", true);
+		if(ms.idDoubleCheck(m.getUserId())) model.addAttribute("idDoubleCheck", true);
 		//이미 등록된 유저인지 확인
-		boolean customer = ms.humanDuplicationCheck(m);
-		if(customer) model.addAttribute("humanDuplicationCheck", true);
+		boolean customer = ms.humanDoubleCheck(m);
+		if(customer) model.addAttribute("humanDoubleCheck", true);
 		//전화번호 중복체크
-		if(ms.phoneDuplicationCheck(m.getPhoneNum())) model.addAttribute("phoneDuplicationCheck", true);
+		if(ms.phoneDoubleCheck(m.getPhoneNum())) model.addAttribute("phoneDoubleCheck", true);
 		//이메일 중복체크
-		if(ms.mailDuplicationCheck(m.getEmail())) model.addAttribute("mailDuplicationCheck", true);
+		if(ms.mailDoubleCheck(m.getEmail())) model.addAttribute("mailDoubleCheck", true);
 		// 가입 가능?
 		if(customer) customer = ms.updateBankId(m);
 		else customer = ms.signUp(m);
