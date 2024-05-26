@@ -50,28 +50,28 @@ CREATE SEQUENCE test_customer_seq;
 	</insert>
 	
 	<!-- id 중복체크 -->
-	<select id="idDuplicationCheck" parameterType="String" resultType="memberVO">
+	<select id="idDoubleCheck" parameterType="String" resultType="memberVO">
 		select bank_id userId
 		from test_customer
 		where bank_id = #{userId}
 	</select>
 	
 	<!-- human 중복체크 -->
-	<select id="humanDuplicationCheck" parameterType="memberVO" resultType="memberVO">
+	<select id="humanDoubleCheck" parameterType="memberVO" resultType="memberVO">
 		select bank_id userid
 		from test_customer
 		where name = #{name} and rrn = #{rrn}
 	</select>
 
 	<!-- mail 중복체크 -->
-	<select id="mailDuplicationCheck" parameterType="String" resultType="memberVO">
+	<select id="mailDoubleCheck" parameterType="String" resultType="memberVO">
 		select email
 		from test_customer
 		where email = #{email}
 	</select>
 
 	<!-- phone 중복체크 -->
-	<select id="phoneDuplicationCheck" parameterType="String" resultType="memberVO">
+	<select id="phoneDoubleCheck" parameterType="String" resultType="memberVO">
 		select phone_num phoneNum
 		from test_customer
 		where phone_num = #{phoneNum}

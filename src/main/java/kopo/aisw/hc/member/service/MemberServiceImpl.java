@@ -24,23 +24,23 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public boolean idDuplicationCheck(String userId) {
-		return mDao.idDuplicationCheck(userId);
+	public boolean idDoubleCheck(String userId) {
+		return mDao.idDoubleCheck(userId);
 	}
 
 	@Override
-	public boolean humanDuplicationCheck(MemberVO m) {
-		return mDao.humanDuplicationCheck(m);
+	public boolean humanDoubleCheck(MemberVO m) {
+		return mDao.humanDoubleCheck(m);
 	}
 
 	@Override
-	public boolean phoneDuplicationCheck(String phoneNum) {
-		return mDao.phoneDuplicationCheck(phoneNum);
+	public boolean phoneDoubleCheck(String phoneNum) {
+		return mDao.phoneDoubleCheck(phoneNum);
 	}
 
 	@Override
-	public boolean mailDuplicationCheck(String email) {
-		return mDao.mailDuplicationCheck(email);
+	public boolean mailDoubleCheck(String email) {
+		return mDao.mailDoubleCheck(email);
 	}
 
 	@Override
