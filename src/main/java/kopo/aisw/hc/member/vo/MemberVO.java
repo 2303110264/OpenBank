@@ -21,7 +21,7 @@ public class MemberVO {
 	사용자 ID	USER_ID	VARCHAR2(20)
 	비밀번호	PASSWORD	VARCHAR2(256)
 	결제 비밀번호	CREDIT_PASSWORD	VARCHAR2(256)
-	이름	NAME	VARCHAR2(15)
+	이름	NAME	VARCHAR2(18)
 	휴대폰번호	PHONE_NUM	VARCHAR2(13)
 	이메일	EMAIL	VARCHAR2(40)
 	우편번호	ZIP_CODE	NUMBER(5)
@@ -33,14 +33,14 @@ public class MemberVO {
 	 */
 	private int customerId;
 	
-	@Size(min=6, message="아이디는 6~16자 사이로 입력해주세요")
-	@Pattern(regexp = "^[\\w-]{6,16}$", 
+	@Size(min=6, max=16, message="아이디는 6~16자 사이로 입력해주세요")
+	@Pattern(regexp = "^[\\w-]{0,30}$", 
 	message="아이디는 영어와 숫자, 특수문자 -또는 _로만 이루어져야 합니다")
 	private String userId;
 	
 	@JsonIgnore
-	@Size(min=3, message="비밀번호는 8~20자 사이로 입력해주세요")
-	@Pattern(regexp ="^(?=.*[a-z])(?=.*\\d)(?=.*[~!@#$%^&*()+|=])[a-z\\d~!@#$%^&*()+|=]{8,20}$", 
+	@Size(min=8, max=20, message="비밀번호는 8~20자 사이로 입력해주세요")
+	@Pattern(regexp ="^(?=.*[a-z])(?=.*\\d)(?=.*[~!@#$%^&*()+|=])[a-z\\d~!@#$%^&*()+|=]{0,30}$", 
 	message = "영문 소문자, 숫자, 특수문자(~!@#$%^&*()+|=])가 모두 포함되어야 합니다")
 	private String password;
 	

@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,32 +27,33 @@ public class MemberController {
 	@Autowired
     private Api api;
     
+	//프로필 수정
 	@GetMapping("profile")
 	public String profile(Model model, HttpSession session) {
 		MemberVO userVO = (MemberVO) session.getAttribute("userVO");
+		if(userVO==null) return "redirect:/member/signIn";
+		userVO = ms.getProfile(userVO);
 		model.addAttribute("m", userVO);
-		String msg = (String) session.getAttribute("message");
-		model.addAttribute("message", msg);
-		return "user/signIn";
+		return "user/profile";
 	}
-	
 	@PostMapping("profile")
-	public String profile(@Valid @ModelAttribute("userVO")MemberVO userVO,
-			BindingResult res, HttpSession session){
+	public String profile(@Valid @ModelAttribute("m")MemberVO userVO,
+			BindingResult res, Model model){
 		if(userVO.getPassword().length()<1) {
 			ms.edit(userVO);
-			session.setAttribute("message", "수정에 성공했습니다");
+			model.addAttribute("message", "수정에 성공했습니다");
 		}else {
 			if(res.hasErrors()){
-				session.setAttribute("message", "수정에 실패했습니다. 다시 시도해주세요.");
+				model.addAttribute("message", "수정에 실패했습니다. 다시 시도해주세요.");
 			}else{
 				ms.edit(userVO);
-				session.setAttribute("message", "수정에 성공했습니다");
+				model.addAttribute("message", "수정에 성공했습니다");
 			}
 		}
 		return "user/profile";
 	}
-	
+
+	//로그인
 	@GetMapping("signIn")
 	public String signIn(Model model) {
 		MemberVO m = new MemberVO();
@@ -61,7 +61,6 @@ public class MemberController {
 		
 		return "user/signIn";
 	}
-	
 	@PostMapping("signIn")
 	public String signIn(@ModelAttribute("m")MemberVO m, BindingResult res, 
 			Model model) throws Exception {
@@ -75,12 +74,14 @@ public class MemberController {
 		}
 	}
 	
+	//로그아웃
 	@GetMapping("logout")
 	public String logout(SessionStatus state) {
 		state.setComplete();
 		return "redirect:/bank/";
 	}
 	
+	//회원가입
 	@GetMapping("signUp")
 	public String signUp(Model model) {
 		MemberVO m = new MemberVO();
@@ -95,17 +96,22 @@ public class MemberController {
 		
 		//id 중복체크
 		if(ms.idDuplicationCheck(m.getUserId())) model.addAttribute("idDuplicationCheck", true);
-		// 주민번호+이름->아이디체크, 전화번호, 이메일 체크 남음
-		// humanDC, phoneDC, mailDC
-		if(ms.humanDuplicationCheck(m)) model.addAttribute("humanDuplicationCheck", true);
+		//이미 등록된 유저인지 확인
+		boolean customer = ms.humanDuplicationCheck(m);
+		if(customer) model.addAttribute("humanDuplicationCheck", true);
+		//전화번호 중복체크
 		if(ms.phoneDuplicationCheck(m.getPhoneNum())) model.addAttribute("phoneDuplicationCheck", true);
+		//이메일 중복체크
 		if(ms.mailDuplicationCheck(m.getEmail())) model.addAttribute("mailDuplicationCheck", true);
 		// 가입 가능?
+		if(customer) customer = ms.updateBankId(m);
+		else customer = ms.signUp(m);
 		if(!ms.signUp(m)) model.addAttribute("signUp", false);
 		else model.addAttribute("signUp", true);
 		return "user/signUp";
 	}
 	
+	//우편번호&주소 기입 api
 	@RequestMapping("jusoPopup")
 	public String jusoPopup(Model model) {
 		model.addAttribute("juso", api.getJuso());

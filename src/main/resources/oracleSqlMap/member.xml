@@ -2,21 +2,28 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+CREATE TABLE TEST_CUSTOMER(
+	CUSTOMER_ID NUMBER PRIMARY KEY
+	, BANK_ID VARCHAR2(20) UNIQUE
+	, PASSWORD VARCHAR2(256) 
+	, CREDIT_PASSWORD VARCHAR2(256) 
+	, NAME VARCHAR2(13) NOT NULL
+	, PHONE_NUM VARCHAR2(13) NOT NULL UNIQUE
+	, EMAIL VARCHAR2(30) NOT NULL
+	, ZIP_CODE NUMBER(5) NOT NULL 
+	, ADDRESS VARCHAR2(300) NOT NULL
+	, ADDRESS_DETAIL VARCHAR2(300)
+	, RRN VARCHAR2(13) NOT NULL UNIQUE
+	, CUSTOMER_TYPE NUMBER(3) NOT NULL
+	, AVAILABLE_BALANCE	NUMBER(15) NOT NULL
+);
+CREATE SEQUENCE test_customer_seq;
+ -->
 <mapper namespace="dao.MemberDAO">
 	<!-- 로그인 -->
 	<select id="signIn" parameterType="memberVO" resultType="memberVO">
 		select customer_ID customerid
-		<!--  
-		bank_id userid, 
-		phone_num phonenum, 
-		email, 
-		zip_code zipcode, 
-		address, 
-		address_detail addressDetail, 
-		rrn, 
-		customer_type customertype
-		, available_balance availablebalance
-		 -->
 		from test_customer
 		where bank_id=#{userId} and password=#{password}
 	</select>
@@ -70,23 +77,42 @@
 		where phone_num = #{phoneNum}
 	</select>
 	
-</mapper>
+	<!-- 프로필 조회 -->
+	<select id="profile" parameterType="memberVO" resultType="memberVO">
+		select customer_ID customerid
+		, bank_id userid
+		, phone_num phonenum
+		, email
+		, zip_code zipcode
+		, address
+		, address_detail addressDetail
+		, rrn 
+		, customer_type customertype
+		, available_balance availablebalance
+		from test_customer
+		where customer_ID = #{customerId}
+	</select>
+	
+	<update id="updateProfile" parameterType="memberVO">
+		update test_customer
+		set
+		<if test="password!=null">
+		password = #{password},
+		</if>
+		<if test="phoneNum!=null">
+		phone_num = #{phoneNum},
+		</if>
+		<if test="email!=null">
+		email = #{email},
+		</if>
+		where customer_id = #{customerId}
+	</update>
 
-<!--
-CREATE TABLE TEST_CUSTOMER(
-	CUSTOMER_ID NUMBER PRIMARY KEY
-	, BANK_ID VARCHAR2(20) UNIQUE
-	, PASSWORD VARCHAR2(256) 
-	, CREDIT_PASSWORD VARCHAR2(256) 
-	, NAME VARCHAR2(13) NOT NULL
-	, PHONE_NUM VARCHAR2(13) NOT NULL UNIQUE
-	, EMAIL VARCHAR2(30) NOT NULL
-	, ZIP_CODE NUMBER(5) NOT NULL 
-	, ADDRESS VARCHAR2(300) NOT NULL
-	, ADDRESS_DETAIL VARCHAR2(300)
-	, RRN VARCHAR2(13) NOT NULL UNIQUE
-	, CUSTOMER_TYPE NUMBER(3) NOT NULL
-	, AVAILABLE_BALANCE	NUMBER(15) NOT NULL
-);
-CREATE SEQUENCE test_customer_seq;
- -->
+	<update id="updateBankId" parameterType="memberVO">
+		update test_customer
+		set	
+		bank_id = #{userId}
+		, password = #{password}
+		where customer_id = #{customerId}
+	</update>
+</mapper>

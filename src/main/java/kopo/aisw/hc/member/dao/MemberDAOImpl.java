@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import jakarta.validation.Valid;
 import kopo.aisw.hc.member.vo.MemberVO;
 
 @Transactional
@@ -38,10 +37,11 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 
 	@Override
-	public boolean humanDuplicationCheck(@Valid MemberVO m) {
+	public boolean humanDuplicationCheck(MemberVO m) {
 		if(m.getName()==null || m.getRrn()==null) return false;
 		m = sqlSession.selectOne("dao.MemberDAO.humanDuplicationCheck", m);
-		return m.getUserId().length()>5;
+		if(m==null) return false;
+		return m.getUserId()!=null;
 	}
 
 	@Override
@@ -54,6 +54,24 @@ public class MemberDAOImpl implements MemberDAO{
 	public boolean phoneDuplicationCheck(String phoneNum) {
 		MemberVO phoneChk = sqlSession.selectOne("dao.MemberDAO.phoneDuplicationCheck", phoneNum);
 		return phoneChk!=null;
+	}
+
+	@Override
+	public boolean edit(MemberVO userVO) {
+		int i = sqlSession.update("dao.MemberDAO.updateProfile", userVO);
+		return i!=0;
+	}
+
+	@Override
+	public MemberVO getProfile(MemberVO userVO) {
+		userVO = sqlSession.selectOne("dao.MemberDAO.profile", userVO.getCustomerId());
+		return userVO;
+	}
+
+	@Override
+	public boolean updateBankId(MemberVO m) {
+		int i = sqlSession.update("dao.MemberDAO.updateBankId", m);
+		return i!=0;
 	}
 
 }
