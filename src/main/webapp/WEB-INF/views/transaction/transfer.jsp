@@ -70,23 +70,52 @@
                 <a class="filter-btn btn rounded-pill btn-outline-primary border-0 m-md-2 px-md-4" data-filter=".graphic" href="#">Graphic</a>
             </div>
         </div>
-
         <div class="row projects gx-lg-5">
-            <a href="${path}/work-single" class="col-sm-6 col-lg-4 text-decoration-none project marketing social business">
-                <div class="service-work overflow-hidden card mb-5 mx-5 m-sm-0">
-                    <img class="card-img-top" src="${path}/assets/img/our-work-01.jpg" alt="...">
-                    <div classs="card-body">
-                        <h5 class="card-title light-300 text-dark">Digital Marketing</h5>
-                        <p class="card-text light-300 text-dark">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                            sed do eiusmod tempor incididunt ut labore et dolor.
-                        </p>
-                        <span class="text-decoration-none text-primary light-300">
-                              Read more <i class='bx bxs-hand-right ms-1'></i>
-                          </span>
-                    </div>
-                </div>
-            </a>
+        <%-- foreach 예시 ㅠㅠ
+	        <c:forEach items="${blist}" var="b">
+				<tr>
+					<td>${b.no}</td>
+					<td><a href="${pageContext.request.contextPath}/board/detail/${b.no}">
+					${b.title}</a></td>
+					<td>${b.writer}</td>
+					<td>${b.reg_date}</td>
+				</tr>
+			</c:forEach>
+         --%>
+			<c:forEach items="${accList}" var="acc">
+	            <a href="${path}/accDetail/${acc.accId}" class="col-sm-6 col-lg-4 text-decoration-none project marketing social business">
+	                <div class="service-work overflow-hidden card mb-5 mx-5 m-sm-0">
+	                    <img class="card-img-top" src="${path}/assets/img/our-work-01.jpg" alt="...">
+	                    <div classs="card-body">
+	                        <h5 class="card-title light-300 text-dark">Digital Marketing</h5>
+	                        <p class="card-text light-300 text-dark">
+	                            Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+	                            sed do eiusmod tempor incididunt ut labore et dolor.
+	                        </p>
+	                        <span class="text-decoration-none text-primary light-300">
+	                              Read more <i class='bx bxs-hand-right ms-1'></i>
+	                          </span>
+	                    </div>
+	                </div>
+	            </a>
+			</c:forEach>
+		</div>
+	<%--
+	            <a href="${path}/work-single" class="col-sm-6 col-lg-4 text-decoration-none project marketing social business">
+	                <div class="service-work overflow-hidden card mb-5 mx-5 m-sm-0">
+	                    <img class="card-img-top" src="${path}/assets/img/our-work-01.jpg" alt="...">
+	                    <div classs="card-body">
+	                        <h5 class="card-title light-300 text-dark">Digital Marketing</h5>
+	                        <p class="card-text light-300 text-dark">
+	                            Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+	                            sed do eiusmod tempor incididunt ut labore et dolor.
+	                        </p>
+	                        <span class="text-decoration-none text-primary light-300">
+	                              Read more <i class='bx bxs-hand-right ms-1'></i>
+	                          </span>
+	                    </div>
+	                </div>
+	            </a>
             <a href="${path}/work-single" class="col-sm-6 col-lg-4 text-decoration-none project graphic social">
                 <div class="service-work overflow-hidden card mx-5 mx-sm-0 mb-5">
                     <img class="card-img-top" src="${path}/assets/img/our-work-02.jpg" alt="...">
@@ -163,6 +192,8 @@
                 </div>
             </a>
         </div>
+	 --%>
+	 <%--
         <div class="row">
             <div class="btn-toolbar justify-content-center pb-4" role="toolbar" aria-label="Toolbar with button groups">
                 <div class="btn-group me-2" role="group" aria-label="First group">
@@ -179,6 +210,7 @@
                 </div>
             </div>
         </div>
+	  --%>
     </section>
     <%-- End Our Work --%>
 
