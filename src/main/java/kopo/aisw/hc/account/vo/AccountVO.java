@@ -14,7 +14,8 @@ import lombok.ToString;
 @ToString
 public class AccountVO {
 	/**
-		ACC_NUM	NUMBER PRIMARY KEY
+		ACC_ID VARCHAR2(12) PRIMARY KEY
+		ACC_NUM	NUMBER NOT NULL UNIQUE
 		ACC_NAME VARCHAR2(30) NOT NULL
 		PRODUCT_NUM NUMBER(2) NOT NULL
 		CUSTOMER_NAME VARCHAR2(18) NOT NULL
@@ -28,6 +29,7 @@ public class AccountVO {
 		CONSTRAINT FK_PRODUCT_NUM FOREIGN KEY(PRODUCT_NUM) REFERENCES TEST_PRODUCT_LIST(PRODUCT_NUM)
 	 */
 	//계좌번호 어떻게 구현하지
+	private String accId;
 	@Size(min=13)
 	private double accNum;
 	private String accName;
