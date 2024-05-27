@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import kopo.aisw.hc.api.Api;
@@ -55,21 +57,27 @@ public class MemberController {
 
 	//로그인
 	@GetMapping("signIn")
-	public String signIn(Model model) {
+	public String signIn(Model model, HttpServletRequest request) {
 		MemberVO m = new MemberVO();
 		model.addAttribute("m", m);
-		
+		//로그인 시 직전 페이지로 돌아가고 싶었던 흔적
+//		String referer = request.getHeader("Referer");
+//		if(referer!=null&&!referer.equals("http://localhost:8008/ob/signIn")) model.addAttribute("ref", referer);
+//		System.out.println("trans"+referer);
 		return "user/signIn";
 	}
 	@PostMapping("signIn")
 	public String signIn(@ModelAttribute("m")MemberVO m, BindingResult res, 
-			Model model) throws Exception {
+			Model model, @ModelAttribute("ref")String referer) throws Exception {
 		MemberVO userVO = ms.signIn(m);
 		if(userVO==null) {
 			model.addAttribute("loginChk", false);
 			return "user/signIn";
 		}else {
 			model.addAttribute("userVO", userVO);
+			//흔적2
+//			System.out.println(referer);
+//			return "redirect:"+referer;
 			return "redirect:/bank/";
 		}
 	}

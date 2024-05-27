@@ -66,6 +66,8 @@ public class MemberVO {
 	
 	@Size(min=13, max=13, message="주민번호를 입력해주세요")
 	private String rrn;
+	
+	//0: 일반 사용자, 1: 관리자, 999:거래정지
 	private int customerType;
 	private int availableBalance;
 }
