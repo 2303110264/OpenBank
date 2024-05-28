@@ -31,8 +31,8 @@ public class MemberController {
 	//프로필 수정
 	@GetMapping("profile")
 	public String profile(Model model, HttpSession session) {
+//		if(userVO==null) return "redirect:/member/signIn";
 		MemberVO userVO = (MemberVO) session.getAttribute("userVO");
-		if(userVO==null) return "redirect:/member/signIn";
 		userVO = ms.getProfile(userVO);
 		model.addAttribute("m", userVO);
 		return "user/profile";
@@ -56,13 +56,12 @@ public class MemberController {
 
 	//로그인
 	@GetMapping("signIn")
-	public String signIn(Model model, HttpServletRequest request) {
+	public String signIn(Model model, HttpSession session) {
+		//이미 로그인상태일 경우 메인화면으로
+		if(session.getAttribute("userVO")!=null) return "redirect:/bank/";
+		
 		MemberVO m = new MemberVO();
 		model.addAttribute("m", m);
-		//로그인 시 직전 페이지로 돌아가고 싶었던 흔적
-//		String referer = request.getHeader("Referer");
-//		if(referer!=null&&!referer.equals("http://localhost:8008/ob/signIn")) model.addAttribute("ref", referer);
-//		System.out.println("trans"+referer);
 		return "user/signIn";
 	}
 	@PostMapping("signIn")
@@ -74,12 +73,9 @@ public class MemberController {
 			return "user/signIn";
 		}else {
 			model.addAttribute("userVO", userVO);
-			//흔적2
-//			System.out.println(referer);
-//			return "redirect:"+referer;
-			
-			//흔적3 (성공)
-			//로그인이 필요한 모든 링크에 interceptor가 걸린 상태임.
+
+			//로그인이 필요한 모든 링크에 interceptor를 걸었으나 수동임... url정리 필요.
+			// 	(applicationContext.xml참조)
 			//kopo.aisw.hc.interceptor.SignInInterceptor에 세션에 preUrl을 추가하는 코드가 있음
 			String preUrl = (String) session.getAttribute("preUrl");
 			if(preUrl!=null) return "redirect:"+preUrl.substring(3);

@@ -9,9 +9,9 @@ public interface AccountService {
 
 	//조회: 추후 accNum 대신 accId로 변경 예정
 	//계좌 조회- 이름 체크
-	public String getOwnerName(double accNum);
+	public String getOwnerName(long accNum);
 	//계좌 조회- 잔액 조회
-	public double getBalance(double accNum);
+	public long getBalance(long accNum);
 	//계좌 이체
 	public boolean transfer(TransactionVO transaction);
 

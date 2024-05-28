@@ -1,5 +1,8 @@
 package kopo.aisw.hc.account.service;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +19,18 @@ public class AccountServiceImpl implements AccountService {
 	//계좌 개설하기
 	@Override
 	public boolean openAnAccount(AccountVO account) {
+		//베타 한정 잔액 추가
+		account.setBalance(1000000);
+		
 		//계좌번호 생성-중복 체크 자동
-		double accNum = aDao.createAccNum(account.getProductNum());
+		long accNum = aDao.createAccNum(account.getProductNum());
+		
+		LocalDate seoulNow = LocalDate.now(ZoneId.of("Korea/Seoul"));
+		//가입일자
+		account.setRegDate(seoulNow.toString());
+		//+N개월
+		account.setRetDate(seoulNow.plusMonths
+				(Integer.parseInt(account.getRetDate())).toString());
 		account.setAccNum(accNum);
 		return aDao.openAnAccount(account);
 	}
@@ -25,13 +38,13 @@ public class AccountServiceImpl implements AccountService {
 	//조회: 추후 accNum 대신 accId로 변경 예정
 	//계좌 조회- 이름 체크
 	@Override
-	public String getOwnerName(double accNum) {
+	public String getOwnerName(long accNum) {
 		return aDao.getOwnerName(accNum);
 	}
 	
 	//계좌 조회- 잔액 조회
 	@Override
-	public double getBalance(double accNum) {
+	public long getBalance(long accNum) {
 		return aDao.getBalance(accNum);
 	}
 	

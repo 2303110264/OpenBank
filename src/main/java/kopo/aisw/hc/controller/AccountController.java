@@ -3,13 +3,23 @@ package kopo.aisw.hc.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import kopo.aisw.hc.account.service.AccountService;
+import kopo.aisw.hc.account.vo.AccountVO;
+import kopo.aisw.hc.member.service.MemberService;
 import kopo.aisw.hc.member.vo.MemberVO;
 // git push origin localBranch:gitBranch 
+import kopo.aisw.hc.product.service.ProductService;
+import kopo.aisw.hc.product.vo.ProductVO;
+import kopo.aisw.hc.transaction.vo.TransactionVO;
 
 @Controller
 //@RequestMapping("/account/")
@@ -18,6 +28,10 @@ public class AccountController {
 	
 	@Autowired
 	private AccountService as;
+	@Autowired
+	private MemberService ms;
+	@Autowired
+	private ProductService ps;
 	
 	/*
 	계좌 이체하기
@@ -31,20 +45,52 @@ public class AccountController {
 	 */
 
 	//계좌생성
-	@GetMapping("openAcc")
-	public String openAnAcc(Model model, HttpSession session) {
+	@GetMapping("openAcc/{productNum}")
+	public String openAnAcc(@PathVariable int productNum, Model model, HttpSession session) {
 		MemberVO userVO = (MemberVO) session.getAttribute("userVO");
-		if(userVO==null) return "redirect:/member/signIn";
-		
-		
+		//고객정보 가져오기(패스워드 제외)
+		userVO = ms.getProfile(userVO);
+		AccountVO openAcc = new AccountVO();
+		//상품번호
+		openAcc.setProductNum(productNum);
+		//고객고유번호 (PK)
+		openAcc.setCustomerId(userVO.getCustomerId());
+		//고객이름
+		openAcc.setCustomerName(userVO.getName());
+
+		model.addAttribute("openAcc", openAcc);
+		model.addAttribute("openAnAcc", false);
 		return "account/open";
 	}
+	@PostMapping("openAcc/{productNum}")
+	public String openAnAcc(@PathVariable int productNum,
+			@Valid @ModelAttribute("openAcc")AccountVO openAcc,
+			BindingResult res, Model model) throws Exception {
+		/**open 수정덜됨*/
+		if(res.hasErrors()) return "account/open";
+		
+		//상품정보 불러오기 + 가입기간 세팅
+		ProductVO p = ps.selectProduct(productNum);
+		openAcc.setRetDate(p.getDateOfDeposit()+"");
+		openAcc.setInterestRate(p.getInterestRate());
+		//계좌번호 생성 및 등록
+		as.openAnAccount(openAcc);
+		
+		/**result 페이지 비어있음*/
+		return "account/result";
+	}
+	
+	
 	//계좌이체
 	@GetMapping("transfer")
 	public String transfer(Model model, HttpSession session) {
-//		MemberVO userVO = (MemberVO) session.getAttribute("userVO");
+		MemberVO userVO = (MemberVO) session.getAttribute("userVO");
 //		//로그인정보 없을 시 로그인 창으로 이동
 //		if(userVO==null) return "redirect:/member/signIn";
+		//(intercept 추가 완료 - 5/28 (applicationContext.xml참조))
+		
+		TransactionVO t = new TransactionVO();
+		
 		
 		
 		return "account/transfer";

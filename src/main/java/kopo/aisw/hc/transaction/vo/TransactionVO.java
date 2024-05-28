@@ -27,10 +27,10 @@ public class TransactionVO {
 	private int transactionId;
 	private String transactionType;
 	private String transactionDate;
-	private int amount;
-	private double depositAcc;
+	private long amount;
+	private long depositAcc;
 	private String depositName;
-	private double withdrawAcc;
+	private long withdrawAcc;
 	private String withdrawName;
 	
 }

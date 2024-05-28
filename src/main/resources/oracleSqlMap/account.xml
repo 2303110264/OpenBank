@@ -25,7 +25,7 @@ CREATE TABLE TEST_ACCOUNT(
  -->
 <mapper namespace="dao.AccountDAO">
 	<!-- 계좌번호 기반  -->
-	<select id="searchByAccNum" parameterType="Double" resultType="accountVO">
+	<select id="searchByAccNum" parameterType="Long" resultType="accountVO">
 		<include refid="selectAstr"></include>
 		<include refid="whereAccNum"></include>
 	</select>
@@ -51,13 +51,13 @@ CREATE TABLE TEST_ACCOUNT(
 	</select>
 	
 	<!-- 이체시 대상계좌 확인: 단일계좌 이름체크 -->
-	<select id="getOwnerName" parameterType="Double" resultType="accountVO">
+	<select id="getOwnerName" parameterType="Long" resultType="accountVO">
 		select customer_name customerName
 		<include refid="whereAccNum"></include>
 	</select>
 	
 	<!-- 이체시 출금계좌 확인: 단일계좌 잔액조회 -->
-	<select id="getBalance" parameterType="Double" resultType="accountVO">
+	<select id="getBalance" parameterType="Long" resultType="accountVO">
 		select balance
 		<include refid="whereAccNum"></include>
 	</select>

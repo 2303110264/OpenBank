@@ -23,16 +23,16 @@ public class AccountDAOImpl implements AccountDAO {
 	
 	//계좌 개설- 계좌번호 생성-자동 (수동은 추후 업데이트 예정)
 	@Override
-	public double createAccNum(int productNum) {
+	public long createAccNum(int productNum) {
 		StringBuilder sb = new StringBuilder();
-		double accNum;
+		long accNum;
 		do {
 			// 은행 고정번호 3+상품번호 3 = 6자리
 			sb.append(245000+productNum); 
 			// random 6자리
 			sb.append(rd.nextInt(900000)+100000);
 			// 숫자 크기상 double 형태로 변환 (차라리 String이 나을지 나중에 고민)
-			accNum = Double.parseDouble(sb.toString());
+			accNum = Long.parseLong(sb.toString());
 		}while(sqlSession.selectOne("dao.AccountDAO.getOwnerName",(accNum))!=null);
 		
 		return accNum;
@@ -41,7 +41,7 @@ public class AccountDAOImpl implements AccountDAO {
 	//현재 사용되지 않음 **** 중복체크가 create 과정에 병합됨
 	//계좌 개설- 생성된 계좌번호 중복체크
 	@Override
-	public boolean accDoubleCheck(double accNum) {
+	public boolean accDoubleCheck(long accNum) {
 		AccountVO a = sqlSession.selectOne("dao.AccountDAO.searchByAccNum", accNum);
 		return a!=null;
 	}
@@ -62,13 +62,13 @@ public class AccountDAOImpl implements AccountDAO {
 
 	//계좌 조회- 이름 체크
 	@Override
-	public String getOwnerName(double accNum) {
+	public String getOwnerName(long accNum) {
 		AccountVO acc = sqlSession.selectOne("dao.AccountDAO.getOwnerName", accNum);
 		return acc.getCustomerName();
 	}
 	//계좌 조회- 잔액 조회
 	@Override
-	public double getBalance(double accNum) {
+	public long getBalance(long accNum) {
 		AccountVO acc = sqlSession.selectOne("dao.AccountDAO.getBalance", accNum);
 		return acc.getBalance();
 	}
