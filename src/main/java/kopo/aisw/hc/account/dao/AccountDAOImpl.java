@@ -1,5 +1,7 @@
 package kopo.aisw.hc.account.dao;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Random;
 
@@ -9,6 +11,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import kopo.aisw.hc.account.vo.AccountVO;
+import kopo.aisw.hc.member.vo.MemberVO;
+import kopo.aisw.hc.product.vo.ProductVO;
 import kopo.aisw.hc.transaction.vo.TransactionVO;
 
 @Transactional
@@ -21,23 +25,36 @@ public class AccountDAOImpl implements AccountDAO {
 //	private SqlSessionTemplate sqlSession;
 	private SqlSession sqlSession;
 	
+	//사전설정
+	@Override
+	public AccountVO preset(MemberVO member, int productNum) throws Exception {
+		AccountVO openAcc = new AccountVO();
+		//상품번호
+		openAcc.setProductNum(productNum);
+		//고객고유번호 (PK)
+		openAcc.setCustomerId(member.getCustomerId());
+		//고객이름
+		openAcc.setCustomerName(member.getName());
+		return openAcc;
+	}
+	
 	//계좌 개설- 계좌번호 생성-자동 (수동은 추후 업데이트 예정)
 	@Override
-	public long createAccNum(int productNum) {
+	public AccountVO createAccNum(AccountVO account) {
 		StringBuilder sb = new StringBuilder();
 		long accNum;
 		do {
 			// 은행 고정번호 3+상품번호 3 = 6자리
-			sb.append(245000+productNum); 
+			sb.append(245000+account.getProductNum()); 
 			// random 6자리
 			sb.append(rd.nextInt(900000)+100000);
 			// 숫자 크기상 double 형태로 변환 (차라리 String이 나을지 나중에 고민)
 			accNum = Long.parseLong(sb.toString());
 		}while(sqlSession.selectOne("dao.AccountDAO.getOwnerName",(accNum))!=null);
 		
-		return accNum;
+		return account;
 	}
-
+/*
 	//현재 사용되지 않음 **** 중복체크가 create 과정에 병합됨
 	//계좌 개설- 생성된 계좌번호 중복체크
 	@Override
@@ -45,10 +62,23 @@ public class AccountDAOImpl implements AccountDAO {
 		AccountVO a = sqlSession.selectOne("dao.AccountDAO.searchByAccNum", accNum);
 		return a!=null;
 	}
+ */
 
 	//계좌 개설-등록 (최근거래일 빼고 다 채워야함)
 	@Override
-	public boolean openAnAccount(AccountVO account) {
+	public boolean openAnAccount(AccountVO account, ProductVO product) {
+		//베타 한정 잔액 추가
+		account.setBalance(1000000);
+		
+		//등록일자 세팅
+		LocalDate seoulNow = LocalDate.now(ZoneId.of("Asia/Seoul"));
+		//가입일자 세팅
+		account.setRegDate(seoulNow.toString());
+		//+N개월 = 만기일 세팅
+		account.setRetDate(seoulNow.plusMonths(product.getDateOfDeposit()).toString());
+		//이자율 세팅
+		account.setInterestRate(product.getInterestRate());
+		
 		int a = sqlSession.insert("dao.AccountDAO.openAnAccount", account);
 		return rollbackOrCommit(a==1);
 	}

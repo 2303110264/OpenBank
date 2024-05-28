@@ -1,13 +1,13 @@
 package kopo.aisw.hc.account.service;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kopo.aisw.hc.account.dao.AccountDAO;
 import kopo.aisw.hc.account.vo.AccountVO;
+import kopo.aisw.hc.member.vo.MemberVO;
+import kopo.aisw.hc.product.dao.ProductDAO;
+import kopo.aisw.hc.product.vo.ProductVO;
 import kopo.aisw.hc.transaction.vo.TransactionVO;
 
 @Service
@@ -15,24 +15,20 @@ public class AccountServiceImpl implements AccountService {
 	
 	@Autowired
 	private AccountDAO aDao;
-	
-	//계좌 개설하기
+	@Autowired
+	private ProductDAO pDao;
+		
+	//사전설정
 	@Override
-	public boolean openAnAccount(AccountVO account) {
-		//베타 한정 잔액 추가
-		account.setBalance(1000000);
-		
-		//계좌번호 생성-중복 체크 자동
-		long accNum = aDao.createAccNum(account.getProductNum());
-		
-		LocalDate seoulNow = LocalDate.now(ZoneId.of("Korea/Seoul"));
-		//가입일자
-		account.setRegDate(seoulNow.toString());
-		//+N개월
-		account.setRetDate(seoulNow.plusMonths
-				(Integer.parseInt(account.getRetDate())).toString());
-		account.setAccNum(accNum);
-		return aDao.openAnAccount(account);
+	public AccountVO preset(MemberVO member, int productNum) throws Exception {
+		return aDao.preset(member, productNum);
+	}
+
+	//계좌 개설하기 (상품번호/고객고유번호/고객이름/계좌명)
+	@Override
+	public boolean openAnAccount(AccountVO account) throws Exception {
+		ProductVO product = pDao.selectProduct(account.getProductNum());
+		return aDao.openAnAccount(account, product);
 	}
 
 	//조회: 추후 accNum 대신 accId로 변경 예정
@@ -65,6 +61,7 @@ public class AccountServiceImpl implements AccountService {
 		if(account.getBalance()!=0) return false;
 		return aDao.closeAnAccount(account);
 	}
+
 
 
 }

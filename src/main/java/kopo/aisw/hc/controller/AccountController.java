@@ -46,33 +46,23 @@ public class AccountController {
 
 	//계좌생성
 	@GetMapping("openAcc/{productNum}")
-	public String openAnAcc(@PathVariable int productNum, Model model, HttpSession session) {
+	public String openAnAcc(@PathVariable int productNum, Model model,
+							HttpSession session) throws Exception {
 		MemberVO userVO = (MemberVO) session.getAttribute("userVO");
 		//고객정보 가져오기(패스워드 제외)
 		userVO = ms.getProfile(userVO);
-		AccountVO openAcc = new AccountVO();
-		//상품번호
-		openAcc.setProductNum(productNum);
-		//고객고유번호 (PK)
-		openAcc.setCustomerId(userVO.getCustomerId());
-		//고객이름
-		openAcc.setCustomerName(userVO.getName());
+		AccountVO openAcc = as.preset(userVO, productNum);
 
 		model.addAttribute("openAcc", openAcc);
 		model.addAttribute("openAnAcc", false);
 		return "account/open";
 	}
-	@PostMapping("openAcc/{productNum}")
-	public String openAnAcc(@PathVariable int productNum,
-			@Valid @ModelAttribute("openAcc")AccountVO openAcc,
+	@PostMapping("openAcc")
+	public String openAnAcc(@Valid @ModelAttribute("openAcc")AccountVO openAcc,
 			BindingResult res, Model model) throws Exception {
 		/**open 수정덜됨*/
 		if(res.hasErrors()) return "account/open";
 		
-		//상품정보 불러오기 + 가입기간 세팅
-		ProductVO p = ps.selectProduct(productNum);
-		openAcc.setRetDate(p.getDateOfDeposit()+"");
-		openAcc.setInterestRate(p.getInterestRate());
 		//계좌번호 생성 및 등록
 		as.openAnAccount(openAcc);
 		
