@@ -33,10 +33,12 @@ public class AccountDAOImpl implements AccountDAO {
 			sb.append(rd.nextInt(900000)+100000);
 			// 숫자 크기상 double 형태로 변환 (차라리 String이 나을지 나중에 고민)
 			accNum = Double.parseDouble(sb.toString());
-		}while(accDoubleCheck(accNum));
+		}while(sqlSession.selectOne("dao.AccountDAO.getOwnerName",(accNum))!=null);
+		
 		return accNum;
 	}
 
+	//현재 사용되지 않음 **** 중복체크가 create 과정에 병합됨
 	//계좌 개설- 생성된 계좌번호 중복체크
 	@Override
 	public boolean accDoubleCheck(double accNum) {

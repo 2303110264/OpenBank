@@ -82,8 +82,9 @@
 				</tr>
 			</c:forEach>
          --%>
+         <%--
 			<c:forEach items="${accList}" var="acc">
-	            <a href="${path}/accDetail/${acc.accId}" class="col-sm-6 col-lg-4 text-decoration-none project marketing social business">
+	            <a href="${path}/accDetail/${i}" class="col-sm-6 col-lg-4 text-decoration-none project marketing social business">
 	                <div class="service-work overflow-hidden card mb-5 mx-5 m-sm-0">
 	                    <img class="card-img-top" src="${path}/assets/img/our-work-01.jpg" alt="...">
 	                    <div classs="card-body">
@@ -99,6 +100,7 @@
 	                </div>
 	            </a>
 			</c:forEach>
+          --%>
 		</div>
 	<%--
 	            <a href="${path}/work-single" class="col-sm-6 col-lg-4 text-decoration-none project marketing social business">

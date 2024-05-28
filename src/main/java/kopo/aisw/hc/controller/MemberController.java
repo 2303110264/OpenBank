@@ -67,7 +67,7 @@ public class MemberController {
 	}
 	@PostMapping("signIn")
 	public String signIn(@ModelAttribute("m")MemberVO m, BindingResult res, 
-			Model model, @ModelAttribute("ref")String referer) throws Exception {
+			Model model, HttpSession session) throws Exception {
 		MemberVO userVO = ms.signIn(m);
 		if(userVO==null) {
 			model.addAttribute("loginChk", false);
@@ -77,6 +77,12 @@ public class MemberController {
 			//흔적2
 //			System.out.println(referer);
 //			return "redirect:"+referer;
+			
+			//흔적3 (성공)
+			//로그인이 필요한 모든 링크에 interceptor가 걸린 상태임.
+			//kopo.aisw.hc.interceptor.SignInInterceptor에 세션에 preUrl을 추가하는 코드가 있음
+			String preUrl = (String) session.getAttribute("preUrl");
+			if(preUrl!=null) return "redirect:"+preUrl.substring(3);
 			return "redirect:/bank/";
 		}
 	}
