@@ -80,6 +80,7 @@ CREATE SEQUENCE test_customer_seq;
 	<!-- 프로필 조회 -->
 	<select id="profile" parameterType="memberVO" resultType="memberVO">
 		select customer_ID customerid
+		, name
 		, bank_id userid
 		, phone_num phonenum
 		, email

@@ -1,5 +1,7 @@
 package kopo.aisw.hc.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,21 +11,20 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpSession;
-import jakarta.validation.Valid;
 import kopo.aisw.hc.account.service.AccountService;
 import kopo.aisw.hc.account.vo.AccountVO;
 import kopo.aisw.hc.member.service.MemberService;
 import kopo.aisw.hc.member.vo.MemberVO;
-// git push origin localBranch:gitBranch 
 import kopo.aisw.hc.product.service.ProductService;
 import kopo.aisw.hc.product.vo.ProductVO;
 import kopo.aisw.hc.transaction.vo.TransactionVO;
 
+// git push origin localBranch:gitBranch 
 @Controller
-//@RequestMapping("/account/")
-@RequestMapping("/")
+@RequestMapping("/account/")
 public class AccountController {
 	
 	@Autowired
@@ -33,41 +34,39 @@ public class AccountController {
 	@Autowired
 	private ProductService ps;
 	
-	/*
-	계좌 이체하기
-	0. 상대 계좌 입력
-	1. 상대 계좌 존재 확인하기 (없는 계좌: 일단 넘어감
-						있는 계좌: 소유자 이름 출력)
-	2. 이체금액 입력
-	3. 차액 계산->출력
-	--원래 결제비밀번호 입력해야하는데 어쩌지ㅋㅋ--
-	4. 송금 => transactionVO -> 출금+입금 => 둘 다 성공해야 성공 -> 결과 출력
-	 */
-
 	//계좌생성
 	@GetMapping("openAcc/{productNum}")
-	public String openAnAcc(@PathVariable int productNum, Model model,
+	public String openAnAcc(@PathVariable(value = "productNum") int productNum, Model model,
 							HttpSession session) throws Exception {
 		MemberVO userVO = (MemberVO) session.getAttribute("userVO");
 		//고객정보 가져오기(패스워드 제외)
 		userVO = ms.getProfile(userVO);
+		ProductVO p = ps.selectProduct(productNum);
+		//상품번호, 고객고유번호, 고객이름 세팅
 		AccountVO openAcc = as.preset(userVO, productNum);
-
+		
+		model.addAttribute("product", p);
 		model.addAttribute("openAcc", openAcc);
-		model.addAttribute("openAnAcc", false);
 		return "account/open";
 	}
-	@PostMapping("openAcc")
-	public String openAnAcc(@Valid @ModelAttribute("openAcc")AccountVO openAcc,
-			BindingResult res, Model model) throws Exception {
-		/**open 수정덜됨*/
-		if(res.hasErrors()) return "account/open";
+	@PostMapping("openAcc/{productNum}")
+	public String openAnAcc(@PathVariable(value = "productNum") int productNum,
+			@ModelAttribute("openAcc")AccountVO openAcc,
+			@RequestParam("password")String password, BindingResult res, Model model) {
+//		if(res.hasErrors()) return "account/open";
 		
-		//계좌번호 생성 및 등록
-		as.openAnAccount(openAcc);
+		//인증 또는 비밀번호 확인 로직이 빠져있음
+		try {
+			//계좌번호 생성 및 등록
+			model.addAttribute("openAnAcc", as.openAnAccount(openAcc));
+			model.addAttribute("openAnAcc", true);
+			return "account/open";
+		}catch(Exception e) {
+			model.addAttribute("openAnAcc", false);
+			e.printStackTrace();
+			return "redirect:/ob/product/"+productNum;
+		}
 		
-		/**result 페이지 비어있음*/
-		return "account/result";
 	}
 	
 	
@@ -84,5 +83,14 @@ public class AccountController {
 		
 		
 		return "account/transfer";
+	}
+	
+	//계좌목록
+	@GetMapping("list")
+	public String accountList(Model model, HttpSession session) {
+		MemberVO userVO = (MemberVO) session.getAttribute("userVO");
+		List<AccountVO> list = as.getAccountList(userVO);
+		model.addAttribute("accList", list);
+		return "account/list";
 	}
 }

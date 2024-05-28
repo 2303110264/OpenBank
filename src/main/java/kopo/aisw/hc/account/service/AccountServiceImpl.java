@@ -1,5 +1,7 @@
 package kopo.aisw.hc.account.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -60,6 +62,12 @@ public class AccountServiceImpl implements AccountService {
 	public boolean closeAnAccount(AccountVO account) {
 		if(account.getBalance()!=0) return false;
 		return aDao.closeAnAccount(account);
+	}
+
+	//소유계좌조회
+	@Override
+	public List<AccountVO> getAccountList(MemberVO userVO) {
+		return aDao.getAccList(userVO.getCustomerId());
 	}
 
 

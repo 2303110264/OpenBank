@@ -12,10 +12,6 @@ public interface AccountDAO {
 	public AccountVO preset(MemberVO member, int productNum) throws Exception;
 	//계좌 개설- 계좌번호 생성-자동 (수동은 추후 업데이트 예정)
 	public AccountVO createAccNum(AccountVO account);
-/*
-	//계좌 개설- 생성된 계좌번호 중복체크 (생성에 병합됨)
-	public boolean accDoubleCheck(long accNum);
- */
 	//계좌 개설-등록
 	public boolean openAnAccount(AccountVO account, ProductVO product);
 	

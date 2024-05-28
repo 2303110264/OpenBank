@@ -1,5 +1,6 @@
 package kopo.aisw.hc.transaction.vo;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,12 +26,19 @@ public class TransactionVO {
 		--CONSTRAINT FK_DEPOSIT_ACC FOREIGN KEY(DEPOSIT_ACC) REFERENCES TEST_ACCOUNT(ACC_NUM)
 	 */
 	private int transactionId;
+	@NotNull
 	private String transactionType;
+	@NotNull
 	private String transactionDate;
+	@NotNull
 	private long amount;
+	@NotNull
 	private long depositAcc;
+	@NotNull
 	private String depositName;
+	@NotNull
 	private long withdrawAcc;
+	@NotNull
 	private String withdrawName;
 	
 }

@@ -63,11 +63,13 @@
     <section class="container py-5">
         <div class="row justify-content-center my-5">
             <div class="filter-btns shadow-md rounded-pill text-center col-auto">
-                <a class="filter-btn btn rounded-pill btn-outline-primary border-0 m-md-2 px-md-4 active" data-filter=".project" href="#">All</a>
-                <a class="filter-btn btn rounded-pill btn-outline-primary border-0 m-md-2 px-md-4" data-filter=".business" href="#">Business</a>
-                <a class="filter-btn btn rounded-pill btn-outline-primary border-0 m-md-2 px-md-4" data-filter=".marketing" href="#">Marketing</a>
-                <a class="filter-btn btn rounded-pill btn-outline-primary border-0 m-md-2 px-md-4" data-filter=".social" href="#">Social Media</a>
-                <a class="filter-btn btn rounded-pill btn-outline-primary border-0 m-md-2 px-md-4" data-filter=".graphic" href="#">Graphic</a>
+                <a class="filter-btn btn rounded-pill btn-outline-primary border-0 m-md-2 px-md-4 active" data-filter=".account" href="#">All</a>
+                <a class="filter-btn btn rounded-pill btn-outline-primary border-0 m-md-2 px-md-4" data-filter=".type1" href="#">예금</a>
+                <a class="filter-btn btn rounded-pill btn-outline-primary border-0 m-md-2 px-md-4" data-filter=".type2" href="#">적금</a>
+                <a class="filter-btn btn rounded-pill btn-outline-primary border-0 m-md-2 px-md-4" data-filter=".type3" href="#">대출</a>
+<%--
+                 <a class="filter-btn btn rounded-pill btn-outline-primary border-0 m-md-2 px-md-4" data-filter=".graphic" href="#">Graphic</a>
+ --%>
             </div>
         </div>
         <div class="row projects gx-lg-5">
@@ -82,9 +84,11 @@
 				</tr>
 			</c:forEach>
          --%>
-         <%--
+         	<c:if test="${accList}==null">
+         	소유한 계좌가 없습니다.
+         	</c:if>
 			<c:forEach items="${accList}" var="acc">
-	            <a href="${path}/accDetail/${i}" class="col-sm-6 col-lg-4 text-decoration-none project marketing social business">
+	            <a href="${path}/accDetail/${i}" class="col-sm-6 col-lg-4 text-decoration-none account marketing social type1">
 	                <div class="service-work overflow-hidden card mb-5 mx-5 m-sm-0">
 	                    <img class="card-img-top" src="${path}/assets/img/our-work-01.jpg" alt="...">
 	                    <div classs="card-body">
@@ -100,7 +104,6 @@
 	                </div>
 	            </a>
 			</c:forEach>
-          --%>
 		</div>
 	<%--
 	            <a href="${path}/work-single" class="col-sm-6 col-lg-4 text-decoration-none project marketing social business">
@@ -216,7 +219,7 @@
     </section>
     <%-- End Our Work --%>
 
-    <%-- Start Feature Work --%>
+    <%-- Start Feature Work 
     <section class="bg-light py-5">
         <div class="feature-work container my-4">
             <div class="row d-flex d-flex align-items-center">
@@ -251,9 +254,9 @@
                 </div>
             </div>
         </div>
+    --%>
     </section>
     <%-- End Feature Work --%>
-    
     
     <%-- Start Footer --%>
     <jsp:include page="../footer.jsp"></jsp:include>

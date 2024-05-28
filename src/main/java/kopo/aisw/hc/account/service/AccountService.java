@@ -1,5 +1,7 @@
 package kopo.aisw.hc.account.service;
 
+import java.util.List;
+
 import kopo.aisw.hc.account.vo.AccountVO;
 import kopo.aisw.hc.member.vo.MemberVO;
 import kopo.aisw.hc.transaction.vo.TransactionVO;
@@ -10,6 +12,8 @@ public interface AccountService {
 	//계좌 개설하기
 	public boolean openAnAccount(AccountVO account) throws Exception;
 
+	//계좌 조회- 목록 조회
+	public List<AccountVO> getAccountList(MemberVO userVO);
 	//조회: 추후 accNum 대신 accId로 변경 예정
 	//계좌 조회- 이름 체크
 	public String getOwnerName(long accNum);

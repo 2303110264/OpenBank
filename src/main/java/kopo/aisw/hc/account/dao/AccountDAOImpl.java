@@ -38,7 +38,7 @@ public class AccountDAOImpl implements AccountDAO {
 		return openAcc;
 	}
 	
-	//계좌 개설- 계좌번호 생성-자동 (수동은 추후 업데이트 예정)
+	//계좌 개설- 계좌번호 생성-자동
 	@Override
 	public AccountVO createAccNum(AccountVO account) {
 		StringBuilder sb = new StringBuilder();
@@ -54,15 +54,6 @@ public class AccountDAOImpl implements AccountDAO {
 		
 		return account;
 	}
-/*
-	//현재 사용되지 않음 **** 중복체크가 create 과정에 병합됨
-	//계좌 개설- 생성된 계좌번호 중복체크
-	@Override
-	public boolean accDoubleCheck(long accNum) {
-		AccountVO a = sqlSession.selectOne("dao.AccountDAO.searchByAccNum", accNum);
-		return a!=null;
-	}
- */
 
 	//계좌 개설-등록 (최근거래일 빼고 다 채워야함)
 	@Override

@@ -20,10 +20,15 @@
 		});
 	}
 		
+//open an account
+	if(typeof accmsg!='undefined' && accmsg){
+    	alert("계좌 생성이 완료되었습니다!");
+    	location.href="/ob/account/list"
+	}
 	
 //sign in
-//	if(typeof login!='undefined' && !login){
-	if(!login){
+//	if(!login){
+	if(typeof login!='undefined' && !login){
     	alert("아이디 또는 비밀번호가 다릅니다.");
 		login = true;
 	}
