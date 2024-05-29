@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import jakarta.validation.Valid;
 import kopo.aisw.hc.member.dao.MemberDAO;
 import kopo.aisw.hc.member.vo.MemberVO;
 

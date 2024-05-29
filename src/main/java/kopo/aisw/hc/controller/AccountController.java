@@ -55,11 +55,12 @@ public class AccountController {
 			@RequestParam("password")String password, BindingResult res, Model model) {
 //		if(res.hasErrors()) return "account/open";
 		
+		boolean b;
 		//인증 또는 비밀번호 확인 로직이 빠져있음
 		try {
 			//계좌번호 생성 및 등록
-			model.addAttribute("openAnAcc", as.openAnAccount(openAcc));
-			model.addAttribute("openAnAcc", true);
+			b= as.openAnAccount(openAcc);
+			model.addAttribute("openAnAcc", b);
 			return "account/open";
 		}catch(Exception e) {
 			model.addAttribute("openAnAcc", false);
