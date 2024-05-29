@@ -51,57 +51,65 @@
                 <ol class="carousel-indicators">
                     <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
                     <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
+                    <%--
                     <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></li>
+                     --%>
                 </ol>
                 <div class="carousel-inner">
+						<%--
                     <div class="carousel-item active">
-
                         <div class="py-5-2 row d-flex align-items-center">
                             <div onclick="window.open('#')" class="banner-content col-lg-8 col-8 offset-2 m-lg-auto text-left py-5-2">
                                 <h1 class="banner-heading h1 text-secondary display-3 mb-0 pb-5 mx-0 px-0 light-300 typo-space-line">
-                                    Develop <strong>Strategies</strong> for 
-                                  <br>your business
+                                    Develop <strong>Portfolio</strong> for 
+                                  <br>your employment
                               </h1>
                                 <p class="banner-body text-muted py-3 mx-0 px-0">
-                                    Purple Buzz is a corporate HTML template with Bootstrap 5 Beta 1. This CSS template is 100% free to download provided by <a rel="nofollow" href="https://templatemo.com/page/1" target="_parent">TemplateMo</a>. Total 6 HTML pages included in this template. Icon fonts by <a rel="nofollow" href="https://boxicons.com/" target="_blank">Boxicons</a>. Photos are from <a rel="nofollow" href="https://unsplash.com/" target="_blank">Unsplash</a> and <a rel="nofollow" href="https://icons8.com/" target="_blank">Icons 8</a>.
+                                    Purple Buzz is a corporate HTML template with Bootstrap 5 Beta 1. This CSS template is 100% free to download provided by 
+                                    <a rel="nofollow" href="https://templatemo.com/page/1" target="_parent">TemplateMo</a>
+                                    . Total 6 HTML pages included in this template. Icon fonts by 
+                                    <a rel="nofollow" href="https://boxicons.com/" target="_blank">Boxicons</a>
+                                    . Photos are from 
+                                    <a rel="nofollow" href="https://unsplash.com/" target="_blank">Unsplash</a> 
+                                    and <a rel="nofollow" href="https://icons8.com/" target="_blank">Icons 8</a>.
                               </p>
-                                <%--
+                                <!--
                                  <a class="banner-button btn rounded-pill btn-outline-primary btn-lg px-4" href="#" role="button">Get Started</a>
-                                 --%>
+                                 -->
                             </div>
                         </div>
 
                     </div>
-                    <div class="carousel-item">
-
-                        <div class="py-5-2 row d-flex align-items-center click-banner">
-                            <div onclick="window.open('#')" class="banner-content col-lg-8 col-8 offset-2 m-lg-auto text-left py-5-2">
-                                <h1 class="banner-heading h1 text-secondary display-3 mb-0 pb-3 mx-0 px-0 light-300">
-                                    HTML CSS Template with Bootstrap 5 Beta 1
-                                </h1>
-                                <p class="banner-body text-muted py-3">
-                                    You are not allowed to re-distribute this Purple Buzz HTML template as a downloadable ZIP file on any kind of Free CSS collection websites. This is strongly prohibited. Please contact TemplateMo for more information.
-                                </p>
-                                <%--
-                                <a class="banner-button btn rounded-pill btn-outline-primary btn-lg px-4" href="#" role="button">Get Started</a>
-                                 --%>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="carousel-item">
-
+						 --%>
+                    <div class="carousel-item active">
                         <div class="py-5-2 row d-flex align-items-center">
                             <!-- 링크걸곳: banner-content -->
                             <div onclick="window.open('#')" class="banner-content col-lg-8 col-8 offset-2 m-lg-auto text-left py-5-2">
                                 <h1 class="banner-heading h1 text-secondary display-3 mb-0 pb-3 mx-0 px-0 light-300">
-                                    Cupidatat non proident, sunt in culpa qui officia
+                                    <b>Bug Fix</b> &nbsp;&nbsp;<small>v2.13.1</small>
                                 </h1>
                                 <p class="banner-body text-muted py-3">
-                                    Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                                    laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                                    irure dolor in reprehenderit in voluptate velit esse cillum
-                                    dolore eu fugiat nulla pariatur. Excepteur sint occaecat.
+                                    <b>Controller</b> : Member-signUp의 return값이 수정되었습니다. ("redirect:/bank/" -> "user/signUp")
+                                	<br/><b>Service</b> : bcrypt를 이용한 Password 암호화 기능이 추가되었습니다.
+                                	<br/><b>member.xml</b> : 잘못된 SQL을 수정하였습니다.
+                                </p>
+                                <%--
+                                <a class="banner-button btn rounded-pill btn-outline-primary btn-lg px-4" href="#" role="button">Get Started</a>
+                                --%>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="carousel-item">
+                        <div class="py-5-2 row d-flex align-items-center click-banner">
+                            <div onclick="window.open('#')" class="banner-content col-lg-8 col-8 offset-2 m-lg-auto text-left py-5-2">
+                                <h1 class="banner-heading h1 text-secondary display-3 mb-0 pb-3 mx-0 px-0 light-300">
+                                    Develop <strong>Portfolio</strong> for 
+                                  <br>your employment
+                                </h1>
+                                <p class="banner-body text-muted py-3">
+                                    원하는 결과를 얻지 못하더라도 하다 보면 안 한 것보다 나을 때가 많습니다.
                                 </p>
                                 <%--
                                 <a class="banner-button btn rounded-pill btn-outline-primary btn-lg px-4" href="#" role="button">Get Started</a>
@@ -207,7 +215,7 @@
                     </div>
                 </a>
             </div><%-- End Recent Work --%>
-
+<!--
             <%-- Start Recent Work --%>
             <div class="col-xl-3 col-md-4 col-sm-6 project ui graphic">
                 <a href="#" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
@@ -272,12 +280,12 @@
                     </div>
                 </a>
             </div><%-- End Recent Work --%>
-
+-->
         </div>
     </section>
     <%-- End Service --%>
 
-
+<!-- 
     <%-- Start View Work --%>
     <section class="bg-secondary">
         <div class="container py-5">
@@ -387,6 +395,7 @@
         </div>
     </section>
     <%-- End Recent Work --%>
+ -->
 
     <%-- Start Footer --%>
     <jsp:include page="footer.jsp"></jsp:include>

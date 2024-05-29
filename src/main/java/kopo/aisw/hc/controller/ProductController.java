@@ -29,7 +29,7 @@ public class ProductController {
     }
 
     // 관리자용 상품 상세정보 조회
-    @GetMapping("detail/{productNum}")
+    @GetMapping("admin/detail/{productNum}")
     public String productDetail(@PathVariable("productNum") int productNum, Model model) {
         try {
             model.addAttribute("p", productService.selectProduct(productNum));

@@ -26,7 +26,7 @@
 	                            <a class="nav-link btn-outline-primary rounded-pill px-3" href="${path}/ob/account/transfer">이체</a>
 	                        </li>
 	                        <li class="nav-item">
-	                            <a class="nav-link btn-outline-primary rounded-pill px-3" href="${path}/ob/pricing">상품가입</a>
+	                            <a class="nav-link btn-outline-primary rounded-pill px-3" href="${path}/ob/product/view">상품가입</a>
 	                        </li>
 	                        <li class="nav-item">
 	                            <a class="nav-link btn-outline-primary rounded-pill px-3" href="${path}/ob/contact">고객센터(Contact)</a>

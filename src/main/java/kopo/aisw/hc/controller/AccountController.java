@@ -64,7 +64,7 @@ public class AccountController {
 		}catch(Exception e) {
 			model.addAttribute("openAnAcc", false);
 			e.printStackTrace();
-			return "redirect:/ob/product/"+productNum;
+			return "redirect:/product/view/"+productNum;
 		}
 		
 	}

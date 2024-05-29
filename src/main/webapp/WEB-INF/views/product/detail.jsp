@@ -40,6 +40,7 @@
         <th>신규 가입 가능 여부</th>
         <td>${p.available == 1 ? '가능' : '불가능'}</td>
     </tr>
+    
 </table>
 <a href="${pageContext.request.contextPath}/product/list">목록으로</a>
 </body>

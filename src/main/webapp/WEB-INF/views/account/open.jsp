@@ -40,9 +40,10 @@
 		<a class="navbar-brand" href="${path}/bank/">
 		</a>
         </h1>
-        <h2 class="col-12 col-xl-8 h4 regular-400 margin-auto">${product.interestRate}%</h2>
+        <h2 class="col-12 col-xl-8 h4 regular-400 margin-auto">금리: ${product.interestRate}%</h2>
         <p class="col-12 col-xl-8 text-muted pb-5 light-300 margin-auto">
-            ${product.description}
+            초기 가입금액: ${product.initialDeposit }
+            <br/>${product.description}
         </p>
 
         <div class="row pb-4 sign-up">
@@ -67,7 +68,7 @@
 
                     <div class="col-lg-4 mb-4 sign-in-div2">
                         <div class="form-floating">
-                            <form:input path="accName" type="text" class="form-control form-control-lg light-300" id="accName" name="accName" placeholder="Account Name"/>
+                            <form:input path="accName" type="text" class="form-control form-control-lg light-300" id="accName" name="accName" placeholder="Account Name" value="통장 별명을 설정해주세요"/>
                             <label for="floatingname light-300">Account Name</label>
                             <form:errors path="accName" class="error"/>
                         </div>

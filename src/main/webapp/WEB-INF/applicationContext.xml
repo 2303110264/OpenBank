@@ -68,6 +68,7 @@
 		<!-- 크흑 URL이 중구난방이라 일단 다 지정해두는중 ㅠㅠ 정리필요 -->
 		<mvc:interceptor>
 	        <mvc:mapping path="/account/**" /> 
+	        <mvc:mapping path="/product/**" /> 
 	        <mvc:mapping path="/transfer" /> 
 	        <mvc:mapping path="/member/profile" /> 
 	        <bean class="kopo.aisw.hc.interceptor.SignInInterceptor" />

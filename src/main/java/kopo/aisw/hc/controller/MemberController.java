@@ -52,13 +52,12 @@ public class MemberController {
 		model.addAttribute("message", result);
 		return "user/profile";
 	}
-
+	
 	//로그인
 	@GetMapping("signIn")
 	public String signIn(Model model, HttpSession session) {
 		//이미 로그인상태일 경우 메인화면으로
 		if(session.getAttribute("userVO")!=null) return "redirect:/bank/";
-		
 		MemberVO m = new MemberVO();
 		model.addAttribute("m", m);
 		return "user/signIn";
@@ -83,7 +82,6 @@ public class MemberController {
 		}
 	}
 
-	
 	//로그아웃
 	@GetMapping("logout")
 	public String logout(SessionStatus state) {
@@ -119,7 +117,7 @@ public class MemberController {
 
 		if(!ms.signUp(m)) model.addAttribute("signUp", false);
 		else model.addAttribute("signUp", true);
-		return "redirect:/bank/";
+		return "user/signUp";
 	}
 	
 	

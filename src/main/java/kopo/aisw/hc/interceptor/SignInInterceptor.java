@@ -30,7 +30,6 @@ public class SignInInterceptor implements HandlerInterceptor {
 		}else{
 			String previousUrl = req.getRequestURI();
 	        req.getSession().setAttribute("preUrl", previousUrl);
-	        System.out.println(previousUrl);
 	        res.sendRedirect("/ob/member/signIn");
 			return false;
 		}

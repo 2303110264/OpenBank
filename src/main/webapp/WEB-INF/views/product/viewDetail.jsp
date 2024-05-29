@@ -37,6 +37,11 @@
         <th>신규 가입 가능 여부</th>
         <td>${product.available == 1 ? '가능' : '불가능'}</td>
     </tr>
+    <tr>
+    	<td colspan="2" style="text-align:center;">
+    		<input type="button" onclick="location.href='/ob/account/openAcc/${product.productNum}'" value="가입하기"/>
+    	</td>
+    </tr>
 </table>
 <a href="${pageContext.request.contextPath}/product/view">목록으로</a>
 <a href="${pageContext.request.contextPath}/">홈으로</a>
