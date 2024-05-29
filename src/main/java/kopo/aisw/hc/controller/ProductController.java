@@ -17,7 +17,7 @@ public class ProductController {
     private ProductService productService;
     
     // 관리자용 상품 목록 조회
-    @GetMapping("list")
+    @GetMapping("admin/list")
     public String productList(Model model) {
         try {
             model.addAttribute("p", productService.selectAllProducts());

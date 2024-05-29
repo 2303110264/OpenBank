@@ -39,7 +39,7 @@ public class MemberVO {
 	private String userId;
 	
 	@JsonIgnore
-	@Size(min=8, max=20, message="비밀번호는 8~20자 사이로 입력해주세요")
+	@Size(min=8, max=50, message="비밀번호는 8~20자 사이로 입력해주세요")
 	@Pattern(regexp ="^(?=.*[a-z])(?=.*\\d)(?=.*[~!@#$%^&*()+|=])[a-z\\d~!@#$%^&*()+|=]{0,30}$", 
 	message = "영문 소문자, 숫자, 특수문자(~!@#$%^&*()+|=])가 모두 포함되어야 합니다")
 	private String password;
