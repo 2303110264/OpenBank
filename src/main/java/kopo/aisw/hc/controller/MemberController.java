@@ -119,7 +119,7 @@ public class MemberController {
 
 		if(!ms.signUp(m)) model.addAttribute("signUp", false);
 		else model.addAttribute("signUp", true);
-		return "user/signUp";
+		return "redirect:/bank/";
 	}
 	
 	
