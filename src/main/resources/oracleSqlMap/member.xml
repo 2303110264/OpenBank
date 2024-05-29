@@ -23,9 +23,13 @@ CREATE SEQUENCE test_customer_seq;
 <mapper namespace="dao.MemberDAO">
 	<!-- 로그인 -->
 	<select id="signIn" parameterType="memberVO" resultType="memberVO">
-		select customer_ID customerid
+		<!-- select customer_ID customerid
 		from test_customer
-		where bank_id=#{userId} and password=#{password}
+		where bank_id=#{userId} and password=#{password} -->
+		select customer_ID as customerId,
+		       password
+		from test_customer
+		where bank_id = #{userId}
 	</select>
 	
 	<!-- 회원가입 -->

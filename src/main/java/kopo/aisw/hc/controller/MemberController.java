@@ -63,6 +63,7 @@ public class MemberController {
 		model.addAttribute("m", m);
 		return "user/signIn";
 	}
+	
 	@PostMapping("signIn")
 	public String signIn(@ModelAttribute("m")MemberVO m, BindingResult res, 
 			Model model, HttpSession session) throws Exception {
@@ -81,6 +82,7 @@ public class MemberController {
 			return "redirect:/bank/";
 		}
 	}
+
 	
 	//로그아웃
 	@GetMapping("logout")
@@ -114,10 +116,12 @@ public class MemberController {
 		// 가입 가능?
 		if(customer) customer = ms.updateBankId(m);
 		else customer = ms.signUp(m);
+
 		if(!ms.signUp(m)) model.addAttribute("signUp", false);
 		else model.addAttribute("signUp", true);
 		return "user/signUp";
 	}
+	
 	
 	//우편번호&주소 기입 api
 	@RequestMapping("jusoPopup")

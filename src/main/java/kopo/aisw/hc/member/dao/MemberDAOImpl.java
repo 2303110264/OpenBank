@@ -2,6 +2,7 @@ package kopo.aisw.hc.member.dao;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,11 +16,28 @@ public class MemberDAOImpl implements MemberDAO{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
+	@Autowired
+    private PasswordEncoder passwordEncoder; // PasswordEncoder 추가
+	
+	/*
 	@Override
 	public MemberVO signIn(MemberVO m) throws Exception {
 		MemberVO in = sqlSession.selectOne("dao.MemberDAO.signIn", m);
 		return in;
 	}
+	*/
+	@Override
+    public MemberVO signIn(MemberVO m) throws Exception {
+        // DB에서 사용자 정보 조회
+        MemberVO in = sqlSession.selectOne("dao.MemberDAO.signIn", m);
+        
+        // 비밀번호 비교
+        if (in != null && passwordEncoder.matches(m.getPassword(), in.getPassword())) {
+            return in;
+        } else {
+            return null;
+        }
+    }
 
 	@Override
 	public boolean signUp(MemberVO m) {

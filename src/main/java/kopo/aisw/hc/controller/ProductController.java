@@ -16,7 +16,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
     
-    // 상품 목록 조회
+    // 관리자용 상품 목록 조회
     @GetMapping("list")
     public String productList(Model model) {
         try {
@@ -27,10 +27,10 @@ public class ProductController {
             return "error";
         }
     }
-    
-    // 상품 상세정보 조회
-    @GetMapping("{productNum}")
-    public String productDetail(@PathVariable int productNum, Model model) {
+
+    // 관리자용 상품 상세정보 조회
+    @GetMapping("detail/{productNum}")
+    public String productDetail(@PathVariable("productNum") int productNum, Model model) {
         try {
             model.addAttribute("p", productService.selectProduct(productNum));
             return "product/detail";
@@ -57,6 +57,7 @@ public class ProductController {
             productService.insertProduct(productVO);
             return "redirect:/product/list";
         } catch (Exception e) {
+        	e.printStackTrace();
             model.addAttribute("message", "상품 등록에 실패했습니다.");
             return "error";
         }
@@ -88,14 +89,40 @@ public class ProductController {
         }
     }
     
-    // 상품 삭제 처리
+ // 상품 삭제 처리
     @GetMapping("delete/{productNum}")
-    public String productDelete(@PathVariable int productNum) {
+    public String productDelete(@PathVariable int productNum, Model model) {
         try {
             productService.deleteProduct(productNum);
             return "redirect:/product/list";
         } catch (Exception e) {
+            model.addAttribute("message", "상품 삭제에 실패했습니다.");
             return "error";
         }
     }
+    
+    // 회원용 상품 목록 조회
+    @GetMapping("view")
+    public String viewProductList(Model model) {
+        try {
+            model.addAttribute("products", productService.selectAllProducts());
+            return "product/viewList";
+        } catch (Exception e) {
+            model.addAttribute("message", "목록을 불러오는데 실패했습니다.");
+            return "error";
+        }
+    }
+
+    // 회원용 상품 상세정보 조회
+    @GetMapping("view/{productNum}")
+    public String viewProductDetail(@PathVariable("productNum") int productNum, Model model) {
+        try {
+            model.addAttribute("product", productService.selectProduct(productNum));
+            return "product/viewDetail";
+        } catch (Exception e) {
+            model.addAttribute("message", "상품 정보를 불러오는데 실패했습니다.");
+            return "error";
+        }
+    }
+
 }
