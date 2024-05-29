@@ -52,10 +52,11 @@
         where product_num = #{productNum}
     </update>
 
-    <!-- 상품 삭제 -->
-    <delete id="deleteProduct" parameterType="int">
-        delete from test_product_list 
-          where product_num = #{productNum}
-    </delete>
+    <!-- 상품 비활성화 -->
+    <update id="deleteProduct" parameterType="productVO">
+        update test_product_list
+        set available = 0
+        where product_num = #{productNum}
+    </update>
 
 </mapper>
