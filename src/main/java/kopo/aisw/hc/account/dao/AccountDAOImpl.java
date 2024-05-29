@@ -18,7 +18,7 @@ import kopo.aisw.hc.transaction.vo.TransactionVO;
 @Transactional
 @Repository
 public class AccountDAOImpl implements AccountDAO {
-	private Random rd;
+	private Random rd = new Random();
 	
 	
 	@Autowired
@@ -51,6 +51,7 @@ public class AccountDAOImpl implements AccountDAO {
 			// 숫자 크기상 double 형태로 변환 (차라리 String이 나을지 나중에 고민)
 			accNum = Long.parseLong(sb.toString());
 		}while(sqlSession.selectOne("dao.AccountDAO.getOwnerName",(accNum))!=null);
+		account.setAccNum(accNum);
 		
 		return account;
 	}
@@ -69,7 +70,7 @@ public class AccountDAOImpl implements AccountDAO {
 		account.setRetDate(seoulNow.plusMonths(product.getDateOfDeposit()).toString());
 		//이자율 세팅
 		account.setInterestRate(product.getInterestRate());
-		
+		System.out.println(account);
 		int a = sqlSession.insert("dao.AccountDAO.openAnAccount", account);
 		return rollbackOrCommit(a==1);
 	}

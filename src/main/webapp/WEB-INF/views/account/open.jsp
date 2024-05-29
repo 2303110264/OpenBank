@@ -51,7 +51,8 @@
             <%-- Start Contact Form --%>
             <div class="col-lg-8 sign-in-div">
                 <form:form class="contact-form row sign-in-form" method="post" name="form" role="form" modelAttribute="openAcc">
-
+					<form:input path="customerId" type="hidden"/>
+					<form:input path="customerName" type="hidden"/>
                     <div class="col-lg-4 mb-4 sign-in-div2">
                         <div class="form-floating">
                             <div class="form-control form-control-lg light-300">${product.productName}</div>

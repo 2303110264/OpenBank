@@ -30,8 +30,7 @@ public class AccountServiceImpl implements AccountService {
 	@Override
 	public boolean openAnAccount(AccountVO account) throws Exception {
 		ProductVO product = pDao.selectProduct(account.getProductNum());
-		System.out.println(account);
-		System.out.println(product);
+		account = aDao.createAccNum(account);
 		return aDao.openAnAccount(account, product);
 	}
 
