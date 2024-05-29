@@ -78,5 +78,7 @@ header.scrollDown {
   transform: translate(0, -90px);
 }
 
-
-
+/*main banner*/
+.click-banner{
+	cursor: pointer;
+}
