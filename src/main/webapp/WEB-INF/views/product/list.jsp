@@ -5,6 +5,20 @@
 <head>
 <meta charset="UTF-8">
 <title>상품 목록</title>
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
 </head>
 <body>
 <h2>상품 목록 (관리자용)</h2>
@@ -18,12 +32,12 @@
         <th>가입 기간</th>
         <th>신규 가입 가능 여부</th>
         <th>수정</th>
-        <th>삭제</th>
+        <th>비활성</th>
     </tr>
     <c:forEach var="product" items="${p}">
         <tr>
             <td>${product.productNum}</td>
-            <td>${product.productName}</td>
+            <td><a href="${pageContext.request.contextPath}/product/detail/${product.productNum}">${product.productName}</a></td>
             <td>${product.productTarget == 0 ? '개인' : '법인'}</td>
             <td>${product.interestRate}</td>
             <td>${product.initialDeposit}</td>

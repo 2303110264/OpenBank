@@ -4,6 +4,20 @@
 <head>
 <meta charset="UTF-8">
 <title>상품 상세보기</title>
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
 </head>
 <body>
 <h2>상품 상세정보</h2>
@@ -42,6 +56,6 @@
     </tr>
     
 </table>
-<a href="${pageContext.request.contextPath}/product/list">목록으로</a>
+<a href="${pageContext.request.contextPath}/product/admin/list">목록으로</a>
 </body>
 </html>
