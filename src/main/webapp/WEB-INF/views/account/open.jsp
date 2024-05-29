@@ -77,7 +77,7 @@
 
                     <div class="col-lg-4 mb-4 sign-in-div2">
                         <div class="form-floating">
-                            <input path="accPwd" type="password" class="form-control form-control-lg light-300" id="password" name="password" placeholder="Account Password"/>
+                            <input type="password" class="form-control form-control-lg light-300" id="password" name="password" placeholder="Account Password"/>
                             <label for="floatingname light-300">Account Password</label>
                         </div>
                     </div>
@@ -109,9 +109,11 @@
     <%-- End Footer --%>
 	
 	<%-- Custom --%>
+	<c:if test="${openAnAcc} || !${openAnAcc}">
 	<script>
 	    var accmsg = ${openAnAcc}
 	</script>
+	</c:if>
 	<script src="${path}/assets/js/custom.js"></script>
 	<%-- Bootstrap --%>
     <script src="${path}/assets/js/bootstrap.bundle.min.js"></script>

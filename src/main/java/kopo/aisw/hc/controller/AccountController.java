@@ -3,6 +3,7 @@ package kopo.aisw.hc.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -33,6 +34,8 @@ public class AccountController {
 	private MemberService ms;
 	@Autowired
 	private ProductService ps;
+	@Autowired
+    private PasswordEncoder passwordEncoder;
 	
 	//계좌생성
 	@GetMapping("openAcc/{productNum}")
@@ -52,12 +55,16 @@ public class AccountController {
 	@PostMapping("openAcc/{productNum}")
 	public String openAnAcc(@PathVariable(value = "productNum") int productNum,
 			@ModelAttribute("openAcc")AccountVO openAcc,
-			@RequestParam("password")String password, BindingResult res, Model model) {
+			@RequestParam("password")String password, HttpSession session, Model model) {
 //		if(res.hasErrors()) return "account/open";
 		
 		boolean b;
 		//인증 또는 비밀번호 확인 로직이 빠져있음
 		try {
+			MemberVO m = (MemberVO) session.getAttribute("userVO");
+			m.setPassword(password);
+			//checkpwd 만드는게 좋을것
+			if(ms.signIn(m)==null) return "account/open";
 			//계좌번호 생성 및 등록
 			b= as.openAnAccount(openAcc);
 			model.addAttribute("openAnAcc", b);
