@@ -49,6 +49,8 @@ public class AccountVO {
 	@NotNull(message="세션이 만료되었거나 상품 정보를 불러올 수 없습니다.")
 	private double interestRate;
 	private long balance;
+	@Size(min=6, max=6, message="비밀번호는 6자리로 설정해주세요.")
+	private int accPwd;
 	private String regDate;
 	private String retDate;
 	private String lastTradeDate;

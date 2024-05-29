@@ -88,23 +88,31 @@
          	소유한 계좌가 없습니다.
          	</c:if>
 			<c:forEach items="${accList}" var="acc">
-	            <a href="${path}/accDetail/${accList.indexOf(acc)}" class="a-margin col-sm-6 col-lg-4 text-decoration-none account type${acc.productNum }">
+				<!-- 
+		            <a href="${path}/accDetail/${accList.indexOf(acc)}" class="a-margin col-sm-6 col-lg-4 text-decoration-none account type${acc.productNum }">
+				 -->
+				 <form action="/ob/account/list" method="post" id="acc" name="acc">
+	            	<input type="hidden" name="accNum" value="${acc.accNum}"/>
+	            <a class="a-margin col-sm-6 col-lg-4 text-decoration-none account type${acc.productNum }">
 	                <div class="service-work overflow-hidden card mb-5 mx-5 m-sm-0 account-card">
-	                    <!-- 
-	                     <img class="card-img-top" src="${path}/assets/img/our-work-01.jpg" alt="...">
-	                     -->
-	                    <div class="card-body account-card">
-	                        <h5 class="card-title light-300 text-dark">${acc.accName }</h5>
-	                        <p class="card-text light-300 text-dark">
-	                            <b>${acc.balance }</b><i class='bx bx-won ms-1'></i>
-	                            <br/>만기일: ${acc.retDate }
-	                        </p>
-	                        <span class="text-decoration-none text-primary light-300">
-	                              상세보기 <i class='bx bx-right-arrow-alt ms-1'></i>
-                         	 </span>
-	                    </div>
+						<button class="decoration-none" type="submit">
+		                    <!-- 
+		                     <img class="card-img-top" src="${path}/assets/img/our-work-01.jpg" alt="...">
+		                     -->
+		                    <div class="card-body account-card">
+		                        <h5 class="card-title light-300 text-dark">${acc.accName }</h5>
+		                        <p class="card-text light-300 text-dark">
+		                            <b>${acc.balance }</b><i class='bx bx-won ms-1'></i>
+		                            <br/>만기일: ${acc.retDate }
+		                        </p>
+		                        <span class="text-decoration-none text-primary light-300">
+		                              상세보기 <i class='bx bx-right-arrow-alt ms-1'></i>
+	                         	 </span>
+		                    </div>
+						</button>
 	                </div>
 	            </a>
+				 </form>
 			</c:forEach>
 		</div>
 	<%--

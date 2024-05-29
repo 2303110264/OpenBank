@@ -27,7 +27,7 @@ CREATE SEQUENCE test_customer_seq;
 		from test_customer
 		where bank_id=#{userId} and password=#{password} -->
 		select customer_ID as customerId,
-		       password
+		       password, customer_type customerType
 		from test_customer
 		where bank_id = #{userId}
 	</select>

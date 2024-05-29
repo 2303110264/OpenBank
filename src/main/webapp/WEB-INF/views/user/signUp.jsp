@@ -113,7 +113,7 @@
                             	<span class='error'>이름 또는 주민번호를 확인해주세요</span>
                             </c:if>
                         </div>
-                    </div><%-- End Input phoneNum --%>
+                    </div><%-- End Input rrn --%>
 
                     <div class="col-lg-6 mb-4">
                         <div class="form-floating">
@@ -152,10 +152,6 @@
     </section>
     <%-- End Contact --%>
 
-	
-	<%-- Start Footer --%>
-    <jsp:include page="../footer.jsp"></jsp:include>
-    <%-- End Footer --%>
 	
 	<%-- Custom --%>
 	<script>

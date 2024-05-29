@@ -38,18 +38,20 @@ public class MemberController {
 	@PostMapping("profile")
 	public String profile(@Valid @ModelAttribute("m")MemberVO profileVO,
 			BindingResult res, HttpSession session, Model model){
-		System.out.println(profileVO);
-		MemberVO userVO = (MemberVO) session.getAttribute("userVO");
-		System.out.println(userVO);
-		//세션과 아이디가 다르면 제거
-		if(!(userVO.getCustomerId()==profileVO.getCustomerId()))
-			return "redirect:/bank/";
-		//폼에서 display none이나 함수도 괜찮을 거긴 한데...일단은 세션에서 가져오는 것으로
-		if(profileVO.getPassword().length()<8)
-			profileVO.setPassword(null);
-		
-		boolean result = ms.edit(profileVO);
-		model.addAttribute("message", result);
+		try {
+			MemberVO userVO = (MemberVO) session.getAttribute("userVO");
+			//세션과 아이디가 다르면 메인화면 복귀
+			if(!(userVO.getCustomerId()==profileVO.getCustomerId()))
+				return "redirect:/bank/";
+			//폼에서 display none이나 함수도 괜찮을 거긴 한데...일단은 세션에서 가져오는 것으로
+			if(profileVO.getPassword().length()<8)
+				profileVO.setPassword(null);
+			
+			boolean result = ms.edit(profileVO);
+			model.addAttribute("message", result);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		return "user/profile";
 	}
 	

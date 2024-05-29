@@ -19,6 +19,7 @@ CREATE TABLE TEST_ACCOUNT(
 	, REG_DATE DATE DEFAULT sysdate NOT NULL
 	, RET_DATE DATE NOT NULL
 	, LAST_TRADE_DATE DATE NOT NULL
+	, ACC_PWD VARCHAR2(256) NOT NULL
 	, CONSTRAINT FK_CUSTOMER_ID FOREIGN KEY(CUSTOMER_ID) REFERENCES TEST_CUSTOMER(CUSTOMER_ID)
 	, CONSTRAINT FK_PRODUCT_NUM FOREIGN KEY(PRODUCT_NUM) REFERENCES TEST_PRODUCT_LIST(PRODUCT_NUM)
 	);
@@ -35,7 +36,7 @@ CREATE TABLE TEST_ACCOUNT(
 		insert into TEST_ACCOUNT
 		values(#{accNum}, #{accName}, #{productNum},
 		#{customerId}, #{customerName}, #{interestRate},
-		#{balance}, #{regDate}, #{retDate}, sysdate)
+		#{balance}, #{regDate}, #{retDate}, sysdate, #{accPwd})
 	</insert>
 	
 	<!-- 고객의 계좌목록 조회 -->

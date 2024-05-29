@@ -77,8 +77,8 @@
 
                     <div class="col-lg-4 mb-4 sign-in-div2">
                         <div class="form-floating">
-                            <input path="password" type="password" class="form-control form-control-lg light-300" id="password" name="password" placeholder="password"/>
-                            <label for="floatingname light-300">Password</label>
+                            <input path="accPwd" type="password" class="form-control form-control-lg light-300" id="password" name="password" placeholder="Account Password"/>
+                            <label for="floatingname light-300">Account Password</label>
                         </div>
                     </div>
 <%--

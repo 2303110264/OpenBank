@@ -15,9 +15,15 @@ https://templatemo.com/tm-561-purple-buzz
 }
 .a-margin{
 	margin-bottom:10px;
+	margin-left: 5px;
+	margin-right: 5px;
 }
 .min-height{
 	min-height:300px;
+}
+.decoration-none{
+	border:0px !important;
+	background:none !important;
 }
 
 /*a-*/

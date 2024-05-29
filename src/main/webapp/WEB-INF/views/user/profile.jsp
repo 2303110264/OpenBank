@@ -56,10 +56,6 @@
                         <div class="form-floating">
                             <form:input path="userId" type="text" class="form-control form-control-lg light-300" id="floatingID" name="userId" readonly="true" placeholder="ID"/>
                             <label for="floatingID light-300">ID</label>
-                            <form:errors path="userId" class="error"/>
-                            <c:if test="${idDuplicationCheck}">
-                            	<span class='error'>다른 아이디를 써주세요</span>
-                            </c:if>
                         </div>
                     </div><%-- End Input userId --%>
 
@@ -67,7 +63,9 @@
                         <div class="form-floating">
                             <form:input path="password" type="password" class="form-control form-control-lg light-300" id="floatingPassword" name="password" placeholder="Password"/>
                             <label for="floatingPassword light-300">Password</label>
-                            <form:errors path="password" class="error"/>
+                            <c:if test="document.form.zipNo.value!=''">
+                            	<form:errors path="password" class="error"/>
+							</c:if>                            
                         </div>
                     </div><%-- End Input Password --%>
 
@@ -76,9 +74,6 @@
                             <form:input path="name" type="text" class="form-control form-control-lg light-300" id="floatingname" name="name" placeholder="Name"/>
                             <label for="floatingname light-300">Name</label>
                             <form:errors path="name" class="error"/>
-                            <c:if test="${humanDuplicationCheck}">
-                            	<span class='error'>이름 또는 주민번호를 확인해주세요</span>
-                            </c:if>
                         </div>
                     </div><%-- End Input Name --%>
 

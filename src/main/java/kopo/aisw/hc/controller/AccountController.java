@@ -94,4 +94,9 @@ public class AccountController {
 		model.addAttribute("accList", list);
 		return "account/list";
 	}
+	@PostMapping("list")
+	public String accountList(Model model, @RequestParam("accNum")String accNum) {
+		model.addAttribute("account", accNum);
+		return "account/detail";
+	}
 }

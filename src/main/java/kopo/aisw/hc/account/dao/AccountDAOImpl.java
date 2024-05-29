@@ -5,25 +5,27 @@ import java.time.ZoneId;
 import java.util.List;
 import java.util.Random;
 
-import org.apache.ibatis.session.SqlSession;
+import javax.transaction.Transactional;
+
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import kopo.aisw.hc.account.vo.AccountVO;
 import kopo.aisw.hc.member.vo.MemberVO;
 import kopo.aisw.hc.product.vo.ProductVO;
 import kopo.aisw.hc.transaction.vo.TransactionVO;
 
-@Transactional
 @Repository
 public class AccountDAOImpl implements AccountDAO {
 	private Random rd = new Random();
 	
 	
 	@Autowired
-//	private SqlSessionTemplate sqlSession;
-	private SqlSession sqlSession;
+	private SqlSessionTemplate sqlSession;
+//	private SqlSession sqlSession;
+//	private SqlSessionFactory sqlSessionFactory;
+//	private SqlSession sqlSession = sqlSessionFactory.openSession();
 	
 	//사전설정
 	@Override
@@ -72,7 +74,7 @@ public class AccountDAOImpl implements AccountDAO {
 		account.setInterestRate(product.getInterestRate());
 		System.out.println(account);
 		int a = sqlSession.insert("dao.AccountDAO.openAnAccount", account);
-		return rollbackOrCommit(a==1);
+		return a==1;
 	}
 
 	//계좌목록 조회- customerId
@@ -99,42 +101,31 @@ public class AccountDAOImpl implements AccountDAO {
 	@Override
 	public boolean deposit(TransactionVO transaction) {
 		int a = sqlSession.update("dao.AccountDAO.deposit", transaction);
-		return rollbackOrCommit(a==1);
+		return a==1;
 	}
 	
 	//출금
 	@Override
 	public boolean withdraw(TransactionVO transaction) {
 		int a = sqlSession.update("dao.AccountDAO.withdraw", transaction);
-		return rollbackOrCommit(a==1);
+		return a==1;
 	}
 	
 	//계좌이체 (이게 입출금 외에 따로 필요한가??)
 	@Override
+	@Transactional
 	public boolean transfer(TransactionVO transaction) {
 		int a = 0;
 		a+= sqlSession.update("dao.AccountDAO.deposit", transaction);
 		a+= sqlSession.update("dao.AccountDAO.withdraw", transaction);
-		return rollbackOrCommit(a==2);
+		return a==2;
 	}
 	
 	//계좌 해지
 	@Override
 	public boolean closeAnAccount(AccountVO account) {
 		int a = sqlSession.delete("dao.AccountDAO.closeAnAccount", account);
-		return rollbackOrCommit(a==1);
+		return a==1;
 	}
 	
-	
-	//트랜잭션 제어
-	private boolean rollbackOrCommit(boolean b) {
-		if(b) {
-			sqlSession.commit();
-			return true;
-		}else {
-			sqlSession.rollback();
-			return false;
-		}
-	}
-
 }
