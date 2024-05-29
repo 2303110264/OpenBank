@@ -60,6 +60,19 @@
 		</mvc:message-converters>
 	</mvc:annotation-driven>
 	
+	<mvc:view-resolvers>
+		<mvc:jsp prefix="/WEB-INF/views/" suffix=".jsp" />
+	</mvc:view-resolvers>
+
+	<mvc:interceptors>
+		<!-- 크흑 URL이 중구난방이라 일단 다 지정해두는중 ㅠㅠ 정리필요 -->
+		<mvc:interceptor>
+	        <mvc:mapping path="/account/**" /> 
+	        <mvc:mapping path="/transfer" /> 
+	        <mvc:mapping path="/member/profile" /> 
+	        <bean class="kopo.aisw.hc.interceptor.SignInInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>	
 	<!-- 최대 업로드 파일 사이즈 : 10MB -->
 	<!-- 
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -77,9 +90,6 @@
 	<!-- 
 	<mvc:view-controller path="/file/uploadForm.do" view-name="file/fileUploadForm" />
 	-->
-	<mvc:view-resolvers>
-		<mvc:jsp prefix="/WEB-INF/views/" suffix=".jsp" />
-	</mvc:view-resolvers>
 
 </beans>
 <!-- src/resources = 환경 구성을 위한 xml 파일 -->

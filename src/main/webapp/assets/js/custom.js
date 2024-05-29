@@ -20,13 +20,6 @@
 		});
 	}
 		
-	
-//sign in
-//	if(typeof login!='undefined' && !login){
-	if(!login){
-    	alert("아이디 또는 비밀번호가 다릅니다.");
-		login = true;
-	}
 
 // Sign up
 	let zip = document.getElementById('zipNo');			
@@ -35,9 +28,11 @@
 		if (typeof msg != 'undefined' && msg) {
 	        alert("회원가입이 완료되었습니다! 로그인을 진행해주세요!");
 	        location.href="/ob/member/signIn"
-		}else if(zip.value<1){
+		}else if(zip.value==0){
 			// ^^ 0뜨는 거 보기 싫어서 JS로 해결!
 			zip.value = "";
+		}else{
+			console.log('test')	
 		}
 		
 		if(document.form.rrn != null){
@@ -70,4 +65,27 @@
 			zip.addEventListener('click', goPopup);
 		}
 		
+	}
+
+//open an account
+	if(typeof accmsg!='undefined' && accmsg){
+    	alert("계좌 생성이 완료되었습니다!");
+    	location.href="/ob/account/list"
+	}
+
+//profile
+	if(typeof profile!='undefined'){
+    	if(profile){
+			alert("수정이 완료되었습니다");
+			location.href="/ob/bank/"
+		}else{
+			alert("수정에 실패했습니다. 내용을 다시 확인해주세요.");
+		} 
+	}
+	
+//sign in
+//	if(!login){
+	if(typeof login!='undefined' && !login){
+    	alert("아이디 또는 비밀번호가 다릅니다.");
+		login = true;
 	}

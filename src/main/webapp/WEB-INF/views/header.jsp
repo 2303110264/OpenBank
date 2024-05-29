@@ -20,10 +20,10 @@
 	                            <a class="nav-link btn-outline-primary rounded-pill px-3" href="${path}/ob/bank/">Home</a>
 	                        </li>
 	                        <li class="nav-item">
-	                            <a class="nav-link btn-outline-primary rounded-pill px-3" href="${path}/ob/about">모아보기(About)</a>
+	                            <a class="nav-link btn-outline-primary rounded-pill px-3" href="${path}/ob/account/list">모아보기</a>
 	                        </li>
 	                        <li class="nav-item">
-	                            <a class="nav-link btn-outline-primary rounded-pill px-3" href="${path}/ob/transfer">이체(Work)</a>
+	                            <a class="nav-link btn-outline-primary rounded-pill px-3" href="${path}/ob/account/transfer">이체</a>
 	                        </li>
 	                        <li class="nav-item">
 	                            <a class="nav-link btn-outline-primary rounded-pill px-3" href="${path}/ob/pricing">상품가입</a>
