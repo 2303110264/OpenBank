@@ -50,7 +50,8 @@
             <%-- Start Contact Form --%>
             <div class="col-lg-8 ">
                 <form:form class="contact-form row" method="post" name="form" role="form" modelAttribute="m">
-
+					<form:input path="customerId" type="hidden" class="form-control form-control-lg light-300"/>
+                            
                     <div class="col-lg-6 mb-4">
                         <div class="form-floating">
                             <form:input path="userId" type="text" class="form-control form-control-lg light-300" id="floatingID" name="userId" readonly="true" placeholder="ID"/>
@@ -159,14 +160,16 @@
     <jsp:include page="../footer.jsp"></jsp:include>
     <%-- End Footer --%>
 	
-	<%-- Custom --%>
-	<script>
-	    var msg = ${signUp}
-	</script>
-	<script src="${path}/assets/js/custom.js"></script>
 	<%-- Bootstrap --%>
     <script src="${path}/assets/js/bootstrap.bundle.min.js"></script>
     <%-- Templatemo --%>
     <script src="${path}/assets/js/templatemo.js"></script>
+	<%-- Custom --%>
+	<c:if test="${message}">
+	<script>
+	    var profile = ${message}
+	</script>
+	</c:if>	
+	<script src="${path}/assets/js/custom.js"></script>
 </body>
 </html>
