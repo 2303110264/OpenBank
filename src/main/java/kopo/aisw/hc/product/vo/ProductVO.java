@@ -47,7 +47,7 @@ public class ProductVO {
     private String description;
     
     @NotNull(message = "금리는 필수입니다.")
-    private double interestRate;
+    private float interestRate;
     
     @NotNull(message = "초기 가입금액은 필수입니다.")
     private long initialDeposit;

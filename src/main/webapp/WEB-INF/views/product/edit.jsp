@@ -4,13 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>상품 등록</title>
+<title>상품 수정</title>
 </head>
 <body>
-<!-- Spring 폼 태그 사용!! -->
-<h2>상품 등록</h2>
+<h2>상품 수정</h2>
 
-<form:form modelAttribute="p" action="${pageContext.request.contextPath}/product/register" method="post">
+<form:form modelAttribute="p" action="${pageContext.request.contextPath}/product/edit" method="post">
     <form:hidden path="productNum"/>
     
     <form:label path="productTarget">가입 대상:</form:label>
@@ -36,7 +35,7 @@
     <form:radiobutton path="available" value="1" label="가능"/>
     <form:radiobutton path="available" value="0" label="불가능"/><br/>
     
-    <input type="submit" value="상품 등록"/>
+    <input type="submit" value="상품 수정"/>
 </form:form>
 
 </body>
