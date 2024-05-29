@@ -105,7 +105,7 @@ CREATE SEQUENCE test_customer_seq;
 			phone_num = #{phoneNum},
 			</if>
 			<if test="name!=null">
-			name = #{name},
+			name = #{name}, 
 			</if>
 			<if test="email!=null">
 			email = #{email},
