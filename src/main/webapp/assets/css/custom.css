@@ -4,6 +4,15 @@ Custom CSS for TemplateMo 561 Purple Buzz
 https://templatemo.com/tm-561-purple-buzz
 
 */
+th{
+		background-color:#9396e8;
+		color:white;
+		text-align:center;
+}
+table{
+	width:100%;
+}
+
 /*account List*/
 /*계좌박스 정렬*/
 .my-5-custom{

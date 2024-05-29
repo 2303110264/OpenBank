@@ -109,7 +109,7 @@
     <%-- End Footer --%>
 	
 	<%-- Custom --%>
-	<c:if test="${openAnAcc} || !${openAnAcc}">
+	<c:if test="${openAnAcc}">
 	<script>
 	    var accmsg = ${openAnAcc}
 	</script>

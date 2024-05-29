@@ -21,4 +21,9 @@ public interface MemberService {
 	public boolean edit(MemberVO userVO);
 	//프로필 조회
 	public MemberVO getProfile(MemberVO userVO);
+	
+	
+	
+	//비밀번호 로직(임시)
+	public boolean checkPwd(MemberVO m);
 }

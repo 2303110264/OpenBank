@@ -37,6 +37,19 @@
     <jsp:include page="../header.jsp"></jsp:include>
     <%-- Close Header --%>
     
+    <%--임시 --%>
+    <section class="container py-5 text-center" style="margin-bottom:-150px">
+        <h1 class="col-12 col-xl-8 h2 text-primary pt-3 margin-auto">
+        계좌 목록
+        </h1>
+        <h2 class="col-12 col-xl-8 h4 regular-400 margin-auto"></h2>
+        <p class="col-12 col-xl-8 text-muted pb-5 light-300 margin-auto">
+        계좌를 클릭하시면 상세 페이지로 이동됩니다.
+        </p>
+    </section>
+
+    <%--임시 끝 --%>
+    
      <%-- Start Banner Hero --%>
     <%--
     <div id="work_banner" class="banner-wrapper bg-light w-100 py-5">
@@ -73,19 +86,8 @@
             </div>
         </div>
         <div class="row accounts gx-lg-5 min-height">
-        <%-- foreach 예시 ㅠㅠ
-	        <c:forEach items="${blist}" var="b">
-				<tr>
-					<td>${b.no}</td>
-					<td><a href="${pageContext.request.contextPath}/board/detail/${b.no}">
-					${b.title}</a></td>
-					<td>${b.writer}</td>
-					<td>${b.reg_date}</td>
-				</tr>
-			</c:forEach>
-         --%>
          	<c:if test="${accList}==null">
-         	소유한 계좌가 없습니다.
+         		소유한 계좌가 없습니다.
          	</c:if>
 			<c:forEach items="${accList}" var="acc">
 				<!-- 

@@ -127,5 +127,12 @@ public class AccountDAOImpl implements AccountDAO {
 		int a = sqlSession.delete("dao.AccountDAO.closeAnAccount", account);
 		return a==1;
 	}
+
+	//임시-계좌겟
+	@Override
+	public AccountVO getAccount(String accNum) {
+		Long acc = Long.parseLong(accNum);
+		return sqlSession.selectOne("dao.AccountDAO.getAccount", acc);
+	}
 	
 }

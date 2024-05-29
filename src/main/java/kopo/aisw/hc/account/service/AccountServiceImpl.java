@@ -71,6 +71,17 @@ public class AccountServiceImpl implements AccountService {
 		return aDao.getAccList(userVO.getCustomerId());
 	}
 
+	
+	
+	
+	
+	
+	//임시
+	@Override
+	public AccountVO getAccount(String accNum) {
+		return aDao.getAccount(accNum);
+	}
 
+	
 
 }

@@ -132,4 +132,12 @@ CREATE SEQUENCE test_customer_seq;
 		, password = #{password}
 		where customer_id = #{customerId}
 	</update>
+	
+	<!-- 세션 로그인중인 계정 비번 체크 -->
+	<select id="getPwd" parameterType="int" resultType="memberVO">
+		select password
+		from test_customer
+		where customer_id = #{customerId}
+	</select>
+	
 </mapper>

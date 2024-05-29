@@ -40,9 +40,8 @@
         Open Bank
 		</a>
         </h1>
-        <h2 class="col-12 col-xl-8 h4 regular-400 margin-auto">약관 넣어야하나</h2>
+        <h2 class="col-12 col-xl-8 h4 regular-400 margin-auto">회원 가입</h2>
         <p class="col-12 col-xl-8 text-muted pb-5 light-300 margin-auto">
-            여긴 헤더랑 푸터를 날릴지 고민중
         </p>
 
         <div class="row pb-4 sign-up">

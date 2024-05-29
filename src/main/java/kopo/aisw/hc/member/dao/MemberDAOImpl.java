@@ -93,4 +93,11 @@ public class MemberDAOImpl implements MemberDAO{
 		return i!=0;
 	}
 
+	//
+	@Override
+	public MemberVO getPwd(MemberVO m) {
+		m = sqlSession.selectOne("dao.MemberDAO.getPwd", m.getCustomerId()); 
+		return m;
+	}
+
 }

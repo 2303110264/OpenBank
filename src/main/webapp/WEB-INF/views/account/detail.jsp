@@ -31,7 +31,16 @@
 원본 파일명: index.html
 --%>
 </head>
-
+<style>
+	th{
+		background-color:#9396e8;
+		color:white;
+		text-align:center;
+	}
+	table{
+		width:100%;
+	}
+</style>
 <body>
     <%-- Header --%>
     <jsp:include page="../header.jsp"></jsp:include>
@@ -40,72 +49,79 @@
 
     <!-- Start Work Sigle -->
     <section class="container py-5">
-
-        <div class="row pt-5">
-            <div class="worksingle-content col-lg-8 m-auto text-left justify-content-center">
-                <h2 class="worksingle-heading h3 pb-3 light-300 typo-space-line">Digital Marketing Service</h2>
-                <p class="worksingle-footer py-3 text-muted light-300">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </p>
-            </div>
+		<div class="row pt-5">
+	            <div class="worksingle-content col-lg-8 m-auto text-left justify-content-center">
+	                <h2 class="worksingle-heading h3 pb-3 light-300 typo-space-line">${account.accName }</h2>
+	                <p class="worksingle-footer py-3 text-muted light-300">
+	                	<table border="0" style="width:100%;">
+			    <tr>
+			        <th width=20%>계좌번호</th>
+			        <td>${account.accNum}</td>
+			    </tr>
+			    <tr>
+			        <th>잔액</th>
+			        <td>${account.balance}</td>
+			    </tr>
+			    <tr>
+			        <th>가입일</th>
+			        <td>${account.regDate}</td>
+			    </tr>
+			    <tr>
+			        <th>만료일</th>
+			        <td>${account.regDate}</td>
+			    </tr>
+			    <tr>
+			        <th>최근 거래일</th>
+			        <td>${account.regDate}</td>
+			    </tr>
+		        <tr>
+		            <!-- 
+		             <td>${product.productTarget == 0 ? '개인' : '법인'}</td>
+		             -->
+		        </tr>
+			</table>	
+	                	
+	                		
+	                </p>
+	            </div>
+	        </div>
+<%--
+accNum,acc_name accName,
+		product_num productNum, balance,
+		to_char(reg_date, 'yyyy-mm-dd') regDate,
+		to_char(ret_date, 'yyyy-mm-dd') retDate,
+		to_char(last_trade_date, 'yyyy-mm-dd') lastTradeDate
+ --%>
+       <div class="row pt-5">
+           <div class="worksingle-content col-lg-8 m-auto text-left justify-content-center">
+			<table border="0">
+			    <tr>
+			        <th width="20%">거래일자</th>
+			        <th width="10%">거래유형</th>
+			        <th width="22%">입금</th>
+			        <th width="22%">출금</th>
+			        <th width="14%">거래금액</th>
+			        <th width="14%">잔액</th>
+			    </tr>
+			    <c:forEach var="t" items="${transaction}">
+			        <tr>
+			            <td>${t.transactionDate}</td>
+			            <td>${t.transactionType}</td>
+			            <td>${t.depositName}</td>
+			            <td>${t.withdrawName}</td>
+			            <td>${t.amount}</td>
+						<td>어..잔액어떻게출력하지?</td>
+			        </tr>
+			    </c:forEach>	
+			</table>	
         </div><!-- End Blog Cover -->
-
-        <div class="row">
-            <div class="col-md-8 m-auto text-left justify-content-center">
-                <p class="pt-5 text-muted light-300">
-                    You are permitted to download, modify and use Purple Buzz template for your websites. You are <strong>not permitted</strong> to re-distribute this template ZIP file on any other template websites. It is super easy to simply copy and repost the ZIP file on any <a rel="nofollow" href="https://www.google.com/search?q=free+css" target="_blank">Free CSS</a> template websites.
-                </p>
-            </div>
-        </div><!-- End Paragrph -->
-
-
-        <div class="row">
-            <div class="col-md-8 m-auto text-left justify-content-center">
-                <p class="display-6 py-4 ps-4 border border-5 border-top-0 border-end-0 border-bottom-0 border-start">
-                    <i>
-                          "Vestibulum vestibulum est eu lorem laoreet suscipit. Duis auctor,
-                          metus vel sollicitudin hendrerit, elit neque pulvinar magna, non
-                          sodales orci turpis blandit quam."
-                      </i>
-                </p>
-                <p class="text-muted light-300">
-                    Nam tortor quam, aliquet vel nibh sit amet, faucibus bibendum nisl.
-                    Donec vehicula nulla justo, vel sodales massa vestibulum nec. Praesent
-                    non orci sed massa fringilla rutrum at et odio. Quisque est orci,
-                    elementum sed neque ac, suscipit consectetur leo. Cras fermentum luctus
-                    cursus. Ut porta, augue vel tempus congue, augue purus vulputate ex,
-                    lacinia lobortis arcu metus sed lectus.
-                </p>
-            </div>
-        </div><!-- End Qute -->
-
-
-        
-        <div class="row justify-content-center">
-            <div class="col-lg-8 ml-auto mr-auto pt-3 pb-4">
-                <p class="text-muted light-300">
-                    Ed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas
-                    accumsan lacus vel facilisis. Lorem ipsum dolor sit amet, consectetur
-                    adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                    magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                    laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                    in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.
-                </p>
-            </div>
-        </div>
-        <!-- End Work Sigle -->
-
-       
+	</div>
 
     </section>
+    
     <!-- End Work Sigle -->
 
+<%--
     <!-- Start Related Post -->
     <article class="container-fluid bg-light">
         <div class="container">
@@ -175,6 +191,7 @@
 
     </article>
     <!-- End Related Post -->
+ --%>
     
     
     <%-- Start Footer --%>

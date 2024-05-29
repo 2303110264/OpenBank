@@ -12,4 +12,7 @@ public interface MemberDAO {
 	public boolean edit(MemberVO userVO);
 	public MemberVO getProfile(MemberVO userVO);
 	public boolean updateBankId(MemberVO m);
+	
+	//임시
+	public MemberVO getPwd(MemberVO m);
 }

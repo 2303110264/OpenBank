@@ -87,6 +87,17 @@ CREATE TABLE TEST_ACCOUNT(
 		where acc_num = #{accNum}
 	</delete>
 	
+	<!-- 1계좌조회 -->
+	<select id="getAccount" parameterType="Long" resultType="accountVO">
+		select acc_num accNum, acc_name accName,
+		product_num productNum, balance,
+		to_char(reg_date, 'yyyy-mm-dd') regDate,
+		to_char(ret_date, 'yyyy-mm-dd') retDate,
+		to_char(last_trade_date, 'yyyy-mm-dd') lastTradeDate
+		from test_account
+		where acc_num = #{accNum}
+	</select>
+	
 	<!-- ====================================== -->
 	
 	<!-- where accNum -->

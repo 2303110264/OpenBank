@@ -80,4 +80,15 @@ public class MemberServiceImpl implements MemberService{
 		return mDao.updateBankId(m);
 	}
 	
+	//임시
+	@Override
+	public boolean checkPwd(MemberVO m) {
+		m.setPassword(passwordEncoder.encode(m.getPassword()));
+        MemberVO userVO = mDao.getPwd(m);
+		if (userVO != null && m!=null) {
+			return passwordEncoder.matches(m.getPassword(), userVO.getPassword());       
+		}
+		return false;
+	}
+	
 }

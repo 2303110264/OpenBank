@@ -63,8 +63,8 @@ public class AccountController {
 		try {
 			MemberVO m = (MemberVO) session.getAttribute("userVO");
 			m.setPassword(password);
-			//checkpwd 만드는게 좋을것
-			if(ms.signIn(m)==null) return "account/open";
+			//임시
+			if(ms.checkPwd(m)) return "account/open";
 			//계좌번호 생성 및 등록
 			b= as.openAnAccount(openAcc);
 			model.addAttribute("openAnAcc", b);
@@ -103,7 +103,9 @@ public class AccountController {
 	}
 	@PostMapping("list")
 	public String accountList(Model model, @RequestParam("accNum")String accNum) {
-		model.addAttribute("account", accNum);
+		AccountVO account = as.getAccount(accNum);
+		model.addAttribute("account", account);
+		System.out.println(account);
 		return "account/detail";
 	}
 }

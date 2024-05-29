@@ -32,4 +32,7 @@ public interface AccountDAO {
 	//계좌 해지하기
 	public boolean closeAnAccount(AccountVO account);
 	
+	//임시-계좌조회
+	public AccountVO getAccount(String accNum);
+	
 }
