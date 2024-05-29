@@ -14,14 +14,28 @@
 
     <!-- 상품 정보 조회 -->
     <select id="selectProduct" parameterType="int" resultType="productVO">
-        select * 
+        select product_num as productNum,
+               product_target as productTarget,
+               product_name as productName,
+               description,
+               interest_rate as interestRate,
+               initial_deposit as initialDeposit,
+               date_of_deposit as dateOfDeposit,
+               available
           from test_product_list 
          where product_num = #{productNum}
     </select>
 
     <!-- 모든 상품 정보 조회 -->
     <select id="selectAllProducts" resultType="productVO">
-        select * 
+        select product_num as productNum,
+               product_target as productTarget,
+               product_name as productName,
+               description,
+               interest_rate as interestRate,
+               initial_deposit as initialDeposit,
+               date_of_deposit as dateOfDeposit,
+               available
           from test_product_list
     </select>
 

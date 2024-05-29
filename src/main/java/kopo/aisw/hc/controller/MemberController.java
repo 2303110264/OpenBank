@@ -61,18 +61,19 @@ public class MemberController {
 		
 		return "user/signIn";
 	}
+	
 	@PostMapping("signIn")
-	public String signIn(@ModelAttribute("m")MemberVO m, BindingResult res, 
-			Model model) throws Exception {
-		MemberVO userVO = ms.signIn(m);
-		if(userVO==null) {
-			model.addAttribute("loginChk", false);
-			return "user/signIn";
-		}else {
-			model.addAttribute("userVO", userVO);
-			return "redirect:/bank/";
-		}
-	}
+    public String signIn(@ModelAttribute("m") MemberVO m, BindingResult res, 
+                         Model model) throws Exception {
+        MemberVO userVO = ms.signIn(m);
+        if (userVO == null) {
+            model.addAttribute("loginChk", false);
+            return "user/signIn";
+        } else {
+            model.addAttribute("userVO", userVO);
+            return "redirect:/bank/";
+        }
+    }
 	
 	//로그아웃
 	@GetMapping("logout")
@@ -106,10 +107,12 @@ public class MemberController {
 		// 가입 가능?
 		if(customer) customer = ms.updateBankId(m);
 		else customer = ms.signUp(m);
+
 		if(!ms.signUp(m)) model.addAttribute("signUp", false);
 		else model.addAttribute("signUp", true);
 		return "user/signUp";
 	}
+	
 	
 	//우편번호&주소 기입 api
 	@RequestMapping("jusoPopup")

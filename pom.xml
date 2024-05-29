@@ -15,6 +15,11 @@
 		<spring-version>6.1.6</spring-version>
 		<aspectj-version>1.9.22</aspectj-version>
 		<log4j2-version>2.20.0</log4j2-version>
+		
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    	<java.version>17</java.version>
+	
 	</properties>
 	<packaging>war</packaging>
 	<build>
@@ -288,6 +293,29 @@
 		    <artifactId>hibernate-validator</artifactId>
 		    <version>8.0.1.Final</version>
 		</dependency>
+		
+		<!-- Spring Security -->
+		<dependency>
+	        <groupId>org.springframework.security</groupId>
+	        <artifactId>spring-security-config</artifactId>
+	        <version>6.3.0</version>
+    	</dependency>
+    
+	    <dependency>
+	        <groupId>org.springframework.security</groupId>
+	        <artifactId>spring-security-web</artifactId>
+	        <version>6.3.0</version>
+	    </dependency>
+    
+	    <dependency>
+	        <groupId>org.springframework.security</groupId>
+	        <artifactId>spring-security-crypto</artifactId>
+	        <version>6.3.0</version>
+	    </dependency>
+    
+    
+
+		
 		
 	</dependencies>
 </project>
