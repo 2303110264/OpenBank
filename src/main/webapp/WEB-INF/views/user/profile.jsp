@@ -32,7 +32,7 @@
 -->
 </head>
 <body>
-
+	<jsp:include page="../header.jsp"/>
 	<%-- Start Contact --%>
     <section class="container py-5 text-center">
         <h1 class="col-12 col-xl-8 h2 text-primary pt-3 margin-auto">
@@ -53,7 +53,7 @@
 
                     <div class="col-lg-6 mb-4">
                         <div class="form-floating">
-                            <form:input path="userId" type="text" class="form-control form-control-lg light-300" id="floatingID" name="userId" placeholder="ID"/>
+                            <form:input path="userId" type="text" class="form-control form-control-lg light-300" id="floatingID" name="userId" readonly="true" placeholder="ID"/>
                             <label for="floatingID light-300">ID</label>
                             <form:errors path="userId" class="error"/>
                             <c:if test="${idDuplicationCheck}">
@@ -102,10 +102,10 @@
                             </c:if>
                         </div>
                     </div><%-- End Input phoneNum --%>
-
+<%--
                     <div class="col-lg-6 mb-4">
                         <div class="form-floating">
-                            <form:input path="rrn" type="text" class="form-control form-control-lg light-300" id="rrn" name="rrn" placeholder="rrn"/>
+                            <form:input path="rrn" type="text" class="form-control form-control-lg light-300" id="rrn" name="rrn" readonly="true" placeholder="rrn"/>
                             <label for="floatingRrn light-300">RRN</label>
                             <form:errors path="rrn" class="error"/>
                             <span id="IDCheck" class="error"></span>
@@ -113,7 +113,9 @@
                             	<span class='error'>이름 또는 주민번호를 확인해주세요</span>
                             </c:if>
                         </div>
-                    </div><%-- End Input phoneNum --%>
+                    </div>
+ --%>
+                    <%-- End Input RRN --%>
 
                     <div class="col-lg-6 mb-4">
                         <div class="form-floating">
@@ -141,7 +143,7 @@
                     <div class="col-md-12 col-12 m-auto text-center">
                     	<button type="button" onclick="location.href='${path}/bank/'" class="btn btn-3 rounded-pill px-md-5 px-4 py-2 radius-0 light-300">돌아가기</button>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <button type="submit" class="btn btn-secondary rounded-pill px-md-5 px-4 py-2 radius-0 text-light light-300">회원가입</button>
+                        <button type="submit" class="btn btn-secondary rounded-pill px-md-5 px-4 py-2 radius-0 text-light light-300">변경하기</button>
                     </div>
 
                 </form:form>

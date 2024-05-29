@@ -94,18 +94,30 @@ CREATE SEQUENCE test_customer_seq;
 		where customer_ID = #{customerId}
 	</select>
 	
+	<!-- 프로필 변경 -->
 	<update id="updateProfile" parameterType="memberVO">
 		update test_customer
-		set
-		<if test="password!=null">
-		password = #{password},
-		</if>
-		<if test="phoneNum!=null">
-		phone_num = #{phoneNum},
-		</if>
-		<if test="email!=null">
-		email = #{email},
-		</if>
+		<set>
+			<if test="password!=null">
+			password = #{password},
+			</if>
+			<if test="phoneNum!=null">
+			phone_num = #{phoneNum},
+			</if>
+			<if test="name!=null">
+			name = #{name},
+			</if>
+			<if test="email!=null">
+			email = #{email},
+			</if>
+			<if test="zipCode!=null">
+			ZIP_CODE = #{zipCode},
+			address = #{address},
+			</if>
+			<if test="addressDetail!=null">
+			address_detail = #{addressDetail},
+			</if>
+		</set>
 		where customer_id = #{customerId}
 	</update>
 

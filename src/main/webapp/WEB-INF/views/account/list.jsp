@@ -61,7 +61,7 @@
 
     <%-- Start Our Work --%>
     <section class="container py-5">
-        <div class="row justify-content-center my-5">
+        <div class="row justify-content-center my-5 my-5-custom">
             <div class="filter-btns shadow-md rounded-pill text-center col-auto">
                 <a class="filter-btn btn rounded-pill btn-outline-primary border-0 m-md-2 px-md-4 active" data-filter=".account" href="#">All</a>
                 <a class="filter-btn btn rounded-pill btn-outline-primary border-0 m-md-2 px-md-4" data-filter=".type1" href="#">예금</a>
@@ -72,7 +72,7 @@
  --%>
             </div>
         </div>
-        <div class="row projects gx-lg-5">
+        <div class="row accounts gx-lg-5 min-height">
         <%-- foreach 예시 ㅠㅠ
 	        <c:forEach items="${blist}" var="b">
 				<tr>
@@ -88,18 +88,20 @@
          	소유한 계좌가 없습니다.
          	</c:if>
 			<c:forEach items="${accList}" var="acc">
-	            <a href="${path}/accDetail/${i}" class="col-sm-6 col-lg-4 text-decoration-none account marketing social type1">
-	                <div class="service-work overflow-hidden card mb-5 mx-5 m-sm-0">
-	                    <img class="card-img-top" src="${path}/assets/img/our-work-01.jpg" alt="...">
-	                    <div classs="card-body">
-	                        <h5 class="card-title light-300 text-dark">Digital Marketing</h5>
+	            <a href="${path}/accDetail/${accList.indexOf(acc)}" class="a-margin col-sm-6 col-lg-4 text-decoration-none account type${acc.productNum }">
+	                <div class="service-work overflow-hidden card mb-5 mx-5 m-sm-0 account-card">
+	                    <!-- 
+	                     <img class="card-img-top" src="${path}/assets/img/our-work-01.jpg" alt="...">
+	                     -->
+	                    <div class="card-body account-card">
+	                        <h5 class="card-title light-300 text-dark">${acc.accName }</h5>
 	                        <p class="card-text light-300 text-dark">
-	                            Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-	                            sed do eiusmod tempor incididunt ut labore et dolor.
+	                            <b>${acc.balance }</b><i class='bx bx-won ms-1'></i>
+	                            <br/>만기일: ${acc.retDate }
 	                        </p>
 	                        <span class="text-decoration-none text-primary light-300">
-	                              Read more <i class='bx bxs-hand-right ms-1'></i>
-	                          </span>
+	                              상세보기 <i class='bx bx-right-arrow-alt ms-1'></i>
+                         	 </span>
 	                    </div>
 	                </div>
 	            </a>
@@ -255,7 +257,6 @@
             </div>
         </div>
     --%>
-    </section>
     <%-- End Feature Work --%>
     
     <%-- Start Footer --%>
@@ -264,10 +265,12 @@
     
     
 	<%-- Lightbox --%>
+    <%--
     <script src="${path}/assets/js/fslightbox.js"></script>
     <script>
         fsLightboxInstances['gallery'].props.loadOnlyCurrentSource = true;
     </script>
+     --%>
     
     <%-- Bootstrap --%>
     <script src="${path}/assets/js/bootstrap.bundle.min.js"></script>
@@ -283,13 +286,13 @@
     <script>
         $(window).load(function() {
             // init Isotope
-            var $projects = $('.projects').isotope({
-                itemSelector: '.project',
+            var $accounts = $('.accounts').isotope({
+                itemSelector: '.account',
                 layoutMode: 'fitRows'
             });
             $(".filter-btn").click(function() {
                 var data_filter = $(this).attr("data-filter");
-                $projects.isotope({
+                $accounts.isotope({
                     filter: data_filter
                 });
                 $(".filter-btn").removeClass("active");

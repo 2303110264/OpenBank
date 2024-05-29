@@ -40,7 +40,7 @@
 		if (typeof msg != 'undefined' && msg) {
 	        alert("회원가입이 완료되었습니다! 로그인을 진행해주세요!");
 	        location.href="/ob/member/signIn"
-		}else if(zip.value<1){
+		}else if(zip.value==0){
 			// ^^ 0뜨는 거 보기 싫어서 JS로 해결!
 			zip.value = "";
 		}

@@ -4,6 +4,23 @@ Custom CSS for TemplateMo 561 Purple Buzz
 https://templatemo.com/tm-561-purple-buzz
 
 */
+/*account List*/
+/*계좌박스 정렬*/
+.my-5-custom{
+	margin-bottom: 1rem !important;
+}
+.account-card{
+	text-align:center;
+	padding: 5px;
+}
+.a-margin{
+	margin-bottom:10px;
+}
+.min-height{
+	min-height:300px;
+}
+
+/*a-*/
 
 /*signUp*/
 /*sign-up form 중앙정렬*/
