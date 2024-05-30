@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 
 <!DOCTYPE html>
@@ -37,18 +38,65 @@
     <jsp:include page="../header.jsp"></jsp:include>
     <%-- Close Header --%>
     
-    
+    <%-- Start Contact --%>
+    <section class="container py-5 text-center">
+        <h1 class="col-12 col-xl-8 h2 text-primary pt-3 margin-auto">
+		<a class="navbar-brand" href="${path}/bank/">
+        Transfer
+		</a>
+        </h1>
+        <h2 class="col-12 col-xl-8 h4 regular-400 margin-auto">계좌 이체</h2>
+        <p class="col-12 col-xl-8 text-muted pb-5 light-300 margin-auto">
+            
+        </p>
+
+        <div class="row pb-4 sign-up">
+
+            <%-- Start Contact Form --%>
+            <div class="col-lg-8 sign-in-div">
+                <form:form class="contact-form row sign-in-form" method="post" name="form" role="form" modelAttribute="t">
+                    <form:input path="transactionType" type="hidden" class="form-control form-control-lg light-300 " id="type" name="type" value="출금이체"/>
+
+                    <div class="col-lg-4 mb-4 sign-in-div2">
+                        <div class="form-floating">
+                            <form:select path="withdrawAcc" type="text" class="formSelect form-control form-control-lg light-300 " id="wAcc" name="wAcc" placeholder="withdrawAcc" required="true">
+                            	<c:forEach items="${accList}" var="a">
+                            		<form:option value="${a.accNum}">${a.accName}</form:option>
+                            	</c:forEach>
+                            </form:select>
+                            <label for="floatingID light-300">출금할 계좌</label>
+                        </div>
+                    </div><%-- End Input userId --%>
+                    <div class="col-lg-4 mb-4 sign-in-div2">
+                        <div class="form-floating">
+                            <form:input path="depositAcc" type="text" class="form-control form-control-lg light-300 " id="dAcc" name="dAcc" placeholder="deposit Account" required="true"/>
+                            <label for="floatingPassword light-300">입금될 계좌</label>
+                        </div>
+                    </div><%-- End Input Password --%>
+                    <div class="col-lg-4 mb-4 sign-in-div2">
+                        <div class="form-floating">
+                            <form:input path="amount" type="text" class="form-control form-control-lg light-300 " id="amt" name="amt" placeholder="Amount" required="true"/>
+                            <label for="floatingPassword light-300">금액</label>
+                        </div>
+                    </div><%-- End Input Password --%>
+					
+					
+                    <div class="col-md-12 col-12 m-auto text-center">
+                        <button type="submit" class="btn sign-in-btn btn-secondary rounded-pill px-md-5 px-4 py-2 radius-0 text-light light-300">송금하기</button>
+                    </div>
+
+                </form:form>
+            </div>
+            <%-- End Contact Form --%>
+
+        </div>
+    </section>
+    <%-- End Contact --%>
     
     <%-- Start Footer --%>
     <jsp:include page="../footer.jsp"></jsp:include>
     <%-- End Footer --%>
     
-    
-	<%-- Lightbox --%>
-    <script src="${path}/assets/js/fslightbox.js"></script>
-    <script>
-        fsLightboxInstances['gallery'].props.loadOnlyCurrentSource = true;
-    </script>
     
     <%-- Bootstrap --%>
     <script src="${path}/assets/js/bootstrap.bundle.min.js"></script>
@@ -60,27 +108,6 @@
     <script src="${path}/assets/js/jquery.min.js"></script>
     <%-- Isotope --%>
     <script src="${path}/assets/js/isotope.pkgd.js"></script>
-    <%-- Page Script --%>
-    <script>
-        $(window).load(function() {
-            // init Isotope
-            var $projects = $('.projects').isotope({
-                itemSelector: '.project',
-                layoutMode: 'fitRows'
-            });
-            $(".filter-btn").click(function() {
-                var data_filter = $(this).attr("data-filter");
-                $projects.isotope({
-                    filter: data_filter
-                });
-                $(".filter-btn").removeClass("active");
-                $(".filter-btn").removeClass("shadow");
-                $(this).addClass("active");
-                $(this).addClass("shadow");
-                return false;
-            });
-        });
-    </script>
 
 </body>
 

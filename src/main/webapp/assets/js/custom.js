@@ -1,3 +1,5 @@
+window.onload=function(){
+	
 // header 4try
 	var header = document.querySelector('header');
 	if(header!=null){
@@ -68,6 +70,21 @@
 	        this.value = this.value.replace(/[^0-9]/g, '');
 	    });
 	}
+    let dAcc = document.getElementById('dAcc');
+    if(dAcc){
+			dAcc.value = "";
+			dAcc.addEventListener('input', function() {
+	        this.value = this.value.replace(/[^0-9]/g, '');
+	    });
+	}
+    let amt = document.getElementById('amt');
+    if(amt){
+			amt.value = "";
+			amt.addEventListener('input', function() {
+	        this.value = this.value.replace(/[^0-9]/g, '');
+	    });
+	}
+}
     
 
 //open an account

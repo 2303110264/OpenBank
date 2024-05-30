@@ -5,12 +5,18 @@ https://templatemo.com/tm-561-purple-buzz
 
 */
 th{
-		background-color:#9396e8;
+		background-color:#5c60dc;
 		color:white;
 		text-align:center;
 }
+td{
+	text-align:center;
+}
 table{
 	width:100%;
+}
+.formSelect{
+	height: calc(3.8rem + 2px) !important;
 }
 
 /*account List*/

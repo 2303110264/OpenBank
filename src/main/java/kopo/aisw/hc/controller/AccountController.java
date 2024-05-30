@@ -85,10 +85,16 @@ public class AccountController {
 //		//로그인정보 없을 시 로그인 창으로 이동
 //		if(userVO==null) return "redirect:/member/signIn";
 		//(intercept 추가 완료 - 5/28 (applicationContext.xml참조))
+		List<AccountVO> list = as.getAccountList(userVO);
+		model.addAttribute("accList", list);
 		
 		TransactionVO t = new TransactionVO();
+		model.addAttribute("t", t);
 		
-		
+		return "account/transfer";
+	}
+	@PostMapping("transfer")
+	public String transfer(Model model, BindingResult res, HttpSession session) {
 		
 		return "account/transfer";
 	}

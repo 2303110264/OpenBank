@@ -35,8 +35,9 @@
     <%-- Header --%>
     <jsp:include page="../header.jsp"></jsp:include>
     <%-- Close Header --%>
-    
+    <div style="text-align:center; align-content:center;">
 	<h2>상품 목록</h2>
+	<%--
 	<table border="1">
 	    <tr>
 	        <th>상품 번호</th>
@@ -61,8 +62,43 @@
 	        </tr>
 	    </c:forEach>
 	</table>
-	<a href="${pageContext.request.contextPath}/">홈으로</a>
-
+	 --%>
+	 
+	<table border="1">
+	    <tr>
+	        <th>상품 번호</th>
+	        <th width="35%">상품명</th>
+	        <th>가입 대상</th>
+	        <th>금리(%)</th>
+	        <th>초기 가입금액</th>
+	        <th>가입 기간(개월)</th>
+	        <th>신규 가입 가능 여부</th>
+	    </tr>
+	    <c:forEach var="product" items="${products}">
+	        <tr>
+	            <td>
+		            <a class="text-decoration-none" href="${pageContext.request.contextPath}/product/view/${product.productNum}">
+			            ${product.productNum}
+        		    </a>
+	            </td>
+	            <td>
+		            <a class="text-decoration-none" href="${pageContext.request.contextPath}/product/view/${product.productNum}">
+	            		${product.productName}
+        		    </a>
+	            </td>
+	            <td>${product.productTarget == 0 ? '개인' : '법인'}</td>
+	            <td>${product.interestRate}</td>
+	            <td>${product.initialDeposit}</td>
+	            <td>${product.dateOfDeposit}</td>
+	            <td>${product.available == 1 ? '가능' : '불가능'}</td>
+	        </tr>
+	    </c:forEach>
+	</table>
+	</div>
+	<br/>
+    <div style="height:50px; text-align:center; justify-content: center;">
+	<button type="button" onclick="location.href='${path}/bank/'" class="btn btn-3 rounded-pill px-md-5 px-4 py-2 radius-0 light-300">돌아가기</button>
+    </div><br/>               
 
 <%-- Start Footer --%>
     <jsp:include page="../footer.jsp"></jsp:include>
