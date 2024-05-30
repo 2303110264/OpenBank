@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpSession;
@@ -89,8 +90,9 @@ public class AccountController {
 		model.addAttribute("t", t);
 		return "account/transfer";
 	}
-	@PostMapping("transfer")
-	public String transfer(@Valid @ModelAttribute("t")TransactionVO t, 
+	
+	@RequestMapping(value="transfer", method = RequestMethod.POST )
+	public String transfer(@ModelAttribute("t")TransactionVO t, 
 			Model model, BindingResult res, HttpSession session) {
 		if(res.hasErrors()) return "account/transfer";
 		try {

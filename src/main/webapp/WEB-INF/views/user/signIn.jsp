@@ -56,9 +56,6 @@
                             <form:input path="userId" type="text" class="form-control form-control-lg light-300 " id="floatingID" name="userId" placeholder="ID" required="true"/>
                             <label for="floatingID light-300">ID</label>
                             <form:errors path="userId" class="error"/>
-                            <c:if test="${IdDuplicationCheck}">
-                            	<span class='error'>다른 아이디를 써주세요</span>
-                            </c:if>
                         </div>
                     </div><%-- End Input userId --%>
                     <div class="col-lg-4 mb-4 sign-in-div2">

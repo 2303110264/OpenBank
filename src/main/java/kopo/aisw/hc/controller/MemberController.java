@@ -102,7 +102,6 @@ public class MemberController {
 	
 	@PostMapping("signUp")
 	public String signUp(@Valid @ModelAttribute("m")MemberVO m, BindingResult res, Model model) throws Exception {
-		//if(res.hasErrors()) return "user/signUp";
 		
 		//id 중복체크
 		if(ms.idDoubleCheck(m.getUserId())) model.addAttribute("idDoubleCheck", true);
@@ -114,6 +113,7 @@ public class MemberController {
 		//이메일 중복체크
 		if(ms.mailDoubleCheck(m.getEmail())) model.addAttribute("mailDoubleCheck", true);
 		// 가입 가능?
+		if(res.hasErrors()) return "user/signUp";
 		if(customer) customer = ms.updateBankId(m);
 		else customer = ms.signUp(m);
 

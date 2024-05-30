@@ -153,9 +153,11 @@
 
 	
 	<%-- Custom --%>
-	<script>
-	    var msg = ${signUp}
-	</script>
+	<c:if test="${signUp}">
+		<script>
+		    var msg = ${signUp}
+		</script>
+    </c:if>
 	<script src="${path}/assets/js/custom.js"></script>
 	<%-- Bootstrap --%>
     <script src="${path}/assets/js/bootstrap.bundle.min.js"></script>

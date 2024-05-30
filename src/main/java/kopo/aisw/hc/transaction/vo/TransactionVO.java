@@ -30,9 +30,8 @@ public class TransactionVO {
 		--CONSTRAINT FK_DEPOSIT_ACC FOREIGN KEY(DEPOSIT_ACC) REFERENCES TEST_ACCOUNT(ACC_NUM)
 	 */
 	private int transactionId;
-	@NotNull(message="필수 항목입니다")
+	@Size(min=1)
 	private String transactionType;
-	@NotNull
 	private String transactionDate;
 	@Min(value = 500, message="500원 이상부터 송금 가능합니다")
 	@Max(value = 999999999, message="1000000000원 이상은 송금할 수 없습니다.")
@@ -42,8 +41,9 @@ public class TransactionVO {
 	@Size(max=7, message="이름은 7자 이하로 정해주세요")
 	@Pattern(regexp = "^[가-힣a-zA-Z]{0,7}$", message="한글, 영어 대소문자만 가능합니다")
 	private String depositName;
-	@NotNull
+	@Min(value=1)
 	private long withdrawAcc;
+	@Size(min=1)
 	private String withdrawName;
 	
 }
