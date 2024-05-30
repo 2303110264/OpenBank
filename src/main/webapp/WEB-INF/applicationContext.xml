@@ -84,6 +84,7 @@
 	        <mvc:mapping path="/product/**" /> 
 			<bean class="kopo.aisw.hc.interceptor.BlacklistInterceptor" />
 		</mvc:interceptor>
+		
 	</mvc:interceptors>	
 	<!-- 최대 업로드 파일 사이즈 : 10MB -->
 	<!-- 

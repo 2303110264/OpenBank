@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <!-- Console Appender: 콘솔에 로그 출력 -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+        <!-- File Appender: 파일에 로그 출력 -->
+        <File name="File" fileName="logs/app.log">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </File>
+    </Appenders>
+    <Loggers>
+        <!-- Root Logger: 최상위 로거 -->
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="File"/>
+        </Root>
+    </Loggers>
+<!-- 
+ <?xml version="1.0" encoding="UTF-8"?>
 <Configuration>
  
-<!-- Appender, Layout 설정 -->
 <Appenders>
  <Console name="console" target="SYSTEM_OUT">
  <PatternLayout pattern=" %-5level %c(%M:%L) - %m%n"/>
  </Console>
 </Appenders>
  
-<!-- Logger 설정 -->
 <Loggers>
  <Root level="INFO">
  <AppenderRef ref="console"/>
@@ -22,4 +40,7 @@
  </Logger>
 </Loggers>
  
+</Configuration>
+
+ -->
 </Configuration>

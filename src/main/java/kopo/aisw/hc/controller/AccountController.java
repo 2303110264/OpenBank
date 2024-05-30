@@ -55,7 +55,6 @@ public class AccountController {
 	public String openAnAcc(@PathVariable(value = "productNum") int productNum,
 			@ModelAttribute("openAcc")AccountVO openAcc,
 			@RequestParam("password")String password, HttpSession session, Model model) {
-//		if(res.hasErrors()) return "account/open";
 		
 		boolean b;
 		//인증 또는 비밀번호 확인 로직이 빠져있음
@@ -80,9 +79,8 @@ public class AccountController {
 	//계좌이체
 	@GetMapping("transfer")
 	public String transfer(Model model, HttpSession session) {
+		
 		MemberVO userVO = (MemberVO) session.getAttribute("userVO");
-//		//로그인정보 없을 시 로그인 창으로 이동
-//		if(userVO==null) return "redirect:/member/signIn";
 		//(intercept 추가 완료 - 5/28 (applicationContext.xml참조))
 		List<AccountVO> list = as.getAccountList(userVO);
 		model.addAttribute("accList", list);
@@ -94,9 +92,9 @@ public class AccountController {
 	@PostMapping("transfer")
 	public String transfer(@Valid @ModelAttribute("t")TransactionVO t, 
 			Model model, BindingResult res, HttpSession session) {
+		if(res.hasErrors()) return "account/transfer";
 		try {
 			System.out.println(t);
-			if(res.hasErrors()) return "account/transfer";
 			MemberVO userVO = (MemberVO) session.getAttribute("userVO");
 			System.out.println(t);
 			//입/출금 계좌 동일한지 확인

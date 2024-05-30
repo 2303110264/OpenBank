@@ -59,7 +59,7 @@
 
                     <div class="col-lg-4 mb-4 sign-in-div2">
                         <div class="form-floating">
-                            <form:select path="depositAcc" type="text" class="form-control form-control-lg light-300 " id="dAcc" name="dAcc" placeholder="deposit Account" required="true">
+                            <form:select path="depositAcc" type="text" class="form-control form-control-lg light-300 " id="dAcc" name="depositAcc" placeholder="deposit Account" required="true">
                             	<c:forEach items="${accList}" var="a">
                             		<form:option value="${a.accNum}">${a.accName}(${a.accNum})</form:option>
                             	</c:forEach>
@@ -70,14 +70,14 @@
                     </div><%-- End Input userId --%>
                     <div class="col-lg-4 mb-4 sign-in-div2">
                         <div class="form-floating">
-                            <form:input path="withdrawAcc" type="text" class="formSelect form-control form-control-lg light-300 " id="wAcc" name="wAcc" placeholder="withdrawAcc"/>
+                            <form:input path="withdrawAcc" type="text" class="formSelect form-control form-control-lg light-300 " id="wAcc" name="withdrawAcc" placeholder="withdrawAcc"/>
                             <label for="floatingPassword light-300">입금될 계좌</label>
                             <form:errors path="withdrawAcc" class="error"/>
                         </div>
                     </div><%-- End Input Password --%>
                     <div class="col-lg-4 mb-4 sign-in-div2">
                         <div class="form-floating">
-                            <form:input path="amount" type="text" class="form-control form-control-lg light-300 " id="amt" name="amt" placeholder="Amount"/>
+                            <form:input path="amount" type="text" class="form-control form-control-lg light-300 " id="amt" name="amount" placeholder="Amount"/>
                             <label for="floatingPassword light-300">금액</label>
                             <form:errors path="amount" class="error"/>
                         </div>

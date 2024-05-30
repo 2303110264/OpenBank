@@ -68,11 +68,11 @@
 			    </tr>
 			    <tr>
 			        <th>만료일</th>
-			        <td>${account.regDate}</td>
+			        <td>${account.retDate}</td>
 			    </tr>
 			    <tr>
 			        <th>최근 거래일</th>
-			        <td>${account.regDate}</td>
+			        <td>${account.lastTradeDate}</td>
 			    </tr>
 		        <tr>
 		            <!-- 

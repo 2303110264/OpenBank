@@ -89,7 +89,7 @@ CREATE TABLE TEST_ACCOUNT(
 	
 	<!-- 1계좌조회 -->
 	<select id="getAccount" parameterType="Long" resultType="accountVO">
-		select acc_num accNum, acc_name accName, customer_Id customerId
+		select acc_num accNum, acc_name accName, customer_Id customerId,
 		product_num productNum, balance,
 		to_char(reg_date, 'yyyy-mm-dd') regDate,
 		to_char(ret_date, 'yyyy-mm-dd') retDate,

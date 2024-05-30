@@ -16,7 +16,6 @@ import kopo.aisw.hc.member.vo.MemberVO;
  * 삭제시 applicationContext.xml -> interceptor 제거
  */
 @Configuration
-@SessionAttributes({"preUrl"})
 public class AdminInterceptor implements HandlerInterceptor {
 
 	@Override
