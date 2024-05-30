@@ -1,4 +1,3 @@
-window.onload=function(){
 	
 // header 4try
 	var header = document.querySelector('header');
@@ -70,10 +69,10 @@ window.onload=function(){
 	        this.value = this.value.replace(/[^0-9]/g, '');
 	    });
 	}
-    let dAcc = document.getElementById('dAcc');
-    if(dAcc){
-			dAcc.value = "";
-			dAcc.addEventListener('input', function() {
+    let wAcc = document.getElementById('wAcc');
+    if(wAcc){
+			wAcc.value = "";
+			wAcc.addEventListener('input', function() {
 	        this.value = this.value.replace(/[^0-9]/g, '');
 	    });
 	}
@@ -84,7 +83,6 @@ window.onload=function(){
 	        this.value = this.value.replace(/[^0-9]/g, '');
 	    });
 	}
-}
     
 
 //open an account

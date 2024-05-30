@@ -1,6 +1,10 @@
 package kopo.aisw.hc.transaction.vo;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,19 +30,20 @@ public class TransactionVO {
 		--CONSTRAINT FK_DEPOSIT_ACC FOREIGN KEY(DEPOSIT_ACC) REFERENCES TEST_ACCOUNT(ACC_NUM)
 	 */
 	private int transactionId;
-	@NotNull
+	@NotNull(message="필수 항목입니다")
 	private String transactionType;
 	@NotNull
 	private String transactionDate;
-	@NotNull
+	@Min(value = 500, message="500원 이상부터 송금 가능합니다")
+	@Max(value = 999999999, message="1000000000원 이상은 송금할 수 없습니다.")
 	private long amount;
-	@NotNull
+	@NotNull(message="필수 항목입니다")
 	private long depositAcc;
-	@NotNull
+	@Size(max=7, message="이름은 7자 이하로 정해주세요")
+	@Pattern(regexp = "^[가-힣a-zA-Z]{0,7}$", message="한글, 영어 대소문자만 가능합니다")
 	private String depositName;
 	@NotNull
 	private long withdrawAcc;
-	@NotNull
 	private String withdrawName;
 	
 }

@@ -26,7 +26,7 @@ CREATE SEQUENCE test_customer_seq;
 		<!-- select customer_ID customerid
 		from test_customer
 		where bank_id=#{userId} and password=#{password} -->
-		select customer_ID as customerId,
+		select customer_ID as customerId, name,
 		       password, customer_type customerType
 		from test_customer
 		where bank_id = #{userId}

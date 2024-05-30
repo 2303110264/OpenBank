@@ -59,24 +59,34 @@
 
                     <div class="col-lg-4 mb-4 sign-in-div2">
                         <div class="form-floating">
-                            <form:select path="withdrawAcc" type="text" class="formSelect form-control form-control-lg light-300 " id="wAcc" name="wAcc" placeholder="withdrawAcc" required="true">
+                            <form:select path="depositAcc" type="text" class="form-control form-control-lg light-300 " id="dAcc" name="dAcc" placeholder="deposit Account" required="true">
                             	<c:forEach items="${accList}" var="a">
-                            		<form:option value="${a.accNum}">${a.accName}</form:option>
+                            		<form:option value="${a.accNum}">${a.accName}(${a.accNum})</form:option>
                             	</c:forEach>
                             </form:select>
                             <label for="floatingID light-300">출금할 계좌</label>
+                            <form:errors path="depositAcc" class="error"/>
                         </div>
                     </div><%-- End Input userId --%>
                     <div class="col-lg-4 mb-4 sign-in-div2">
                         <div class="form-floating">
-                            <form:input path="depositAcc" type="text" class="form-control form-control-lg light-300 " id="dAcc" name="dAcc" placeholder="deposit Account" required="true"/>
+                            <form:input path="withdrawAcc" type="text" class="formSelect form-control form-control-lg light-300 " id="wAcc" name="wAcc" placeholder="withdrawAcc"/>
                             <label for="floatingPassword light-300">입금될 계좌</label>
+                            <form:errors path="withdrawAcc" class="error"/>
                         </div>
                     </div><%-- End Input Password --%>
                     <div class="col-lg-4 mb-4 sign-in-div2">
                         <div class="form-floating">
-                            <form:input path="amount" type="text" class="form-control form-control-lg light-300 " id="amt" name="amt" placeholder="Amount" required="true"/>
+                            <form:input path="amount" type="text" class="form-control form-control-lg light-300 " id="amt" name="amt" placeholder="Amount"/>
                             <label for="floatingPassword light-300">금액</label>
+                            <form:errors path="amount" class="error"/>
+                        </div>
+                    </div><%-- End Input Password --%>
+                    <div class="col-lg-4 mb-4 sign-in-div2">
+                        <div class="form-floating">
+                            <form:input path="depositName" type="text" class="form-control form-control-lg light-300 " id="dName" name="dName" placeholder="Name" value="${userVO.name }"/>
+                            <label for="floatingPassword light-300">보내는 사람 이름</label>
+                            <form:errors path="depositName" class="error"/>
                         </div>
                     </div><%-- End Input Password --%>
 					

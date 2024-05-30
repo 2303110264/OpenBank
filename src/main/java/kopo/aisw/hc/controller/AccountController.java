@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import kopo.aisw.hc.account.service.AccountService;
 import kopo.aisw.hc.account.vo.AccountVO;
 import kopo.aisw.hc.member.service.MemberService;
@@ -90,13 +91,27 @@ public class AccountController {
 		
 		TransactionVO t = new TransactionVO();
 		model.addAttribute("t", t);
-		
 		return "account/transfer";
 	}
 	@PostMapping("transfer")
-	public String transfer(Model model, BindingResult res, HttpSession session) {
-		
-		return "account/transfer";
+	public String transfer(@Valid @ModelAttribute("t")TransactionVO t, 
+			Model model, BindingResult res, HttpSession session) {
+		try {
+			System.out.println(t);
+			if(res.hasErrors()) return "account/transfer";
+			MemberVO userVO = (MemberVO) session.getAttribute("userVO");
+			System.out.println(t);
+			//입/출금 계좌 동일한지 확인
+			Long Acc = t.getWithdrawAcc();
+			if(Acc==t.getDepositAcc()) return "redirect:/bank/";
+			//로그인중인 유저와 출금하려는 계좌 소유주가 같은지 확인
+			AccountVO a = as.getAccount(Acc.toString());
+			if(a.getCustomerId()!=userVO.getCustomerId())
+				return "redirect:/bank/";
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return "account/result";
 	}
 	
 	//계좌목록

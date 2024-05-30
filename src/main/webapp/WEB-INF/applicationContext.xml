@@ -69,9 +69,20 @@
 		<mvc:interceptor>
 	        <mvc:mapping path="/account/**" /> 
 	        <mvc:mapping path="/product/**" /> 
-	        <mvc:mapping path="/transfer" /> 
 	        <mvc:mapping path="/member/profile" /> 
+	        <mvc:mapping path="/**/admin/**" /> 
 	        <bean class="kopo.aisw.hc.interceptor.SignInInterceptor" />
+		</mvc:interceptor>
+		
+		<mvc:interceptor>
+	        <mvc:mapping path="/**/admin/**" /> 
+			<bean class="kopo.aisw.hc.interceptor.AdminInterceptor" />
+		</mvc:interceptor>
+		
+		<mvc:interceptor>
+	        <mvc:mapping path="/account/**" /> 
+	        <mvc:mapping path="/product/**" /> 
+			<bean class="kopo.aisw.hc.interceptor.BlacklistInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>	
 	<!-- 최대 업로드 파일 사이즈 : 10MB -->
