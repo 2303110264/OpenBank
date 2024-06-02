@@ -12,6 +12,8 @@
 			alias="productVO" />
 		<typeAlias type="kopo.aisw.hc.account.vo.AccountVO"
 			alias="accountVO" />
+		<typeAlias type="kopo.aisw.hc.transaction.vo.TransactionVO"
+			alias="transactionVO" />
 	</typeAliases>
 	<!-- 
 	<mappers>

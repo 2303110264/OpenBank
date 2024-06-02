@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="debug"> 
+    <!-- DEBUG로 설정할시 모르는 줄이 더 뜸 -->
+    <Properties>
+        <Property name="log-path">logs</Property>
+    </Properties>
+
+    <Appenders>
+        <RollingFile name="file-log" fileName="${log-path}/app.log" filePattern="${log-path}/HelloLog4j-%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="[%5p] - %c{1}:%L %d{yyyy-MM-dd HH:mm:ss} - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"  modulate="true" />
+            </Policies>
+            <immediateFlush>true</immediateFlush>
+        </RollingFile>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"/>
+        </Console>
+        <File name="FileAppender" fileName="logs/transactions.log" append="true">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"/>
+            <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+        </File>
+        <File name="FileAppender2" fileName="logs/test.log" append="true">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"/>
+        </File>
+    </Appenders>
+    <Loggers>
+        <Logger name="kopo.aisw.hc.controller" level="debug" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="FileAppender"/>
+        </Logger>
+        <Logger name="kopo.aisw.hc.controller.TestController" level="debug" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="file-log"/>
+        </Logger>
+        <Root level="trace">
+            <AppenderRef ref="Console"/> <!-- 콘솔 출력을 위해 추가 -->
+            <AppenderRef ref="FileAppender2"/> <!-- 파일 출력을 위해 추가 -->
+        </Root>
+    </Loggers>
+</Configuration>

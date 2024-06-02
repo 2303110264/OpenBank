@@ -9,7 +9,6 @@
 <body>
 	<b style="font-size:1.5em">Log4j2 Test</b>용 화면.......인데
 	<br/>log.info가 어디 기록되는 거야?
-	<br/>공부 필요...
+	<br/>콘솔에 기록된다는데 tomcat debug log만 뜨는거갓은디?
 </body>
-<jsp:include page="footer.jsp"></jsp:include>
 </html>
