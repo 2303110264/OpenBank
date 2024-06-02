@@ -14,7 +14,7 @@
 	<properties>
 		<spring-version>6.1.6</spring-version>
 		<aspectj-version>1.9.22</aspectj-version>
-		<log4j2-version>2.20.0</log4j2-version>
+		<log4j2-version>2.23.0</log4j2-version>
 		
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -90,6 +90,8 @@
 	</build>
 	
 	<dependencies>
+		
+		
 		<dependency>
 		    <groupId>org.apache.maven.plugins</groupId>
 		    <artifactId>maven-war-plugin</artifactId>
@@ -187,6 +189,12 @@
 		    <artifactId>log4j-slf4j2-impl</artifactId>
 		    <version>${log4j2-version}</version>
 		</dependency>
+		<dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-web</artifactId>
+		    <version>${log4j2-version}</version>
+		</dependency>
+
 
 		<!-- @Inject -->
 		<dependency>
@@ -201,7 +209,7 @@
 		<dependency>
 		    <groupId>jakarta.servlet</groupId>
 		    <artifactId>jakarta.servlet-api</artifactId>
-		    <version>6.0.0</version>
+		    <version>6.1.0-M2</version>
 		    <scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -217,7 +225,7 @@
 		<dependency>
 		    <groupId>jakarta.servlet.jsp</groupId>
 		    <artifactId>jakarta.servlet.jsp-api</artifactId>
-		    <version>3.1.1</version>
+		    <version>4.0.0-M2</version>
 		    <scope>provided</scope>
 		</dependency>
 		<dependency>

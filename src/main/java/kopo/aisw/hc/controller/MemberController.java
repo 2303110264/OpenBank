@@ -96,7 +96,6 @@ public class MemberController {
 	public String signUp(Model model) {
 		MemberVO m = new MemberVO();
 		model.addAttribute("m", m);
-		model.addAttribute("signUp", false);
 		return "user/signUp";
 	}
 	
@@ -116,9 +115,11 @@ public class MemberController {
 		if(res.hasErrors()) return "user/signUp";
 		if(customer) customer = ms.updateBankId(m);
 		else customer = ms.signUp(m);
-
-		if(!ms.signUp(m)) model.addAttribute("signUp", false);
-		else model.addAttribute("signUp", true);
+		System.out.println(customer);
+		if(customer) 
+			model.addAttribute("signUp", true);
+		else 
+			model.addAttribute("signUp", false);
 		return "user/signUp";
 	}
 	
