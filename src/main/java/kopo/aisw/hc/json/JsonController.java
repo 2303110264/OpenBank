@@ -19,15 +19,19 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kopo.aisw.hc.ajax.ResponseVO;
 import kopo.aisw.hc.member.vo.MemberVO;
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 @RestController
 public class JsonController {
 	
 	@RequestMapping("/api")
-	public ResponseVO test() {
+	public ResponseVO test(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		System.out.println(request.getContextPath());
 		ResponseVO res = new ResponseVO();
 		MemberVO m = new MemberVO();
 		m.setUserId("id");
@@ -35,6 +39,8 @@ public class JsonController {
 		m.setName("name");
 		res.setMember(m);
 		res.setResponseCode(200);
+		log.info("이 로그는 기록되는 로그인가?");
+		log.error("물론안됨");
 		return res;
 	}
 	
