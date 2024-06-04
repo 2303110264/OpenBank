@@ -4,7 +4,7 @@ import java.util.List;
 
 import kopo.aisw.hc.account.vo.AccountVO;
 import kopo.aisw.hc.member.vo.MemberVO;
-import kopo.aisw.hc.transaction.vo.TransactionVO;
+import kopo.aisw.hc.transaction.vo.ViewTransactionVO;
 
 public interface AccountService {
 	//개설 전 세팅
@@ -20,7 +20,7 @@ public interface AccountService {
 	//계좌 조회- 잔액 조회
 	public long getBalance(long accNum);
 	//계좌 이체
-	public boolean transfer(TransactionVO transaction);
+	public boolean transfer(ViewTransactionVO transaction);
 
 	//계좌 해지하기
 	public boolean closeAnAccount(AccountVO account);

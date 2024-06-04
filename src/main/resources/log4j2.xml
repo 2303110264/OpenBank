@@ -6,8 +6,8 @@
     </Properties>
 
     <Appenders>
-        <RollingFile name="file-log" fileName="${log-path}/app.log" filePattern="${log-path}/HelloLog4j-%d{yyyy-MM-dd}.log">
-            <PatternLayout pattern="[%5p] - %c{1}:%L %d{yyyy-MM-dd HH:mm:ss} - %m%n"/>
+        <RollingFile name="file-log" fileName="${log-path}/app.log" filePattern="${log-path}/app-%d{yyyy-MM-dd}.log">
+            <PatternLayout charset="UTF-8" pattern="[%5p] - %c{1}:%L %d{yyyy-MM-dd HH:mm:ss} - %m%n"/>
             <Policies>
                 <TimeBasedTriggeringPolicy interval="1"  modulate="true" />
             </Policies>
@@ -17,12 +17,12 @@
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"/>
         </Console>
         
-        <File name="FileAppender" fileName="${log-path}/transactions.log" append="true">
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"/>
+        <File name="transactions" fileName="${log-path}/transactions.log" append="true">
+            <PatternLayout charset="UTF-8" pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"/>
             <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
         </File>
         
-        <File name="FileAppender2" fileName="${log-path}/test.log" append="true">
+        <File name="test" fileName="${log-path}/test.log" append="true">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"/>
         </File>
         
@@ -39,7 +39,9 @@
             <AppenderRef ref="file-log"/>
         </Logger>
         <Root level="info">
-            <AppenderRef ref="Console"/> <!-- 콘솔 출력을 위해 추가 -->
+            <!-- 콘솔 출력을 위해 추가
+            <AppenderRef ref="Console"/> 
+             -->
             <AppenderRef ref="FileAppender2"/> <!-- 파일 출력을 위해 추가 -->
         </Root>
     </Loggers>

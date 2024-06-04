@@ -9,6 +9,8 @@ import java.nio.charset.Charset;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,7 +30,14 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @RestController
 public class JsonController {
-	
+	@GetMapping("/apitest")
+	public ResponseEntity<MemberVO> apitest(){
+		MemberVO m = new MemberVO();
+		m.setCustomerId(0);
+		log.info(m.toString());
+		log.info("Slf4j 테스트");
+		return new ResponseEntity<>(m, HttpStatus.OK);
+	}
 	@RequestMapping("/api")
 	public ResponseVO test(HttpServletResponse response, HttpServletRequest request) throws Exception {
 		System.out.println(request.getContextPath());
@@ -39,14 +48,14 @@ public class JsonController {
 		m.setName("name");
 		res.setMember(m);
 		res.setResponseCode(200);
-		log.info("이 로그는 기록되는 로그인가?");
-		log.error("물론안됨");
+		log.info("api log");
 		return res;
 	}
 	
 	@GetMapping("/api/{id}")
 	public ResponseVO getTest(@PathVariable(value = "id") String id) {
 		ResponseVO res = new ResponseVO();
+		log.info("/api/{id} get run");
 		try{
 			MemberVO m = new MemberVO();
 			m.setUserId(id);
@@ -63,6 +72,7 @@ public class JsonController {
 	@PostMapping("/api/{id}")
 	public ResponseVO getTest2(@RequestHeader("Authorization") String Authorization,
 								@PathVariable(value = "id") String id) {
+		log.info("/api/{id} post run");
 		ResponseVO res = new ResponseVO();
 		MemberVO m = new MemberVO();
 		m.setUserId(id);

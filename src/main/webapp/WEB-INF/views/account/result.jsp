@@ -42,10 +42,10 @@
     <section class="container py-5 text-center">
         <h1 class="col-12 col-xl-8 h2 text-primary pt-3 margin-auto">
 		<a class="navbar-brand" href="${path}/bank/">
-        Transfer
+        Result
 		</a>
         </h1>
-        <h2 class="col-12 col-xl-8 h4 regular-400 margin-auto">계좌 이체</h2>
+        <h2 class="col-12 col-xl-8 h4 regular-400 margin-auto">이체 결과</h2>
         <p class="col-12 col-xl-8 text-muted pb-5 light-300 margin-auto">
             
         </p>
@@ -59,40 +59,32 @@
 
                     <div class="col-lg-4 mb-4 sign-in-div2">
                         <div class="form-floating">
-                            <form:select path="depositAcc" type="text" class="form-control form-control-lg light-300 " id="dAcc" name="dAcc" placeholder="deposit Account" required="true">
-                            	<c:forEach items="${accList}" var="a">
-                            		<form:option value="${a.accNum}">${a.accName}(${a.accNum})</form:option>
-                            	</c:forEach>
-                            </form:select>
-                            <label for="floatingID light-300">출금할 계좌</label>
-                            <form:errors path="depositAcc" class="error"/>
+                            <div class="form-control form-control-lg light-300">${t.depositAcc}</div>
+                            <label for="floatingPassword light-300">출금계좌</label>
                         </div>
-                    </div><%-- End Input userId --%>
+                    </div><%-- 표시용 --%>
                     <div class="col-lg-4 mb-4 sign-in-div2">
                         <div class="form-floating">
-                            <form:input path="withdrawAcc" type="text" class="formSelect form-control form-control-lg light-300 " id="wAcc" name="wAcc" placeholder="withdrawAcc" required="true"/>
-                            <label for="floatingPassword light-300">입금될 계좌</label>
-                            <form:errors path="withdrawAcc" class="error"/>
+                            <div class="form-control form-control-lg light-300">${t.withdrawAcc}</div>
+                            <label for="floatingPassword light-300">입금대상</label>
                         </div>
-                    </div><%-- End Input Password --%>
+                    </div><%-- 표시용 --%>
+                   <div class="col-lg-4 mb-4 sign-in-div2">
+                        <div class="form-floating">
+                            <div class="form-control form-control-lg light-300">${t.amount}</div>
+                            <label for="floatingPassword light-300">거래금액</label>
+                        </div>
+                    </div><%-- 표시용 --%>
                     <div class="col-lg-4 mb-4 sign-in-div2">
                         <div class="form-floating">
-                            <form:input path="amount" type="text" class="form-control form-control-lg light-300 " id="amt" name="amt" placeholder="Amount" required="true"/>
-                            <label for="floatingPassword light-300">금액</label>
-                            <form:errors path="amount" class="error"/>
+                            <div class="form-control form-control-lg light-300">${t.amount}</div>
+                            <label for="floatingPassword light-300">거래후 잔액</label>
                         </div>
-                    </div><%-- End Input Password --%>
-                    <div class="col-lg-4 mb-4 sign-in-div2">
-                        <div class="form-floating">
-                            <form:input path="depositName" type="text" class="form-control form-control-lg light-300 " id="dName" name="dName" placeholder="Name" required="true" value="${userVO.name }"/>
-                            <label for="floatingPassword light-300">보내는 사람 이름</label>
-                            <form:errors path="depositName" class="error"/>
-                        </div>
-                    </div><%-- End Input Password --%>
+                    </div><%-- 표시용 --%>
 					
 					
                     <div class="col-md-12 col-12 m-auto text-center">
-                        <button type="submit" class="btn sign-in-btn btn-secondary rounded-pill px-md-5 px-4 py-2 radius-0 text-light light-300">송금하기</button>
+                        <button onclick="location.href='ob/account/'" class="btn sign-in-btn btn-secondary rounded-pill px-md-5 px-4 py-2 radius-0 text-light light-300">확인</button>
                     </div>
 
                 </form:form>

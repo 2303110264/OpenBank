@@ -16,7 +16,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class TransactionVO {
+public class ViewTransactionVO {
 	
 	private int transactionId;
 	@Size(min=1)

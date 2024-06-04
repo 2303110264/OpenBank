@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 import kopo.aisw.hc.account.vo.AccountVO;
 import kopo.aisw.hc.member.vo.MemberVO;
 import kopo.aisw.hc.product.vo.ProductVO;
-import kopo.aisw.hc.transaction.vo.TransactionVO;
+import kopo.aisw.hc.transaction.vo.ViewTransactionVO;
 
 @Repository
 public class AccountDAOImpl implements AccountDAO {
@@ -99,14 +99,14 @@ public class AccountDAOImpl implements AccountDAO {
 	
 	//입금
 	@Override
-	public boolean deposit(TransactionVO transaction) {
+	public boolean deposit(ViewTransactionVO transaction) {
 		int a = sqlSession.update("dao.AccountDAO.deposit", transaction);
 		return a==1;
 	}
 	
 	//출금
 	@Override
-	public boolean withdraw(TransactionVO transaction) {
+	public boolean withdraw(ViewTransactionVO transaction) {
 		int a = sqlSession.update("dao.AccountDAO.withdraw", transaction);
 		return a==1;
 	}
@@ -114,7 +114,7 @@ public class AccountDAOImpl implements AccountDAO {
 	//계좌이체 (이게 입출금 외에 따로 필요한가??)
 	@Override
 	@Transactional
-	public boolean transfer(TransactionVO transaction) {
+	public boolean transfer(ViewTransactionVO transaction) {
 		int a = 0;
 		a+= sqlSession.update("dao.AccountDAO.deposit", transaction);
 		a+= sqlSession.update("dao.AccountDAO.withdraw", transaction);
