@@ -6,14 +6,14 @@
 	<typeAliases>
 		<typeAlias type="kopo.aisw.hc.member.vo.MemberVO"
 			alias="memberVO" />
-		<typeAlias type="kopo.aisw.hc.transaction.vo.TransactionVO"
-			alias="transactionVO" />
 		<typeAlias type="kopo.aisw.hc.product.vo.ProductVO"
 			alias="productVO" />
 		<typeAlias type="kopo.aisw.hc.account.vo.AccountVO"
 			alias="accountVO" />
-		<typeAlias type="kopo.aisw.hc.transaction.vo.TransactionVO"
-			alias="transactionVO" />
+		<typeAlias type="kopo.aisw.hc.transaction.vo.ViewTransactionVO"
+			alias="vTran" />
+		<typeAlias type="kopo.aisw.hc.transaction.vo.DBTransactionVO"
+			alias="dbTran" />
 	</typeAliases>
 	<!-- 
 	<mappers>

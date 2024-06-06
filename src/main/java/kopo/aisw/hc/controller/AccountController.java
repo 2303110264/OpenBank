@@ -5,13 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpSession;
@@ -21,11 +19,10 @@ import kopo.aisw.hc.member.service.MemberService;
 import kopo.aisw.hc.member.vo.MemberVO;
 import kopo.aisw.hc.product.service.ProductService;
 import kopo.aisw.hc.product.vo.ProductVO;
-import kopo.aisw.hc.transaction.vo.ViewTransactionVO;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 
 // git push origin localBranch:gitBranch 
-@Log4j2
+@Slf4j
 @Controller
 @RequestMapping("/account/")
 public class AccountController {
@@ -64,20 +61,21 @@ public class AccountController {
 			MemberVO m = (MemberVO) session.getAttribute("userVO");
 			m.setPassword(password);
 			//임시
-			if(ms.checkPwd(m)) return "account/open";
-			//계좌번호 생성 및 등록
-			b= as.openAnAccount(openAcc);
-			if(!b) {
-				model.addAttribute("openAnAcc", b);
-				log.error(b+"-"+m.getUserId()+" open account : "+openAcc.toString());
-				return "redirect:/product/view"+productNum;
-			}else {
-				model.addAttribute("openAnAcc", b);
-				log.info(b+"-"+m.getUserId()+" open account : "+openAcc.toString());
-				return "redirect:/account/";
+			b = as.openAnAccount(openAcc);
+			log.info("Try -"+m.getUserId()+" open account : "+openAcc.toString());
+			
+			if(!ms.checkPwd(m)||!b) {
+				//model.addAttribute("openAnAcc", false);
+				return "redirect:/product/view/"+productNum;
 			}
+			
+			
+			//계좌번호 생성 및 등록
+			//model.addAttribute("openAnAcc", true);
+			log.info("Success -"+m.getUserId()+" open account : "+openAcc.toString());
+			return "redirect:/account/";
 		}catch(Exception e) {
-			model.addAttribute("openAnAcc", false);
+			//model.addAttribute("openAnAcc", false);
 			e.printStackTrace();
 			return "redirect:/product/view/"+productNum;
 		}

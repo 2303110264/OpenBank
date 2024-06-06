@@ -9,9 +9,11 @@ import java.nio.charset.Charset;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -23,6 +25,8 @@ import com.fasterxml.jackson.databind.util.JSONPObject;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import kopo.aisw.hc.account.service.AccountService;
 import kopo.aisw.hc.ajax.ResponseVO;
 import kopo.aisw.hc.member.vo.MemberVO;
 import lombok.extern.log4j.Log4j2;
@@ -30,6 +34,17 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @RestController
 public class JsonController {
+	@Autowired
+	AccountService as;
+	
+	@GetMapping("/transaction/accCheck")
+	public String getName(@ModelAttribute String accNum, HttpSession session) {
+		if(session==null) return "잘못된 접근입니다.";
+		MemberVO userVO = (MemberVO) session.getAttribute("userVO");
+		log.info(userVO.getCustomerId()+" => "+accNum);
+		return as.getOwnerName(Long.parseLong(accNum));
+	}
+	
 	@GetMapping("/apitest")
 	public ResponseEntity<MemberVO> apitest(){
 		MemberVO m = new MemberVO();

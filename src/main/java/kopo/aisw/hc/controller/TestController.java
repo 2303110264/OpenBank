@@ -33,8 +33,6 @@ public class TestController {
 	
 	@GetMapping("/test")
 	public String testIndex(Locale locale, Model model) {
-		Log l = new Log();
-		l.logtest();
 		
 		System.out.println("콘솔에 출력이 왜 안 될까...");
 		log.info("Slf4j2 Testing...");

@@ -63,18 +63,19 @@ CREATE TABLE TEST_ACCOUNT(
 	<!-- 이체시 출금계좌 확인: 단일계좌 잔액조회 -->
 	<select id="getBalance" parameterType="Long" resultType="accountVO">
 		select balance
-		<include refid="whereAccNum"></include>
+		from V_CB_account
+		where accNum=#{accNum}
 	</select>
 	
 	<!-- 입금 -->
-	<update id="deposit" parameterType="transactionVO">
+	<update id="deposit" parameterType="vTranVO">
 		update test_account
 		set balance = balance+#{amount}
 		where deposit_acc = #{depositAcc}
 	</update>
 	
 	<!-- 출금 -->
-	<update id="withdraw" parameterType="transactionVO">
+	<update id="withdraw" parameterType="vTranVO">
 		update test_account
 		set balance = balance-#{amount}
 		where deposit_acc = #{withdrawAcc}
