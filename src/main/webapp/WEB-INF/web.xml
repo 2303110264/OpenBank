@@ -71,6 +71,16 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
+	 <filter>
+        <filter-name>apiKeyFilter</filter-name>
+        <filter-class>kopo.aisw.hc.json.JsonKeyFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>apiKeyFilter</filter-name>
+        <url-pattern>/api-key/*</url-pattern>
+    </filter-mapping>
+	
 	 <!-- Listener 설정 -->
 	  <listener> <!-- Context를 로딩하는 리스너 -->
 	    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

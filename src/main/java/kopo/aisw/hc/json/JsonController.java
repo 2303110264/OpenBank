@@ -9,6 +9,7 @@ import java.nio.charset.Charset;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import org.springframework.http.HttpStatusCode;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,7 +46,7 @@ public class JsonController {
 			MemberVO m = new MemberVO();
 			m.setUserId(id);
 			res.setMember(m);
-			System.out.println(requestTest());
+			res.setResponseString(requestTest());
 			return res;
 		}catch(Exception e){
 			res.setResponseCode(400);
@@ -54,7 +55,7 @@ public class JsonController {
 	}
 	
 	//Auth Header test
-	@PostMapping("/api/{id}")
+	@PostMapping("/api/post/{id}")
 	public ResponseVO getTest2(@RequestHeader("Authorization") String Authorization,
 								@PathVariable(value = "id") String id) {
 		ResponseVO res = new ResponseVO();
@@ -83,7 +84,7 @@ public class JsonController {
 */
 	
 	public String requestTest() {
-		StringBuilder url = new StringBuilder("http://localhost:8008/ob/api/headerTesting");
+		StringBuilder url = new StringBuilder("http://localhost:8008/ob/api/post/headerTesting");
 		String testKey = "testing-testing"; // kakao REST api Key(it's work!) or admin key(i don't know)
 		
 		try{

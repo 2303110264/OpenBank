@@ -1,26 +1,27 @@
 package kopo.aisw.hc.controller;
 
-import java.util.Locale;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
-import lombok.Getter;
-import lombok.ToString;
+import kopo.aisw.hc.member.service.MemberService;
+import kopo.aisw.hc.member.vo.MemberVO;
 import lombok.extern.log4j.Log4j2;
 
-@Controller
-@Getter
-@ToString
 @Log4j2
+@RestController
 public class TestController {
+	@Autowired
+	MemberService ms;
 	
-	@RequestMapping(value="/test", method =RequestMethod.GET)
-	public String testIndex(Locale locale, Model model) {
-		log.info("Log4j2 Testing...");
-		return "main";
+	@GetMapping("/api-test/1")
+	public MemberVO testFilter() {
+		MemberVO m = new MemberVO();
+		m.setCustomerId(1);
+		m = ms.getProfile(m);
+		log.info("API 테스트중..."+m);
+		return m;
 	}
 	
 }
