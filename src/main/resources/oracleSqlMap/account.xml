@@ -62,8 +62,8 @@ CREATE TABLE TEST_ACCOUNT(
 	
 	<!-- 이체시 출금계좌 확인: 단일계좌 잔액조회 -->
 	<select id="getBalance" parameterType="Long" resultType="accountVO">
-		select balance
-		from V_CB_account
+		select afterBalance balance
+		from 
 		where accNum=#{accNum}
 	</select>
 	
