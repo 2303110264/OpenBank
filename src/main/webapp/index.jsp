@@ -29,6 +29,10 @@
 	<a href="<%=request.getContextPath()%>/ajax/resVOListBody.json"> JSON List(VO) 응답 </a>
 	<br />
 	<a href="<%=request.getContextPath()%>/test"> log4j2 Test?? </a>
+	<br/>
+	<a href="<%=request.getContextPath()%>/api"> log4j2(1) </a>
+	<br/>
+	<a href="<%=request.getContextPath()%>/apitest"> log4j2 (2) </a>
 	<br />
 	<a href="<%=request.getContextPath()%>/bank/"> Sample Main page </a>
 	<br />

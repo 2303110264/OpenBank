@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="path" value="${pageContext.request.contextPath}"/>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 
 
 <!DOCTYPE html>
@@ -32,7 +32,43 @@
 원본 파일명: index.html
 --%>
 </head>
+<style>
+	.error {
+	    color: red;
+	}
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#form').on('submit', function(event) {
+        event.preventDefault();
 
+        $('#accErr').text('');
+        var dAcc = $('#dAcc').val();
+        var wAcc = $('#wAcc').val();
+
+        if (wAcc == dAcc) {
+            $('#accErr').text('동일한 계좌끼리는 이체할 수 없습니다.');
+        } else {
+            var formData = $(this).serialize();
+
+            $.ajax({
+                type: 'GET',
+                url: '/ob/accCheck',
+                data: formData,
+                success: function(response) {
+                    $('#accErr').text(reseponse.name);
+                    console.log(response);
+                },
+                error: function(error) {
+                    $('#accErr').text('존재하지 않는 계좌입니다.');
+                    console.error(error);
+                }
+            });
+        }
+    });
+});
+</script>
 <body>
     <%-- Header --%>
     <jsp:include page="../header.jsp"></jsp:include>
@@ -54,47 +90,46 @@
 
             <%-- Start Contact Form --%>
             <div class="col-lg-8 sign-in-div">
-                <form:form class="contact-form row sign-in-form" method="post" name="form" role="form" modelAttribute="t">
-                    <form:input path="transactionType" type="hidden" class="form-control form-control-lg light-300 " id="type" name="type" value="출금이체"/>
-
+                <form:form class="contact-form row sign-in-form" method="POST" action="/ob/account/transfer" name="form" role="form" modelAttribute="t">
+                    <form:input path="transactionType" type="hidden" class="form-control form-control-lg light-300 " id="type" name="type" value="출금이체"></form:input>
                     <div class="col-lg-4 mb-4 sign-in-div2">
                         <div class="form-floating">
-                            <form:select path="depositAcc" type="text" class="form-control form-control-lg light-300 " id="dAcc" name="dAcc" placeholder="deposit Account" required="true">
+                            <form:select path="withdrawAcc" type="text" class="form-control form-control-lg light-300 " id="wAcc" name="withdrawAcc" placeholder="withdraw Account" required="true">
                             	<c:forEach items="${accList}" var="a">
                             		<form:option value="${a.accNum}">${a.accName}(${a.accNum})</form:option>
                             	</c:forEach>
                             </form:select>
-                            <label for="floatingID light-300">출금할 계좌</label>
-                            <form:errors path="depositAcc" class="error"/>
-                        </div>
-                    </div><%-- End Input userId --%>
-                    <div class="col-lg-4 mb-4 sign-in-div2">
-                        <div class="form-floating">
-                            <form:input path="withdrawAcc" type="text" class="formSelect form-control form-control-lg light-300 " id="wAcc" name="wAcc" placeholder="withdrawAcc" required="true"/>
                             <label for="floatingPassword light-300">입금될 계좌</label>
                             <form:errors path="withdrawAcc" class="error"/>
                         </div>
-                    </div><%-- End Input Password --%>
+                    </div>
                     <div class="col-lg-4 mb-4 sign-in-div2">
                         <div class="form-floating">
-                            <form:input path="amount" type="text" class="form-control form-control-lg light-300 " id="amt" name="amt" placeholder="Amount" required="true"/>
+                            <form:input path="depositAcc" type="text" class="formSelect form-control form-control-lg light-300 " id="dAcc" name="depositAcc" placeholder="deposit Account" required="true"/>
+                            <label for="floatingID light-300">출금할 계좌</label>
+                            <form:errors path="depositAcc" class="error"/>
+                            <span id="accErr" class="error"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 mb-4 sign-in-div2">
+                        <div class="form-floating">
+                            <form:input path="amount" type="text" class="form-control form-control-lg light-300 " id="amt" name="amount" placeholder="Amount"/>
                             <label for="floatingPassword light-300">금액</label>
                             <form:errors path="amount" class="error"/>
                         </div>
-                    </div><%-- End Input Password --%>
+                    </div>
                     <div class="col-lg-4 mb-4 sign-in-div2">
                         <div class="form-floating">
-                            <form:input path="depositName" type="text" class="form-control form-control-lg light-300 " id="dName" name="dName" placeholder="Name" required="true" value="${userVO.name }"/>
+                            <form:input path="depositName" type="text" class="form-control form-control-lg light-300 " id="dName" name="depositName" placeholder="Name" value="${userVO.name }"/>
                             <label for="floatingPassword light-300">보내는 사람 이름</label>
                             <form:errors path="depositName" class="error"/>
                         </div>
-                    </div><%-- End Input Password --%>
+                    </div>
 					
 					
                     <div class="col-md-12 col-12 m-auto text-center">
                         <button type="submit" class="btn sign-in-btn btn-secondary rounded-pill px-md-5 px-4 py-2 radius-0 text-light light-300">송금하기</button>
                     </div>
-
                 </form:form>
             </div>
             <%-- End Contact Form --%>

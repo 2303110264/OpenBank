@@ -93,7 +93,7 @@
 				<!-- 
 		            <a href="${path}/accDetail/${accList.indexOf(acc)}" class="a-margin col-sm-6 col-lg-4 text-decoration-none account type${acc.productNum }">
 				 -->
-				 <form action="/ob/account/list" method="post" id="acc" name="acc">
+				 <form action="/ob/account/" method="post" id="acc" name="acc">
 	            	<input type="hidden" name="accNum" value="${acc.accNum}"/>
 	            <a class="a-margin col-sm-6 col-lg-4 text-decoration-none account type${acc.productNum }">
 	                <div class="service-work overflow-hidden card mb-5 mx-5 m-sm-0 account-card">
