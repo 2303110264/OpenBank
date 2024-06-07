@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kopo.aisw.hc.transaction.dao.TransactionDAO;
-import kopo.aisw.hc.transaction.vo.ViewTransactionVO;
+import kopo.aisw.hc.transaction.vo.TransactionVO;
 
 @Service
 public class TransactionServiceImpl implements TransactionService{
@@ -13,7 +13,7 @@ public class TransactionServiceImpl implements TransactionService{
 	TransactionDAO tDao;
 	
 	@Override
-	public ViewTransactionVO transfer(ViewTransactionVO transaction) throws Exception {
+	public TransactionVO transfer(TransactionVO transaction) throws Exception {
 		return tDao.transfer(transaction);
 	}
 

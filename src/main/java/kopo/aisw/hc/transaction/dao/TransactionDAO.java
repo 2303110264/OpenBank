@@ -1,18 +1,13 @@
 package kopo.aisw.hc.transaction.dao;
 
-import java.util.List;
-
-import kopo.aisw.hc.transaction.vo.DBTransactionVO;
-import kopo.aisw.hc.transaction.vo.ViewTransactionVO;
+import kopo.aisw.hc.transaction.vo.TransactionVO;
 
 public interface TransactionDAO {
-	//변환
-	public List<DBTransactionVO> vTranToDbTran(ViewTransactionVO VTran);
 	//이체
-	public ViewTransactionVO transfer(ViewTransactionVO VTran) throws Exception;
+	public TransactionVO transfer(TransactionVO VTran) throws Exception;
 	
 	//입금
-	public boolean deposit(DBTransactionVO dbTran);
+	public boolean deposit(TransactionVO dbTran);
 	//출금
-	public boolean withdraw(DBTransactionVO dbTran);
+	public boolean withdraw(TransactionVO dbTran);
 }

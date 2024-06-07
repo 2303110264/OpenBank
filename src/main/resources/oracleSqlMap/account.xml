@@ -68,14 +68,14 @@ CREATE TABLE TEST_ACCOUNT(
 	</select>
 	
 	<!-- 입금 -->
-	<update id="deposit" parameterType="vTranVO">
+	<update id="deposit" parameterType="transactionVO">
 		update test_account
 		set balance = balance+#{amount}
 		where deposit_acc = #{depositAcc}
 	</update>
 	
 	<!-- 출금 -->
-	<update id="withdraw" parameterType="vTranVO">
+	<update id="withdraw" parameterType="transactionVO">
 		update test_account
 		set balance = balance-#{amount}
 		where deposit_acc = #{withdrawAcc}

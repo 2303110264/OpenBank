@@ -16,7 +16,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class ViewTransactionVO {
+public class TransactionVO {
 	
 	private int transactionId;
 	private String transactionType;
@@ -38,6 +38,7 @@ public class ViewTransactionVO {
 	private String depositName;
 
 	//현재잔액
-	private long afterBalance;
+	private long wAfterBalance;
+	private long dAfterBalance;
 }
 

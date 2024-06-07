@@ -27,11 +27,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import kopo.aisw.hc.account.service.AccountService;
-import kopo.aisw.hc.ajax.ResponseVO;
 import kopo.aisw.hc.member.vo.MemberVO;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 
-@Log4j2
+
+/**
+ * api 샘플로써 존재하는 컨트롤러입니다
+*/
+
+@Slf4j
 @RestController
 public class JsonController {
 	@Autowired

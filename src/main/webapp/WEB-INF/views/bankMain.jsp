@@ -89,7 +89,7 @@
                                     <b>Bug Fix</b> &nbsp;&nbsp;<small>v2.13.1</small>
                                 </h1>
                                 <p class="banner-body text-muted py-3">
-                                    <b>Controller</b> : Member-signUp의 return값이 수정되었습니다. ("redirect:/bank/" -> "user/signUp")
+                                    <b>Controller</b> : Member-signUp의 return값이 수정되었습니다. ("redirect:/bank" -> "user/signUp")
                                 	<br/><b>Service</b> : bcrypt를 이용한 Password 암호화 기능이 추가되었습니다.
                                 	<br/><b>member.xml</b> : 잘못된 SQL을 수정하였습니다.
                                 </p>

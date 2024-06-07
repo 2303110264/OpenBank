@@ -23,7 +23,7 @@ public class BlacklistInterceptor implements HandlerInterceptor {
 		HttpSession session = req.getSession();
 		MemberVO userVO = (MemberVO) session.getAttribute("userVO");
 		if(userVO==null || userVO.getCustomerType()>899) {
-			res.sendRedirect("/ob/bank/");
+			res.sendRedirect("/ob/bank");
 			return false;
 		}else {
 			return true;

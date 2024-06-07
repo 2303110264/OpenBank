@@ -10,7 +10,7 @@ import kopo.aisw.hc.account.vo.AccountVO;
 import kopo.aisw.hc.member.vo.MemberVO;
 import kopo.aisw.hc.product.dao.ProductDAO;
 import kopo.aisw.hc.product.vo.ProductVO;
-import kopo.aisw.hc.transaction.vo.ViewTransactionVO;
+import kopo.aisw.hc.transaction.vo.TransactionVO;
 
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -50,7 +50,7 @@ public class AccountServiceImpl implements AccountService {
 	
 	//계좌 이체
 	@Override
-	public boolean transfer(ViewTransactionVO transaction) {
+	public boolean transfer(TransactionVO transaction) {
 		//잔액부족
 		if(aDao.getBalance(transaction.getWithdrawAcc())-transaction.getAmount()<0)
 			return false;

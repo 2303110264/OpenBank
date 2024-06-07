@@ -5,7 +5,7 @@
 <header>
 	<nav id="main_nav" class="navbar navbar-expand-lg navbar-light bg-white shadow">
 	        <div class="container d-flex justify-content-between align-items-center">
-	            <a class="navbar-brand h1" href="/ob/bank/">
+	            <a class="navbar-brand h1" href="/ob/bank">
 	                <i class='bx bx-money bx-sm text-dark'></i>
 	                <span class="text-dark h4">Open</span> <span class="text-primary h4">bank</span>
 	            </a>
@@ -17,7 +17,7 @@
 	                <div class="flex-fill mx-xl-5 mb-2">
 	                    <ul class="nav navbar-nav d-flex justify-content-between mx-xl-5 text-center text-dark">
 	                        <li class="nav-item">
-	                            <a class="nav-link btn-outline-primary rounded-pill px-3" href="${path}/ob/bank/">Home</a>
+	                            <a class="nav-link btn-outline-primary rounded-pill px-3" href="${path}/ob/bank">Home</a>
 	                        </li>
 	                        <li class="nav-item">
 	                            <a class="nav-link btn-outline-primary rounded-pill px-3" href="${path}/ob/account/">모아보기</a>

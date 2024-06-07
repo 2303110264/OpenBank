@@ -42,7 +42,7 @@ public class MemberController {
 			MemberVO userVO = (MemberVO) session.getAttribute("userVO");
 			//세션과 아이디가 다르면 메인화면 복귀
 			if(!(userVO.getCustomerId()==profileVO.getCustomerId()))
-				return "redirect:/bank/";
+				return "redirect:/bank";
 			//폼에서 display none이나 함수도 괜찮을 거긴 한데...일단은 세션에서 가져오는 것으로
 			if(profileVO.getPassword().length()<8)
 				profileVO.setPassword(null);
@@ -59,7 +59,7 @@ public class MemberController {
 	@GetMapping("signIn")
 	public String signIn(Model model, HttpSession session) {
 		//이미 로그인상태일 경우 메인화면으로
-		if(session.getAttribute("userVO")!=null) return "redirect:/bank/";
+		if(session.getAttribute("userVO")!=null) return "redirect:/bank";
 		MemberVO m = new MemberVO();
 		model.addAttribute("m", m);
 		return "user/signIn";
@@ -80,7 +80,7 @@ public class MemberController {
 			//kopo.aisw.hc.interceptor.SignInInterceptor에 세션에 preUrl을 추가하는 코드가 있음
 			String preUrl = (String) session.getAttribute("preUrl");
 			if(preUrl!=null) return "redirect:"+preUrl.substring(3);
-			return "redirect:/bank/";
+			return "redirect:/bank";
 		}
 	}
 
@@ -88,7 +88,7 @@ public class MemberController {
 	@GetMapping("logout")
 	public String logout(SessionStatus state) {
 		state.setComplete();
-		return "redirect:/bank/";
+		return "redirect:/bank";
 	}
 	
 	//회원가입

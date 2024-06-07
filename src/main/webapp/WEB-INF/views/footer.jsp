@@ -5,7 +5,7 @@
 		<div class="row py-4">
 
 			<div class="col-lg-3 col-12 align-left">
-				<a class="navbar-brand" href="${path}/ob/bank/"> 
+				<a class="navbar-brand" href="${path}/ob/bank"> 
 					<i class='bx bx-money bx-sm text-light'></i> 
 					<span class="text-light h5">Open</span>
 					<span class="text-light h5 semi-bold-600">bank</span>
@@ -56,7 +56,7 @@
 					</h2>
 					<ul class="list-unstyled text-light light-300">
                         <li class="pb-2">
-                            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light" href="${path}/ob/bank/">Home</a>
+                            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light" href="${path}/ob/bank">Home</a>
                         </li>
                         <li class="pb-2">
                             <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" href="${path}/ob/about">About Us</a>

@@ -5,7 +5,7 @@ import java.util.List;
 import kopo.aisw.hc.account.vo.AccountVO;
 import kopo.aisw.hc.member.vo.MemberVO;
 import kopo.aisw.hc.product.vo.ProductVO;
-import kopo.aisw.hc.transaction.vo.ViewTransactionVO;
+import kopo.aisw.hc.transaction.vo.TransactionVO;
 
 public interface AccountDAO {
 	//계좌 개설- 사전세팅
@@ -23,11 +23,11 @@ public interface AccountDAO {
 	//계좌 조회- 잔액 조회
 	public long getBalance(long accNum);
 	//입금
-	public boolean deposit(ViewTransactionVO transaction);
+	public boolean deposit(TransactionVO transaction);
 	//출금
-	public boolean withdraw(ViewTransactionVO transaction);
+	public boolean withdraw(TransactionVO transaction);
 	//이체
-	public boolean transfer(ViewTransactionVO transaction);
+	public boolean transfer(TransactionVO transaction);
 	
 	//계좌 해지하기
 	public boolean closeAnAccount(AccountVO account);

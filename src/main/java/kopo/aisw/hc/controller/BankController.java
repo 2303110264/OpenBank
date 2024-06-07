@@ -9,7 +9,7 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 @RequestMapping("/")
 public class BankController {
-	@RequestMapping("bank/")
+	@RequestMapping("")
 	public String bankMain() {
 		log.info("Bank Start (L)");
 		return "bankMain";
