@@ -9,6 +9,5 @@ import lombok.extern.log4j.Log4j2;
 @RestController
 public class AccountRestController {
 	
-	@GetMapping("/")
 	
 }

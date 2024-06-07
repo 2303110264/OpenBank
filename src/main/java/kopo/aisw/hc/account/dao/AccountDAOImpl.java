@@ -23,9 +23,6 @@ public class AccountDAOImpl implements AccountDAO {
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-//	private SqlSession sqlSession;
-//	private SqlSessionFactory sqlSessionFactory;
-//	private SqlSession sqlSession = sqlSessionFactory.openSession();
 	
 	//사전설정
 	@Override

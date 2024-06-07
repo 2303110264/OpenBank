@@ -28,20 +28,18 @@
         
     </Appenders>
     <Loggers>
-        <Logger name="kopo.aisw.hc.json" level="debug" additivity="false">
+        <Logger name="kopo.aisw.hc.json" level="info" additivity="false">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="FileAppender"/>
             <AppenderRef ref="file-log"/>
             <AppenderRef ref="FileAppender2"/>
         </Logger>
-        <Logger name="kopo.aisw.hc.controller.TestController" level="debug" additivity="false">
+        <Logger name="kopo.aisw.hc.controller.TestController" level="info" additivity="false">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="file-log"/>
         </Logger>
         <Root level="info">
-            <!-- 콘솔 출력을 위해 추가
             <AppenderRef ref="Console"/> 
-             -->
             <AppenderRef ref="FileAppender2"/> <!-- 파일 출력을 위해 추가 -->
         </Root>
     </Loggers>

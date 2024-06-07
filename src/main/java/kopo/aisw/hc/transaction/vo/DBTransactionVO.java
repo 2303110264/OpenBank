@@ -34,7 +34,7 @@ public class DBTransactionVO {
 	private String tranType; 
 	//입금 출금 이체? 이체일 경우 pivot을 사용할 수 없음. 
 	// Q. 이체여부를 따로 컬럼으로 분리해야하는가?
-	// 		단순 출금과 이체를 분리할 이유가 있는가?
+	// 		단순 출금과 이체를 분리할 이유가 있는가? -> 추후 분리해도 지장이 없을 것.
 	
 	private String tranDate;
 	
