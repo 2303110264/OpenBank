@@ -5,6 +5,7 @@ import kopo.aisw.hc.transaction.vo.ViewTransactionVO;
 public interface TransactionService {
 	
 	//거래내역 추가
-	public boolean transfer(ViewTransactionVO transaction);
+	public ViewTransactionVO transfer(ViewTransactionVO transaction) throws Exception;
 	
 }
+	

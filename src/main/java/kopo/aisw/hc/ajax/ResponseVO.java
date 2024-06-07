@@ -15,4 +15,5 @@ import lombok.ToString;
 public class ResponseVO {
 	private int responseCode;
 	private MemberVO member;
+	private String responseString;
 }

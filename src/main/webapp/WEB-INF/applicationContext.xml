@@ -69,6 +69,7 @@
 		<mvc:interceptor>
 	        <mvc:mapping path="/account/**" /> 
 	        <mvc:mapping path="/product/**" /> 
+	        <mvc:mapping path="/transaction/**" /> 
 	        <mvc:mapping path="/member/profile" /> 
 	        <mvc:mapping path="/**/admin/**" /> 
 	        <bean class="kopo.aisw.hc.interceptor.SignInInterceptor" />

@@ -9,9 +9,11 @@ import java.nio.charset.Charset;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -23,6 +25,8 @@ import com.fasterxml.jackson.databind.util.JSONPObject;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import kopo.aisw.hc.account.service.AccountService;
 import kopo.aisw.hc.ajax.ResponseVO;
 import kopo.aisw.hc.member.vo.MemberVO;
 import lombok.extern.log4j.Log4j2;
@@ -30,6 +34,17 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @RestController
 public class JsonController {
+	@Autowired
+	AccountService as;
+	
+	@GetMapping("/transaction/accCheck")
+	public String getName(@ModelAttribute String accNum, HttpSession session) {
+		if(session==null) return "잘못된 접근입니다.";
+		MemberVO userVO = (MemberVO) session.getAttribute("userVO");
+		log.info(userVO.getCustomerId()+" => "+accNum);
+		return as.getOwnerName(Long.parseLong(accNum));
+	}
+	
 	@GetMapping("/apitest")
 	public ResponseEntity<MemberVO> apitest(){
 		MemberVO m = new MemberVO();
@@ -60,7 +75,7 @@ public class JsonController {
 			MemberVO m = new MemberVO();
 			m.setUserId(id);
 			res.setMember(m);
-			System.out.println(requestTest());
+			res.setResponseString(requestTest());
 			return res;
 		}catch(Exception e){
 			res.setResponseCode(400);
@@ -69,7 +84,7 @@ public class JsonController {
 	}
 	
 	//Auth Header test
-	@PostMapping("/api/{id}")
+	@PostMapping("/api/post/{id}")
 	public ResponseVO getTest2(@RequestHeader("Authorization") String Authorization,
 								@PathVariable(value = "id") String id) {
 		log.info("/api/{id} post run");
@@ -99,7 +114,7 @@ public class JsonController {
 */
 	
 	public String requestTest() {
-		StringBuilder url = new StringBuilder("http://localhost:8008/ob/api/headerTesting");
+		StringBuilder url = new StringBuilder("http://localhost:8008/ob/api/post/headerTesting");
 		String testKey = "testing-testing"; // kakao REST api Key(it's work!) or admin key(i don't know)
 		
 		try{
@@ -149,7 +164,7 @@ public class JsonController {
             conn.setRequestProperty("X-Requested-With", "curl");
             conn.setRequestProperty("Authorization", "KakaoAK " + kakaoKey);
             //conn.setRequestProperty("content-type", "application/json");
-            //conn.setDoOutput(true);
+            //conn.set	DoOutput(true);
             
             Charset charset = Charset.forName("UTF-8");
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), charset));

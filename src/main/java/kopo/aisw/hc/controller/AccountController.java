@@ -5,13 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpSession;
@@ -21,11 +19,10 @@ import kopo.aisw.hc.member.service.MemberService;
 import kopo.aisw.hc.member.vo.MemberVO;
 import kopo.aisw.hc.product.service.ProductService;
 import kopo.aisw.hc.product.vo.ProductVO;
-import kopo.aisw.hc.transaction.vo.ViewTransactionVO;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 
 // git push origin localBranch:gitBranch 
-@Log4j2
+@Slf4j
 @Controller
 @RequestMapping("/account/")
 public class AccountController {
@@ -64,20 +61,21 @@ public class AccountController {
 			MemberVO m = (MemberVO) session.getAttribute("userVO");
 			m.setPassword(password);
 			//임시
-			if(ms.checkPwd(m)) return "account/open";
-			//계좌번호 생성 및 등록
-			b= as.openAnAccount(openAcc);
-			if(!b) {
-				model.addAttribute("openAnAcc", b);
-				log.error(b+"-"+m.getUserId()+" open account : "+openAcc.toString());
-				return "redirect:/product/view"+productNum;
-			}else {
-				model.addAttribute("openAnAcc", b);
-				log.info(b+"-"+m.getUserId()+" open account : "+openAcc.toString());
-				return "redirect:/account/";
+			b = as.openAnAccount(openAcc);
+			log.info("Try -"+m.getUserId()+" open account : "+openAcc.toString());
+			
+			if(!ms.checkPwd(m)||!b) {
+				//model.addAttribute("openAnAcc", false);
+				return "redirect:/product/view/"+productNum;
 			}
+			
+			
+			//계좌번호 생성 및 등록
+			//model.addAttribute("openAnAcc", true);
+			log.info("Success -"+m.getUserId()+" open account : "+openAcc.toString());
+			return "redirect:/account/";
 		}catch(Exception e) {
-			model.addAttribute("openAnAcc", false);
+			//model.addAttribute("openAnAcc", false);
 			e.printStackTrace();
 			return "redirect:/product/view/"+productNum;
 		}
@@ -85,39 +83,6 @@ public class AccountController {
 	}
 	
 	
-	//계좌이체
-	@GetMapping("transfer")
-	public String transfer(Model model, HttpSession session) {
-		
-		MemberVO userVO = (MemberVO) session.getAttribute("userVO");
-		//(intercept 추가 완료 - 5/28 (applicationContext.xml참조))
-		List<AccountVO> list = as.getAccountList(userVO);
-		model.addAttribute("accList", list);
-		
-		ViewTransactionVO t = new ViewTransactionVO();
-		model.addAttribute("t", t);
-		return "account/transfer";
-	}
-	
-	@RequestMapping(value="transfer", method = RequestMethod.POST )
-	public String transfer(@ModelAttribute("t")ViewTransactionVO t, 
-			Model model, BindingResult res, HttpSession session) {
-		if(res.hasErrors()) return "account/transfer";
-		try {
-			System.out.println(t);
-			MemberVO userVO = (MemberVO) session.getAttribute("userVO");
-			//입/출금 계좌 동일한지 확인
-			Long Acc = t.getWithdrawAcc();
-			if(Acc==t.getDepositAcc()) return "redirect:/bank/";
-			//로그인중인 유저와 출금하려는 계좌 소유주가 같은지 확인
-			AccountVO a = as.getAccount(Acc.toString());
-			if(a.getCustomerId()!=userVO.getCustomerId())
-				return "redirect:/bank/";
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return "account/result";
-	}
 	
 	//계좌목록
 	@GetMapping("")
