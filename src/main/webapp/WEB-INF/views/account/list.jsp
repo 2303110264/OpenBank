@@ -104,7 +104,7 @@
 		                    <div class="card-body account-card">
 		                        <h5 class="card-title light-300 text-dark">${acc.accName }</h5>
 		                        <p class="card-text light-300 text-dark">
-		                            <b>${acc.balance }</b><i class='bx bx-won ms-1'></i>
+		                            <b>${String.format("%,d", acc.balance) }</b><i class='bx bx-won ms-1'></i>
 		                            <br/>만기일: ${acc.retDate }
 		                        </p>
 		                        <span class="text-decoration-none text-primary light-300">
