@@ -30,13 +30,39 @@
 	TemplateMo 561 Purple Buzz
 	https://templatemo.com/tm-561-purple-buzz
 -->
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+	    const password = document.getElementById('password');
+	    const passwordCheck = document.getElementById('password-check');
+	    const passwordError = document.getElementById('password-error');
+	
+	    function checkPasswordMatch() {
+	        if (password.value === passwordCheck.value) {
+	        	return true;
+	        } else {
+	            passwordError.textContent = '비밀번호가 일치하지 않습니다';
+	            passwordError.style.color = 'red';
+	        	return false;
+	        }
+	    }
+	
+	    password.addEventListener('input', checkPasswordMatch);
+	    passwordCheck.addEventListener('input', checkPasswordMatch);
+	    
+	    form.addEventListener('submit', function(event) {
+	        if (!checkPasswordMatch()) {
+	            event.preventDefault();
+	        }
+	    });
+	});
+</script>
 </head>
 <body>
 
 	<%-- Start Contact --%>
     <section class="container py-5 text-center">
         <h1 class="col-12 col-xl-8 h2 text-primary pt-3 margin-auto">
-		<a class="navbar-brand" href="${path}/bank/">
+		<a class="navbar-brand" href="${path}/">
         Open Bank
 		</a>
         </h1>
@@ -60,12 +86,21 @@
                             </c:if>
                         </div>
                     </div><%-- End Input userId --%>
-
+                    
+                    <div class="col-lg-6"></div> <%-- 정렬을 위한 더미공간 --%>
+					
                     <div class="col-lg-6 mb-4">
                         <div class="form-floating">
-                            <form:input path="password" type="password" class="form-control form-control-lg light-300" id="floatingPassword" name="password" placeholder="Password"/>
+                            <form:input path="password" type="password" class="form-control form-control-lg light-300" id="password" name="password" placeholder="Password"/>
                             <label for="floatingPassword light-300">Password</label>
                             <form:errors path="password" class="error"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="form-floating">
+                            <input type="password" class="form-control form-control-lg light-300" id="password-check" name="pw" placeholder="Password check"/>
+                            <label for="floatingPassword light-300">Confirm Password</label>
+							<span class="error" id="password-error"></span>
                         </div>
                     </div><%-- End Input Password --%>
 
@@ -138,7 +173,7 @@
                     </div><%-- End Input Address Detail --%>
 
                     <div class="col-md-12 col-12 m-auto text-center">
-                    	<button type="button" onclick="location.href='${path}/bank/'" class="btn btn-3 rounded-pill px-md-5 px-4 py-2 radius-0 light-300">돌아가기</button>
+                    	<button type="button" onclick="location.href='${path}/'" class="btn btn-3 rounded-pill px-md-5 px-4 py-2 radius-0 light-300">돌아가기</button>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <button type="submit" class="btn btn-secondary rounded-pill px-md-5 px-4 py-2 radius-0 text-light light-300">회원가입</button>
                     </div>

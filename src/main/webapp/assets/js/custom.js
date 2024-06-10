@@ -95,7 +95,7 @@
 	if(typeof profile!='undefined'){
     	if(profile){
 			alert("수정이 완료되었습니다");
-			location.href="/ob/bank/"
+			location.href="/ob/"
 		}else{
 			alert("수정에 실패했습니다. 내용을 다시 확인해주세요.");
 		} 

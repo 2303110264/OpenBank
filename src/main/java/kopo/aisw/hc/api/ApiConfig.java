@@ -6,26 +6,29 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
-import lombok.Getter;
-
 //@Component
 //@ComponentScan(value = "application-API-KEY.properties")
 @Configuration
 @PropertySource("classpath:application-API-KEY.properties")
-@ComponentScan(basePackages ="kopo.aisw.hc")
+@ComponentScan(basePackages ={"kopo.aisw.hc",
+							"kopo.aisw.hc.member.kakao"})
 public class ApiConfig {
 	
 	@Value("${JUSO}")
 	private String juso;
 	
-	@Value("${KAKAO}")
-	private String kakao;
+	@Value("${KAKAO-REST}")
+	private String kakaoRest;
+	
+	@Value("${KAKAO-JS}")
+	private String kakaoJs;
 	
 	@Bean
 	public Api api() {
 		Api api = new Api();
 		api.setJuso(juso);
-		api.setKakao(kakao);
+		api.setKakaoRest(kakaoRest);
+		api.setKakaoJs(kakaoJs);
 		return api;
 	}
 	

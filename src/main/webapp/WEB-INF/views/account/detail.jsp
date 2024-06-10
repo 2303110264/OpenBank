@@ -60,7 +60,7 @@
 			    </tr>
 			    <tr>
 			        <th>잔액</th>
-			        <td>${account.balance}</td>
+			        <td>${String.format("%,d", account.balance)}</td>
 			    </tr>
 			    <tr>
 			        <th>가입일</th>

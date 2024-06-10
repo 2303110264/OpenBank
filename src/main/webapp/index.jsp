@@ -81,43 +81,51 @@
 
                     </div>
 						 --%>
+						 
+						 
                     <div class="carousel-item active">
-                        <div class="py-5-2 row d-flex align-items-center">
-                            <!-- 링크걸곳: banner-content -->
-                            <div onclick="window.open('#')" class="banner-content col-lg-8 col-8 offset-2 m-lg-auto text-left py-5-2">
-                                <h1 class="banner-heading h1 text-secondary display-3 mb-0 pb-3 mx-0 px-0 light-300">
-                                    <b>Bug Fix</b> &nbsp;&nbsp;<small>v2.13.1</small>
-                                </h1>
-                                <p class="banner-body text-muted py-3">
-                                    <b>Controller</b> : Member-signUp의 return값이 수정되었습니다. ("redirect:/bank" -> "user/signUp")
-                                	<br/><b>Service</b> : bcrypt를 이용한 Password 암호화 기능이 추가되었습니다.
-                                	<br/><b>member.xml</b> : 잘못된 SQL을 수정하였습니다.
-                                </p>
-                                <%--
-                                <a class="banner-button btn rounded-pill btn-outline-primary btn-lg px-4" href="#" role="button">Get Started</a>
-                                --%>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="carousel-item">
                         <div class="py-5-2 row d-flex align-items-center click-banner">
                             <div onclick="window.open('#')" class="banner-content col-lg-8 col-8 offset-2 m-lg-auto text-left py-5-2">
                                 <h1 class="banner-heading h1 text-secondary display-3 mb-0 pb-3 mx-0 px-0 light-300">
-                                    Develop <strong>Portfolio</strong> for 
-                                  <br>your employment
+                                    Bank beta 
+                                    <strong>
+                                    Open!
+                                    </strong> 
+                                 
                                 </h1>
                                 <p class="banner-body text-muted py-3">
-                                    원하는 결과를 얻지 못하더라도 하다 보면 안 한 것보다 나을 때가 많습니다.
+                                	베타 테스트 중에는 계좌 개설 시 일괄적으로 100만원이 입금됩니다.
+                                	<br/>
+                                	<br/>
+                                	<br/>
+                                	<br/>
+                                	<i style="font-size:9px;color:#BBBBBB">※ 해당 금액은 실제 거래에 사용할 수 없으며, 현물화가 불가능한 점 양해 부탁드립니다.
+                                	</i>
                                 </p>
                                 <%--
                                 <a class="banner-button btn rounded-pill btn-outline-primary btn-lg px-4" href="#" role="button">Get Started</a>
                                  --%>
                             </div>
                         </div>
-
                     </div>
+						 
+                    <div class="carousel-item">
+                        <div class="py-5-2 row d-flex align-items-center">
+                            <!-- 링크걸곳: banner-content -->
+                            <div onclick="window.open('#')" class="banner-content col-lg-8 col-8 offset-2 m-lg-auto text-left py-5-2">
+                                <h1 class="banner-heading h1 text-secondary display-3 mb-0 pb-3 mx-0 px-0 light-300">
+                                    <b>Your satisfaction 
+                                    </b>
+                                    <br/>
+                                    is our pride
+                                </h1>
+                                <p class="banner-body text-muted py-3">
+                                	:)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
                 <a class="carousel-control-prev text-decoration-none" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
                     <i class='bx bx-chevron-left'></i>

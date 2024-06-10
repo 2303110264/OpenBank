@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
@@ -36,7 +35,7 @@
 	<%-- Start Contact --%>
     <section class="container py-5 text-center">
         <h1 class="col-12 col-xl-8 h2 text-primary pt-3 margin-auto">
-		<a class="navbar-brand" href="${path}/bank/">
+		<a class="navbar-brand" href="${path}/">
         Open Bank
 		</a>
         </h1>
@@ -67,14 +66,46 @@
                     </div><%-- End Input Password --%>
 
                     <div class="col-md-12 col-12 m-auto text-center">
-                    	<button type="button" onclick="location.href='/ob/bank/'" class="btn btn-3 rounded-pill px-md-5 px-4 py-2 radius-0 light-300">돌아가기</button>
+                    	<button type="button" onclick="location.href='/ob/'" class="btn btn-3 rounded-pill px-md-5 px-4 py-2 radius-0 light-300">돌아가기</button>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <button type="submit" class="btn sign-in-btn btn-secondary rounded-pill px-md-5 px-4 py-2 radius-0 text-light light-300">로그인</button>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     	<button type="button" onclick="location.href='/ob/member/signUp'" class="btn btn-3 rounded-pill px-md-5 px-4 py-2 radius-0 light-300">회원가입</button>
+                    	
                     </div>
-
                 </form:form>
+                    <div class="col-md-12 col-12 m-auto text-center" style="padding-top:20px; padding-right:28px;">
+						<%--
+						<script src = "https://developers.kakao.com/sdk/js/kakao.js"></script>
+						<script>
+						  Kakao.init('${api.kakaoJs}'); // 사용하려는 앱의 JavaScript 키 입력
+						</script>
+						<script>
+						  let loginWithKakao = function() {
+						    Kakao.Auth.authorize({
+						      redirectUri: 'http://localhost:8008/ob/member/kakao-login',
+						      serviceTerms: 'account_email name phone_number',
+					    	  prompt: 'select_account'
+					    	  , state:'userme'
+						    });
+						  }
+						</script>
+						
+						<a id="kakao-login-btn" href="javascript:loginWithKakao()">
+						  <img src="${path}/assets/img/kakao-login.png"
+						    alt="카카오 로그인 버튼" />
+						</a>
+						 --%>
+						<div class="col-lg-6 mb-4"></div>
+						<div class="col-lg-6 mb-4"></div>
+						<div class="col-lg-6 mb-4"></div>
+                   		<a href="${location}">
+						  <img src="${path}/assets/img/kakao-login.png"
+						    alt="카카오 로그인 버튼" />
+						</a>
+						
+
+                    </div>
             </div>
             <%-- End Contact Form --%>
 
@@ -89,7 +120,9 @@
 	
 	<%-- Custom --%>
 	<script>
-		let login = ${loginChk}
+	if('${loginChk}'!=''){
+		let login = '${loginChk}'
+	}
 	</script>
 	<script src="${path}/assets/js/custom.js"></script>
 	<%-- Bootstrap --%>

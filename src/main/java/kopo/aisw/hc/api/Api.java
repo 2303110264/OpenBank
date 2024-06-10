@@ -7,5 +7,6 @@ import lombok.Setter;
 @Setter
 public class Api {
 	private String juso;
-	private String kakao;
+	private String kakaoRest;
+	private String kakaoJs;
 }
