@@ -52,11 +52,10 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 
 	@Override
-	public boolean humanDoubleCheck(MemberVO m) {
-		if(m.getName()==null || m.getRrn()==null) return false;
+	public MemberVO humanDoubleCheck(MemberVO m) {
 		m = sqlSession.selectOne("dao.MemberDAO.humanDoubleCheck", m);
-		if(m==null) return false;
-		return m.getUserId()!=null;
+		if(m==null) m = new MemberVO();
+		return m;
 	}
 
 	@Override
@@ -94,6 +93,12 @@ public class MemberDAOImpl implements MemberDAO{
 	public MemberVO getPwd(MemberVO m) {
 		m = sqlSession.selectOne("dao.MemberDAO.getPwd", m.getCustomerId()); 
 		return m;
+	}
+
+	@Override
+	public int quitMember(MemberVO m) {
+		int i = sqlSession.update("dao.MemberDAO.quitMember", m);
+		return i;
 	}
 
 }

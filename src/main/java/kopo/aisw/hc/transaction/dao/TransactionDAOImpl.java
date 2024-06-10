@@ -27,19 +27,17 @@ public class TransactionDAOImpl implements TransactionDAO{
 			log.error("거래 실패 - "+transaction);
 			throw new Exception("거래 실패. 관리자에게 문의해주세요.");
 		}
-		
+		log.info("거래 성공 - "+transaction);
 		return transaction;
 	}
 
 	@Override
 	public boolean deposit(TransactionVO transaction) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean withdraw(TransactionVO transaction) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

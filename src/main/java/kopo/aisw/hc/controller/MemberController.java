@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +28,14 @@ public class MemberController {
 	@Autowired
     private Api api;
     
+	//회원탈퇴
+	@GetMapping("quit")
+	public String quit(Model model, HttpSession session) {
+		MemberVO userVO = (MemberVO) session.getAttribute("userVO");
+		model.addAttribute("userVO", userVO);
+		return "user/quit";
+	}
+	
 	//프로필 수정
 	@GetMapping("profile")
 	public String profile(Model model, HttpSession session) {
@@ -108,18 +117,19 @@ public class MemberController {
 		//id 중복체크
 		if(ms.idDoubleCheck(m.getUserId())) model.addAttribute("idDoubleCheck", true);
 		//이미 등록된 유저인지 확인
-		boolean customer = ms.humanDoubleCheck(m);
-		if(customer) model.addAttribute("humanDoubleCheck", true);
+		MemberVO humanCheck = ms.humanDoubleCheck(m);
+		if(humanCheck.getUserId()!=null) model.addAttribute("humanDoubleCheck", true);
 		//전화번호 중복체크
 		if(ms.phoneDoubleCheck(m.getPhoneNum())) model.addAttribute("phoneDoubleCheck", true);
 		//이메일 중복체크
 		if(ms.mailDoubleCheck(m.getEmail())) model.addAttribute("mailDoubleCheck", true);
 		// 가입 가능?
 		if(res.hasErrors()) return "user/signUp";
-		if(customer) customer = ms.updateBankId(m);
-		else customer = ms.signUp(m);
-		System.out.println(customer);
-		if(customer) 
+		
+		boolean result;
+		if(humanCheck.getName()!=null) result = ms.updateBankId(m);
+		else result = ms.signUp(m);
+		if(result) 
 			model.addAttribute("signUp", true);
 		else 
 			model.addAttribute("signUp", false);
