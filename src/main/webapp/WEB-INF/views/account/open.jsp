@@ -11,7 +11,7 @@
 <%-- 
     <title>Purple Buzz HTML Template with Bootstrap 5 Beta 1</title>
  --%>
-	<title>Open An Account</title>
+    <title>Open An Account</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" href="${path}/assets/img/apple-icon.png">
@@ -26,19 +26,19 @@
     <%-- Custom CSS --%>
     <link rel="stylesheet" href="${path}/assets/css/custom.css">
 <!--
-	원본 템플릿:
-	TemplateMo 561 Purple Buzz
-	https://templatemo.com/tm-561-purple-buzz
+    원본 템플릿:
+    TemplateMo 561 Purple Buzz
+    https://templatemo.com/tm-561-purple-buzz
 -->
 </head>
 <body>
-	<jsp:include page="../header.jsp"/>
-	<%-- Start Contact --%>
+    <jsp:include page="../header.jsp"/>
+    <%-- Start Contact --%>
     <section class="container py-5 text-center">
         <h1 class="col-12 col-xl-8 h2 text-primary pt-3 margin-auto">
         상품 가입 페이지
-		<a class="navbar-brand" href="${path}/bank/">
-		</a>
+        <a class="navbar-brand" href="${path}/bank/">
+        </a>
         </h1>
         <h2 class="col-12 col-xl-8 h4 regular-400 margin-auto">금리: ${product.interestRate}%</h2>
         <p class="col-12 col-xl-8 text-muted pb-5 light-300 margin-auto">
@@ -47,12 +47,11 @@
         </p>
 
         <div class="row pb-4 sign-up">
-
             <%-- Start Contact Form --%>
             <div class="col-lg-8 sign-in-div">
                 <form:form class="contact-form row sign-in-form" method="post" name="form" role="form" modelAttribute="openAcc">
-					<form:input path="customerId" type="hidden"/>
-					<form:input path="customerName" type="hidden"/>
+                    <form:input path="customerId" type="hidden"/>
+                    <form:input path="customerName" type="hidden"/>
                     <div class="col-lg-4 mb-4 sign-in-div2">
                         <div class="form-floating">
                             <div class="form-control form-control-lg light-300">${product.productName}</div>
@@ -81,43 +80,73 @@
                             <label for="floatingname light-300">Account Password</label>
                         </div>
                     </div>
-<%--
-                    <div class="col-lg-6 mb-4">
-                        <div class="form-floating">
-                            <form:input path="name" type="text" class="form-control form-control-lg light-300" id="floatingname" name="name" placeholder="Name"/>
-                            <label for="floatingname light-300">Name</label>
-                            <form:errors path="name" class="error"/>
-                            <c:if test="${humanDuplicationCheck}">
-                            	<br/><span class='error'>이미 등록된 회원입니다.</span>
-                            </c:if>
-                        </div>
+                    
+                    <%-- 약관 동의 버튼 --%>
+                    <div class="col-lg-12 text-center mb-4">
+                        <button type="button" class="btn btn-primary sign-in-btn rounded-pill px-md-5 px-4 py-2 radius-0 light-300" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+                            약관 확인
+                        </button>
                     </div>
- --%>
-					<button type="submit" class="btn sign-in-btn btn-secondary rounded-pill px-md-5 px-4 py-2 radius-0 text-light light-300">상품 가입</button>
 
+                    <button type="submit" id="submitButton" class="btn sign-in-btn btn-secondary rounded-pill px-md-5 px-4 py-2 radius-0 text-light light-300">상품 가입</button>
                 </form:form>
             </div>
             <%-- End Contact Form --%>
+        </div>
 
+        <%-- Vertically centered scrollable modal --%>
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">약관 확인</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <%-- 모달 내용 --%>
+                <p>이제 이 계좌는 제껍니다.</p>
+              </div>
+              <div class="modal-footer justify-content-center">
+              	<button type="button" id="agreeButton" class="btn btn-primary">약관 동의</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">동의 안 함</button>
+              </div>
+            </div>
+          </div>
         </div>
     </section>
     <%-- End Contact --%>
 
-	
-	<%-- Start Footer --%>
+    <%-- Start Footer --%>
     <jsp:include page="../footer.jsp"></jsp:include>
     <%-- End Footer --%>
-	
-	<%-- Custom --%>
-	<c:if test="${openAnAcc}">
-	<script>
-	    var accmsg = ${openAnAcc}
-	</script>
-	</c:if>
-	<script src="${path}/assets/js/custom.js"></script>
-	<%-- Bootstrap --%>
+    
+    <%-- Custom --%>
+    <c:if test="${openAnAcc}">
+    <script>
+        var accmsg = ${openAnAcc}
+    </script>
+    </c:if>
+    <script src="${path}/assets/js/custom.js"></script>
+    <%-- Bootstrap --%>
     <script src="${path}/assets/js/bootstrap.bundle.min.js"></script>
     <%-- Templatemo --%>
     <script src="${path}/assets/js/templatemo.js"></script>
+    
+    <script>
+        let agreed = false;
+
+        document.getElementById('agreeButton').addEventListener('click', function() {
+            agreed = true;
+            var modal = bootstrap.Modal.getInstance(document.getElementById('exampleModalCenter'));
+            modal.hide();
+        });
+
+        document.getElementById('submitButton').addEventListener('click', function(event) {
+            if (!agreed) {
+                event.preventDefault();
+                alert('약관에 동의해 주세요.');
+            }
+        });
+    </script>
 </body>
 </html>
