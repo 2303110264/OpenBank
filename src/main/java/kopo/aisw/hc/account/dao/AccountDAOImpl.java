@@ -68,6 +68,8 @@ public class AccountDAOImpl implements AccountDAO {
 		//+N개월 = 만기일 세팅
 		account.setRetDate(seoulNow.plusMonths(product.getDateOfDeposit()).toString());
 		//이자율 세팅
+		float iRate = product.getInterestRate();
+		iRate = (float) (Math.round(iRate*10)/10.0);
 		account.setInterestRate(product.getInterestRate());
 		System.out.println(account);
 		int a = sqlSession.insert("dao.AccountDAO.openAnAccount", account);

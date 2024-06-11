@@ -33,7 +33,11 @@
 	TemplateMo 561 Purple Buzz
 	https://templatemo.com/tm-561-purple-buzz
 -->
+<script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="${path}/assets/js/jquery-member.js"></script>
+	
 </head>
+<%--
 <script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
 	let requestMsg = function(event){
@@ -61,6 +65,7 @@
 		
 	}
 </script>
+ --%>
 <body>
 	<jsp:include page="../header.jsp" />
 	<%-- Start Contact --%>

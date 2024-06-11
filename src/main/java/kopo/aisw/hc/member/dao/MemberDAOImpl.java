@@ -14,8 +14,7 @@ public class MemberDAOImpl implements MemberDAO{
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-	@Autowired
-	private TransactionTemplate tranSession;
+	
 	
 	/*
 	@Override
@@ -59,6 +58,13 @@ public class MemberDAOImpl implements MemberDAO{
 		if(m==null) m = new MemberVO();
 		return m;
 	}
+	
+	@Override
+	public int quitMember(MemberVO m) {
+		int i = sqlSession.update("dao.MemberDAO.quitMember", m);
+		return i;
+	}
+
 
 	@Override
 	public boolean mailDoubleCheck(String email) {
@@ -95,12 +101,6 @@ public class MemberDAOImpl implements MemberDAO{
 	public MemberVO getPwd(MemberVO m) {
 		m = sqlSession.selectOne("dao.MemberDAO.getPwd", m.getCustomerId()); 
 		return m;
-	}
-
-	@Override
-	public int quitMember(MemberVO m) {
-		int i = sqlSession.update("dao.MemberDAO.quitMember", m);
-		return i;
 	}
 
 }

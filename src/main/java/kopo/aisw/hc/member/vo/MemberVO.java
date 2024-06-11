@@ -43,7 +43,6 @@ public class MemberVO {
 	message = "영문 소문자, 숫자, 특수문자(~!@#$%^&*()+|=])가 모두 포함되어야 합니다")
 	private String password;
 	
-	@JsonIgnore
 	private String creditPassword;
 	
 	@Size(min=1, max=6, message="이름을 입력해주세요(최대 6자)")
