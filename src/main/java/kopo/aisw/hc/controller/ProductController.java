@@ -1,5 +1,8 @@
 package kopo.aisw.hc.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +15,7 @@ import kopo.aisw.hc.product.vo.ProductVO;
 @Controller
 @RequestMapping("/product/")
 public class ProductController {
-    
+
     @Autowired
     private ProductService productService;
 
@@ -39,14 +42,14 @@ public class ProductController {
             return "error";
         }
     }
-    
+
     // 상품 등록 페이지 이동
     @GetMapping("register")
     public String productRegisterForm(Model model) {
         model.addAttribute("p", new ProductVO());
         return "product/register";
     }
-    
+
     // 상품 등록 처리
     @PostMapping("register")
     public String productRegister(@Valid @ModelAttribute("p") ProductVO productVO, BindingResult result, Model model) {
@@ -62,7 +65,7 @@ public class ProductController {
             return "error";
         }
     }
-    
+
     // 상품 수정 페이지 이동
     @GetMapping("edit/{productNum}")
     public String productEditForm(@PathVariable("productNum") int productNum, Model model) {
@@ -74,7 +77,7 @@ public class ProductController {
             return "error";
         }
     }
-    
+
     // 상품 수정 처리
     @PostMapping("edit")
     public String productEdit(@Valid @ModelAttribute("p") ProductVO productVO, BindingResult result) {
@@ -88,7 +91,7 @@ public class ProductController {
             return "error";
         }
     }
-    
+
     // 상품 비활성화 처리
     @GetMapping("delete/{productNum}")
     public String productDelete(@PathVariable("productNum") int productNum, Model model) {
@@ -100,7 +103,7 @@ public class ProductController {
             return "error";
         }
     }
-    
+
     // 회원용 상품 목록 조회
     @GetMapping("view")
     public String viewProductList(Model model) {
@@ -125,4 +128,18 @@ public class ProductController {
         }
     }
 
+    // 관리자용 대시보드
+    @GetMapping("admin/dashboard")
+    public String productDashboard(Model model) {
+        try {
+            List<Map<String, Object>> stats = productService.getProductStatistics();
+            List<Map<String, Object>> userTrends = productService.getUserTrends();
+            model.addAttribute("stats", stats);
+            model.addAttribute("userTrends", userTrends);
+            return "product/dashboard";
+        } catch (Exception e) {
+            model.addAttribute("message", "관리자용 대시보드를 불러오는데 실패했습니다.");
+            return "error";
+        }
+    }
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
+import java.util.Map;
 
 @Transactional // 오토 커밋 굳!!
 @Repository
@@ -37,5 +38,15 @@ public class ProductDAOImpl implements ProductDAO {
     @Override
     public void deleteProduct(int productNum) throws Exception {
         sqlSession.delete("dao.ProductDAO.deleteProduct", productNum);
+    }
+
+    @Override
+    public List<Map<String, Object>> getProductStatistics() throws Exception {
+        return sqlSession.selectList("dao.ProductDAO.getProductStatistics");
+    }
+
+    @Override
+    public List<Map<String, Object>> getUserTrends() throws Exception {
+        return sqlSession.selectList("dao.ProductDAO.getUserTrends");
     }
 }
