@@ -37,37 +37,6 @@
 	    color: red;
 	}
 </style>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-$(document).ready(function() {
-    $('#form').on('submit', function(event) {
-        event.preventDefault();
-
-        $('#accErr').text('');
-        var dAcc = $('#dAcc').val();
-        var wAcc = $('#wAcc').val();
-
-        if (wAcc == dAcc) {
-            $('#accErr').text('동일한 계좌끼리는 이체할 수 없습니다.');
-        } else {
-
-            $.ajax({
-                type: 'GET',
-                url: '/ob/transaction/accCheck',
-                data: { accNum: dAcc },
-                success: function(response) {
-                    $('#accErr').text(reseponse);
-                    console.log(response);
-                },
-                error: function(error) {
-                    $('#accErr').text('존재하지 않는 계좌입니다.');
-                    console.error(error);
-                }
-            });
-        }
-    });
-});
-</script>
 <body>
     <%-- Header --%>
     <jsp:include page="../header.jsp"></jsp:include>
@@ -93,7 +62,7 @@ $(document).ready(function() {
                     <form:input path="transactionType" type="hidden" class="form-control form-control-lg light-300 " id="type" name="type" value="출금이체"></form:input>
                     <div class="col-lg-4 mb-4 sign-in-div2">
                         <div class="form-floating">
-                            <form:select path="withdrawAcc" type="text" class="form-control form-control-lg light-300 " id="wAcc" name="withdrawAcc" placeholder="withdraw Account" required="true">
+                            <form:select path="withdrawAcc" type="text" class="form-control form-control-lg light-300 formSelect" id="wAcc" name="withdrawAcc" placeholder="withdraw Account" required="true">
                             	<c:forEach items="${accList}" var="a">
                             		<form:option value="${a.accNum}">${a.accName}(${a.accNum})</form:option>
                             	</c:forEach>
@@ -147,7 +116,38 @@ $(document).ready(function() {
     <%-- Templatemo --%>
     <script src="${path}/assets/js/templatemo.js"></script>
     <%-- Custom --%>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="${path}/assets/js/custom.js"></script>
+	<script>
+	$(document).ready(function() {
+	    $('#form').on('submit', function(event) {
+	        event.preventDefault();
+	
+	        $('#accErr').text('');
+	        var dAcc = $('#dAcc').val();
+	        var wAcc = $('#wAcc').val();
+	
+	        if (wAcc == dAcc) {
+	            $('#accErr').text('동일한 계좌끼리는 이체할 수 없습니다.');
+	        } else {
+	
+	            $.ajax({
+	                type: 'GET',
+	                url: '/ob/transaction/accCheck',
+	                data: { accNum: dAcc },
+	                success: function(response) {
+	                    $('#accErr').text(reseponse);
+	                    console.log(response);
+	                },
+	                error: function(error) {
+	                    $('#accErr').text('존재하지 않는 계좌입니다.');
+	                    console.error(error);
+	                }
+	            });
+	        }
+	    });
+	});
+	</script>
     <%-- Load jQuery require for isotope --%>
     <script src="${path}/assets/js/jquery.min.js"></script>
     <%-- Isotope --%>

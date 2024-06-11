@@ -6,13 +6,13 @@
 
 	<insert id="withdraw" parameterType="transactionVO">
 	insert into CB_Transaction
-	values(seq_cb_transaction.nextval, '출금', systimestamp,
+	values(cb_tran_seq.nextval, '출금', systimestamp,
 	#{withdrawAcc}, #{withdrawName}, #{amount}, #{wAfterBalance})
 	</insert>
 	
 	<insert id="deposit" parameterType="transactionVO">
 	insert into CB_Transaction
-	values(seq_cb_transaction.nextval, '입금', systimestamp,
+	values(cb_tran_seq.nextval, '입금', systimestamp,
 	#{depositAcc}, #{depositName}, #{amount}, #{dAfterBalance})
 	</insert>
 	

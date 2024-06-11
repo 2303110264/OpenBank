@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import kopo.aisw.hc.account.service.AccountService;
 import kopo.aisw.hc.account.vo.AccountVO;
 import kopo.aisw.hc.member.service.MemberService;
@@ -56,26 +58,24 @@ public class AccountController {
 	}
 	@PostMapping("openAcc/{productNum}")
 	public String openAnAcc(@PathVariable(value = "productNum") int productNum,
-			@ModelAttribute("openAcc")AccountVO openAcc,
-			@RequestParam("password")String password, HttpSession session, Model model) {
-		
+			@Valid @ModelAttribute("openAcc")AccountVO openAcc, BindingResult res,
+			HttpSession session, Model model) throws Exception {
 		boolean b;
+		ProductVO p = ps.selectProduct(productNum);
+		//상품번호, 고객고유번호, 고객이름 세팅
+		model.addAttribute("product", p);
+		model.addAttribute("openAcc", openAcc);
+		if(res.hasErrors()) return "account/open";
 		//인증 또는 비밀번호 확인 로직이 빠져있음
 		try {
 			MemberVO m = (MemberVO) session.getAttribute("userVO");
-			m.setPassword(password);
 			//임시
 			b = as.openAnAccount(openAcc);
 			log.info("Try -[customer:"+m.getCustomerId()+"] open account : "+openAcc.toString());
 			
-			if(!ms.checkPwd(m)||!b) {
-				//model.addAttribute("openAnAcc", false);
-				return "redirect:/product/view/"+productNum;
-			}
-			
 			//계좌번호 생성 및 등록
 			//model.addAttribute("openAnAcc", true);
-			log.info("Success -[customer:"+m.getCustomerId()+"] open account : "+openAcc.toString());
+			log.info(b+" -[customer:"+m.getCustomerId()+"] open account : "+openAcc.toString());
 			return "redirect:/account/";
 		}catch(Exception e) {
 			//model.addAttribute("openAnAcc", false);

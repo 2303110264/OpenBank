@@ -99,31 +99,32 @@ accNum,acc_name accName,
 			<table border="0">
 			    <tr>
 			        <th >거래일자</th>
+			        <%-- 
 			        <th >거래유형</th>
-			        <th >입금</th>
-			        <th >입금액</th>
-			        <th >출금</th>
-			        <th >출금액</th>
+			         --%>
+			        <th >거래명</th>
+			        <th >입금 금액</th>
+			        <th >출금 금액</th>
 			        <th >잔액</th>
 			    </tr>
 			    <c:forEach var="t" items="${transaction}">
 			        <tr>
 			            <td>${t.transactionDate}</td>
+			            <%--
 			            <td>${t.transactionType}</td>
+			             --%>
 
-			        <c:if test="t.transactionType.equals('입금')">
+			        <c:if test="${ t.transactionType.equals('입금')}">
 			            <td>${t.withdrawName}</td>
-			            <td>${t.amount}</td>
-			            <td></td>
+			            <td>${String.format("%,d", t.amount)}</td>
 			            <td></td>
 			        </c:if>
-			        <c:if test="t.transactionType.equals('출금')">
-			            <td></td>
-			            <td></td>
+			        <c:if test="${ t.transactionType.equals('출금')}">
 			            <td>${t.withdrawName}</td>
-			            <td>${t.amount}</td>
+			            <td></td>
+			            <td>${String.format("%,d", t.amount)}</td>
 			        </c:if>
-						<td>${t.wAfterBalance}</td>
+						<td>${String.format("%,d", t.WAfterBalance)}</td>
 			        </tr>
 			    </c:forEach>	
 			</table>	

@@ -38,7 +38,7 @@ public class AccountVO {
 //	private String accId;
 	
 	private long accNum;
-	@Size(max=100, message="통장 이름은 100자 이내로 작성해주세요.") //input
+	@Size(max=7, message="통장 이름은 7자 이내로 작성해주세요.") //input
 	private String accName;
 	@NotNull(message="상품 번호를 불러오지 못했습니다. 다시 시도해주세요.")
 	private int productNum;
