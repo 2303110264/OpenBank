@@ -15,5 +15,38 @@
 	values(seq_cb_transaction.nextval, '입금', systimestamp,
 	#{depositAcc}, #{depositName}, #{amount}, #{dAfterBalance})
 	</insert>
-
+	
+	<select id="transactionListByAcc" parameterType="long" resultType="transactionVO">
+		<!-- 
+		 SELECT 
+			t.transaction_id transactionId,
+	        t.transaction_date transactionDate, t.acc_num withdrawAcc,
+	        d.tran_name AS deposit_name,
+	        d.amount AS dAfterBalance,
+	        w.tran_name AS withdrawName,
+	        w.amount AS wAfterBalance,
+	        ROUND(t.after_balance) amount
+	    FROM 
+		    (SELECT * FROM cb_transaction WHERE acc_num = #{accNum}) t
+		LEFT JOIN 
+		    (SELECT transaction_date, tran_name, amount, acc_num
+		     FROM cb_transaction 
+		     WHERE transaction_type = '입금' AND acc_num = #{accNum}) d 
+		ON 
+		    t.transaction_date = d.transaction_date
+		LEFT JOIN 
+		    (SELECT transaction_date, tran_name, amount, acc_num
+		     FROM cb_transaction 
+		     WHERE transaction_type = 'withdraw' AND acc_num = #{accNum}) w 
+		ON 
+		    t.transaction_date = w.transaction_date
+		 -->
+		 SELECT transaction_id transactionId, to_char(transaction_date, 'yyyy-mm-dd') transactionDate
+		 , transaction_type transactionType
+		 , acc_num withdrawAcc, tran_name withdrawName, amount, 
+		 after_balance wAfterBalance
+		 from cb_transaction
+		 where acc_num = #{long}
+		 ORDER BY transaction_date desc
+	</select>
 </mapper>

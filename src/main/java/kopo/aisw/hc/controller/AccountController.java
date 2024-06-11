@@ -19,6 +19,8 @@ import kopo.aisw.hc.member.service.MemberService;
 import kopo.aisw.hc.member.vo.MemberVO;
 import kopo.aisw.hc.product.service.ProductService;
 import kopo.aisw.hc.product.vo.ProductVO;
+import kopo.aisw.hc.transaction.service.TransactionService;
+import kopo.aisw.hc.transaction.vo.TransactionVO;
 import lombok.extern.slf4j.Slf4j;
 
 // git push origin localBranch:gitBranch 
@@ -33,6 +35,8 @@ public class AccountController {
 	private MemberService ms;
 	@Autowired
 	private ProductService ps;
+	@Autowired
+	private TransactionService ts;
 
 	
 	//계좌생성
@@ -62,17 +66,16 @@ public class AccountController {
 			m.setPassword(password);
 			//임시
 			b = as.openAnAccount(openAcc);
-			log.info("Try -"+m.getUserId()+" open account : "+openAcc.toString());
+			log.info("Try -[customer:"+m.getCustomerId()+"] open account : "+openAcc.toString());
 			
 			if(!ms.checkPwd(m)||!b) {
 				//model.addAttribute("openAnAcc", false);
 				return "redirect:/product/view/"+productNum;
 			}
 			
-			
 			//계좌번호 생성 및 등록
 			//model.addAttribute("openAnAcc", true);
-			log.info("Success -"+m.getUserId()+" open account : "+openAcc.toString());
+			log.info("Success -[customer:"+m.getCustomerId()+"] open account : "+openAcc.toString());
 			return "redirect:/account/";
 		}catch(Exception e) {
 			//model.addAttribute("openAnAcc", false);
@@ -94,9 +97,10 @@ public class AccountController {
 	}
 	@PostMapping("")
 	public String accountList(Model model, @RequestParam("accNum")String accNum) {
+		List<TransactionVO> transaction = ts.getTransactionList(Long.parseLong(accNum));
 		AccountVO account = as.getAccount(accNum);
 		model.addAttribute("account", account);
-		System.out.println(account);
+		model.addAttribute("transaction", transaction);
 		return "account/detail";
 	}
 }

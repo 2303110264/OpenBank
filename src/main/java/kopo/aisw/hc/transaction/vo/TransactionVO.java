@@ -23,9 +23,9 @@ public class TransactionVO {
 	private String transactionDate;
 	@Min(value = 500, message="500원 이상부터 송금 가능합니다")
 	@Max(value = 999999999, message="1000000000원 이상은 송금할 수 없습니다.")
-	private int amount;
+	private long amount; //출력시 이쪽이 잔액
 	
-	//출금계좌/거래명
+	//출력시 w라인이 출력부
 	@Min(value=1)
 	private long withdrawAcc;
 	private String withdrawName;
@@ -38,7 +38,7 @@ public class TransactionVO {
 	private String depositName;
 
 	//현재잔액
-	private long wAfterBalance;
+	private long wAfterBalance; 
 	private long dAfterBalance;
 }
 

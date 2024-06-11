@@ -1,11 +1,14 @@
 package kopo.aisw.hc.transaction.dao;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kopo.aisw.hc.account.vo.AccountVO;
 import kopo.aisw.hc.transaction.vo.TransactionVO;
 import lombok.extern.slf4j.Slf4j;
 
@@ -39,6 +42,20 @@ public class TransactionDAOImpl implements TransactionDAO{
 	@Override
 	public boolean withdraw(TransactionVO transaction) {
 		return false;
+	}
+
+	@Override
+	public boolean depositForOpenAcc(AccountVO account) throws Exception {
+		return false;
+	}
+
+	@Override
+	public List<TransactionVO> getTransactionList(long accNum) {
+		List<TransactionVO> list = sqlSession.selectList("dao.TransactionDAO.transactionListByAcc", accNum);
+		for(TransactionVO tran:list) {
+			System.out.println(tran);
+		}
+		return list;
 	}
 
 	
