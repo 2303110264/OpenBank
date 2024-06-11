@@ -7,7 +7,6 @@ CREATE TABLE TEST_CUSTOMER(
 	CUSTOMER_ID NUMBER PRIMARY KEY
 	, BANK_ID VARCHAR2(20) UNIQUE
 	, PASSWORD VARCHAR2(256) 
-	, CREDIT_PASSWORD VARCHAR2(256) 
 	, NAME VARCHAR2(13) NOT NULL
 	, PHONE_NUM VARCHAR2(13) NOT NULL UNIQUE
 	, EMAIL VARCHAR2(30) NOT NULL
@@ -21,6 +20,17 @@ CREATE TABLE TEST_CUSTOMER(
 CREATE SEQUENCE test_customer_seq;
  -->
 <mapper namespace="dao.MemberDAO">
+	<!-- 회원삭제(관리자용) -->
+	
+	<!-- 회원탈퇴 -->
+	<update id="quitMember" parameterType="memberVO">
+	update test_customer
+	<set>
+		bank_id = null, password = null
+	</set>
+	where customer_id = #{customerId}
+	</update>
+	
 	<!-- 로그인 -->
 	<select id="signIn" parameterType="memberVO" resultType="memberVO">
 		<!-- select customer_ID customerid
@@ -50,7 +60,8 @@ CREATE SEQUENCE test_customer_seq;
 		#{addressDetail}, 
 		#{rrn}, 
 		0, 
-		0)
+		0,
+		sysdate)
 	</insert>
 	
 	<!-- id 중복체크 -->
@@ -62,9 +73,9 @@ CREATE SEQUENCE test_customer_seq;
 	
 	<!-- human 중복체크 -->
 	<select id="humanDoubleCheck" parameterType="memberVO" resultType="memberVO">
-		select bank_id userid
+		select bank_id userid, name
 		from test_customer
-		where name = #{name} and rrn = #{rrn}
+		where rrn = #{rrn}
 	</select>
 
 	<!-- mail 중복체크 -->
@@ -94,6 +105,7 @@ CREATE SEQUENCE test_customer_seq;
 		, rrn 
 		, customer_type customertype
 		, available_balance availablebalance
+		, reg_date regdate
 		from test_customer
 		where customer_ID = #{customerId}
 	</select>
@@ -124,13 +136,30 @@ CREATE SEQUENCE test_customer_seq;
 		</set>
 		where customer_id = #{customerId}
 	</update>
-
+	
+	<!-- 재가입 -->
 	<update id="updateBankId" parameterType="memberVO">
 		update test_customer
-		set	
+		<set>
 		bank_id = #{userId}
 		, password = #{password}
-		where customer_id = #{customerId}
+		, name = #{name}
+		<if test="phoneNum!=null">
+			,phone_num = #{phoneNum}
+		</if>
+		<if test="email!=null">
+			,email = #{email}
+		</if>
+		<if test="zipCode!=null">
+			,ZIP_CODE = #{zipCode}
+			,address = #{address}
+		</if>
+		<if test="addressDetail!=null">
+			,address_detail = #{addressDetail},
+		</if>
+		reg_date = sysdate
+		</set>
+		where rrn = #{rrn}
 	</update>
 	
 	<!-- 세션 로그인중인 계정 비번 체크 -->

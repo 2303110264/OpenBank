@@ -22,14 +22,13 @@ public class MemberServiceImpl implements MemberService{
 		return mDao.signUp(m);
 	}
 	
-
 	@Override
 	public boolean idDoubleCheck(String userId) {
 		return mDao.idDoubleCheck(userId);
 	}
 
 	@Override
-	public boolean humanDoubleCheck(MemberVO m) {
+	public MemberVO humanDoubleCheck(MemberVO m) {
 		return mDao.humanDoubleCheck(m);
 	}
 
@@ -67,6 +66,11 @@ public class MemberServiceImpl implements MemberService{
 			return m.getPassword().equals(userVO.getPassword());     
 		}
 		return false;
+	}
+
+	@Override
+	public int quitMember(MemberVO m) {
+		return mDao.quitMember(m);
 	}
 	
 }

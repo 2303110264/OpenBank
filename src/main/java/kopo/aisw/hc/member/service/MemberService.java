@@ -9,8 +9,8 @@ public interface MemberService {
 	public boolean signUp(MemberVO m);
 	//기존고객 회원가입
 	public boolean updateBankId(MemberVO m);
-	//고객 중복확인 (중복 기준: 동일한 이름, rrn 존재하면서 bank id가 null이 아니어야 함
-	public boolean humanDoubleCheck(MemberVO m);
+	//고객 중복확인 1차필터 (중복 기준: rrn -> 이후 id null확인)
+	public MemberVO humanDoubleCheck(MemberVO m);
 	//아이디 중복확인
 	public boolean idDoubleCheck(String userId);
 	//전화번호 중복확인
@@ -21,7 +21,8 @@ public interface MemberService {
 	public boolean edit(MemberVO userVO);
 	//프로필 조회
 	public MemberVO getProfile(MemberVO userVO);
-	
+	//회원탈퇴
+	public int quitMember(MemberVO m);
 	
 	
 	//비밀번호 로직(임시)
