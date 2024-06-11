@@ -137,7 +137,7 @@
                     </div><%-- End Input Address Detail --%>
 
                     <div class="col-md-12 col-12 m-auto text-center">
-                    	<button type="button" onclick="location.href='${path}/bank/'" class="btn btn-3 rounded-pill px-md-5 px-4 py-2 radius-0 light-300">돌아가기</button>
+                    	<button type="button" onclick="location.href='${path}/member/quit'" class="btn btn-3 rounded-pill px-md-5 px-4 py-2 radius-0 light-300">회원탈퇴</button>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <button type="submit" class="btn btn-secondary rounded-pill px-md-5 px-4 py-2 radius-0 text-light light-300">변경하기</button>
                     </div>
