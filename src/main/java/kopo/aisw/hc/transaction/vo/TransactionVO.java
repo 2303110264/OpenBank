@@ -28,6 +28,7 @@ public class TransactionVO {
 	//출력시 w라인이 출력부
 	@Min(value=1)
 	private long withdrawAcc;
+	@Size(max=7, message="현재 거래가 불가능한 계좌입니다.")
 	private String withdrawName;
 	
 	//입금계좌/입금자명

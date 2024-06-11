@@ -114,13 +114,12 @@ accNum,acc_name accName,
 			            <td>${t.transactionType}</td>
 			             --%>
 
-			        <c:if test="${ t.transactionType.equals('입금')}">
 			            <td>${t.withdrawName}</td>
+			        <c:if test="${ t.transactionType.equals('입금')}">
 			            <td>${String.format("%,d", t.amount)}</td>
 			            <td></td>
 			        </c:if>
 			        <c:if test="${ t.transactionType.equals('출금')}">
-			            <td>${t.withdrawName}</td>
 			            <td></td>
 			            <td>${String.format("%,d", t.amount)}</td>
 			        </c:if>

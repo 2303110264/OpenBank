@@ -58,8 +58,9 @@
 
             <%-- Start Contact Form --%>
             <div class="col-lg-8 sign-in-div">
-                <form:form class="contact-form row sign-in-form" method="POST" action="/ob/transaction/transfer" name="form" role="form" modelAttribute="t">
-                    <form:input path="transactionType" type="hidden" class="form-control form-control-lg light-300 " id="type" name="type" value="출금이체"></form:input>
+                <form:form class="contact-form row sign-in-form" method="POST" action="/ob/transaction/transfer" id="form" name="form" role="form" modelAttribute="t">
+                    <!-- 응답테스트 -->
+                    <form:input path="withdrawName" id="wName" type="hidden"/>
                     <div class="col-lg-4 mb-4 sign-in-div2">
                         <div class="form-floating">
                             <form:select path="withdrawAcc" type="text" class="form-control form-control-lg light-300 formSelect" id="wAcc" name="withdrawAcc" placeholder="withdraw Account" required="true">
@@ -68,7 +69,7 @@
                             	</c:forEach>
                             </form:select>
                             <label for="floatingID light-300">출금할 계좌</label>
-                            <form:errors path="withdrawAcc" class="error"/>
+                            <form:errors path="withdrawName" class="error"/>
                         </div>
                     </div>
                     <div class="col-lg-4 mb-4 sign-in-div2">
@@ -81,7 +82,7 @@
                     </div>
                     <div class="col-lg-4 mb-4 sign-in-div2">
                         <div class="form-floating">
-                            <form:input path="amount" type="text" class="form-control form-control-lg light-300 " id="amt" name="amount" placeholder="Amount"/>
+                            <form:input path="amount" type="text" class="form-control form-control-lg light-300 " id="amt" name="amount" placeholder="Amount" required="true"/>
                             <label for="floatingPassword light-300">금액</label>
                             <form:errors path="amount" class="error"/>
                         </div>
@@ -119,32 +120,38 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="${path}/assets/js/custom.js"></script>
 	<script>
+		var ready = false;
 	$(document).ready(function() {
-	    $('#form').on('submit', function(event) {
-	        event.preventDefault();
-	
-	        $('#accErr').text('');
-	        var dAcc = $('#dAcc').val();
-	        var wAcc = $('#wAcc').val();
-	
-	        if (wAcc == dAcc) {
-	            $('#accErr').text('동일한 계좌끼리는 이체할 수 없습니다.');
-	        } else {
-	
-	            $.ajax({
-	                type: 'GET',
-	                url: '/ob/transaction/accCheck',
-	                data: { accNum: dAcc },
-	                success: function(response) {
-	                    $('#accErr').text(reseponse);
-	                    console.log(response);
-	                },
-	                error: function(error) {
-	                    $('#accErr').text('존재하지 않는 계좌입니다.');
-	                    console.error(error);
-	                }
-	            });
-	        }
+		$('#dAcc').on('change', function(){ 
+			ready=false
+		})
+		$('#form').on('submit', function(event) {
+			if(!ready){
+		    	event.preventDefault();
+		
+		        var dAcc = $('#dAcc').val();
+		        var wAcc = $('#wAcc').val();
+		
+		        if (wAcc == dAcc) {
+		            $('#accErr').text('동일한 계좌끼리는 이체할 수 없습니다.');
+		        } else{
+			            $.ajax({
+			                type: 'GET',
+			                url: '/ob/account/accCheck',
+			                data: { accNum: dAcc },
+			                success: function(result) {
+			                    $('#wName').val(result);
+			                    ready=true;
+			                    console.log(ready)
+			                    return true;
+			                },
+			                error: function(error) {
+			                    $('#accErr').text('존재하지 않는 계좌입니다.');
+			                    console.error(error);
+			                }
+			            });
+        		}
+			}
 	    });
 	});
 	</script>

@@ -55,7 +55,7 @@ CREATE TABLE CB_ACCOUNT(
 	
 	<!-- 이체시 대상계좌 확인: 단일계좌 이름체크 -->
 	<select id="getOwnerName" parameterType="Long" resultType="String">
-		select c.name name
+		select c.name customerName
 		from cb_account a
 		join test_customer c
 			on a.customer_id = c.customer_id
