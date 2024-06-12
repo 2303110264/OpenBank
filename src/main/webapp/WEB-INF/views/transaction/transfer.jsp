@@ -45,7 +45,7 @@
     <%-- Start Contact --%>
     <section class="container py-5 text-center">
         <h1 class="col-12 col-xl-8 h2 text-primary pt-3 margin-auto">
-		<a class="navbar-brand" href="${path}/bank/">
+		<a class="navbar-brand" href="${path}/">
         Transfer
 		</a>
         </h1>
@@ -74,7 +74,10 @@
                     </div>
                     <div class="col-lg-4 mb-4 sign-in-div2">
                         <div class="form-floating">
+                            <%-- 임시값
                             <form:input path="depositAcc" type="text" class="formSelect form-control form-control-lg light-300 " id="dAcc" name="depositAcc" placeholder="deposit Account" required="true"/>
+                             --%>
+                            <input path="depositAcc" type="text" class="formSelect form-control form-control-lg light-300 " id="dAcc" name="depositAcc" placeholder="deposit Account" required value="245003441374">
                             <label for="floatingPassword light-300">입금될 계좌</label>
                             <form:errors path="depositAcc" class="error"/>
                             <span id="accErr" class="error"></span>
@@ -84,7 +87,7 @@
                         <div class="form-floating">
                             <form:input path="amount" type="text" class="form-control form-control-lg light-300 " id="amt" name="amount" placeholder="Amount" required="true"/>
                             <label for="floatingPassword light-300">금액</label>
-                            <form:errors path="amount" class="error"/>
+                            <span id="amtErr" class="error"></span>
                         </div>
                     </div>
                     <div class="col-lg-4 mb-4 sign-in-div2">
@@ -94,16 +97,83 @@
                             <form:errors path="depositName" class="error"/>
                         </div>
                     </div>
-					
-					
                     <div class="col-md-12 col-12 m-auto text-center">
-                        <button type="submit" class="btn sign-in-btn btn-secondary rounded-pill px-md-5 px-4 py-2 radius-0 text-light light-300">송금하기</button>
+					<input type="submit" id="btn1" class="btn sign-in-btn btn-secondary rounded-pill px-md-5 px-4 py-2 radius-0 text-light light-300" value="다음">
                     </div>
                 </form:form>
-            </div>
-            <%-- End Contact Form --%>
+</div>					
+					
 
+                    <!-- Button trigger modal -->
+            <%-- End Contact Form --%>
+					
+					<!-- Modal -->
+        <div class="row pb-4 sign-up">
+					<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+					  <div class="modal-dialog  modal-dialog-centered">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h1 class="modal-title fs-5" id="staticBackdropLabel">
+					        송금 확인
+					        </h1>
+					        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					      </div>
+			<div class="col-lg-8">
+					      <div class="modal-body">
+                <form class="contact-form row modal-form" id="modal-form" method="POST" action="/ob/transaction/transfer" name="modal-form">
+					        <%------------------------ --%>
+            
+                    <div class="col-lg-4 mb-4 sign-in-div2">
+                        <div class="form-floating  border-clean">
+                            <div class="form-control form-control-lg light-300 formSelect border-clean" id="wAcc-modal">대충 계좌번호</div>
+                            <label for="floatingID light-300">아래 계좌에서</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 mb-4 sign-in-div2">
+                        <div class="form-floating border-clean">
+                            <div class="formSelect form-control form-control-lg light-300 border-clean text-center" id="wName-modal">대충 받는사람</div>
+                            <label for="floatingPassword light-300">받는사람</label>
+                            <label class="label2" for="floatingPassword light-300">님께</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 mb-4 sign-in-div2 ">
+                        <div class="form-floating border-clean">
+                            <div class="formSelect form-control form-control-lg light-300 border-clean text-center" id="amount-modal">대충 금액</div>
+                        </div>
+                        송금합니다.
+                    </div>
+                    <div class="col-lg-4 mb-4 sign-in-div2">
+                        <div class="form-floating">
+                            <input type="password" class="form-control form-control-lg light-300 " id="credit-password" placeholder="Name" required/>
+                            <label for="floatingPassword light-300">결제 비밀번호를 입력해주세요</label>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-12 m-auto text-center">
+                    </div>
+					
+					
+
+
+
+
+<%----------------- --%>
+                </form>
+					      </div>
+					      <div class="modal-footer">
+					      <%-- 버튼 색상 css 지정할것 --%>
+					        <button type="button" class="btn btn-secondary transfer-dismiss white-box" data-bs-dismiss="modal">취소</button>
+	                        <button type="submit" form="form" class="btn btn-primary">&nbsp;&nbsp;송금하기&nbsp;&nbsp;</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+           		</div>	
+			</div>
+			
+		
+			
         </div>
+		<%-- End Modal --%>
     </section>
     <%-- End Contact --%>
     
@@ -121,38 +191,74 @@
     <script src="${path}/assets/js/custom.js"></script>
 	<script>
 		var ready = false;
+		var cpChk = false;
 	$(document).ready(function() {
 		$('#dAcc').on('change', function(){ 
 			ready=false
 		})
-		$('#form').on('submit', function(event) {
-			if(!ready){
-		    	event.preventDefault();
+		$('#amt').on('change', function(){ 
+			ready=false
+		})
+
+    	$('#form').on('submit', function(e){
+    		var cp = $('#credit-password').val();
+    		if(ready && cpChk){
+    			return true;
+    		}else if(ready && cp!=''){
+	    		e.preventDefault();
+				
+	    		$.ajax({
+	                type: 'POST',
+	                url: '/ob/member/credit-password',
+	                data: { creditPassword: cp },
+	                success: function(result) {
+	                	if(result){
+	                		cpChk = true;
+	                		$('#form').submit();
+	                		return true;
+	                	}
+	                	else alert('비밀번호가 맞지 않습니다.')
+	                }, error: function(error) {
+	                    alert('잘못된 요청입니다');
+	                    console.error(error);
+	                }
+	            });
+    		}else{
+	    		e.preventDefault();
 		
-		        var dAcc = $('#dAcc').val();
+				var dAcc = $('#dAcc').val();
 		        var wAcc = $('#wAcc').val();
+		        
+		        $('#accErr').text((wAcc==dAcc) ? '동일한 계좌끼리는 이체할 수 없습니다.':'');
+	        	$('#amtErr').text((Number($('#amt').val())<500) ? '송금은 500원부터 가능합니다.':'');
+				
+				$.ajax({
+	                type: 'GET',
+	                url: '/ob/account/accCheck',
+	                data: { accNum: dAcc },
+	                success: function(result) {
+	                	if(result==""){
+	               			$('#accErr').text("존재하지 않는 계좌입니다.");
+	                	}else{
+	                		var amt = $('#amt').val()
+		                    $('#wName').val(result);
+		                    $('#wAcc-modal').text($('#wAcc').val());
+		                    $('#amount-modal').text(amt.toString().replace(/(\d+)(\d{4})$/, '$1만 $2').concat('원'));
+		                    $('#wName-modal').text(result);
+		                    ready=true;
+		                    if($('#accErr').text()==$('#amtErr').text())
+	                    		$('#staticBackdrop').modal('show');
+	            			}
+	                    console.log(result)
+						console.log("왜 안먹는거같지")
+	                }, error: function(error) {
+	                    $('#accErr').text('존재하지 않는 계좌입니다.');
+	                    console.error(error);
+	                }
+	            });
+    		}
+		});
 		
-		        if (wAcc == dAcc) {
-		            $('#accErr').text('동일한 계좌끼리는 이체할 수 없습니다.');
-		        } else{
-			            $.ajax({
-			                type: 'GET',
-			                url: '/ob/account/accCheck',
-			                data: { accNum: dAcc },
-			                success: function(result) {
-			                    $('#wName').val(result);
-			                    ready=true;
-			                    console.log(ready)
-			                    return true;
-			                },
-			                error: function(error) {
-			                    $('#accErr').text('존재하지 않는 계좌입니다.');
-			                    console.error(error);
-			                }
-			            });
-        		}
-			}
-	    });
 	});
 	</script>
     <%-- Load jQuery require for isotope --%>
@@ -160,7 +266,8 @@
     <%-- Isotope --%>
     <script src="${path}/assets/js/isotope.pkgd.js"></script>
 	<script>
-		document.getElementById("dAcc").value = "";
+		//document.getElementById("dAcc").value = "";
+		document.getElementById("amt").value = "";
 	</script>
 </body>
 

@@ -57,6 +57,21 @@
 	}
 	
 	// 숫자만 입력받는 폼
+	let onlyNum = function(id){
+		let inputBox = document.getElementById(id);
+		if(inputBox){
+		    inputBox.addEventListener('input', function(){
+			    this.value = this.value.replace(/[^0-9]/g, '');
+			})
+		}
+	}
+	onlyNum('phoneNum');
+	onlyNum('rrn');
+	//onlyNum('wAcc');
+	onlyNum('dAcc');
+	onlyNum('amt');
+
+/**
 	let phoneNum = document.getElementById('phoneNum');
 	if(phoneNum){
 			phoneNum.addEventListener('input', function() {
@@ -84,6 +99,7 @@
 	    });
 	}
     
+ */	
 
 //open an account
 	if(typeof accmsg!='undefined' && accmsg){

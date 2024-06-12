@@ -21,7 +21,7 @@ public class PostInterceptor implements HandlerInterceptor {
         int statusCode = response.getStatus();
         if (statusCode == HttpServletResponse.SC_BAD_REQUEST) {
             // 400 코드가 오면 다른 화면으로 리다이렉트
-            response.sendRedirect("/ob/bank/"); // 적절한 경로로 변경하세요
+            response.sendRedirect("/ob/"); // 적절한 경로로 변경하세요
             return false; // 요청 처리 중단
         }
         return true; // 계속 진행

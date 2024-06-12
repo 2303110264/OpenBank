@@ -16,6 +16,7 @@ import jakarta.validation.Valid;
 import kopo.aisw.hc.account.service.AccountService;
 import kopo.aisw.hc.account.vo.AccountVO;
 import kopo.aisw.hc.member.vo.MemberVO;
+import kopo.aisw.hc.transaction.service.TransactionService;
 import kopo.aisw.hc.transaction.vo.TransactionVO;
 import lombok.extern.log4j.Log4j2;
 
@@ -27,8 +28,8 @@ public class TransactionController {
 	@Autowired
 	AccountService as;
 	
-//	@Autowired
-//	TransactionService ts;
+	@Autowired
+	TransactionService ts;
 	
 	
 	//계좌이체
@@ -52,12 +53,10 @@ public class TransactionController {
 		try {
 			MemberVO userVO = (MemberVO) session.getAttribute("userVO");
 			log.info(userVO.getCustomerId()+" - "+t);
-			//입/출금 계좌 동일한지 확인
-			//Long Acc = t.getWithdrawAcc();
-			//if(Acc==t.getDepositAcc()) return "redirect:/transaction/transfer";
-			
 			//로그인중인 유저와 출금하려는 계좌 소유주가 같은지 확인
 			AccountVO a = as.getAccount(t.getWithdrawAcc()+"");
+			
+			log.info(ts.transfer(t));
 			//아님
 			if(a.getCustomerId()!=userVO.getCustomerId()) {
 				log.fatal("송금 체크 요망 - 통장 번호, 소유자: "+a.getAccNum()+", "+a.getCustomerId()+"/ 요청자 ID:"+userVO.getCustomerId());
@@ -65,8 +64,8 @@ public class TransactionController {
 			}
 		}catch(Exception e){
 			e.printStackTrace();
-			return "transaction/transfer";
+			return "redirect:/transaction/transfer";
 		}
-		return "transaction/transfer";
+		return "transaction/result";
 	}
 }

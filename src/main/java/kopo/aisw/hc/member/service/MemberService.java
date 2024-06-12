@@ -27,4 +27,6 @@ public interface MemberService {
 	
 	//비밀번호 로직(임시)
 	public boolean checkPwd(MemberVO m);
+	//결제비밀번호 로직
+	public boolean checkCreditPwd(MemberVO userVO);
 }

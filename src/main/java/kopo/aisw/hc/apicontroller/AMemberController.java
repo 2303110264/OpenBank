@@ -1,22 +1,37 @@
 package kopo.aisw.hc.apicontroller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.servlet.http.HttpSession;
 import kopo.aisw.hc.member.service.MemberService;
 import kopo.aisw.hc.member.vo.MemberVO;
+import lombok.extern.slf4j.Slf4j;
 
-
+@Slf4j
 @RestController
 @RequestMapping("/member/")
 public class AMemberController {
 	@Autowired
 	MemberService ms;
 	
+	@PostMapping(value="credit-password", produces="application/json; charset=utf8")
+	public ResponseEntity<Boolean> checkPw(@RequestParam(value = "creditPassword") String cp,
+			HttpSession session) {
+		MemberVO userVO = (MemberVO) session.getAttribute("userVO");
+		System.out.println(cp);
+		userVO.setCreditPassword(cp);
+		boolean result = ms.checkCreditPwd(userVO);
+		log.info("CreditPassword check : "+userVO.getCustomerId()+" - result:"+result);
+		return new ResponseEntity<>(result, HttpStatus.OK);
+	}
 	
 	@DeleteMapping(value = "quit", produces = "application/text; charset=utf8")
 	public String quit(@RequestBody MemberVO m, HttpSession session){

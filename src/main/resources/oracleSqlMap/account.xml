@@ -27,6 +27,7 @@ CREATE TABLE CB_ACCOUNT(
 		<include refid="whereAccNum"></include>
 	</select>
 	
+	
 	<!-- 계좌 개설 -->
 	<insert id="openAnAccount" parameterType="accountVO">
 		insert into CB_ACCOUNT
