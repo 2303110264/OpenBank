@@ -10,6 +10,7 @@ import kopo.aisw.hc.account.vo.AccountVO;
 import kopo.aisw.hc.member.vo.MemberVO;
 import kopo.aisw.hc.product.dao.ProductDAO;
 import kopo.aisw.hc.product.vo.ProductVO;
+import kopo.aisw.hc.transaction.dao.TransactionDAO;
 import kopo.aisw.hc.transaction.vo.TransactionVO;
 
 @Service
@@ -19,7 +20,9 @@ public class AccountServiceImpl implements AccountService {
 	private AccountDAO aDao;
 	@Autowired
 	private ProductDAO pDao;
-		
+	@Autowired
+	private TransactionDAO tDao;
+	
 	//사전설정
 	@Override
 	public AccountVO preset(MemberVO member, int productNum) throws Exception {
@@ -31,7 +34,10 @@ public class AccountServiceImpl implements AccountService {
 	public boolean openAnAccount(AccountVO account) throws Exception {
 		ProductVO product = pDao.selectProduct(account.getProductNum());
 		account = aDao.createAccNum(account);
-		return aDao.openAnAccount(account, product);
+		if(aDao.openAnAccount(account, product))
+			return tDao.depositForOpenAcc(account);
+		else
+			return false;
 	}
 
 	//조회: 추후 accNum 대신 accId로 변경 예정
@@ -71,10 +77,6 @@ public class AccountServiceImpl implements AccountService {
 		return aDao.getAccList(userVO.getCustomerId());
 	}
 
-	
-	
-	
-	
 	
 	//임시
 	@Override

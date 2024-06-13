@@ -35,8 +35,8 @@ public class AMemberController {
 	@DeleteMapping(value = "quit", produces = "application/text; charset=utf8")
 	public String quit(@RequestBody MemberVO m, HttpSession session){
 		MemberVO userVO = (MemberVO) session.getAttribute("userVO");
-		if(userVO.getCustomerType()==1) return "관리자는 해당 경로로 탈퇴할 수 없습니다.";
 		if(m.getCustomerId()!=userVO.getCustomerId()) return "잘못된 접근입니다.";
+		if(userVO.getCustomerType()==1) return "관리자는 해당 경로로 탈퇴할 수 없습니다.";
 		boolean bool = ms.checkPwd(m);
 		if(bool) {
 			int a = ms.quitMember(m);

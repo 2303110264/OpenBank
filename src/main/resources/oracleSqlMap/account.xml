@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 추후구현
-CREATE TABLE TEST_ACCOUNT(
+CREATE TABLE cb_account(
 	ACC_ID VARCHAR2(12) PRIMARY KEY
 	, ACC_NUM	NUMBER NOT NULL UNIQUE
 -->
@@ -41,7 +41,7 @@ CREATE TABLE CB_ACCOUNT(
 	<!-- 고객의 계좌목록 조회 -->
 	<select id="selectAccByCustomer" parameterType="int" resultType="accountVO">
 		select c.acc_num accNum, c.acc_name accName, c.customer_id customerId
-				, c.ret_date, tn.after_balance balance
+				, to_char(c.ret_date, 'yyyy-mm-dd') retDate, tn.after_balance balance, c.avaliable avaliable
 		from cb_account c
 		join (
 		    select acc_num, after_balance
@@ -57,14 +57,14 @@ CREATE TABLE CB_ACCOUNT(
 	
 	<!-- 이체시 대상계좌 확인: 단일계좌 이름체크 -->
 	<select id="getOwnerName" parameterType="Long" resultType="String">
-		select c.name name
+		select c.name customerName
 		from cb_account a
 		join test_customer c
 			on a.customer_id = c.customer_id
 		where a.acc_num = #{accNum}
 	</select>
 	
-	<!-- 이 쿼리는 확인이 안됐음!!!!!!!!!!!!!!!! -->
+	<!-- 근데이거 쓸일이 있는것인? 삭제고민......... -->
 	<!-- 이체시 출금계좌 확인: 단일계좌 잔액조회 -->
 	<select id="getBalance" parameterType="Long" resultType="accountVO">
 		SELECT c.acc_num accNum, c.acc_name accName, c.customer_id customerId,
@@ -84,32 +84,42 @@ CREATE TABLE CB_ACCOUNT(
 	
 	<!-- 입금 -->
 	<update id="deposit" parameterType="transactionVO">
-		update test_account
+		update cb_account
 		set balance = balance+#{amount}
 		where deposit_acc = #{depositAcc}
 	</update>
 	
 	<!-- 출금 -->
 	<update id="withdraw" parameterType="transactionVO">
-		update test_account
+		update cb_account
 		set balance = balance-#{amount}
 		where deposit_acc = #{withdrawAcc}
 	</update>
 	
 	<!-- 해지 -->
 	<delete id="cloaseAnAccount" parameterType="accountVO">
-		delete from test_account
+		delete from cb_account
 		where acc_num = #{accNum}
 	</delete>
 	
 	<!-- 1계좌조회 -->
 	<select id="getAccount" parameterType="Long" resultType="accountVO">
-		select acc_num accNum, acc_name accName, customer_Id customerId,
-		product_num productNum, balance,
-		to_char(reg_date, 'yyyy-mm-dd') regDate,
-		to_char(ret_date, 'yyyy-mm-dd') retDate,
-		from test_account
-		where acc_num = #{accNum}
+		SELECT c.acc_num accNum, c.acc_name accName, c.customer_id customerId,
+				 t.after_balance balance,
+				c.product_num productNum,
+				to_char(c.reg_date, 'yyyy-mm-dd') regDate,
+				to_char(c.ret_date, 'yyyy-mm-dd') retDate, c.avaliable avaliable
+		FROM (
+		    SELECT acc_num, after_balance 
+		    FROM (
+		        SELECT acc_num, after_balance
+		        FROM CB_Transaction
+		        WHERE acc_num = #{accNum}
+		        ORDER BY transaction_date DESC
+		    )
+		    WHERE ROWNUM = 1
+		) t
+		JOIN cb_account c ON c.acc_num = t.acc_num
 	</select>
 	
 	<!-- ====================================== -->
