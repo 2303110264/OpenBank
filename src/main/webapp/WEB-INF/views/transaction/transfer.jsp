@@ -74,10 +74,7 @@
                     </div>
                     <div class="col-lg-4 mb-4 sign-in-div2">
                         <div class="form-floating">
-                            <%-- 임시값
                             <form:input path="depositAcc" type="text" class="formSelect form-control form-control-lg light-300 " id="dAcc" name="depositAcc" placeholder="deposit Account" required="true"/>
-                             --%>
-                            <input path="depositAcc" type="text" class="formSelect form-control form-control-lg light-300 " id="dAcc" name="depositAcc" placeholder="deposit Account" required value="245003441374">
                             <label for="floatingPassword light-300">입금될 계좌</label>
                             <form:errors path="depositAcc" class="error"/>
                             <span id="accErr" class="error"></span>
@@ -85,7 +82,7 @@
                     </div>
                     <div class="col-lg-4 mb-4 sign-in-div2">
                         <div class="form-floating">
-                            <form:input path="amount" type="text" class="form-control form-control-lg light-300 " id="amt" name="amount" placeholder="Amount" required="true"/>
+                            <form:input path="amount" type="text" class="form-control form-control-lg light-300 " id="amt" name="amount" placeholder="Amount" required="true" maxlength="9"/>
                             <label for="floatingPassword light-300">금액</label>
                             <span id="amtErr" class="error"></span>
                         </div>
@@ -125,20 +122,20 @@
             
                     <div class="col-lg-4 mb-4 sign-in-div2">
                         <div class="form-floating  border-clean">
-                            <div class="form-control form-control-lg light-300 formSelect border-clean" id="wAcc-modal">대충 계좌번호</div>
+                            <div class="form-control form-control-lg light-300 formSelect border-clean" id="wAcc-modal"></div>
                             <label for="floatingID light-300">아래 계좌에서</label>
                         </div>
                     </div>
                     <div class="col-lg-4 mb-4 sign-in-div2">
                         <div class="form-floating border-clean">
-                            <div class="formSelect form-control form-control-lg light-300 border-clean text-center" id="wName-modal">대충 받는사람</div>
+                            <div class="formSelect form-control form-control-lg light-300 border-clean text-center" id="wName-modal"></div>
                             <label for="floatingPassword light-300">받는사람</label>
                             <label class="label2" for="floatingPassword light-300">님께</label>
                         </div>
                     </div>
                     <div class="col-lg-4 mb-4 sign-in-div2 ">
                         <div class="form-floating border-clean">
-                            <div class="formSelect form-control form-control-lg light-300 border-clean text-center" id="amount-modal">대충 금액</div>
+                            <div class="formSelect form-control form-control-lg light-300 border-clean text-center" id="amount-modal"></div>
                         </div>
                         송금합니다.
                     </div>
@@ -249,8 +246,6 @@
 		                    if($('#accErr').text()==$('#amtErr').text())
 	                    		$('#staticBackdrop').modal('show');
 	            			}
-	                    console.log(result)
-						console.log("왜 안먹는거같지")
 	                }, error: function(error) {
 	                    $('#accErr').text('존재하지 않는 계좌입니다.');
 	                    console.error(error);
@@ -266,7 +261,7 @@
     <%-- Isotope --%>
     <script src="${path}/assets/js/isotope.pkgd.js"></script>
 	<script>
-		//document.getElementById("dAcc").value = "";
+		document.getElementById("dAcc").value = "";
 		document.getElementById("amt").value = "";
 	</script>
 </body>

@@ -96,9 +96,11 @@ public class AccountController {
 		return "account/list";
 	}
 	@PostMapping("")
-	public String accountList(Model model, @RequestParam("accNum")String accNum) {
+	public String accountList(Model model, HttpSession session, @RequestParam("accNum")String accNum) {
+		MemberVO userVO = (MemberVO) session.getAttribute("userVO");
 		List<TransactionVO> transaction = ts.getTransactionList(Long.parseLong(accNum));
 		AccountVO account = as.getAccount(accNum);
+		if(userVO.getCustomerId()!=account.getCustomerId()) return "redirect:/account/";
 		model.addAttribute("account", account);
 		model.addAttribute("transaction", transaction);
 		return "account/detail";

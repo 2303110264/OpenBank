@@ -104,7 +104,7 @@
 //open an account
 	if(typeof accmsg!='undefined' && accmsg){
     	alert("계좌 생성이 완료되었습니다!");
-    	location.href="/ob/account/list"
+    	location.href="/ob/account/"
 	}
 
 //profile

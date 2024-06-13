@@ -35,7 +35,7 @@ public class TransactionVO {
 	@NotNull(message="필수 항목입니다")
 	private long depositAcc;
 	@Size(max=7, message="이름은 7자 이하로 정해주세요")
-	@Pattern(regexp = "^[가-힣a-zA-Z]{0,7}$", message="한글, 영어 대소문자만 가능합니다")
+	@Pattern(regexp = "^[ㅏ-ㅣㄱ-ㅎ가-힣a-zA-Z]{0,7}$", message="한글, 영어 대소문자만 가능합니다")
 	private String depositName;
 
 	//현재잔액

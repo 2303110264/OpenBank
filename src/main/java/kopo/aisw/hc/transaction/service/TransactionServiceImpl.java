@@ -17,6 +17,8 @@ public class TransactionServiceImpl implements TransactionService{
 	
 	@Override
 	public TransactionVO transfer(TransactionVO transaction) throws Exception {
+		//출금통장 잔액확인
+		
 		return tDao.transfer(transaction);
 	}
 

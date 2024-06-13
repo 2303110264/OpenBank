@@ -35,8 +35,33 @@
     <%-- Header --%>
     <jsp:include page="../header.jsp"></jsp:include>
     <%-- Close Header --%>
-    <div style="text-align:center; align-content:center;">
-	<h2>상품 목록</h2>
+	
+	
+    <section class="container py-5 text-center" style="margin-bottom:50px">
+        <h1 class="col-12 col-xl-8 h2 text-primary pt-3 margin-auto">
+        상품 목록
+        </h1>
+        <h2 class="col-12 col-xl-8 h4 regular-400 margin-auto"></h2>
+        <p class="col-12 col-xl-8 text-muted pb-5 light-300 margin-auto">
+        상품 이름을 선택하시면 상세 페이지로 이동됩니다.
+        </p>
+    
+    <%-- Start Our Work 
+    
+    <section class="container py-5">
+        <div class="row justify-content-center my-5 my-5-custom">
+            <div class="filter-btns shadow-md rounded-pill text-center col-auto">
+                <a class="filter-btn btn rounded-pill btn-outline-primary border-0 m-md-2 px-md-4 active" data-filter=".account" href="#">All</a>
+                <a class="filter-btn btn rounded-pill btn-outline-primary border-0 m-md-2 px-md-4" data-filter=".type1" href="#">예금</a>
+                <a class="filter-btn btn rounded-pill btn-outline-primary border-0 m-md-2 px-md-4" data-filter=".type2" href="#">적금</a>
+                <a class="filter-btn btn rounded-pill btn-outline-primary border-0 m-md-2 px-md-4" data-filter=".type3" href="#">대출</a>
+            </div>
+        </div>
+    </section>
+    
+    End Our Work --%>
+	
+
 	<%--
 	<table border="1">
 	    <tr>
@@ -94,12 +119,13 @@
 	        </tr>
 	    </c:forEach>
 	</table>
-	</div>
 	<br/>
     <div style="height:50px; text-align:center; justify-content: center;">
-	<button type="button" onclick="location.href='${path}/bank/'" class="btn btn-3 rounded-pill px-md-5 px-4 py-2 radius-0 light-300">돌아가기</button>
+	<button type="button" onclick="location.href='${path}/'" class="btn btn-3 rounded-pill px-md-5 px-4 py-2 radius-0 light-300">돌아가기</button>
     </div><br/>               
-
+	
+	</section>
+    <div style="height:10px;"></div>
 <%-- Start Footer --%>
     <jsp:include page="../footer.jsp"></jsp:include>
     <%-- End Footer --%>

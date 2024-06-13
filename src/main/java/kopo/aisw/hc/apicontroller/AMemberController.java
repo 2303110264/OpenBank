@@ -26,7 +26,6 @@ public class AMemberController {
 	public ResponseEntity<Boolean> checkPw(@RequestParam(value = "creditPassword") String cp,
 			HttpSession session) {
 		MemberVO userVO = (MemberVO) session.getAttribute("userVO");
-		System.out.println(cp);
 		userVO.setCreditPassword(cp);
 		boolean result = ms.checkCreditPwd(userVO);
 		log.info("CreditPassword check : "+userVO.getCustomerId()+" - result:"+result);
