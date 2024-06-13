@@ -8,9 +8,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%-- 
-    <title>Purple Buzz HTML Template with Bootstrap 5 Beta 1</title>
- --%>
 	<title>Profile</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,7 +33,7 @@
 	<%-- Start Contact --%>
     <section class="container py-5 text-center">
         <h1 class="col-12 col-xl-8 h2 text-primary pt-3 margin-auto">
-		<a class="navbar-brand" href="${path}/bank/">
+		<a class="navbar-brand" href="${path}/">
         Open Bank
 		</a>
         </h1>

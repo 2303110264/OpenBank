@@ -95,7 +95,7 @@
 				 -->
 				 <form action="/ob/account/" method="post" id="acc" name="acc">
 	            	<input type="hidden" name="accNum" value="${acc.accNum}"/>
-	            <a class="a-margin col-sm-6 col-lg-4 text-decoration-none account type${acc.productNum }">
+	            <a class="a-margin col-sm-6 col-lg-4 text-decoration-none account type${acc.productNum%2 }">
 	                <div class="service-work overflow-hidden card mb-5 mx-5 m-sm-0 account-card">
 						<button class="decoration-none" type="submit">
 		                    <!-- 

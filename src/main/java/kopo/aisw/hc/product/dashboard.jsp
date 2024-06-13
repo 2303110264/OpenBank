@@ -1,45 +1,32 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="path" value="${pageContext.request.contextPath}"/>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>관리자 대시보드</title>
-    
-    <link rel="apple-touch-icon" href="${path}/assets/img/apple-icon.png">
-    <link rel="shortcut icon" type="image/x-icon" href="${path}/assets/img/favicon.ico">
-    <%-- Load Require CSS --%>
-    <link href="${path}/assets/css/bootstrap.min.css" rel="stylesheet">
-    <%-- Font CSS --%>
-    <link href="${path}/assets/css/boxicon.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-    <%-- Load Tempalte CSS --%>
-    <link rel="stylesheet" href="${path}/assets/css/templatemo.css">
-    <%-- Custom CSS --%>
-    <link rel="stylesheet" href="${path}/assets/css/custom.css">
-    
     <link href="<c:url value='/assets/dashboard/vendor/fontawesome-free/css/all.min.css' />" rel="stylesheet" type="text/css">
     <link href="<c:url value='/assets/dashboard/css/sb-admin-2.min.css' />" rel="stylesheet">
 </head>
-<%--
 <body id="page-top">
- --%>
-<body>
-        <!-- Header -->
-        <jsp:include page="../header.jsp"></jsp:include>
-        <!-- End of Sidebar -->
+
     <!-- Page Wrapper -->
     <div id="wrapper">
 
+        <!-- Sidebar -->
+        <jsp:include page="/WEB-INF/views/product/sidebar.jsp"></jsp:include>
+        <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
             <div id="content">
+
+                <!-- Topbar -->
+                <jsp:include page="/WEB-INF/views/product/topbar.jsp"></jsp:include>
+                <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -77,7 +64,7 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                일일 거래 회원수</div>
+                                                신규 가입자 수</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">${newSubscribers}</div>
                                         </div>
                                         <div class="col-auto">
@@ -220,9 +207,6 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-	<%-- Start Footer --%>
-    <jsp:include page="../footer.jsp"></jsp:include>
-    <%-- End Footer --%>
 
     <!-- Bootstrap core JavaScript-->
     <script src="<c:url value='/assets/dashboard/vendor/jquery/jquery.min.js' />"></script>
@@ -231,14 +215,12 @@
     <!-- Core plugin JavaScript-->
     <script src="<c:url value='/assets/dashboard/vendor/jquery-easing/jquery.easing.min.js' />"></script>
 
-    <%-- Custom --%>
-    <script src="${path}/assets/js/custom.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="<c:url value='/assets/dashboard/js/sb-admin-2.min.js' />"></script>
 
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-	
+
     <script>
         $(document).ready(function () {
             var ctx = document.getElementById('userTrendsChart').getContext('2d');
@@ -270,14 +252,7 @@
             });
         });
     </script>
-	
-    
-    <%-- Bootstrap --%>
-    <script src="${path}/assets/js/bootstrap.bundle.min.js"></script>
-    <%-- Templatemo --%>
-    <script src="${path}/assets/js/templatemo.js"></script>
-    
-	
+
 </body>
 
 </html>

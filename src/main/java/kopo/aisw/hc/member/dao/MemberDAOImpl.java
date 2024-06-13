@@ -8,7 +8,6 @@ import org.springframework.transaction.support.TransactionTemplate;
 
 import kopo.aisw.hc.member.vo.MemberVO;
 
-@Transactional
 @Repository
 public class MemberDAOImpl implements MemberDAO{
 

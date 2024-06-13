@@ -27,7 +27,6 @@ CREATE SEQUENCE test_customer_seq;
 	<update id="quitMember" parameterType="memberVO">
 	update test_customer
 	<set>
-		bank_id = null, password = null
 		bank_id = null, password = null, credit_password = null
 	</set>
 	where customer_id = #{customerId}
