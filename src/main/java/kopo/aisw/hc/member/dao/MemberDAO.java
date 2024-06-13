@@ -16,4 +16,5 @@ public interface MemberDAO {
 	
 	//임시
 	public MemberVO getPwd(MemberVO m);
+	public boolean checkCreditPwd(MemberVO userVO);
 }

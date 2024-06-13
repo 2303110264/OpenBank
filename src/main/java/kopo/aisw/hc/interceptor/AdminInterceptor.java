@@ -27,7 +27,7 @@ public class AdminInterceptor implements HandlerInterceptor {
 		if(userVO.getCustomerType()==1) {
 			return true;
 		}else{
-	        res.sendRedirect("/ob/bank/");
+	        res.sendRedirect("/ob/");
 			return false;
 		}
 	}

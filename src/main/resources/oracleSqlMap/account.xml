@@ -16,6 +16,7 @@ CREATE TABLE CB_ACCOUNT(
 	, INTEREST_RATE NUMBER(5,4) NOT NULL
 	, REG_DATE DATE DEFAULT sysdate NOT NULL
 	, RET_DATE DATE NOT NULL
+	, AVALIABLE NUMBER(1) NOT NULL  // 1:활성 0:비활성
 	, CONSTRAINT FK_CUSTOMER_ID FOREIGN KEY(CUSTOMER_ID) REFERENCES TEST_CUSTOMER(CUSTOMER_ID)
 	, CONSTRAINT FK_PRODUCT_NUM FOREIGN KEY(PRODUCT_NUM) REFERENCES TEST_PRODUCT_LIST(PRODUCT_NUM)
 	);
@@ -27,12 +28,13 @@ CREATE TABLE CB_ACCOUNT(
 		<include refid="whereAccNum"></include>
 	</select>
 	
+	
 	<!-- 계좌 개설 -->
 	<insert id="openAnAccount" parameterType="accountVO">
 		insert into CB_ACCOUNT
 		values(#{accNum}, #{accName}, #{productNum},
 		#{customerId}, #{interestRate},
-		#{regDate}, #{retDate}
+		#{regDate}, #{retDate}, 1
 		)
 	</insert>
 	
@@ -77,7 +79,7 @@ CREATE TABLE CB_ACCOUNT(
 		    )
 		    WHERE ROWNUM = 1
 		) t
-		JOIN cb_account c ON c.acc_num = t.acc_num; 
+		JOIN cb_account c ON c.acc_num = t.acc_num
 	</select>
 	
 	<!-- 입금 -->

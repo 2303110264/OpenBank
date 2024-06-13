@@ -72,5 +72,10 @@ public class MemberServiceImpl implements MemberService{
 	public int quitMember(MemberVO m) {
 		return mDao.quitMember(m);
 	}
+
+	@Override
+	public boolean checkCreditPwd(MemberVO userVO) {
+		return mDao.checkCreditPwd(userVO);
+	}
 	
 }

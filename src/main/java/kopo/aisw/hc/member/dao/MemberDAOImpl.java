@@ -103,4 +103,10 @@ public class MemberDAOImpl implements MemberDAO{
 		return m;
 	}
 
+	@Override
+	public boolean checkCreditPwd(MemberVO userVO) {
+		userVO = sqlSession.selectOne("dao.MemberDAO.checkCreditPwd", userVO);
+		return userVO!=null;
+	}
+
 }
