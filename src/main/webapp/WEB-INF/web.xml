@@ -34,12 +34,11 @@
 		<session-timeout>10</session-timeout>
 	</session-config>
 	
-	<!-- ERROR CONTROL 
+	<!-- ERROR CONTROL -->
 	<error-page>
 		<error-code>400</error-code>
 		<location>/common/bankMain.jsp</location>
 	</error-page>
-	-->
 	
 	<servlet-mapping>
 		<servlet-name>dispatcher</servlet-name>

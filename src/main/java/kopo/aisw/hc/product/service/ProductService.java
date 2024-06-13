@@ -11,6 +11,10 @@ public interface ProductService {
     void updateProduct(ProductVO product) throws Exception;
     void deleteProduct(int productNum) throws Exception;
     List<Map<String, Object>> getProductStatistics() throws Exception;
-    List<Map<String, Object>> getUserTrends() throws Exception;
+    List<Map<String, Object>> getNewUserTrends() throws Exception;
+    int getTotalUsers() throws Exception;
+    int getNewSubscribers() throws Exception;
+    long getTotalDeposits() throws Exception;
+    long getTotalWithdrawals() throws Exception;
+    String getProductDescription(int productNum);
 }
-

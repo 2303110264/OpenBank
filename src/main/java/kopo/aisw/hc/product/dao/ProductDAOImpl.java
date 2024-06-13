@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Map;
 
-@Transactional // 오토 커밋 굳!!
+@Transactional
 @Repository
 public class ProductDAOImpl implements ProductDAO {
 
@@ -37,7 +37,7 @@ public class ProductDAOImpl implements ProductDAO {
 
     @Override
     public void deleteProduct(int productNum) throws Exception {
-        sqlSession.delete("dao.ProductDAO.deleteProduct", productNum);
+        sqlSession.update("dao.ProductDAO.deleteProduct", productNum);
     }
 
     @Override
@@ -46,7 +46,33 @@ public class ProductDAOImpl implements ProductDAO {
     }
 
     @Override
-    public List<Map<String, Object>> getUserTrends() throws Exception {
-        return sqlSession.selectList("dao.ProductDAO.getUserTrends");
+    public List<Map<String, Object>> getNewUserTrends() throws Exception {
+        return sqlSession.selectList("dao.ProductDAO.getNewUserTrends");
     }
+
+    @Override
+    public int getTotalUsers() throws Exception {
+        return sqlSession.selectOne("dao.ProductDAO.getTotalUsers");
+    }
+
+    @Override
+    public int getNewSubscribers() throws Exception {
+        return sqlSession.selectOne("dao.ProductDAO.getNewSubscribers");
+    }
+
+    @Override
+    public long getTotalDeposits() throws Exception {
+        return sqlSession.selectOne("dao.ProductDAO.getTotalDeposits");
+    }
+
+    public long getTotalWithdrawals() throws Exception {
+        Long result = sqlSession.selectOne("dao.ProductDAO.getTotalWithdrawals");
+        return result != null ? result : 0L;
+    }
+    
+    @Override
+    public String getProductDescription(int productNum) {
+        return sqlSession.selectOne("dao.ProductDAO.getProductDescription", productNum);
+    }
+    
 }

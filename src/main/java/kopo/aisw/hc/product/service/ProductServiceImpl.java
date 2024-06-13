@@ -44,7 +44,32 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Map<String, Object>> getUserTrends() throws Exception {
-        return pDao.getUserTrends();
+    public List<Map<String, Object>> getNewUserTrends() throws Exception {
+        return pDao.getNewUserTrends();
+    }
+
+    @Override
+    public int getTotalUsers() throws Exception {
+        return pDao.getTotalUsers();
+    }
+
+    @Override
+    public int getNewSubscribers() throws Exception {
+        return pDao.getNewSubscribers();
+    }
+
+    @Override
+    public long getTotalDeposits() throws Exception {
+        return pDao.getTotalDeposits();
+    }
+
+    @Override
+    public long getTotalWithdrawals() throws Exception {
+        return pDao.getTotalWithdrawals();
+    }
+    
+    @Override
+    public String getProductDescription(int productNum) {
+        return pDao.getProductDescription(productNum);
     }
 }
