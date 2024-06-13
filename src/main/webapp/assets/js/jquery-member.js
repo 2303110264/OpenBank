@@ -6,6 +6,7 @@
 let requestMsg = function(event){
 	event.preventDefault();
 	let password = document.getElementById('password').value;
+	let id = '${userVO.customerId}';
 	
 	$.ajax({
 		url : '/ob/member/quit'

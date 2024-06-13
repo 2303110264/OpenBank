@@ -9,14 +9,12 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import jakarta.servlet.http.HttpSession;
-import jakarta.validation.Valid;
 import kopo.aisw.hc.account.service.AccountService;
 import kopo.aisw.hc.account.vo.AccountVO;
 import kopo.aisw.hc.member.kakao.KakaoVO;
@@ -52,9 +50,8 @@ public class TransactionController {
 	}
 	
 	@RequestMapping(value="transfer", method = RequestMethod.POST )
-	public String transfer(@Valid @ModelAttribute("t")TransactionVO t, 
-			Model model, HttpSession session, BindingResult res) {
-		if(res.hasErrors()) return "transaction/transfer";
+	public String transfer(@ModelAttribute("t")TransactionVO t, 
+			Model model, HttpSession session) {
 		try {
 			MemberVO userVO = (MemberVO) session.getAttribute("userVO");
 			log.info("Transaction start: "+userVO.getCustomerId()+" - "+t);

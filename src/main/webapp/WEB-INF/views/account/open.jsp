@@ -84,7 +84,7 @@
                     <%-- 약관 동의 버튼 --%>
                     <div class="col-lg-12 text-center mb-4">
                         <button type="button" class="btn btn-primary sign-in-btn rounded-pill px-md-5 px-4 py-2 radius-0 light-300" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                            약관 확인
+                            약관 동의
                         </button>
                     </div>
 
@@ -99,15 +99,15 @@
           <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">약관 확인</h5>
+                <h5 class="modal-title" id="exampleModalCenterTitle">약관 동의</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
                 <%-- 모달 내용 --%>
-                <p>이제 이 계좌는 제껍니다.</p>
+                <p>${description}</p>
               </div>
               <div class="modal-footer justify-content-center">
-              	<button type="button" id="agreeButton" class="btn btn-primary">약관 동의</button>
+                <button type="button" id="agreeButton" class="btn btn-primary">약관 동의</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">동의 안 함</button>
               </div>
             </div>

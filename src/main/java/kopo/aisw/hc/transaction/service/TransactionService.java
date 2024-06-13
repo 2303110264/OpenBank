@@ -18,4 +18,3 @@ public interface TransactionService {
 	public List<TransactionVO> getTransactionList(long accNum);
 	
 }
-	

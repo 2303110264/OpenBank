@@ -39,7 +39,6 @@ public class AccountController {
 	private ProductService ps;
 	@Autowired
 	private TransactionService ts;
-
 	
 	//계좌생성
 	@GetMapping("openAcc/{productNum}")
@@ -95,6 +94,7 @@ public class AccountController {
 		model.addAttribute("accList", list);
 		return "account/list";
 	}
+	
 	@PostMapping("")
 	public String accountList(Model model, HttpSession session, @RequestParam("accNum")String accNum) {
 		MemberVO userVO = (MemberVO) session.getAttribute("userVO");

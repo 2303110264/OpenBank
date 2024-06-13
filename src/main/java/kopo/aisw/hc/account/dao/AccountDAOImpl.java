@@ -86,7 +86,8 @@ public class AccountDAOImpl implements AccountDAO {
 	//계좌 조회- 이름 체크
 	@Override
 	public String getOwnerName(long accNum) {
-		return sqlSession.selectOne("dao.AccountDAO.getOwnerName", accNum);
+		AccountVO acc = sqlSession.selectOne("dao.AccountDAO.getOwnerName", accNum);
+		return acc.getCustomerName();
 	}
 	//계좌 조회- 잔액 조회
 	@Override

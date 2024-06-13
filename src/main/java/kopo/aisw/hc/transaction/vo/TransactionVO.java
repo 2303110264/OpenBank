@@ -42,4 +42,3 @@ public class TransactionVO {
 	private long wAfterBalance; 
 	private long dAfterBalance;
 }
-

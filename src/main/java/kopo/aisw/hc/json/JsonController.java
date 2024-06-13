@@ -41,6 +41,14 @@ public class JsonController {
 	@Autowired
 	AccountService as;
 	
+	@GetMapping("/transaction/accCheck")
+	public String getName(@ModelAttribute String accNum, HttpSession session) {
+		if(session==null) return "잘못된 접근입니다.";
+		MemberVO userVO = (MemberVO) session.getAttribute("userVO");
+		log.info(userVO.getCustomerId()+" => "+accNum);
+		return as.getOwnerName(Long.parseLong(accNum));
+	}
+	
 	@GetMapping("/apitest")
 	public ResponseEntity<MemberVO> apitest(){
 		MemberVO m = new MemberVO();
