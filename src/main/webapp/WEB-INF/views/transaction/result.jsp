@@ -101,16 +101,16 @@
 					    <div class="modal-content">
 					      <div class="modal-header">
 					        <h1 class="modal-title fs-5" id="staticBackdropLabel">
-								결과					        
+								결과 안내					        
 					        </h1>
-					        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					        <button type="button" onclick="backlist()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					      </div>
 					      <div class="modal-body">
 			                <div class="contact-form row modal-form" id="modal-form" >
 								        <%------------------------ --%>
 			                    <div class="col-lg-4 mb-4 sign-in-div2">
 			                        <div class="form-floating  border-clean">
-			                            표시 테스트 ${transactionError}
+			                            ${transactionError}
 			                        </div>
 			                    </div>
 			

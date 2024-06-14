@@ -1,3 +1,17 @@
+insert into test_customer values(1, 'admin', 'admin', '0000', '하다현', '01011119296', '2303110264@office.kopo.ac.kr',
+00000, ' ', ' ', '123456', 1, 0, sysdate);
+insert into test_customer values(202, 'k202', '', '0000', '하다현', '01026539296', 'ruhyeon_j@daum.net',
+00000, ' ', '주소 미제공', 'RRN 미제공', 1, 0, sysdate);
+select * from test_product_list;
+insert into test_product_list
+values(1, 1, 'Hi정기예금', '<b>제1조 은행의 책임</b><br>은행은 통장에 기록된 금액을 고객에게 현물로 지급하지 않는다.<br><br><b>제2조 개인정보 이용</br>은행은 고객의 개인정보가 유출되지 않도록 주의한다. 실수로 유출되었을 경우 고객은 은행에게 손해배상을 청구할 수 없다.', 4.5, 10000, 6, 1);
+insert into test_product_list
+values(2, 1, '내일부터적금', '<b>제1조 은행의 책임</b><br>은행은 통장에 기록된 금액을 고객에게 현물로 지급하지 않는다.<br><br><b>제2조 개인정보 이용</br>은행은 고객의 개인정보가 유출되지 않도록 주의한다. 실수로 유출되었을 경우 고객은 은행에게 손해배상을 청구할 수 없다.', 3.2, 100000, 12, 1);
+insert into test_product_list
+values(3, 1, '오예금', '<b>제1조 은행의 책임</b><br>은행은 통장에 기록된 금액을 고객에게 현물로 지급하지 않는다.<br><br><b>제2조 개인정보 이용</br>은행은 고객의 개인정보가 유출되지 않도록 주의한다. 실수로 유출되었을 경우 고객은 은행에게 손해배상을 청구할 수 없다.', 3.9, 50000, 6, 1);
+commit;
+
+
 CREATE TABLE TEST_CUSTOMER(
 	CUSTOMER_ID NUMBER PRIMARY KEY
 	, BANK_ID VARCHAR2(20) UNIQUE

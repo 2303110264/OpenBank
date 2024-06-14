@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <title>상품 목록</title>
 <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -71,38 +72,32 @@
 	        <th>금리(%)</th>
 	        <th>초기 가입금액</th>
 	        <th>가입 기간(개월)</th>
-	        <%--
-	         <th>신규 가입 가능 여부</th>
-	         --%>
+	        <th>신규 가입 가능 여부</th>
 	    </tr>
 	    <c:forEach var="product" items="${products}">
-		    <c:if test="${product.available==1 }">
-		        <tr>
-		            <td>
-			            <a class="text-decoration-none" href="${pageContext.request.contextPath}/product/view/${product.productNum}">
-				            ${product.productNum}
-	        		    </a>
-		            </td>
-		            <td>
-			            <a class="text-decoration-none" href="${pageContext.request.contextPath}/product/view/${product.productNum}">
-		            		${product.productName}
-	        		    </a>
-		            </td>
-		            <td>${product.productTarget == 0 ? '개인' : '법인'}</td>
-		            <td>${product.interestRate}</td>
-		            <td>${product.initialDeposit}</td>
-		            <td>${product.dateOfDeposit}</td>
-		            <%--
-		            <td>${product.available == 1 ? '가능' : '불가능'}</td>
-		             --%>
-		        </tr>
-		    </c:if>
+	        <tr>
+	            <td>
+		            <a class="text-decoration-none" href="${pageContext.request.contextPath}/product/view/${product.productNum}">
+			            ${product.productNum}
+        		    </a>
+	            </td>
+	            <td>
+		            <a class="text-decoration-none" href="${pageContext.request.contextPath}/product/view/${product.productNum}">
+	            		${product.productName}
+        		    </a>
+	            </td>
+	            <td>${product.productTarget == 0 ? '개인' : '법인'}</td>
+	            <td>${product.interestRate}</td>
+	            <td>${product.initialDeposit}</td>
+	            <td>${product.dateOfDeposit}</td>
+	            <td>${product.available == 1 ? '가능' : '불가능'}</td>
+	        </tr>
 	    </c:forEach>
 	</table>
 	</div>
 	<br/>
     <div style="height:50px; text-align:center; justify-content: center;">
-	<button type="button" onclick="location.href='${path}/'" class="btn btn-3 rounded-pill px-md-5 px-4 py-2 radius-0 light-300">돌아가기</button>
+	<button type="button" onclick="location.href='${path}/bank/'" class="btn btn-3 rounded-pill px-md-5 px-4 py-2 radius-0 light-300">돌아가기</button>
     </div><br/>               
 
 <%-- Start Footer --%>

@@ -38,7 +38,7 @@ public class AccountVO {
 //	private String accId;
 	
 	private long accNum;
-	@Size(max=100, message="통장 이름은 100자 이내로 작성해주세요.") //input
+	@Size(max=7, message="통장 이름은 7자 이내로 작성해주세요.") //input
 	private String accName;
 	@NotNull(message="상품 번호를 불러오지 못했습니다. 다시 시도해주세요.")
 	private int productNum;
@@ -49,10 +49,8 @@ public class AccountVO {
 	@NotNull(message="세션이 만료되었거나 상품 정보를 불러올 수 없습니다.")
 	private double interestRate;
 	private long balance;
-	@Size(min=6, max=6, message="비밀번호는 6자리로 설정해주세요.")
-	private int accPwd;
 	private String regDate;
 	private String retDate;
-	private String lastTradeDate;
+	private String avaliable;
 	
 }

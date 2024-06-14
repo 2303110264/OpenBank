@@ -72,12 +72,12 @@
 	        <mvc:mapping path="/transaction/**" /> 
 	        <mvc:mapping path="/member/profile" /> 
 	        <mvc:mapping path="/member/quit" /> 
-	        <mvc:mapping path="/**/admin/**" /> 
+	        <mvc:mapping path="**/admin/**" /> 
 	        <bean class="kopo.aisw.hc.interceptor.SignInInterceptor" />
 		</mvc:interceptor>
 		
 		<mvc:interceptor>
-	        <mvc:mapping path="/**/admin/**" /> 
+	        <mvc:mapping path="**/admin/**" /> 
 			<bean class="kopo.aisw.hc.interceptor.AdminInterceptor" />
 		</mvc:interceptor>
 		

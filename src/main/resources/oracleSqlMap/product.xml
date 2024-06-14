@@ -80,19 +80,15 @@
 	
 	<!-- 신규 이용자 추이 조회 -->
 	<select id="getNewUserTrends" resultType="map">
-    SELECT
-      TO_CHAR(t.transaction_date, 'YYYY-MM-DD') AS TRANSACTION_DATE,
+   SELECT
+      TO_CHAR(reg_date, 'YYYY-MM-DD') AS TRANSACTION_DATE,
       COUNT(DISTINCT a.acc_num) AS newUserCount
     FROM
-      cb_transaction t
-    JOIN
-      cb_account a ON t.acc_num = a.acc_num
-    WHERE
-      t.transaction_type = '가입'
+      cb_account a
     GROUP BY
-      TO_CHAR(t.transaction_date, 'YYYY-MM-DD')
+      TO_CHAR(reg_date, 'YYYY-MM-DD')
     ORDER BY
-      TO_CHAR(t.transaction_date, 'YYYY-MM-DD') ASC
+      TO_CHAR(reg_date, 'YYYY-MM-DD') ASC
   </select>
 
 	

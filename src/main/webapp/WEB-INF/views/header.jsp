@@ -16,21 +16,67 @@
 	            <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="navbar-toggler-success">
 	                <div class="flex-fill mx-xl-5 mb-2">
 	                    <ul class="nav navbar-nav d-flex justify-content-between mx-xl-5 text-center text-dark">
-	                        <li class="nav-item">
-	                            <a class="nav-link btn-outline-primary rounded-pill px-3" href="${path}/ob/">Home</a>
-	                        </li>
-	                        <li class="nav-item">
-	                            <a class="nav-link btn-outline-primary rounded-pill px-3" href="${path}/ob/account/">모아보기</a>
-	                        </li>
-	                        <li class="nav-item">
-	                            <a class="nav-link btn-outline-primary rounded-pill px-3" href="${path}/ob/transaction/transfer">이체</a>
-	                        </li>
-	                        <li class="nav-item">
-	                            <a class="nav-link btn-outline-primary rounded-pill px-3" href="${path}/ob/product/view">상품가입</a>
-	                        </li>
-	                        <li class="nav-item">
-	                            <a class="nav-link btn-outline-primary rounded-pill px-3" href="${path}/ob/contact">고객센터(Contact)</a>
-	                        </li>
+		                    <c:choose>
+		                    <%--
+		                    product/admin/list
+							--> product/list
+							
+							2. 상품 상세정보조회
+							product/admin/detail/{productNum}
+							--> product/list
+							
+							3. 상품 등록
+							product/register
+							--> product/register
+							
+							4. 상품 수정
+							product/edit/{productNum}
+							--> product/edit
+							
+							5. 상품 삭제
+							product/delete/{productNum}
+							
+							6. 대쉬보드
+							product/admin/dashboard
+							—> product/dashboard
+		                     --%>
+		                    	<c:when test="${userVO.customerType==1}">
+			                        <li class="nav-item">
+			                            <a class="nav-link btn-outline-primary rounded-pill px-3" href="${path}/ob/product/admin/dashboard">대시보드</a>
+			                        </li>
+			                        <li class="nav-item">
+			                            <a class="nav-link btn-outline-primary rounded-pill px-3" href="${path}/ob/product/admin/list">상품목록</a>
+			                        </li>
+			                        <%-- 
+			                        <li class="nav-item">
+			                            <a class="nav-link btn-outline-primary rounded-pill px-3" href="${path}/ob/product/register">이체</a>
+			                        </li>
+			                         --%>
+			                        <li class="nav-item">
+			                            <a class="nav-link btn-outline-primary rounded-pill px-3" href="${path}/ob/product/register">상품등록</a>
+			                        </li>
+			                        <li class="nav-item">
+			                            <a class="nav-link btn-outline-primary rounded-pill px-3" href="${path}/ob/contact">고객센터(Contact)</a>
+			                        </li>
+								</c:when>
+			                    <c:otherwise>
+			                        <li class="nav-item">
+			                            <a class="nav-link btn-outline-primary rounded-pill px-3" href="${path}/ob/">Home</a>
+			                        </li>
+			                        <li class="nav-item">
+			                            <a class="nav-link btn-outline-primary rounded-pill px-3" href="${path}/ob/account/">계좌목록</a>
+			                        </li>
+			                        <li class="nav-item">
+			                            <a class="nav-link btn-outline-primary rounded-pill px-3" href="${path}/ob/transaction/transfer">이체</a>
+			                        </li>
+			                        <li class="nav-item">
+			                            <a class="nav-link btn-outline-primary rounded-pill px-3" href="${path}/ob/product/view">상품가입</a>
+			                        </li>
+			                        <li class="nav-item">
+			                            <a class="nav-link btn-outline-primary rounded-pill px-3" href="${path}/ob/contact">고객센터(Contact)</a>
+			                        </li>
+			                    </c:otherwise>
+		                    </c:choose>
 	                    </ul>
 	                </div>
 	                <div class="navbar align-self-center d-flex">

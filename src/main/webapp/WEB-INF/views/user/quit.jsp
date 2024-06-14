@@ -33,11 +33,12 @@
 	TemplateMo 561 Purple Buzz
 	https://templatemo.com/tm-561-purple-buzz
 -->
+<%--
 <script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="${path}/assets/js/jquery-member.js"></script>
+ --%>
 	
 </head>
-<%--
 <script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
 	let requestMsg = function(event){
@@ -57,6 +58,7 @@
 			, dataType : 'text'
 			, success : function(result){
 				alert(result)
+				if(result) location.href="/ob/";
 			}
 			, error : function(){
 				alert("서버가 응답하지 않습니다. 다시 시도해주세요.")
@@ -65,7 +67,6 @@
 		
 	}
 </script>
- --%>
 <body>
 	<jsp:include page="../header.jsp" />
 	<%-- Start Contact --%>
@@ -87,6 +88,7 @@
 
                     <div class="col-lg-4 mb-4 sign-in-div2 py-3">
                         <div class="form-floating">
+                            <input type="hidden" class="form-control form-control-lg light-300 " id="customerId" name="customerId" value="${userVO.customerId }"/>
                             <input type="password" class="form-control form-control-lg light-300 " id="password" name="password" placeholder="Password" required/>
                             <label for="floatingPassword light-300">Password</label>
                         </div>

@@ -38,6 +38,7 @@
 	
 	    function checkPasswordMatch() {
 	        if (password.value === passwordCheck.value) {
+	        	passwordError.textContent='';
 	        	return true;
 	        } else {
 	            passwordError.textContent = '비밀번호가 일치하지 않습니다';
@@ -98,7 +99,7 @@
                     </div>
                     <div class="col-lg-6 mb-4">
                         <div class="form-floating">
-                            <input type="password" class="form-control form-control-lg light-300" id="password-check" name="pw" placeholder="Password check"/>
+                            <input type="password" class="form-control form-control-lg light-300" id="password-check" name="pw" placeholder="Password check" />
                             <label for="floatingPassword light-300">Confirm Password</label>
 							<span class="error" id="password-error"></span>
                         </div>
@@ -189,8 +190,8 @@
 	
 	<%-- Custom --%>
 	<script>
-	    var msg = ${signUp}
-	</script>
+	    var msg = '${signUp}'
+    </script>
 	<script src="${path}/assets/js/custom.js"></script>
 	<%-- Bootstrap --%>
     <script src="${path}/assets/js/bootstrap.bundle.min.js"></script>

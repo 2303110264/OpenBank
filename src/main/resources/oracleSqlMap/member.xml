@@ -31,14 +31,14 @@ CREATE SEQUENCE test_customer_seq;
 	</set>
 	where customer_id = #{customerId}
 	</update>
-	
+
 	<!-- 결제비밀번호 체크 -->
 	<select id="checkCreditPwd" parameterType="memberVO" resultType="memberVO">
 		select name
 		from test_customer
 		where customer_id = #{customerId} and credit_password=#{creditPassword}
 	</select>
-	
+
 	<!-- 로그인 -->
 	<select id="signIn" parameterType="memberVO" resultType="memberVO">
 		<!-- select customer_ID customerid
@@ -85,14 +85,12 @@ CREATE SEQUENCE test_customer_seq;
 		from test_customer
 		where rrn = #{rrn}
 	</select>
-
 	<!-- mail 중복체크 -->
 	<select id="mailDoubleCheck" parameterType="String" resultType="memberVO">
 		select email
 		from test_customer
 		where email = #{email}
 	</select>
-
 	<!-- phone 중복체크 -->
 	<select id="phoneDoubleCheck" parameterType="String" resultType="memberVO">
 		select phone_num phoneNum

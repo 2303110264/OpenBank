@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Purple Buzz - Work Page</title>
+<title>Account Detail</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" href="${path}/assets/img/apple-icon.png">
@@ -60,7 +60,7 @@
 			    </tr>
 			    <tr>
 			        <th>잔액</th>
-			        <td>${String.format("%,d", account.balance)}</td>
+			        <td>${String.format("%,d", account.balance)}원</td>
 			    </tr>
 			    <tr>
 			        <th>가입일</th>
@@ -70,10 +70,12 @@
 			        <th>만료일</th>
 			        <td>${account.retDate}</td>
 			    </tr>
+			    <%-- 
 			    <tr>
 			        <th>최근 거래일</th>
 			        <td>${account.lastTradeDate}</td>
 			    </tr>
+			     --%>
 		        <tr>
 		            <!-- 
 		             <td>${product.productTarget == 0 ? '개인' : '법인'}</td>
@@ -96,21 +98,32 @@ accNum,acc_name accName,
            <div class="worksingle-content col-lg-8 m-auto text-left justify-content-center">
 			<table border="0">
 			    <tr>
-			        <th width="20%">거래일자</th>
-			        <th width="10%">거래유형</th>
-			        <th width="22%">입금</th>
-			        <th width="22%">출금</th>
-			        <th width="14%">거래금액</th>
-			        <th width="14%">잔액</th>
+			        <th >거래일자</th>
+			        <%-- 
+			        <th >거래유형</th>
+			         --%>
+			        <th >거래명</th>
+			        <th >입금 금액</th>
+			        <th >출금 금액</th>
+			        <th >잔액</th>
 			    </tr>
 			    <c:forEach var="t" items="${transaction}">
 			        <tr>
 			            <td>${t.transactionDate}</td>
+			            <%--
 			            <td>${t.transactionType}</td>
-			            <td>${t.depositName}</td>
+			             --%>
+
 			            <td>${t.withdrawName}</td>
-			            <td>${t.amount}</td>
-						<td>어..잔액어떻게출력하지?</td>
+			        <c:if test="${ t.transactionType.equals('입금')}">
+			            <td>${String.format("%,d", t.amount)}</td>
+			            <td></td>
+			        </c:if>
+			        <c:if test="${ t.transactionType.equals('출금')}">
+			            <td></td>
+			            <td>${String.format("%,d", t.amount)}</td>
+			        </c:if>
+						<td>${String.format("%,d", t.WAfterBalance)}</td>
 			        </tr>
 			    </c:forEach>	
 			</table>	
