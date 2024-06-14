@@ -112,11 +112,7 @@ $(document).ready(function() {
                     </div>
                     <div class="col-lg-4 mb-4 sign-in-div2">
                         <div class="form-floating">
-<<<<<<< HEAD
                             <form:input path="amount" type="text" class="form-control form-control-lg light-300 " id="amt" name="amount" placeholder="Amount" required="true" maxlength="9"/>
-=======
-                            <form:input path="amount" type="text" class="form-control form-control-lg light-300 " id="amt" name="amount" placeholder="Amount"/>
->>>>>>> a5b364b856f625395ed8b9719af7f6a364f1a0d5
                             <label for="floatingPassword light-300">금액</label>
                             <span id="amtErr" class="error"></span>
                         </div>
