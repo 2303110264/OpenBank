@@ -31,18 +31,19 @@ public class KakaoController {
     @GetMapping("/kakao-login")
     public void callback(Model m, @RequestParam("code") String code,
     					HttpSession session, HttpServletResponse response) throws Exception {
-    	String accessToken = ks.getAccessTokenFromKakao(code, api.getKakaoRest());
+    	KakaoVO accessToken = ks.getAccessTokenFromKakao(code, api.getKakaoRest());
         
     	//시간 부족으로 구현한척 (원래는 kakao에서 프로필값을 받아와야함)
     	//DB에 수동으로 id 202에 관한 정보 추가 필요
     	MemberVO member = new MemberVO();
-        member.setUserId(accessToken);
+        member.setUserId(accessToken.getAccessToken());
         member.setCustomerId(202);
         member.setCustomerType(0);
         member.setName(ms.getProfile(member).getName());
         
     	m.addAttribute("userVO", member);
     	String preUrl = (String) session.getAttribute("preUrl");
+    	System.out.println(ks.getKakaoUserCode(accessToken));
 		if(preUrl!=null)
 			response.sendRedirect(preUrl);
 		else

@@ -16,7 +16,7 @@ public class KakaoService {
     private final String KAUTH_TOKEN_URL_HOST="https://kauth.kakao.com";
     private final String KAUTH_USER_URL_HOST= "https://kapi.kakao.com";
 
-    public String getAccessTokenFromKakao(String code, String clientId) {
+    public KakaoVO getAccessTokenFromKakao(String code, String clientId) {
         log.info(code+"\t"+clientId);
     	RestTemplate restTemplate = new RestTemplate();
         String url = KAUTH_TOKEN_URL_HOST + "/oauth/token";
@@ -46,6 +46,25 @@ public class KakaoService {
         log.info(" [Kakao Service] Id Token ------> {}", kakaoRes.getIdToken());
         log.info(" [Kakao Service] Scope ------> {}", kakaoRes.getScope());
 
-        return kakaoRes.getAccessToken();
+        return kakaoRes;
     }
+    
+    public KakaoVO getKakaoUserCode(KakaoVO KToken) {
+        String url = KAUTH_USER_URL_HOST+"v2/user/me";
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer "+KToken.getAccessToken());
+        HttpEntity<String> request = new HttpEntity<>(headers);
+        
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<KakaoVO> response = restTemplate.exchange(
+            url, 
+            HttpMethod.POST, 
+            request, 
+            KakaoVO.class
+        );
+        KakaoVO kakaoRes = response.getBody();
+        System.out.println(kakaoRes);
+        return kakaoRes;
+    }
+    
 }

@@ -1,4 +1,3 @@
-	
 // header 4try
 	var header = document.querySelector('header');
 	if(header!=null){
@@ -98,8 +97,7 @@
 	        this.value = this.value.replace(/[^0-9]/g, '');
 	    });
 	}
-    
- */	
+*/	
 
 //open an account
 	if(typeof accmsg!='undefined' && accmsg){
@@ -119,7 +117,9 @@
 	
 //sign in
 //	if(!login){
+/*	
 	if(typeof login!='undefined' && !login){
     	alert("아이디 또는 비밀번호가 다릅니다.");
 		login = true;
 	}
+	*/
