@@ -104,7 +104,16 @@
               </div>
               <div class="modal-body">
                 <%-- 모달 내용 --%>
-                <p>${description}</p>
+                <p><strong>상품명:</strong> 내일부터적금</p>
+    			<p><strong>가입대상:</strong> 만 19세 이상 개인</p>
+			    <p><strong>가입기간:</strong> 최소 1년, 최대 3년</p>
+			    <p><strong>가입금액:</strong> 매월 최소 10만원, 최대 50만원</p>
+			    <p><strong>이자율:</strong> 연 2.5%</p>
+			    <p><strong>중도해지 시 이자율:</strong> 연 1.0%</p>
+			    <p><strong>만기 시:</strong> 이자 및 원금은 가입 계좌로 자동 입금됩니다.</p>
+			    <p><strong>보호:</strong> 본 상품은 예금자보호법에 따라 보호됩니다.</p>
+			    <p><strong>기타 사항:</strong> 은행 일반 예금 약관에 따릅니다.</p>
+			    <p>위 약관은 이해를 돕기 위한 예시이며, 실제 약관은 다를 수 있습니다.</p>
               </div>
               <div class="modal-footer justify-content-center">
                 <button type="button" id="agreeButton" class="btn btn-primary">약관 동의</button>
