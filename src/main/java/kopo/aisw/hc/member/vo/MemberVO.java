@@ -1,7 +1,5 @@
 package kopo.aisw.hc.member.vo;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -31,7 +29,7 @@ public class MemberVO {
 	일일이체한도	NUMBER(15) NOT NULL
 	 
 	 */
-	private int customerId;
+	private long customerId;
 	
 	@Size(min=6, max=16, message="아이디는 6~16자 사이로 입력해주세요")
 	@Pattern(regexp = "^[\\w-]{0,30}$", 

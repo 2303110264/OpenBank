@@ -1,7 +1,6 @@
 package kopo.aisw.hc.interceptor;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import jakarta.servlet.http.HttpServletRequest;

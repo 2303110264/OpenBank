@@ -1,12 +1,18 @@
 package kopo.aisw.hc.member.kakao;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.view.RedirectView;
 
+import com.fasterxml.jackson.core.JsonParser;
+
+import jakarta.servlet.http.HttpSession;
+import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -16,6 +22,8 @@ public class KakaoService {
     private final String KAUTH_TOKEN_URL_HOST="https://kauth.kakao.com";
     private final String KAUTH_USER_URL_HOST= "https://kapi.kakao.com";
 
+    HttpCallService httpCallService = new HttpCallService();
+    
     public KakaoVO getAccessTokenFromKakao(String code, String clientId) {
         log.info(code+"\t"+clientId);
     	RestTemplate restTemplate = new RestTemplate();
@@ -50,7 +58,7 @@ public class KakaoService {
     }
     
     public KakaoVO getKakaoUserCode(KakaoVO KToken) {
-        String url = KAUTH_USER_URL_HOST+"v2/user/me";
+        String url = KAUTH_USER_URL_HOST+"/v2/user/me";
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer "+KToken.getAccessToken());
         HttpEntity<String> request = new HttpEntity<>(headers);
@@ -63,8 +71,71 @@ public class KakaoService {
             KakaoVO.class
         );
         KakaoVO kakaoRes = response.getBody();
-        System.out.println(kakaoRes);
+        System.out.println("httpCallservice-------------------------");
+        System.out.println(httpCallService.CallwithToken("GET", url, KToken.getAccessToken()));
+        System.out.println("----------------------------------------");
         return kakaoRes;
     }
+    
+//	@Autowired
+//	public HttpCallService httpCallService;
+//	
+//
+//	private String REST_API_KEY;
+//	
+//	private String REDIRECT_URI;	
+//	
+//	private String AUTHORIZE_URI;		
+//	
+//	public String TOKEN_URI;			
+//	
+//	private String CLIENT_SECRET;	
+//	
+//	private String KAKAO_API_HOST;	
+//	
+//	
+//	public RedirectView goKakaoOAuth() {
+//       return goKakaoOAuth("");
+//	}
+//	
+//	public RedirectView goKakaoOAuth(String scope) {
+//	   
+//	   String uri = AUTHORIZE_URI+"?redirect_uri="+REDIRECT_URI+"&response_type=code&client_id="+REST_API_KEY;
+//	   if(!scope.isEmpty()) uri += "&scope="+scope;
+//			   
+//       return new RedirectView(uri);
+//	}	
+//	
+//	public RedirectView loginCallback(String code, String token, HttpSession httpSession) {	
+//		String param = "grant_type=authorization_code&client_id="+REST_API_KEY+"&redirect_uri="+REDIRECT_URI+"&client_secret="+CLIENT_SECRET+"&code="+code;
+//		String rtn = httpCallService.Call("POST", token, "", param);
+//        httpSession.setAttribute("token", Trans.token(rtn, new JsonParser()));     		
+//		return new RedirectView("/index.html");
+//	}
+//			
+//	public String getProfile() {	
+//		String uri = KAKAO_API_HOST + "/v2/user/me";
+//		return httpCallService.CallwithToken(Const.GET, uri, httpSession.getAttribute("token").toString());
+//	}
+//	
+//	public String getFriends() {	
+//		String uri = KAKAO_API_HOST + "/v1/api/talk/friends";
+//		return httpCallService.CallwithToken(Const.GET, uri, httpSession.getAttribute("token").toString());
+//	}	
+//	
+//	public String message() {	
+//		String uri = KAKAO_API_HOST + "/v2/api/talk/memo/default/send";
+//		return httpCallService.CallwithToken(Const.POST, uri, httpSession.getAttribute("token").toString(), Trans.default_msg_param);
+//	}		
+//	
+//	public String friendMessage(String uuids) {	
+//		String uri = KAKAO_API_HOST + "/v1/api/talk/friends/message/default/send";
+//		return httpCallService.CallwithToken(Const.POST, uri, httpSession.getAttribute("token").toString(), Trans.default_msg_param+"&receiver_uuids=["+uuids+"]");
+//	}	
+//	
+//	public String logout() {	
+//		String uri = KAKAO_API_HOST + "/v1/user/logout";
+//		return httpCallService.CallwithToken(Const.POST, uri, httpSession.getAttribute("token").toString(), Trans.default_msg_param);
+//	}	
     
 }

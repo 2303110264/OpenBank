@@ -16,7 +16,7 @@ public interface AccountDAO {
 	public boolean openAnAccount(AccountVO account, ProductVO product);
 	
 	//계좌목록 조회- customerId
-	public List<AccountVO> getAccList(int customerId);
+	public List<AccountVO> getAccList(long customerId);
 	//추후 accNum 대신 accId로 조회할 예정
 	//계좌 조회- 이름 체크
 	public String getOwnerName(long accNum);
