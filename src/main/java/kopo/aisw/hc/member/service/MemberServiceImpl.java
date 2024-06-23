@@ -78,4 +78,8 @@ public class MemberServiceImpl implements MemberService{
 		return mDao.checkCreditPwd(userVO);
 	}
 	
+	@Override
+	public String Hashing(String password) {
+		return mDao.Hashing(password);
+	}
 }

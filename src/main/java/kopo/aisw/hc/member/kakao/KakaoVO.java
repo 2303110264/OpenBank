@@ -73,4 +73,16 @@ class KakaoProfile{
 	
 	@JsonProperty("email")
 	public String email;
+
+	@JsonProperty("gender")
+	public String gender;
+	
+	@JsonProperty("birthyear")
+	public String birthyear;
+
+	@JsonProperty("birthday")
+	public String birthday;
+
+	@JsonProperty("birthday_type") // SOLAR / LUNAR
+	public String birthdayType;
 }

@@ -58,7 +58,7 @@
 			, dataType : 'text'
 			, success : function(result){
 				alert(result)
-				if(result) location.href="/ob/";
+				location.href="/ob/";
 			}
 			, error : function(){
 				alert("서버가 응답하지 않습니다. 다시 시도해주세요.")

@@ -53,14 +53,10 @@ public class MemberVO {
 	private String email;
 	
 	private int zipCode;
-	
-	@Size(min=3, message="주소를 입력해주세요")
 	private String address;
-	
-	@Size(min=1, message="상세 주소를 입력해주세요")
 	private String addressDetail; //상세주소
 	
-	@Size(min=13, max=13, message="주민번호를 입력해주세요")
+	@Size(min=7, max=7, message="앞에서부터 7자리만 입력해주세요")
 	private String rrn;
 	
 	//0: 일반 사용자, 1: 관리자, 999:거래정지

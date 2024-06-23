@@ -17,4 +17,7 @@ public interface MemberDAO {
 	//임시
 	public MemberVO getPwd(MemberVO m);
 	public boolean checkCreditPwd(MemberVO userVO);
+	
+	//비밀번호 암호화
+	public String Hashing(String password);
 }
