@@ -1,18 +1,13 @@
 package kopo.aisw.hc.member.kakao;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.servlet.view.RedirectView;
 
-import com.fasterxml.jackson.core.JsonParser;
-
-import jakarta.servlet.http.HttpSession;
-import lombok.Value;
+import kopo.aisw.hc.member.vo.MemberVO;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -47,7 +42,6 @@ public class KakaoService {
         );
 
         KakaoVO kakaoRes = response.getBody();
-        System.out.println(kakaoRes);
 
         log.info(" [Kakao Service] Access Token ------> {}", kakaoRes.getAccessToken());
         log.info(" [Kakao Service] Refresh Token ------> {}", kakaoRes.getRefreshToken());
@@ -71,10 +65,36 @@ public class KakaoService {
             KakaoVO.class
         );
         KakaoVO kakaoRes = response.getBody();
-        System.out.println("httpCallservice-------------------------");
-        System.out.println(httpCallService.CallwithToken("GET", url, KToken.getAccessToken()));
-        System.out.println("----------------------------------------");
+        httpCallService.CallwithToken("GET", url, KToken.getAccessToken());
         return kakaoRes;
+    }
+    
+    //회원가입처리용
+    public MemberVO kakaoToMember(KakaoVO kakaouser) {
+    	MemberVO m = new MemberVO();
+    	System.out.println(kakaouser);
+    	m.setUserId(kakaouser.getId()+"");
+    	m.setPassword(kakaouser.getAccessToken());
+    	m.setName(kakaouser.getKakaoAccount().getName());
+    	m.setEmail(kakaouser.getKakaoAccount().getEmail());
+    	m.setPhoneNum("0"+kakaouser.getKakaoAccount().getPhoneNumber().substring(4).replace("-",""));
+    	int gender;
+    	if(kakaouser.getKakaoAccount().getGender().equals("female"))
+    		gender = 2;
+    	else
+    		gender = 1;
+    	if(Integer.parseInt(kakaouser.getKakaoAccount().getBirthyear())>1999)
+    		gender++;
+    	
+    	m.setRrn(kakaouser.getKakaoAccount().getBirthyear().substring(2)
+    			+kakaouser.getKakaoAccount().getBirthday()
+    			+gender);
+    	
+    	//address not null 에러방지용 로직
+    	m.setAddress("-");
+    	m.setAddressDetail("-");
+    	System.out.println(m);
+    	return m;
     }
     
 //	@Autowired

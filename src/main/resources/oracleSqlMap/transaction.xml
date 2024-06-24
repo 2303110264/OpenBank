@@ -17,6 +17,38 @@
 	</insert>
 	
 	<select id="transactionListByAcc" parameterType="long" resultType="transactionVO">
+ 		SELECT to_char(transaction_date, 'yyyy-mm-dd') transactionDate
+		        , transaction_type transcationType, acc_num withdrawAcc
+		        , tran_name withdrawName, amount, after_balance wAfterBalance
+		FROM (
+		    SELECT 
+		        t.transaction_date, 
+		        t.transaction_type, 
+		        t.acc_num, 
+		        t.tran_name,
+		        t.amount,
+		        SUM(DECODE(t.transaction_type, '입금', t.amount, -t.amount)) 
+		            OVER (PARTITION BY t.acc_num ORDER BY t.transaction_date) AS after_balance
+		    FROM 
+		        cb_transaction t
+		    WHERE 
+		        t.acc_num = #{accNum}
+		) tb
+		<!-- 
+		WHERE  
+		    tb.transaction_date BETWEEN '2024-06-14' AND SYSDATE
+		 -->
+		ORDER BY 
+		    tb.transaction_date DESC;
+		 <!-- 
+		 SELECT transaction_id transactionId, to_char(transaction_date, 'yyyy-mm-dd') transactionDate
+		 , transaction_type transactionType
+		 , acc_num withdrawAcc, tran_name withdrawName, amount, 
+		 after_balance wAfterBalance
+		 from cb_transaction
+		 where acc_num = #{long}
+		 ORDER BY transaction_date desc
+		  -->
 		<!-- 
 		 SELECT 
 			t.transaction_id transactionId,
@@ -41,12 +73,5 @@
 		ON 
 		    t.transaction_date = w.transaction_date
 		 -->
-		 SELECT transaction_id transactionId, to_char(transaction_date, 'yyyy-mm-dd') transactionDate
-		 , transaction_type transactionType
-		 , acc_num withdrawAcc, tran_name withdrawName, amount, 
-		 after_balance wAfterBalance
-		 from cb_transaction
-		 where acc_num = #{long}
-		 ORDER BY transaction_date desc
 	</select>
 </mapper>

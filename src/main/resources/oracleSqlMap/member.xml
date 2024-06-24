@@ -83,7 +83,7 @@ CREATE SEQUENCE test_customer_seq;
 	<select id="humanDoubleCheck" parameterType="memberVO" resultType="memberVO">
 		select bank_id userid, name
 		from test_customer
-		where rrn = #{rrn}
+		where name=#{name} and rrn = #{rrn} and phone_num = #{phoneNum}
 	</select>
 	<!-- mail 중복체크 -->
 	<select id="mailDoubleCheck" parameterType="String" resultType="memberVO">
@@ -149,14 +149,10 @@ CREATE SEQUENCE test_customer_seq;
 		<set>
 		bank_id = #{userId}
 		, password = #{password}
-		, name = #{name}
-		<if test="phoneNum!=null">
-			,phone_num = #{phoneNum}
-		</if>
 		<if test="email!=null">
 			,email = #{email}
 		</if>
-		<if test="zipCode!=null">
+		<if test="zipCode>0">
 			,ZIP_CODE = #{zipCode}
 			,address = #{address}
 		</if>
@@ -165,7 +161,7 @@ CREATE SEQUENCE test_customer_seq;
 		</if>
 		reg_date = sysdate
 		</set>
-		where rrn = #{rrn}
+		where name=#{name} and rrn = #{rrn} and phone_num = #{phoneNum}
 	</update>
 	
 	<!-- 세션 로그인중인 계정 비번 체크 -->

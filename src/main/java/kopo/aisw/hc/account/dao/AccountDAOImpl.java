@@ -20,7 +20,6 @@ import kopo.aisw.hc.transaction.vo.TransactionVO;
 public class AccountDAOImpl implements AccountDAO {
 	private Random rd = new Random();
 	
-	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
@@ -78,7 +77,7 @@ public class AccountDAOImpl implements AccountDAO {
 
 	//계좌목록 조회- customerId
 	@Override
-	public List<AccountVO> getAccList(int customerId) {
+	public List<AccountVO> getAccList(long customerId) {
 		List<AccountVO> list = sqlSession.selectList("dao.AccountDAO.selectAccByCustomer", customerId);
 		return list;
 	}

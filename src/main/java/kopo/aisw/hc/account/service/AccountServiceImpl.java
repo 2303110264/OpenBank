@@ -2,10 +2,12 @@ package kopo.aisw.hc.account.service;
 
 import java.util.List;
 
+import org.sonatype.aether.spi.connector.Transfer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kopo.aisw.hc.account.dao.AccountDAO;
+import kopo.aisw.hc.account.dao.AccountDAOImpl;
 import kopo.aisw.hc.account.vo.AccountVO;
 import kopo.aisw.hc.member.vo.MemberVO;
 import kopo.aisw.hc.product.dao.ProductDAO;
@@ -18,7 +20,7 @@ import kopo.aisw.hc.transaction.vo.TransactionVO;
 public class AccountServiceImpl implements AccountService {
 	
 	@Autowired
-	private AccountDAO aDao;
+	private static AccountDAO aDao;
 	@Autowired
 	private ProductDAO pDao;
 	@Autowired
@@ -84,7 +86,5 @@ public class AccountServiceImpl implements AccountService {
 	public AccountVO getAccount(String accNum) {
 		return aDao.getAccount(accNum);
 	}
-
-	
 
 }

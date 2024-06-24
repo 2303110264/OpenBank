@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.support.SessionStatus;
 
 import jakarta.servlet.http.HttpSession;
 import kopo.aisw.hc.member.service.MemberService;
@@ -33,7 +34,7 @@ public class AMemberController {
 	}
 	
 	@DeleteMapping(value = "quit", produces = "application/text; charset=utf8")
-	public String quit(@RequestBody MemberVO m, HttpSession session){
+	public String quit(@RequestBody MemberVO m, HttpSession session, SessionStatus state){
 		MemberVO userVO = (MemberVO) session.getAttribute("userVO");
 		if(m.getCustomerId()!=userVO.getCustomerId()) return "잘못된 접근입니다.";
 		if(userVO.getCustomerType()==1) return "관리자는 해당 경로로 탈퇴할 수 없습니다.";
@@ -41,6 +42,7 @@ public class AMemberController {
 		if(bool) {
 			int a = ms.quitMember(m);
 			if(a>0) {
+				state.setComplete();
 				return "탈퇴 처리가 완료되었습니다.";
 			}
 		}else {
