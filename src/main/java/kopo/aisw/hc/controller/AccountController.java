@@ -58,8 +58,8 @@ public class AccountController {
 	}
 	@PostMapping("openAcc/{productNum}")
 	public String openAnAcc(@PathVariable(value = "productNum") int productNum,
-			@Valid @ModelAttribute("openAcc")AccountVO openAcc, BindingResult res,
-			HttpSession session, Model model) throws Exception {
+			@Valid @ModelAttribute("openAcc")AccountVO openAcc,
+			BindingResult res, HttpSession session, Model model) throws Exception {
 		boolean b;
 		ProductVO p = ps.selectProduct(productNum);
 		//상품번호, 고객고유번호, 고객이름 세팅
@@ -103,6 +103,9 @@ public class AccountController {
 		if(userVO.getCustomerId()!=account.getCustomerId()) return "redirect:/account/";
 		model.addAttribute("account", account);
 		model.addAttribute("transaction", transaction);
+		
+		List<AccountVO> list = as.getAccountList(userVO);
+		model.addAttribute("accList", list);
 		return "account/detail";
 	}
 }

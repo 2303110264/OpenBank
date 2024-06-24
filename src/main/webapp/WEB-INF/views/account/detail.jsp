@@ -51,9 +51,12 @@
     <section class="container py-5">
 		<div class="row pt-5">
 	            <div class="worksingle-content col-lg-8 m-auto text-left justify-content-center">
-	                <h2 class="worksingle-heading h3 pb-3 light-300 typo-space-line">${account.accName }</h2>
-	                <p class="worksingle-footer py-3 text-muted light-300">
-	                	<table border="0" style="width:100%;">
+	                <h2 class="worksingle-heading h3 pb-3 typo-space-line"><b>${account.accName }</b></h2>
+	                <input type="button" id="btn1" class="btn btn-secondary rounded-pill px-md-5 px-4 py-2 radius-0 text-right light-300 white-box"
+	                style="margin-left:80%; margin-top:-90px" value="해지">
+	                <p class="worksingle-footer py-1 text-muted light-300">
+	                </p>
+               	<table border="0" style="width:100%;">
 			    <tr>
 			        <th width=20%>계좌번호</th>
 			        <td>${account.accNum}</td>
@@ -84,7 +87,6 @@
 			</table>	
 	                	
 	                		
-	                </p>
 	            </div>
 	        </div>
 <%--
@@ -94,7 +96,7 @@ accNum,acc_name accName,
 		to_char(ret_date, 'yyyy-mm-dd') retDate,
 		to_char(last_trade_date, 'yyyy-mm-dd') lastTradeDate
  --%>
-       <div class="row pt-5">
+       <div class="row pt-4">
            <div class="worksingle-content col-lg-8 m-auto text-left justify-content-center">
 			<table border="0">
 			    <tr>
@@ -129,7 +131,8 @@ accNum,acc_name accName,
 			</table>	
         </div><!-- End Blog Cover -->
 	</div>
-
+	<p class="worksingle-footer py-1 text-muted light-300">
+	                
     </section>
     
     <!-- End Work Sigle -->
@@ -205,6 +208,80 @@ accNum,acc_name accName,
     </article>
     <!-- End Related Post -->
  --%>
+    <%-- MODAL --%>
+        <div class="row pb-4 sign-up">
+					<div class="modal fade" id="staticBackdrop"  <%-- data-bs-backdrop="static" data-bs-keyboard="false" --%> tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+					  <div class="modal-dialog  modal-dialog-centered">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h1 class="modal-title fs-5" id="staticBackdropLabel">
+					        계좌 해지 확인
+					        </h1>
+					        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					      </div>
+			<div class="col-lg-8">
+					      <div class="modal-body">
+                <form class="contact-form row modal-form" id="form" method="POST" action="/ob/account/close" name="modal-form">
+					        <%------------------------ --%>
+            
+                    <div class="col-lg-4 mb-3 sign-in-div2">
+                        <div class="form-floating  border-clean">
+                            <div class="form-control form-control-lg light-300 formSelect border-clean" id="wAcc" style="padding-top:2rem;">${account.accName }(${account.accNum})</div>
+                            <label for="floatingID light-300">이하 계좌에서</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 mb-4 sign-in-div2">
+                        <div class="form-floating border-clean">
+                            <select class="form-control form-control-lg light-300 formSelect" id="dAcc" name="withdrawAcc" required>
+                            	<c:forEach items="${accList}" var="a">
+	                            	<c:if test="${!a.accNum.equals(account.accNum)}">
+	                            		<option value="${a.accNum}">${a.accName}(${a.accNum})</option>
+	                            	</c:if>
+                            	</c:forEach>
+                            </select>
+                            <div class="formSelect form-control form-control-lg light-300 border-clean text-center" id="wName-modal"></div>
+                            <label for="floatingPassword light-300">모든 잔액을</label>
+                            <label class="label2" style="top:63px!important" for="floatingPassword light-300">계좌로 이동합니다.</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 mb-2 sign-in-div2 ">
+                        <div class="error form-floating border-clean">
+                        <%--
+                            <div class="formSelect form-control form-control-lg light-300 border-clean text-center" id="amount-modal"></div>
+                         --%>
+                        '해지하기' 버튼을 누를 경우 바로 해지가 진행됩니다. 
+                        <br>해지가 완료되면 취소가 불가능합니다.
+                        </div>
+                    </div>
+                    <div class="col-lg-4 mb-4 sign-in-div2">
+                        <div class="form-floating">
+                            <input type="password" class="form-control form-control-lg light-300 " id="credit-password" placeholder="password" required/>
+                            <label for="floatingPassword light-300">결제 비밀번호를 입력해주세요</label>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-12 m-auto text-center">
+                    </div>
+					
+					
+
+
+
+
+<%----------------- --%>
+                </form>
+					      </div>
+					      <div class="modal-footer">
+					      <%-- 버튼 색상 css 지정할것 --%>
+					        <button type="button" class="btn btn-secondary transfer-dismiss white-box" data-bs-dismiss="modal">취소</button>
+	                        <button type="submit" class="btn btn-primary">&nbsp;&nbsp;해지하기&nbsp;&nbsp;</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+           		</div>	
+			</div>
+    
+    
     
     
     <%-- Start Footer --%>
@@ -222,14 +299,75 @@ accNum,acc_name accName,
     <script src="${path}/assets/js/jquery.min.js"></script>
     <%-- Page Script --%>
     <script>
-        $(window).load(function() {
-            // Slide
-            $('.templatemo-slide-link').click(function() {
-                var this_href = $(this).attr('href');
-                $('#templatemo-slide-link-target img').attr('src', this_href);
-                return false;
+    var ready = false;
+	var cChk = false;
+        $(document).ready(function(){
+        	document.getElementById('btn1').addEventListener('click', function() {
+        		$('#staticBackdrop').modal('show');
             });
-            // End Slide
+        	$('#dAcc').on('change', function(){ 
+    			ready=false
+    		})
+    		$('#wAcc').on('change', function(){ 
+    			ready=false
+    		})
+
+        	$('#form').on('submit', function(e){
+        		var cp = $('#credit-password').val();
+        		if(ready && cpChk){
+        			return true;
+        		}else if(ready && cp!=''){
+    	    		e.preventDefault();
+    				
+    	    		$.ajax({
+    	                type: 'POST',
+    	                url: '/ob/member/credit-password',
+    	                data: { creditPassword: cp },
+    	                success: function(result) {
+    	                	if(result){
+    	                		cpChk = true;
+    	                		$('#form').submit();
+    	                		return true;
+    	                	}
+    	                	else alert('비밀번호가 맞지 않습니다.')
+    	                }, error: function(error) {
+    	                    alert('잘못된 요청입니다');
+    	                    console.error(error);
+    	                }
+    	            });
+        		}else{
+    	    		e.preventDefault();
+    		
+    				var dAcc = $('#dAcc').val();
+    		        var wAcc = $('#wAcc').val();
+    		        
+    		        $('#accErr').text((wAcc==dAcc) ? '동일한 계좌끼리는 이체할 수 없습니다.':'');
+    	        	$('#amtErr').text((Number($('#amt').val())<500) ? '송금은 500원부터 가능합니다.':'');
+    				
+    				$.ajax({
+    	                type: 'GET',
+    	                url: '/ob/account/accCheck',
+    	                data: { accNum: dAcc },
+    	                success: function(result) {
+    	                	if(result==""){
+    	               			$('#accErr').text("존재하지 않는 계좌입니다.");
+    	                	}else{
+    	                		var amt = $('#amt').val()
+    		                    $('#wName').val(result);
+    		                    $('#wAcc-modal').text($('#wAcc').val());
+    		                    $('#amount-modal').text(amt.toString().replace(/(\d+)(\d{4})$/, '$1만 $2').concat('원'));
+    		                    $('#wName-modal').text(result);
+    		                    ready=true;
+    		                    if($('#accErr').text()==$('#amtErr').text())
+    	                    		$('#staticBackdrop').modal('show');
+    	            			}
+    	                }, error: function(error) {
+    	                    $('#accErr').text('존재하지 않는 계좌입니다.');
+    	                    console.error(error);
+    	                }
+    	            });
+        		}
+    		});
         });
     </script>
 

@@ -23,14 +23,18 @@ public class TransactionDAOImpl implements TransactionDAO{
 	@Override
 	@Transactional(rollbackOn = {Exception.class})
 	public TransactionVO transfer(TransactionVO transaction) throws Exception {
-		
-		//transaction에 출금계좌의 afterbalance 채워야함
-		if(sqlSession.insert("dao.TransactionDAO.withdraw", transaction)
-				+sqlSession.insert("dao.TransactionDAO.deposit", transaction)!=2) {
+		try {
+			//transaction에 출금계좌의 afterbalance 채워야함
+			sqlSession.update("dao.AccountDAO.withdraw", transaction);
+			sqlSession.update("dao.AccountDAO.deposit", transaction);
+			sqlSession.insert("dao.TransactionDAO.withdraw", transaction);
+			sqlSession.insert("dao.TransactionDAO.deposit", transaction);
+			log.info("거래 성공 - "+transaction);
+		}catch(Exception e) {
+			e.printStackTrace();
 			log.error("거래 실패 - "+transaction);
-			throw new Exception("거래 실패. 관리자에게 문의해주세요.");
+			throw e;
 		}
-		log.info("거래 성공 - "+transaction);
 		return transaction;
 	}
 

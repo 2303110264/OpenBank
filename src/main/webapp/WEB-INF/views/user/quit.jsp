@@ -90,7 +90,7 @@
                         <div class="form-floating">
                             <input type="hidden" class="form-control form-control-lg light-300 " id="customerId" name="customerId" value="${userVO.customerId }"/>
                             <input type="password" class="form-control form-control-lg light-300 " id="password" name="password" placeholder="Password" required/>
-                            <label for="floatingPassword light-300">Password</label>
+                            <label for="floatingPassword light-300">주민번호(7자리: 생년월일6자+뒷자리1자)</label>
                         </div>
                     </div><%-- End Input Password --%>
 

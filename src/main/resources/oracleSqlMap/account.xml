@@ -16,7 +16,8 @@ CREATE TABLE CB_ACCOUNT(
 	, INTEREST_RATE NUMBER(5,4) NOT NULL
 	, REG_DATE DATE DEFAULT sysdate NOT NULL
 	, RET_DATE DATE NOT NULL
-	, AVALIABLE NUMBER(1) NOT NULL  // 1:활성 0:비활성
+	, BALANCE NUMBER NOT NULL /* 지우고만들고또지우고만들고..... */
+	, AVALIABLE NUMBER(1) NOT NULL  /* 1:활성 0:비활성 */
 	, CONSTRAINT FK_CUSTOMER_ID FOREIGN KEY(CUSTOMER_ID) REFERENCES TEST_CUSTOMER(CUSTOMER_ID)
 	, CONSTRAINT FK_PRODUCT_NUM FOREIGN KEY(PRODUCT_NUM) REFERENCES TEST_PRODUCT_LIST(PRODUCT_NUM)
 	);
@@ -39,7 +40,7 @@ CREATE TABLE CB_ACCOUNT(
 	</insert>
 	
 	<!-- 고객의 계좌목록 조회 -->
-	<select id="selectAccByCustomer" parameterType="int" resultType="accountVO">
+	<select id="selectAccByCustomer" parameterType="Long" resultType="accountVO">
 		select c.acc_num accNum, c.acc_name accName, c.customer_id customerId
 				, to_char(c.ret_date, 'yyyy-mm-dd') retDate, tn.after_balance balance, c.avaliable avaliable
 		from cb_account c
@@ -86,21 +87,28 @@ CREATE TABLE CB_ACCOUNT(
 	<update id="deposit" parameterType="transactionVO">
 		update cb_account
 		set balance = balance+#{amount}
-		where deposit_acc = #{depositAcc}
+		where acc_num = #{depositAcc}
 	</update>
 	
 	<!-- 출금 -->
 	<update id="withdraw" parameterType="transactionVO">
 		update cb_account
 		set balance = balance-#{amount}
-		where deposit_acc = #{withdrawAcc}
+		where acc_num = #{withdrawAcc}
 	</update>
 	
 	<!-- 해지 -->
-	<delete id="cloaseAnAccount" parameterType="accountVO">
+	<!-- 
+	<delete id="closeAnAccount" parameterType="accountVO">
 		delete from cb_account
 		where acc_num = #{accNum}
 	</delete>
+	 -->
+	<update id="closeAnAccount" parameterType="accountVO">
+		update cb_account
+		set AVALIABLE=0
+		where acc_num = #{accNum}
+	</update>
 	
 	<!-- 1계좌조회 -->
 	<select id="getAccount" parameterType="Long" resultType="accountVO">

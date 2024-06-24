@@ -2,10 +2,11 @@ package kopo.aisw.hc.account.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import kopo.aisw.hc.account.vo.AccountVO;
 import kopo.aisw.hc.member.vo.MemberVO;
 import kopo.aisw.hc.transaction.vo.TransactionVO;
-
 public interface AccountService {
 	//개설 전 세팅
 	public AccountVO preset(MemberVO member, int productNum) throws Exception;

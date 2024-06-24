@@ -82,6 +82,11 @@
 		</mvc:interceptor>
 		
 		<mvc:interceptor>
+	        <mvc:mapping path="/account/" /> 
+			<bean class="kopo.aisw.hc.interceptor.AccountInterceptor" />
+		</mvc:interceptor>
+
+		<mvc:interceptor>
 	        <mvc:mapping path="/account/**" /> 
 	        <mvc:mapping path="/product/**" /> 
 			<bean class="kopo.aisw.hc.interceptor.BlacklistInterceptor" />

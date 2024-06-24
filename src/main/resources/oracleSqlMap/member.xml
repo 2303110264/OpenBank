@@ -163,10 +163,34 @@ CREATE SEQUENCE test_customer_seq;
 		</set>
 		where name=#{name} and rrn = #{rrn} and phone_num = #{phoneNum}
 	</update>
+	<update id="updateBankIdByEmail" parameterType="memberVO">
+		update test_customer
+		<set>
+		bank_id = #{userId}
+		, password = #{password}
+		,phone_num = #{phoneNum}
+		<if test="zipCode>0">
+			,ZIP_CODE = #{zipCode}
+			,address = #{address}
+		</if>
+		<if test="addressDetail!=null">
+			,address_detail = #{addressDetail},
+		</if>
+		reg_date = sysdate
+		</set>
+		where name=#{name} and rrn = #{rrn} and email = #{email}
+	</update>
 	
 	<!-- 세션 로그인중인 계정 비번 체크 -->
-	<select id="getPwd" parameterType="int" resultType="memberVO">
+	<select id="getPwd" parameterType="Long" resultType="memberVO">
 		select password
+		from test_customer
+		where customer_id = #{customerId}
+	</select>
+	
+	<!-- 세션 로그인중인 rrn 체크 -->
+	<select id="checkBirth" parameterType="memberVO" resultType="String">
+		select rrn
 		from test_customer
 		where customer_id = #{customerId}
 	</select>

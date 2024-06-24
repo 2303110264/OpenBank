@@ -31,4 +31,5 @@ public interface MemberService {
 	public boolean checkCreditPwd(MemberVO userVO);
 	//암호화(임시)
 	public String Hashing(String password);
+	public boolean checkBirth(MemberVO m);
 }

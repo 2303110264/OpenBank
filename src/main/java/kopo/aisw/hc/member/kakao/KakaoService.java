@@ -1,5 +1,6 @@
 package kopo.aisw.hc.member.kakao;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -7,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import kopo.aisw.hc.member.dao.MemberDAO;
 import kopo.aisw.hc.member.vo.MemberVO;
 import lombok.extern.slf4j.Slf4j;
 
@@ -17,7 +19,11 @@ public class KakaoService {
     private final String KAUTH_TOKEN_URL_HOST="https://kauth.kakao.com";
     private final String KAUTH_USER_URL_HOST= "https://kapi.kakao.com";
 
-    HttpCallService httpCallService = new HttpCallService();
+    @Autowired
+    MemberDAO mDao;
+    
+    @Autowired
+    HttpCallService httpCallService;
     
     public KakaoVO getAccessTokenFromKakao(String code, String clientId) {
         log.info(code+"\t"+clientId);
@@ -48,7 +54,7 @@ public class KakaoService {
         log.info(" [Kakao Service] Id Token ------> {}", kakaoRes.getIdToken());
         log.info(" [Kakao Service] Scope ------> {}", kakaoRes.getScope());
 
-        return kakaoRes;
+        return getKakaoUserCode(kakaoRes);
     }
     
     public KakaoVO getKakaoUserCode(KakaoVO KToken) {
@@ -72,9 +78,10 @@ public class KakaoService {
     //회원가입처리용
     public MemberVO kakaoToMember(KakaoVO kakaouser) {
     	MemberVO m = new MemberVO();
-    	System.out.println(kakaouser);
     	m.setUserId(kakaouser.getId()+"");
-    	m.setPassword(kakaouser.getAccessToken());
+    	//수정되어야 할 로직
+    	m.setPassword(mDao.Hashing(m.getUserId()));
+    	
     	m.setName(kakaouser.getKakaoAccount().getName());
     	m.setEmail(kakaouser.getKakaoAccount().getEmail());
     	m.setPhoneNum("0"+kakaouser.getKakaoAccount().getPhoneNumber().substring(4).replace("-",""));

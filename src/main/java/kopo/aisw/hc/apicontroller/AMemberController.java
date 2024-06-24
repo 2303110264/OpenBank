@@ -33,12 +33,22 @@ public class AMemberController {
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
 	
+	@PostMapping(value="password", produces="application/json; charset=utf8")
+	public ResponseEntity<Boolean> checkPwd(@RequestParam(value = "password") String p,
+			HttpSession session) {
+		MemberVO userVO = (MemberVO) session.getAttribute("userVO");
+		userVO.setPassword(p);
+		boolean result = ms.checkPwd(userVO);
+		log.info("Password check : "+userVO.getCustomerId()+" - result:"+result);
+		return new ResponseEntity<>(result, HttpStatus.OK);
+	}
+	
 	@DeleteMapping(value = "quit", produces = "application/text; charset=utf8")
 	public String quit(@RequestBody MemberVO m, HttpSession session, SessionStatus state){
 		MemberVO userVO = (MemberVO) session.getAttribute("userVO");
 		if(m.getCustomerId()!=userVO.getCustomerId()) return "잘못된 접근입니다.";
 		if(userVO.getCustomerType()==1) return "관리자는 해당 경로로 탈퇴할 수 없습니다.";
-		boolean bool = ms.checkPwd(m);
+		boolean bool = ms.checkBirth(m);
 		if(bool) {
 			int a = ms.quitMember(m);
 			if(a>0) {

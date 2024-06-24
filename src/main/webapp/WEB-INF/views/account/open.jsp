@@ -43,7 +43,6 @@
         <h2 class="col-12 col-xl-8 h4 regular-400 margin-auto">금리: ${product.interestRate}%</h2>
         <p class="col-12 col-xl-8 text-muted pb-5 light-300 margin-auto">
             초기 가입금액: ${product.initialDeposit }
-            <br/>${product.description}
         </p>
 
         <div class="row pb-4 sign-up">
@@ -76,7 +75,7 @@
 
                     <div class="col-lg-4 mb-4 sign-in-div2">
                         <div class="form-floating">
-                            <input type="password" class="form-control form-control-lg light-300" id="password" name="password" placeholder="Account Password"/>
+                            <input type="password" class="form-control form-control-lg light-300" id="password" name="password" placeholder="Account Password" required="true"/>
                             <label for="floatingname light-300">Account Password</label>
                         </div>
                     </div>
@@ -104,16 +103,16 @@
               </div>
               <div class="modal-body">
                 <%-- 모달 내용 --%>
-                <p><strong>상품명:</strong> 내일부터적금</p>
+                <p><strong>상품명:</strong> ${product.productName }</p>
     			<p><strong>가입대상:</strong> 만 19세 이상 개인</p>
-			    <p><strong>가입기간:</strong> 최소 1년, 최대 3년</p>
-			    <p><strong>가입금액:</strong> 매월 최소 10만원, 최대 50만원</p>
-			    <p><strong>이자율:</strong> 연 2.5%</p>
+			    <p><strong>가입기간:</strong> ${product.dateOfDeposit}개월</p>
+			    <p><strong>초기 가입금액:</strong> ${product.initialDeposit }원</p>
+			    <p><strong>이자율:</strong> 연 ${product.interestRate }%</p>
 			    <p><strong>중도해지 시 이자율:</strong> 연 1.0%</p>
 			    <p><strong>만기 시:</strong> 이자 및 원금은 가입 계좌로 자동 입금됩니다.</p>
 			    <p><strong>보호:</strong> 본 상품은 예금자보호법에 따라 보호됩니다.</p>
-			    <p><strong>기타 사항:</strong> 은행 일반 예금 약관에 따릅니다.</p>
-			    <p>위 약관은 이해를 돕기 위한 예시이며, 실제 약관은 다를 수 있습니다.</p>
+			    <p><strong>기타 사항:</strong> 다음 약관에 따릅니다.</p>
+			    <p>${product.description}</p>
               </div>
               <div class="modal-footer justify-content-center">
                 <button type="button" id="agreeButton" class="btn btn-primary">약관 동의</button>
@@ -139,11 +138,11 @@
     <%-- Bootstrap --%>
     <script src="${path}/assets/js/bootstrap.bundle.min.js"></script>
     <%-- Templatemo --%>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="${path}/assets/js/templatemo.js"></script>
-    
     <script>
         let agreed = false;
-
+		let pChk = false;
         document.getElementById('agreeButton').addEventListener('click', function() {
             agreed = true;
             var modal = bootstrap.Modal.getInstance(document.getElementById('exampleModalCenter'));
@@ -155,6 +154,28 @@
                 event.preventDefault();
                 alert('약관에 동의해 주세요.');
             }
+            var p = $('#password').val();
+            if(agreed && p!=''){
+                event.preventDefault();
+      
+                $.ajax({
+	                type: 'POST',
+	                url: '/ob/member/password',
+	                data: { password: p },
+	                success: function(result) {
+	                	if(result){
+	                		pChk = true;
+	                		$('#form').submit();
+	                		return true;
+	                	}
+	                	else alert('비밀번호가 맞지 않습니다.')
+	                }, error: function(error) {
+	                    alert('잘못된 요청입니다');
+	                    console.error(error);
+	                }
+	            });        	
+            }
+        
         });
     </script>
 </body>

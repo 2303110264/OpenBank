@@ -135,4 +135,9 @@ public class MemberDAOImpl implements MemberDAO{
 		}
 		return sb.toString();
 	}
+	
+	@Override
+	public boolean checkBirth(MemberVO m) {
+		return m.getPassword().equals(sqlSession.selectOne("dao.MemberDAO.checkBirth",m));
+	}
 }

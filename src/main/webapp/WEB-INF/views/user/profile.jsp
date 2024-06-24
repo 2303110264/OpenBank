@@ -52,10 +52,28 @@
                     <div class="col-lg-6 mb-4">
                         <div class="form-floating">
                             <form:input path="userId" type="text" class="form-control form-control-lg light-300" id="floatingID" name="userId" readonly="true" placeholder="ID"/>
-                            <label for="floatingID light-300">ID</label>
+                            <label for="floatingID light-300">아이디</label>
                         </div>
                     </div><%-- End Input userId --%>
+					
+					<div class="col-lg-6"></div> <%-- 정렬을 위한 더미공간 --%>
+					
+                    <div class="col-lg-6 mb-4">
+                        <div class="form-floating">
+                            <form:input path="password" type="password" class="form-control form-control-lg light-300" id="password" name="password" placeholder="Password"/>
+                            <label for="floatingPassword light-300">비밀번호</label>
+                            <form:errors path="password" class="error"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="form-floating">
+                            <input type="password" class="form-control form-control-lg light-300" id="password-check" name="pw" placeholder="Password check" />
+                            <label for="floatingPassword light-300">비밀번호 확인</label>
+							<span class="error" id="password-error"></span>
+                        </div>
+                    </div><%-- End Input Password --%>
 
+					<%--???
                     <div class="col-lg-6 mb-4">
                         <div class="form-floating">
                             <form:input path="password" type="password" class="form-control form-control-lg light-300" id="floatingPassword" name="password" placeholder="Password"/>
@@ -64,12 +82,13 @@
                             	<form:errors path="password" class="error"/>
 							</c:if>                            
                         </div>
-                    </div><%-- End Input Password --%>
+                    </div>
+					 --%>
 
                     <div class="col-lg-6 mb-4">
                         <div class="form-floating">
                             <form:input path="name" type="text" class="form-control form-control-lg light-300" id="floatingname" name="name" placeholder="Name"/>
-                            <label for="floatingname light-300">Name</label>
+                            <label for="floatingname light-300">이름</label>
                             <form:errors path="name" class="error"/>
                         </div>
                     </div><%-- End Input Name --%>
@@ -77,7 +96,7 @@
                     <div class="col-lg-6 mb-4">
                         <div class="form-floating">
                             <form:input path="email" type="text" class="form-control form-control-lg light-300" id="floatingmail" name="email" placeholder="Phone"/>
-                            <label for="floatingmail light-300">Email</label>
+                            <label for="floatingmail light-300">이메일</label>
                             <form:errors path="email" class="error"/>
                             <c:if test="${mailDuplicationCheck}">
                             	<span class='error'>이미 등록된 이메일입니다</span>
@@ -88,7 +107,7 @@
                     <div class="col-lg-6 mb-4">
                         <div class="form-floating">
                             <form:input path="phoneNum" type="text" class="form-control form-control-lg light-300" id="phoneNum" name="phoneNum" placeholder="phoneNum"/>
-                            <label for="floatingPhone light-300">Phone</label>
+                            <label for="floatingPhone light-300">전화번호</label>
                             <form:errors path="phoneNum" class="error"/>
                             <c:if test="${phoneDuplicationCheck}">
                             	<span class='error'>이미 등록된 전화번호입니다</span>
@@ -114,7 +133,7 @@
                         <div class="form-floating">
                         	<input type="hidden" id="confmKey" name="confmKey" value=""  >
                             <form:input  path="zipCode" type="text" class="form-control form-control-lg light-300" id="zipNo" name="zipNo" readonly="true" placeholder="zipCode"/>
-                            <label for="floatingZip light-300">Zip code</label>
+                            <label for="floatingZip light-300">우편번호</label>
                             <form:errors path="address" class="error"/>
                         </div>
                     </div><%-- End Input zipCode --%>
@@ -122,13 +141,13 @@
                     <div class="col-12">
                         <div class="form-floating mb-4">
                             <form:input path="address" type="text" class="form-control form-control-lg light-300" id="roadAddrPart1" name="roadAddrPart1" readonly="true" placeholder="address"/>
-                            <label for="floatingAddress light-300">Address</label>
+                            <label for="floatingAddress light-300">주소</label>
                         </div>
                     </div><%-- End Input Address --%>
                     <div class="col-12">
                         <div class="form-floating mb-4">
                             <form:input path="addressDetail" type="text" class="form-control form-control-lg light-300" id="addrDetail" name="addrDetail" placeholder="address detail"/>
-                            <label for="floatingAddress light-300">Address detail</label>
+                            <label for="floatingAddress light-300">상세주소</label>
                             <form:errors path="addressDetail" class="error"/>
                         </div>
                     </div><%-- End Input Address Detail --%>
@@ -159,7 +178,32 @@
 	<%-- Custom --%>
 	<c:if test="${message}">
 	<script>
-	    var profile = ${message}
+		document.addEventListener('DOMContentLoaded', function() {
+			var profile = ${message}
+		    const password = document.getElementById('password');
+		    const passwordCheck = document.getElementById('password-check');
+		    const passwordError = document.getElementById('password-error');
+		    
+		    function checkPasswordMatch() {
+		        if (password.value === passwordCheck.value) {
+		        	passwordError.textContent='';
+		        	return true;
+		        } else {
+		            passwordError.textContent = '비밀번호가 일치하지 않습니다';
+		            passwordError.style.color = 'red';
+		        	return false;
+		        }
+		    }
+		
+		    password.addEventListener('input', checkPasswordMatch);
+		    passwordCheck.addEventListener('input', checkPasswordMatch);
+		    
+		    form.addEventListener('submit', function(event) {
+		        if (!checkPasswordMatch()) {
+		            event.preventDefault();
+		        }
+		    });
+	    });
 	</script>
 	</c:if>	
 	<script src="${path}/assets/js/custom.js"></script>

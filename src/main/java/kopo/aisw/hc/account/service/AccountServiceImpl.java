@@ -20,7 +20,7 @@ import kopo.aisw.hc.transaction.vo.TransactionVO;
 public class AccountServiceImpl implements AccountService {
 	
 	@Autowired
-	private static AccountDAO aDao;
+	private AccountDAO aDao;
 	@Autowired
 	private ProductDAO pDao;
 	@Autowired

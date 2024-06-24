@@ -82,4 +82,9 @@ public class MemberServiceImpl implements MemberService{
 	public String Hashing(String password) {
 		return mDao.Hashing(password);
 	}
+	
+	@Override
+	public boolean checkBirth(MemberVO m) {
+		return mDao.checkBirth(m);
+	}
 }

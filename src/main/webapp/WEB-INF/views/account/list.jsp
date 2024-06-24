@@ -77,9 +77,9 @@
         <div class="row justify-content-center my-5 my-5-custom">
             <div class="filter-btns shadow-md rounded-pill text-center col-auto">
                 <a class="filter-btn btn rounded-pill btn-outline-primary border-0 m-md-2 px-md-4 active" data-filter=".account" href="#">All</a>
-                <a class="filter-btn btn rounded-pill btn-outline-primary border-0 m-md-2 px-md-4" data-filter=".type1" href="#">예금</a>
-                <a class="filter-btn btn rounded-pill btn-outline-primary border-0 m-md-2 px-md-4" data-filter=".type2" href="#">적금</a>
-                <a class="filter-btn btn rounded-pill btn-outline-primary border-0 m-md-2 px-md-4" data-filter=".type3" href="#">대출</a>
+                <a class="filter-btn btn rounded-pill btn-outline-primary border-0 m-md-2 px-md-4" data-filter=".type0" href="#">예금</a>
+                <a class="filter-btn btn rounded-pill btn-outline-primary border-0 m-md-2 px-md-4" data-filter=".type1" href="#">적금</a>
+                <a class="filter-btn btn rounded-pill btn-outline-primary border-0 m-md-2 px-md-4" data-filter=".type2" href="#">대출</a>
 <%--
                  <a class="filter-btn btn rounded-pill btn-outline-primary border-0 m-md-2 px-md-4" data-filter=".graphic" href="#">Graphic</a>
  --%>
@@ -90,9 +90,10 @@
          		소유한 계좌가 없습니다.
          	</c:if>
 			<c:forEach items="${accList}" var="acc">
-				<!-- 
+				<c:if test="${acc.avaliable.equals('1') }">
+				<%-- 
 		            <a href="${path}/accDetail/${accList.indexOf(acc)}" class="a-margin col-sm-6 col-lg-4 text-decoration-none account type${acc.productNum }">
-				 -->
+				 --%>
 				 <form action="/ob/account/" method="post" id="acc" name="acc">
 	            	<input type="hidden" name="accNum" value="${acc.accNum}"/>
 	            <a class="a-margin col-sm-6 col-lg-4 text-decoration-none account type${acc.productNum%2 }">
@@ -115,6 +116,7 @@
 	                </div>
 	            </a>
 				 </form>
+				</c:if>
 			</c:forEach>
 		</div>
 	<%--

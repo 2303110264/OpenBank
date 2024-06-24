@@ -1,5 +1,9 @@
 package kopo.aisw.hc.member.kakao;
 
+import java.io.IOException;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,38 +37,45 @@ public class KakaoController {
 	
     @GetMapping("/kakao-login")
     public void callback(Model m, @RequestParam("code") String code,
-    					HttpSession session, HttpServletResponse response) throws Exception {
-    	MemberVO member = new MemberVO();
+    					HttpSession session, HttpServletResponse response) {
     	KakaoVO accessToken = ks.getAccessTokenFromKakao(code, api.getKakaoRest());
-    	accessToken = ks.getKakaoUserCode(accessToken);
-    	
-    	member.setPassword(accessToken.getId()+"");
-    	member.setPassword(ms.Hashing(member.getPassword()));
-    	// id값만 고정값인거같음(유저별)
-    	// id값을 userId(DB상 BankId), id token값을 pw로 (ㅠㅠ원래이러면안됨)
-    	accessToken.setAccessToken(member.getPassword());
-    	member = ks.kakaoToMember(accessToken);
-    	
-    	// 기존 회원 체크 - 이름/주민번호/전화번호
-    	// 회원이 아니면 가입절차 후 로그인
-    	if(ms.humanDoubleCheck(member).getName()==null) {
-    		ms.signUp(member);
-    	}else if(ms.humanDoubleCheck(member).getUserId()==null){
-    		ms.updateBankId(member);
-		}
-    	
-    	member = ms.signIn(member);
-    	
-		if(member==null) {
-			m.addAttribute("loginChk", false);
-		}else {
-			m.addAttribute("userVO", member);
-		}
+    	MemberVO member = ks.kakaoToMember(accessToken);
     	String preUrl = (String) session.getAttribute("preUrl");
-		if(preUrl!=null)
-			response.sendRedirect(preUrl);
-		else
-			response.sendRedirect("/ob/");
+    	
+    	try {
+    		// 기존 회원 체크 - 이름/주민번호/전화번호
+    		// 회원이 아니면 가입절차 후 로그인
+    		if(ms.humanDoubleCheck(member).getName()==null) ms.signUp(member);
+    		else if(ms.humanDoubleCheck(member).getUserId()==null) ms.updateBankId(member);
+	    	member = ms.signIn(member);
+	    	
+	    	ZonedDateTime nowSeoul = ZonedDateTime.now(ZoneId.of("Asia/Seoul"));
+			if(member==null) {
+				m.addAttribute("loginChk", false);
+				log.info("Login fail : "+nowSeoul+"-"+member);
+			}else {
+				log.info("Login Success : "+nowSeoul+"-"+member);
+				m.addAttribute("userVO", member);
+			}
+			
+			if(preUrl!=null)
+				response.sendRedirect(preUrl);
+			else
+				response.sendRedirect("/ob/");
+    	}catch(Exception e) {
+    		try {
+	    	    response.getWriter().println("<script type='text/javascript'>");
+	    	    response.getWriter().println("alert('카카오 로그인에 실패했습니다. \n문제가 반복될 시 관리자에게 문의주세요.');");
+	    	    response.getWriter().println("window.location.href='"+preUrl+"';");
+	    	    response.getWriter().println("</script>");
+	
+	    	    // 응답 플러시
+				response.getWriter().flush();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+				log.error("??: 이 오류는 대체 왜 나는 거니. 머리는 모자를 쓰라고 있는 게 아니야.");
+			}
+    	}
     }
 //    @GetMapping("/test")
 //    public String testing() {

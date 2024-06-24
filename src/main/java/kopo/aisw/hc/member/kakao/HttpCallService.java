@@ -10,11 +10,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@Service
+@Repository
 public class HttpCallService {
 
 	public KakaoVO Call(String method, String reqURL, String header, String param) {
