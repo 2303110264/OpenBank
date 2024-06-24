@@ -31,4 +31,6 @@ public interface MemberDAO {
     // 회원 검색
     public List<MemberVO> searchMembers(Map<String, String> paramMap);
   
+	//비밀번호 암호화
+	public String Hashing(String password);
 }

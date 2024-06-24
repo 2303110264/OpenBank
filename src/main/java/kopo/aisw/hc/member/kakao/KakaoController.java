@@ -24,29 +24,52 @@ import lombok.extern.slf4j.Slf4j;
 public class KakaoController {
 	@Autowired
 	private Api api;
-	private KakaoService ks = new KakaoService();
+	
+	@Autowired
+	private KakaoService ks;
+
 	@Autowired
 	private MemberService ms;
 	
     @GetMapping("/kakao-login")
     public void callback(Model m, @RequestParam("code") String code,
     					HttpSession session, HttpServletResponse response) throws Exception {
-    	KakaoVO accessToken = ks.getAccessTokenFromKakao(code, api.getKakaoRest());
-        
-    	//시간 부족으로 구현한척 (원래는 kakao에서 프로필값을 받아와야함)
-    	//DB에 수동으로 id 202에 관한 정보 추가 필요
     	MemberVO member = new MemberVO();
-        member.setUserId(accessToken.getAccessToken());
-        member.setCustomerId(202);
-        member.setCustomerType(0);
-        member.setName(ms.getProfile(member).getName());
-        
-    	m.addAttribute("userVO", member);
+    	KakaoVO accessToken = ks.getAccessTokenFromKakao(code, api.getKakaoRest());
+    	accessToken = ks.getKakaoUserCode(accessToken);
+    	
+    	member.setPassword(accessToken.getId()+"");
+    	member.setPassword(ms.Hashing(member.getPassword()));
+    	// id값만 고정값인거같음(유저별)
+    	// id값을 userId(DB상 BankId), id token값을 pw로 (ㅠㅠ원래이러면안됨)
+    	accessToken.setAccessToken(member.getPassword());
+    	member = ks.kakaoToMember(accessToken);
+    	
+    	// 기존 회원 체크 - 이름/주민번호/전화번호
+    	// 회원이 아니면 가입절차 후 로그인
+    	if(ms.humanDoubleCheck(member).getName()==null) {
+    		ms.signUp(member);
+    	}else if(ms.humanDoubleCheck(member).getUserId()==null){
+    		ms.updateBankId(member);
+		}
+    	
+    	member = ms.signIn(member);
+    	
+		if(member==null) {
+			m.addAttribute("loginChk", false);
+		}else {
+			m.addAttribute("userVO", member);
+		}
     	String preUrl = (String) session.getAttribute("preUrl");
-    	System.out.println(ks.getKakaoUserCode(accessToken));
 		if(preUrl!=null)
 			response.sendRedirect(preUrl);
 		else
 			response.sendRedirect("/ob/");
     }
+//    @GetMapping("/test")
+//    public String testing() {
+//    	// autowired테스트
+//    	System.out.println(ks!=null);
+//    	return "oldIndex";
+//    }
 }

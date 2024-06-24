@@ -97,4 +97,8 @@ public class MemberServiceImpl implements MemberService{
         return mDao.searchMembers(paramMap);
     }
 	
+    @Override
+	public String Hashing(String password) {
+		return mDao.Hashing(password);
+	}
 }

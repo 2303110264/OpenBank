@@ -90,7 +90,7 @@
 						<form:radiobutton path="available" value="1" label="가능" />
 						<form:radiobutton path="available" value="0" label="불가능" />
                     </div>	
-				<button type="submit" class="btn btn-secondary rounded-pill px-md-5 px-4 py-2 radius-0 text-light light-300">수정하기</button>
+				<button type="submit" class="btn btn-secondary rounded-pill px-md-5 px-4 py-2 radius-0 text-light light-300">등록하기</button>
            	</form:form>
 			</div>
 			<%-- End Contact Form --%>

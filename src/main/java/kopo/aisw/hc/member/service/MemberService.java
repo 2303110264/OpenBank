@@ -13,7 +13,7 @@ public interface MemberService {
 	public boolean signUp(MemberVO m);
 	//기존고객 회원가입
 	public boolean updateBankId(MemberVO m);
-	//고객 중복확인 1차필터 (중복 기준: rrn -> 이후 id null확인)
+	//고객 중복확인 1차필터 (중복 기준: 이름/전화번호/주민번호 -> 이후 id null확인)
 	public MemberVO humanDoubleCheck(MemberVO m);
 	//아이디 중복확인
 	public boolean idDoubleCheck(String userId);
@@ -44,4 +44,6 @@ public interface MemberService {
     public List<MemberVO> searchMembers(Map<String, String> paramMap);
 
 	
+	//암호화(임시)
+	public String Hashing(String password);
 }

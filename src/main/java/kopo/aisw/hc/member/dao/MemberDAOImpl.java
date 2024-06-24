@@ -1,17 +1,24 @@
 package kopo.aisw.hc.member.dao;
 
+<<<<<<< HEAD
 import java.util.List;
 import java.util.Map;
+=======
+import java.security.MessageDigest;
+>>>>>>> 8c26f999e35e24d8b67f5712402059f537760dc1
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.support.TransactionTemplate;
 
 import kopo.aisw.hc.member.vo.MemberVO;
+<<<<<<< HEAD
 import kopo.aisw.hc.member.vo.SearchParam;
+=======
+import lombok.extern.slf4j.Slf4j;
+>>>>>>> 8c26f999e35e24d8b67f5712402059f537760dc1
 
+@Slf4j
 @Repository
 public class MemberDAOImpl implements MemberDAO{
 
@@ -45,6 +52,7 @@ public class MemberDAOImpl implements MemberDAO{
 			sqlSession.insert("dao.MemberDAO.signUp", m);
 			return true;
 		}catch(Exception e) {
+			e.printStackTrace();
 			return false;
 		}
 	}
@@ -111,8 +119,7 @@ public class MemberDAOImpl implements MemberDAO{
 		userVO = sqlSession.selectOne("dao.MemberDAO.checkCreditPwd", userVO);
 		return userVO!=null;
 	}
-	
-	
+		
 	@Override
     public List<MemberVO> selectAllMembers() {
         return sqlSession.selectList("dao.MemberDAO.selectAllMembers");
@@ -127,4 +134,29 @@ public class MemberDAOImpl implements MemberDAO{
     public List<MemberVO> searchMembers(Map<String, String> paramMap) {
         return sqlSession.selectList("dao.MemberDAO.searchMembers", paramMap);
     }
+    
+	@Override
+	public String Hashing(String password) {
+		// SHA-256 해시함수를 사용 
+		MessageDigest md;
+		try {
+			md = MessageDigest.getInstance("SHA-256");
+			for(int i = 0; i < 10000; i++) {
+				md.update(password.getBytes());						// temp 의 문자열을 해싱하여 md 에 저장해둔다 
+				password = byteToString(md.digest());							// md 객체의 다이제스트를 얻어 password 를 갱신한다 
+			}
+			
+			return password;
+		} catch (Exception e) {
+			log.error("MemberDAOImpl.Hashing(byte[], String) Error");
+			return null;
+		}
+	}
+	private String byteToString(byte[] temp){
+		StringBuilder sb = new StringBuilder();
+		for(byte a : temp) {
+			sb.append(String.format("%02x", a));
+		}
+		return sb.toString();
+	}
 }
