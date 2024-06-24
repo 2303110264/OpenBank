@@ -28,7 +28,7 @@ public class AMemberController {
 		MemberVO userVO = (MemberVO) session.getAttribute("userVO");
 		userVO.setCreditPassword(cp);
 		boolean result = ms.checkCreditPwd(userVO);
-		log.info("CreditPassword check : "+userVO.getCustomerId()+" - result:"+result);
+		// log.info("CreditPassword check : "+userVO.getCustomerId()+" - result:"+result);
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
 	

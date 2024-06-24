@@ -1,5 +1,8 @@
 package kopo.aisw.hc.member.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -7,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import kopo.aisw.hc.member.vo.MemberVO;
+import kopo.aisw.hc.member.vo.SearchParam;
 
 @Repository
 public class MemberDAOImpl implements MemberDAO{
@@ -107,5 +111,20 @@ public class MemberDAOImpl implements MemberDAO{
 		userVO = sqlSession.selectOne("dao.MemberDAO.checkCreditPwd", userVO);
 		return userVO!=null;
 	}
+	
+	
+	@Override
+    public List<MemberVO> selectAllMembers() {
+        return sqlSession.selectList("dao.MemberDAO.selectAllMembers");
+    }
 
+    @Override
+    public MemberVO getMemberById(int customerId) {
+        return sqlSession.selectOne("dao.MemberDAO.getMemberById", customerId);
+    }
+
+    @Override
+    public List<MemberVO> searchMembers(Map<String, String> paramMap) {
+        return sqlSession.selectList("dao.MemberDAO.searchMembers", paramMap);
+    }
 }

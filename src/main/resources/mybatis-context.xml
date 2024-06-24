@@ -4,6 +4,8 @@
   "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
+		<typeAlias type="kopo.aisw.hc.member.vo.SearchParam" 
+			alias="SearchParam"/>
 		<typeAlias type="kopo.aisw.hc.member.vo.MemberVO"
 			alias="memberVO" />
 		<typeAlias type="kopo.aisw.hc.product.vo.ProductVO"
