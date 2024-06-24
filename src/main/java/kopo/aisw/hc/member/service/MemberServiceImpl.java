@@ -1,10 +1,14 @@
 package kopo.aisw.hc.member.service;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kopo.aisw.hc.member.dao.MemberDAO;
 import kopo.aisw.hc.member.vo.MemberVO;
+import kopo.aisw.hc.member.vo.SearchParam;
 
 @Service
 public class MemberServiceImpl implements MemberService{
@@ -79,6 +83,21 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	@Override
+    public List<MemberVO> selectAllMembers() {
+        return mDao.selectAllMembers();
+    }
+
+    @Override
+    public MemberVO getMemberById(int customerId) {
+        return mDao.getMemberById(customerId);
+    }
+
+    @Override
+    public List<MemberVO> searchMembers(Map<String, String> paramMap) {
+        return mDao.searchMembers(paramMap);
+    }
+	
+    @Override
 	public String Hashing(String password) {
 		return mDao.Hashing(password);
 	}

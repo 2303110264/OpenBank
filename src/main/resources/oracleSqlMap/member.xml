@@ -195,4 +195,72 @@ CREATE SEQUENCE test_customer_seq;
 		where customer_id = #{customerId}
 	</select>
 	
+	<!-- 전체 회원 조회 -->
+    <select id="selectAllMembers" resultType="memberVO">
+        select customer_id as customerId,
+               bank_id as userId,
+               name,
+               phone_num as phoneNum,
+               email,
+               zip_code as zipCode,
+               address,
+               address_detail as addressDetail,
+               rrn,
+               customer_type as customerType,
+               available_balance as availableBalance,
+               reg_date as regDate
+        from test_customer
+    </select>
+
+    <!-- 회원 상세 조회 -->
+    <select id="getMemberById" parameterType="int" resultType="memberVO">
+        SELECT customer_id AS customerId,
+               bank_id AS userId,
+               name,
+               phone_num AS phoneNum,
+               email,
+               zip_code AS zipCode,
+               address,
+               address_detail AS addressDetail,
+               rrn,
+               customer_type AS customerType,
+               available_balance AS availableBalance,
+               reg_date AS regDate
+        FROM test_customer
+        WHERE customer_id = #{customerId}
+    </select>
+
+    <!-- 회원 검색 -->
+    <select id="searchMembers" parameterType="map" resultType="memberVO">
+        select customer_ID as customerId,
+               bank_id as userId,
+               name,
+               phone_num as phoneNum,
+               email,
+               zip_code as zipCode,
+               address,
+               address_detail as addressDetail,
+               rrn,
+               customer_type as customerType,
+               available_balance as availableBalance,
+               reg_date as regDate
+        from test_customer
+        where
+        <choose>
+            <when test="type == 'userId'">
+                bank_id like '%' || #{keyword} || '%'
+            </when>
+            <when test="type == 'name'">
+                name like '%' || #{keyword} || '%'
+            </when>
+            <when test="type == 'phoneNum'">
+                phone_num like '%' || #{keyword} || '%'
+            </when>
+            <when test="type == 'email'">
+                email like '%' || #{keyword} || '%'
+            </when>
+        </choose>
+    </select>
+
+	
 </mapper>

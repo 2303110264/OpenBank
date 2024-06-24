@@ -47,6 +47,10 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">관리자 대시보드</h1>
+                        <div>
+                            <a href="${pageContext.request.contextPath}/member/admin/list" class="btn btn-primary">회원관리</a>
+                            <a href="${pageContext.request.contextPath}/product/admin/list" class="btn btn-success">상품관리</a>
+                        </div>
                     </div>
 
                     <!-- Content Row -->

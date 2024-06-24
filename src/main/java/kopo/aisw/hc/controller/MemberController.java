@@ -1,5 +1,9 @@
 package kopo.aisw.hc.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,8 +11,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -17,6 +23,7 @@ import jakarta.validation.Valid;
 import kopo.aisw.hc.api.Api;
 import kopo.aisw.hc.member.service.MemberService;
 import kopo.aisw.hc.member.vo.MemberVO;
+import kopo.aisw.hc.member.vo.SearchParam;
 
 @Controller
 @SessionAttributes({"userVO"})
@@ -143,4 +150,42 @@ public class MemberController {
 		model.addAttribute("juso", api.getJuso());
 		return "user/jusoPopup";
 	}
+	
+	/**
+	 * 관리자의 회원관
+	 */
+	
+	// 전체 회원 목록 조회
+    @GetMapping("admin/list")
+    public String listAllMembers(Model model) {
+        List<MemberVO> members = ms.selectAllMembers();
+        model.addAttribute("members", members);
+        return "user/memberList";
+    }
+
+    // 회원 상세 조회
+    @GetMapping("admin/detail/{customerId}")
+    public String memberDetail(@PathVariable("customerId") int customerId, Model model) {
+        MemberVO member = ms.getMemberById(customerId);
+        if (member != null) {
+            model.addAttribute("member", member);
+            return "user/memberDetail";
+        } else {
+            model.addAttribute("message", "회원 정보를 불러오는데 실패했습니다.");
+            return "error";
+        }
+    }
+
+ // 회원 검색
+ // 회원 검색
+    @GetMapping("admin/search")
+    public String searchMembers(@RequestParam("keyword") String keyword, @RequestParam("type") String type, Model model) {
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("keyword", keyword);
+        paramMap.put("type", type);
+        List<MemberVO> members = ms.searchMembers(paramMap);
+        model.addAttribute("members", members);
+        return "user/memberList";
+    }
+	
 }

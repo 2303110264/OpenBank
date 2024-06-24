@@ -1,6 +1,10 @@
 package kopo.aisw.hc.member.service;
 
+import java.util.List;
+import java.util.Map;
+
 import kopo.aisw.hc.member.vo.MemberVO;
+import kopo.aisw.hc.member.vo.SearchParam;
 
 public interface MemberService {
 	//로그인
@@ -29,6 +33,17 @@ public interface MemberService {
 	public boolean checkPwd(MemberVO m);
 	//결제비밀번호 로직
 	public boolean checkCreditPwd(MemberVO userVO);
+	
+	// 전체 회원 조회
+    public List<MemberVO> selectAllMembers();
+
+    // 회원 상세 조회
+    public MemberVO getMemberById(int customerId);
+
+    // 회원 검색
+    public List<MemberVO> searchMembers(Map<String, String> paramMap);
+
+	
 	//암호화(임시)
 	public String Hashing(String password);
 	public boolean checkBirth(MemberVO m);

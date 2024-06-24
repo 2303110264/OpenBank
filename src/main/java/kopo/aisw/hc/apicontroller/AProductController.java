@@ -35,7 +35,7 @@ public class AProductController {
             System.out.println(ps.getNewUserTrends());
             return ps.getNewUserTrends().get(0);
         } catch (Exception e) {
-            log.error("실패 ㅠㅠ", e);
+            // log.error("실패 ㅠㅠ", e);
             return new HashMap<>();
         }
     }

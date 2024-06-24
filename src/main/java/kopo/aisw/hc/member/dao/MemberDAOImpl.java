@@ -1,13 +1,22 @@
 package kopo.aisw.hc.member.dao;
 
+<<<<<<< HEAD
+import java.util.List;
+import java.util.Map;
+=======
 import java.security.MessageDigest;
+>>>>>>> 8c26f999e35e24d8b67f5712402059f537760dc1
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kopo.aisw.hc.member.vo.MemberVO;
+<<<<<<< HEAD
+import kopo.aisw.hc.member.vo.SearchParam;
+=======
 import lombok.extern.slf4j.Slf4j;
+>>>>>>> 8c26f999e35e24d8b67f5712402059f537760dc1
 
 @Slf4j
 @Repository
@@ -110,7 +119,22 @@ public class MemberDAOImpl implements MemberDAO{
 		userVO = sqlSession.selectOne("dao.MemberDAO.checkCreditPwd", userVO);
 		return userVO!=null;
 	}
-	
+		
+	@Override
+    public List<MemberVO> selectAllMembers() {
+        return sqlSession.selectList("dao.MemberDAO.selectAllMembers");
+    }
+
+    @Override
+    public MemberVO getMemberById(int customerId) {
+        return sqlSession.selectOne("dao.MemberDAO.getMemberById", customerId);
+    }
+
+    @Override
+    public List<MemberVO> searchMembers(Map<String, String> paramMap) {
+        return sqlSession.selectList("dao.MemberDAO.searchMembers", paramMap);
+    }
+    
 	@Override
 	public String Hashing(String password) {
 		// SHA-256 해시함수를 사용 

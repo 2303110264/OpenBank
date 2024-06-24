@@ -2,7 +2,7 @@
 <Configuration status="debug"> 
     <!-- DEBUG로 설정할시 모르는 줄이 더 뜸 -->
     <Properties>
-        <Property name="log-path">c:/ob/logs</Property>
+        <Property name="log-path">./ob/logs</Property>
     </Properties>
 
     <Appenders>
