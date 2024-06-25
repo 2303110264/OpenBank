@@ -13,7 +13,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class TransactionResponseVO {
-	
+	private int page;
 	private MemberVO member;
 	private int size;
 	private long amount;

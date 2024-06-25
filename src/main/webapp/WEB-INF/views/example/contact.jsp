@@ -190,7 +190,7 @@
             var subject = document.getElementById("floatingsubject").value;
             var message = document.getElementById("floatingtextarea").value;
 
-            var mailtoLink = 'mailto:example@mail.com' +
+            var mailtoLink = 'mailto:2303110264@office.kopo.ac.kr' +
                 '?subject=' + encodeURIComponent(subject) +
                 '&body=' + encodeURIComponent(
                     'Name: ' + name + '\n' +

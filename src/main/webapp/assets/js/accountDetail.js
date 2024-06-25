@@ -52,8 +52,8 @@ $(document).ready(function(){
     			$('#credit-password').focus()
     		}
 		});
-		let pg = 1;
 		$('#searchBtn').click(function() {
+			let pg = 1;
 			let stD = document.getElementById("startDate").value;
 			let enD = document.getElementById("endDate").value;
 			let params = new URLSearchParams({
@@ -62,31 +62,68 @@ $(document).ready(function(){
 					, endDate : enD
 					, page : pg
 			})
-			
-			fetch('/ob/api/account/transaction?'+params, {
+			let url = '/ob/api/account/transaction?'+params;
+			fetch(url, {
 				mode: 'cors'
 			})
 			.then(function(response) {
-				console.log(response)
 				return response.json()
 			}).then(getTran)
 			
 			
 		})
+		$('#searchBtn').trigger('click');
 });
+
+		
 let getTran = function(result) {
-		console.log(result)
 		let list = result.transaction;
 		let size = result.size;
-		pg+=1;
+		let bal = parseFloat(result.amount);
 		if(size==0) return;
+		$('#transactionTable').html('<tr><th>거래일자</th><th>거래명</th><th >입금 금액</th><th >출금 금액</th><th >잔액</th></tr>')
 		for(let tran of list) {
-			console.log(tran)
-			/*let rank = tran;
-			let date = tran.date;
-			
-			$('#resultView').append('<h4>' + rank + '위</h4>')
-			$('#resultView').append('<strong>' + movieName + '</strong>')
-			$*/('#resultView').append('<hr>')
+			if(tran.transactionType=='입금'){
+			$('#transactionTable').append('<tr><td>'+tran.transactionDate+'</td><td>'
+											+tran.withdrawName+'</td>'
+											+'<td>'+tran.amount.toLocaleString()+'</td><td></td>'
+											+'<td>'+bal.toLocaleString()+'</td></tr>');
+			bal-=parseFloat(tran.amount);
+			}else{
+			$('#transactionTable').append('<tr><td>'+tran.transactionDate+'</td><td>'
+											+tran.withdrawName+'</td>'
+											+'<td></td><td>'+tran.amount.toLocaleString()+'</td>'
+											+'<td>'+tran.amount.toLocaleString()+'</td></tr>');
+			bal+=parseFloat(tran.amount);
+			}
 		}
 	} 
+	let pg = 2;
+	let isFetching = false;
+window.onscroll = function(e) {
+      if(!isFetching && (window.innerHeight + window.scrollY) >= document.body.offsetHeight) { 
+        isFetching =true;
+        setTimeout(function(){
+          let stD = document.getElementById("startDate").value;
+			let enD = document.getElementById("endDate").value;
+			let params = new URLSearchParams({
+					accNum : acc
+					, startDate : stD
+					, endDate : enD
+					, page : pg
+			})
+			let url = '/ob/api/account/transaction?'+params;
+			fetch(url, {
+				mode: 'cors'
+			})
+			.then(function(response) {
+				console.log(pg+" "+bal)
+				return response.json()
+			}).then(getTran)
+			.then(function(){
+				pg+=1
+				isFetching=false;
+			})
+        }, 750)  
+      }
+    }

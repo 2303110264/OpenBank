@@ -125,12 +125,9 @@ accNum,acc_name accName,
  		
        <div class="row pt-4">
            <div class="worksingle-content col-lg-8 m-auto text-left justify-content-center">
-			<table border="0">
+			<table border="0" id="transactionTable">
 			    <tr>
 			        <th >거래일자</th>
-			        <%-- 
-			        <th >거래유형</th>
-			         --%>
 			        <th >거래명</th>
 			        <th >입금 금액</th>
 			        <th >출금 금액</th>
@@ -313,11 +310,6 @@ accNum,acc_name accName,
 			</div>
     
     
-    
-    
-    <%-- Start Footer --%>
-    <jsp:include page="../footer.jsp"></jsp:include>
-    <%-- End Footer --%>
     
     <script>
     	const acc = ${account.accNum}

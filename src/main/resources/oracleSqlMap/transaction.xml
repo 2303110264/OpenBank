@@ -76,7 +76,7 @@
 	</select>
 	
 	<select id="viewTranByDate" parameterType="transactionVO" resultType="transactionVO">
-		SELECT transaction_type transactionType, transaction_date transactionDate, tran_name withdrawName
+		SELECT transaction_type transactionType, to_char(transaction_date, 'YYYY-MM-DD') transactionDate, tran_name withdrawName
 		, amount amount
 		FROM (
 		    SELECT t.*, ROWNUM AS rnum
@@ -89,12 +89,14 @@
 		        ORDER BY TRANSACTION_DATE DESC
 		    ) t
 		)
-		WHERE rnum BETWEEN #{transactionId} AND #{transactionId*15}; 
+		<!-- 
+		WHERE rnum BETWEEN #{transactionId}+(#{transactionId}-1)*15 AND #{transactionId}*15
+		 -->
 	</select>
 	
 	<select id="getSumByDate" parameterType="transactionVO" resultType="Long">
-		SELECT (SELECT NVL(sum(amount), 0) FROM CB_TRANSACTION ct WHERE acc_num = #{accNum} AND transaction_date &lt;=#{transactionDate} and transaction_type='입금' )-
-		(SELECT NVL(sum(amount), 0) FROM CB_TRANSACTION ct WHERE acc_num = #{accNum} AND transaction_date &lt;=#{transactionDate} and transaction_type='출금') amount
-		FROM dual;
+		SELECT (SELECT NVL(sum(amount), 0) FROM CB_TRANSACTION ct WHERE acc_num = #{withdrawAcc} AND transaction_date &lt;=#{transactionDate} and transaction_type='입금' )-
+		(SELECT NVL(sum(amount), 0) FROM CB_TRANSACTION ct WHERE acc_num = #{withdrawAcc} AND transaction_date &lt;=#{transactionDate} and transaction_type='출금') amount
+		FROM dual
 	</select>
 </mapper>

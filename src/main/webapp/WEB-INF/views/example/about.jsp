@@ -61,19 +61,14 @@
             <div class="col-lg-3">
                 <h2 class="h2 py-5 typo-space-line">Our Team</h2>
                 <p class="text-muted light-300">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    지금까지 이런 팀원은 없었다.<br>
+                    이것은 팀원인가, <br>
+                    밤샘메이트인가.
                 </p>
             </div>
 
             <div class="col-lg-9 row">
-                <div class="team-member col-md-4">
-                    <img class="team-member-img img-fluid rounded-circle p-4" src="${path}/assets/img/team-01.jpg" alt="Card image">
-                    <ul class="team-member-caption list-unstyled text-center pt-4 text-muted light-300">
-                        <li>John Doe</li>
-                        <li>Business Development</li>
-                    </ul>
-                </div>
+                <%--
                 <div class="team-member col-md-4">
                     <img class="team-member-img img-fluid rounded-circle p-4" src="${path}/assets/img/team-02.jpg" alt="Card image">
                     <ul class="team-member-caption list-unstyled text-center pt-4 text-muted light-300">
@@ -81,10 +76,18 @@
                         <li>Media Development</li>
                     </ul>
                 </div>
+                 --%>
                 <div class="team-member col-md-4">
                     <img class="team-member-img img-fluid rounded-circle p-4" src="${path}/assets/img/team-03.jpg" alt="Card image">
                     <ul class="team-member-caption list-unstyled text-center pt-4 text-muted light-300">
-                        <li>Sam</li>
+                        <li>CLJ</li>
+                        <li>Developer</li>
+                    </ul>
+                </div>
+                <div class="team-member col-md-4">
+                    <img class="team-member-img img-fluid rounded-circle p-4" src="${path}/assets/img/team-01.jpg" alt="Card image">
+                    <ul class="team-member-caption list-unstyled text-center pt-4 text-muted light-300">
+                        <li>HDH</li>
                         <li>Developer</li>
                     </ul>
                 </div>
@@ -101,22 +104,28 @@
             <div class="row text-center">
                 <div class="col-md-3 mb-3">
                     <div class="card partner-wap py-5">
-                        <a href="#"><i class='display-1 text-white bx bxs-buildings'></i></a>
+                        <%--
+                         <a href="#">
+                         --%>
+                         <i class='display-1 text-white bx bxs-coffee'></i>
+                        <%--
+                         </a>
+                         --%>
                     </div>
                 </div>
                 <div class="col-md-3 mb-3">
                     <div class="card partner-wap py-5">
-                        <a href="#"><i class='display-1 bx text-white bxs-check-shield bx-lg'></i></a>
+                        <i class='display-1 bx text-white bxs-pen'></i>
                     </div>
                 </div>
                 <div class="col-md-3 mb-3">
                     <div class="card partner-wap py-5">
-                        <a href="#"><i class='display-1 text-white bx bxs-bolt-circle'></i></a>
+                        <i class='display-1 text-white bx bx-desktop'></i>
                     </div>
                 </div>
                 <div class="col-md-3 mb-3">
                     <div class="card partner-wap py-5">
-                        <a href="#"><i class='display-1 text-white bx bxs-spa'></i></a>
+                        <a href="#"><i class='display-1 text-white bx bxs-coffee'></i></a>
                     </div>
                 </div>
             </div>
@@ -132,7 +141,8 @@
 
             <div class="creative-content row py-3">
                 <div class="col-md-5">
-                    <p class="text-muted col-lg-8 light-300">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida Risus.
+                    <p class="text-muted col-lg-8 light-300">
+						The only way to do great work is to love what you do.
                     </p>
                 </div>
                 <div class="creative-progress col-md-7">
@@ -141,20 +151,20 @@
                         <div class="col-6">
                             <h4 class="h5">Development</h4>
                         </div>
-                        <div class="col-6 text-right">66%</div>
+                        <div class="col-6 text-right">95%</div>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
 
                     <div class="row mt-4 mt-sm-2">
                         <div class="col-6">
                             <h4 class="h5">Design</h4>
                         </div>
-                        <div class="col-6 text-right">90%</div>
+                        <div class="col-6 text-right">20%</div>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
 
 
@@ -162,10 +172,10 @@
                         <div class="col-6">
                             <h4 class="h5">Marketing</h4>
                         </div>
-                        <div class="col-6 text-right">74%</div>
+                        <div class="col-6 text-right">5%</div>
                     </div>
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 74%" aria-valuenow="74" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar" role="progressbar" style="width: 5%" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
 
                 </div>
@@ -182,9 +192,12 @@
                     <img src="${path}/assets/img/work.svg" class="rounded img-fluid" alt="">
                 </div>
                 <div class="banner-content col-lg-7 align-self-end">
+                    <%--
                     <h2 class="h2 pb-3">Why you choose us?</h2>
                     <p class="text-muted pb-5 light-300">
-                    You are allowed to download and use this Purple Buzz template for your websites. You are <strong>not allowed</strong> to re-distribute this template ZIP file on other template websites. It is quite easy to simply copy and repost the ZIP file on any <a rel="nofollow" href="https://www.google.com/search?q=free+css" target="_blank">Free CSS collection</a> websites.</p>
+					
+					</p>
+                     --%>
                 </div>
             </div>
         </div>
@@ -232,7 +245,7 @@
         </div>
     </section>
     <!-- End Aim -->
-
+<%--
     <!-- Start Contact -->
     <section class="banner-bg bg-light py-5">
         <div class="container">
@@ -251,6 +264,7 @@
         </div>
     </section>
     <!-- End Contact -->
+ --%>
     
     
     <%-- Start Footer --%>

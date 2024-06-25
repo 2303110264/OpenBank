@@ -54,6 +54,7 @@ public class KakaoController {
 				m.addAttribute("loginChk", false);
 				log.info("Login fail : "+nowSeoul+"-"+member);
 			}else {
+				member.setPassword(null);
 				log.info("Login Success : "+nowSeoul+"-"+member);
 				m.addAttribute("userVO", member);
 			}

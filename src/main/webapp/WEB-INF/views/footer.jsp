@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+ 
 <footer class="bg-secondary pt-4">
 	<div class="container">
 		<div class="row py-4">
@@ -11,8 +13,7 @@
 					<span class="text-light h5 semi-bold-600">bank</span>
 				</a>
 				<p class="text-light my-lg-4 my-2">
-					Lorem ipsum dolor sit amet,
-					consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.
+					Live as if you were to die tomorrow. Learn as if you were to live forever.
 				</p>
 				<ul class="list-inline footer-icons light-300">
 					<li class="list-inline-item m-0">
@@ -52,23 +53,30 @@
 
 			<div class="col-lg-3 col-md-4 my-sm-0 mt-4">
 				<h3 class="h4 pb-lg-3 text-light light-300">
-					Our Company
-					</h2>
+				<c:choose>
+					<c:when test="${userVO.customerType==1}">
+						Test pages for Manager
+					</c:when>
+                    <c:otherwise>
+                    	Menu
+                    </c:otherwise>
+                </c:choose>
+					</h3>
 					<ul class="list-unstyled text-light light-300">
                         <li class="pb-2">
                             <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light" href="${path}/ob/">Home</a>
                         </li>
                         <li class="pb-2">
-                            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" href="${path}/ob/about">About Us</a>
+                            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" href="${path}/ob/account/">계좌목록</a>
                         </li>
                         <li class="pb-2">
-                            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" href="${path}/ob/work">Work</a>
+                            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" href="${path}/ob/transaction/transfer">이체</a>
                         </li>
                         <li class="pb-2">
-                            <i class='bx-fw bx bxs-chevron-right bx-xs'></i></i><a class="text-decoration-none text-light py-1" href="${path}/ob/pricing">Price</a>
+                            <i class='bx-fw bx bxs-chevron-right bx-xs'></i></i><a class="text-decoration-none text-light py-1" href="${path}/ob/product/view">상품가입</a>
                         </li>
                         <li class="pb-2">
-                            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" href="${path}/ob/contact">Contact</a>
+                            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" href="${path}/ob/contact">고객센터(Contact)</a>
                         </li>
                     </ul>
 			</div>

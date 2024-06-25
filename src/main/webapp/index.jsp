@@ -85,7 +85,7 @@
 						 
                     <div class="carousel-item active">
                         <div class="py-5-2 row d-flex align-items-center click-banner">
-                            <div onclick="window.open('#')" class="banner-content col-lg-8 col-8 offset-2 m-lg-auto text-left py-5-2">
+                            <div onclick="location.href='/ob/product/view'" class="banner-content col-lg-8 col-8 offset-2 m-lg-auto text-left py-5-2">
                                 <h1 class="banner-heading h1 text-secondary display-3 mb-0 pb-3 mx-0 px-0 light-300">
                                     Bank beta 
                                     <strong>
@@ -112,7 +112,7 @@
                     <div class="carousel-item">
                         <div class="py-5-2 row d-flex align-items-center">
                             <!-- 링크걸곳: banner-content -->
-                            <div onclick="window.open('#')" class="banner-content col-lg-8 col-8 offset-2 m-lg-auto text-left py-5-2">
+                            <div onclick="window.open('/ob/about')" class="banner-content col-lg-8 col-8 offset-2 m-lg-auto text-left py-5-2">
                                 <h1 class="banner-heading h1 text-secondary display-3 mb-0 pb-3 mx-0 px-0 light-300">
                                     <b>Your satisfaction 
                                     </b>
@@ -169,10 +169,10 @@
                 </div>
             </div>
             <p class="service-footer col-10 offset-2 col-lg-9 offset-lg-3 text-start pb-3 text-muted px-2">
-                You are free to use this template for your commercial or business websites. You are not allowed to re-distribute this template ZIP file on any template collection websites. It is too easy to illegally copy and repost this template.
+            	The future rewards those who press on. I don't have time to feel sorry for myself. I don't have time to complain. I'm going to press on.
             </p>
         </div>
-
+<%--
         <div class="service-tag py-5 bg-secondary">
             <div class="col-md-12">
                 <ul class="nav d-flex justify-content-center">
@@ -191,13 +191,13 @@
                 </ul>
             </div>
         </div>
+ --%>
 
     </section>
-
+<%--
     <section class="container overflow-hidden py-5">
         <div class="row gx-5 gx-sm-3 gx-lg-5 gy-lg-5 gy-3 pb-3 projects">
-
-            <%-- Start Recent Work --%>
+        
             <div class="col-xl-3 col-md-4 col-sm-6 project ui branding">
                 <a href="#" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
                     <img class="service card-img" src="${path}/assets/img/services-01.jpg" alt="Card image">
@@ -208,9 +208,7 @@
                         </div>
                     </div>
                 </a>
-            </div><%-- End Recent Work --%>
-
-            <%-- Start Recent Work --%>
+            </div>
             <div class="col-xl-3 col-md-4 col-sm-6 project ui graphic">
                 <a href="#" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
                     <img class="card-img" src="${path}/assets/img/services-02.jpg" alt="Card image">
@@ -221,9 +219,7 @@
                         </div>
                     </div>
                 </a>
-            </div><%-- End Recent Work --%>
-
-            <%-- Start Recent Work --%>
+            </div>
             <div class="col-xl-3 col-md-4 col-sm-6 project branding">
                 <a href="#" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
                     <img class="card-img" src="${path}/assets/img/services-03.jpg" alt="Card image">
@@ -234,9 +230,9 @@
                         </div>
                     </div>
                 </a>
-            </div><%-- End Recent Work --%>
+            </div>
+ --%>
 <!--
-            <%-- Start Recent Work --%>
             <div class="col-xl-3 col-md-4 col-sm-6 project ui graphic">
                 <a href="#" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
                     <img class="card-img" src="${path}/assets/img/services-04.jpg" alt="Card image">

@@ -90,22 +90,20 @@
 	  <listener> <!-- Context를 로딩하는 리스너 -->
 	    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	  </listener>
-	  
+	 
 	 <!-- 
 	<context-param>
         <param-name>log4jConfigLocation</param-name>
         <param-value>
-            /log4j.xml
+            /log4j2.xml
         </param-value>
     </context-param>
-	  -->
-    <!-- Log4j
     <listener>
         <listener-class>
-            org.springframework.web.util.Log4jConfigListener
+            org.springframework.web.util.Log4j2ConfigListener
         </listener-class>
     </listener>
-     -->
+	  -->
 	  
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>

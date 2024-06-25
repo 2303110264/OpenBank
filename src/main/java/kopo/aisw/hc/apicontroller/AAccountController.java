@@ -36,16 +36,18 @@ public class AAccountController {
 	private TransactionService ts;
 	
 	// 계좌 거래내역 출력
-	@GetMapping("transaction?")
-	public ResponseEntity<?> getTransaction(@PathVariable(value = "accNum") String accNum
-			,@PathVariable(value="startDate") String stD
-			,@PathVariable(value="endDate") String enD
-			,@PathVariable(value="page") int page
+	@GetMapping("transaction")
+	public TransactionResponseVO getTransaction(@RequestParam(value = "accNum") String accNum
+			,@RequestParam(value="startDate") String stD
+			,@RequestParam(value="endDate") String enD
+			,@RequestParam(value="page") int page
 			,HttpSession session){
+		
+		TransactionResponseVO tResVO = new TransactionResponseVO();
 		MemberVO userVO = (MemberVO) session.getAttribute("userVO");
 		AccountVO acc = as.getAccount(accNum);
 		if(acc.getCustomerId()!=userVO.getCustomerId())
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized access");
+			return tResVO;
 		else {
 			TransactionVO t = new TransactionVO();
 			t.setWithdrawAcc(Long.parseLong(accNum));
@@ -53,12 +55,12 @@ public class AAccountController {
 			t.setTransactionDate(enD);
 			t.setTransactionId(page);
 			List<TransactionVO> list = ts.getTransactionListByDate(t);
-			TransactionResponseVO tResVO = new TransactionResponseVO();
 			tResVO.setTransaction(list);
 			tResVO.setSize(list.size());
 			tResVO.setAmount(ts.getSumByDate(t));
 			tResVO.setMember(userVO);
-	        return new ResponseEntity<>(new Object[] { tResVO }, HttpStatus.OK);
+			tResVO.setPage(page);
+	        return tResVO;
 		}
 	}
 
@@ -126,32 +128,6 @@ public class AAccountController {
 		return new ResponseEntity<>(new Object[] { account, transaction }, HttpStatus.OK);
 	}
 	
-}
-
-
-/*
-package kopo.aisw.hc.apicontroller;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import jakarta.servlet.http.HttpSession;
-import kopo.aisw.hc.account.service.AccountService;
-import kopo.aisw.hc.account.vo.AccountVO;
-import kopo.aisw.hc.member.vo.MemberVO;
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
-@RestController
-@RequestMapping("/account/")
-public class AAccountController {
-	@Autowired
-	AccountService as;
-	
 	@GetMapping("accCheck")
 	public String accCheck(@RequestParam("accNum") long accNum, HttpSession session) {
 		if(session==null) return "잘못된 접근입니다.";
@@ -169,4 +145,3 @@ public class AAccountController {
 	}
 	
 }
-*/

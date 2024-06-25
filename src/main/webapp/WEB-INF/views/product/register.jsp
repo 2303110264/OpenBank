@@ -38,7 +38,7 @@
 		<div class="row pb-4 sign-up">
 
 			<%-- Start Contact Form --%>
-			<div class="col-lg-8 ">
+			<div class="col-lg-8 " style="margin-left:auto">
 				<form:form modelAttribute="p"
 					action="${pageContext.request.contextPath}/product/register"
 					method="post">
