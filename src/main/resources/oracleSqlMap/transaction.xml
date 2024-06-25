@@ -74,4 +74,27 @@
 		    t.transaction_date = w.transaction_date
 		 -->
 	</select>
+	
+	<select id="viewTranByDate" parameterType="transactionVO" resultType="transactionVO">
+		SELECT transaction_type transactionType, transaction_date transactionDate, tran_name withdrawName
+		, amount amount
+		FROM (
+		    SELECT t.*, ROWNUM AS rnum
+		    FROM (
+		        SELECT *
+		        FROM CB_TRANSACTION
+		        WHERE acc_num = #{withdrawAcc} 
+		        AND 
+		        TRANSACTION_DATE BETWEEN TO_DATE(#{transactionType}, 'YYYY-MM-DD') AND TO_DATE(#{transactionDate}, 'YYYY-MM-DD')
+		        ORDER BY TRANSACTION_DATE DESC
+		    ) t
+		)
+		WHERE rnum BETWEEN #{transactionId} AND #{transactionId*15}; 
+	</select>
+	
+	<select id="getSumByDate" parameterType="transactionVO" resultType="Long">
+		SELECT (SELECT NVL(sum(amount), 0) FROM CB_TRANSACTION ct WHERE acc_num = #{} AND transaction_date &lt;=#{transactionDate} and transaction_type='입금' )-
+		(SELECT NVL(sum(amount), 0) FROM CB_TRANSACTION ct WHERE acc_num = #{} AND transaction_date &lt;=#{transactionDate} and transaction_type='출금') amount
+		FROM dual;
+	</select>
 </mapper>

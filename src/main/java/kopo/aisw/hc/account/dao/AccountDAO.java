@@ -30,7 +30,7 @@ public interface AccountDAO {
 	public boolean transfer(TransactionVO transaction);
 	
 	//계좌 해지하기
-	public boolean closeAnAccount(AccountVO account);
+	public boolean closeAnAccount(Long wAcc);
 	
 	//임시-계좌조회
 	public AccountVO getAccount(String accNum);

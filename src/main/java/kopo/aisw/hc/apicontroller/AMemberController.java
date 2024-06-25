@@ -1,5 +1,9 @@
 package kopo.aisw.hc.apicontroller;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +15,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.support.SessionStatus;
 
+import jakarta.mail.Authenticator;
+import jakarta.mail.Message;
+import jakarta.mail.MessagingException;
+import jakarta.mail.PasswordAuthentication;
+import jakarta.mail.Session;
+import jakarta.mail.Transport;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.http.HttpSession;
 import kopo.aisw.hc.member.service.MemberService;
 import kopo.aisw.hc.member.vo.MemberVO;
@@ -29,7 +41,7 @@ public class AMemberController {
 		MemberVO userVO = (MemberVO) session.getAttribute("userVO");
 		userVO.setCreditPassword(cp);
 		boolean result = ms.checkCreditPwd(userVO);
-		// log.info("CreditPassword check : "+userVO.getCustomerId()+" - result:"+result);
+		log.info("CreditPassword check : "+userVO.getCustomerId()+" - result:"+result);
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
 	

@@ -32,26 +32,36 @@
 -->
 <script>
 	document.addEventListener('DOMContentLoaded', function() {
-	    const password = document.getElementById('password');
+		const password = document.getElementById('password');
 	    const passwordCheck = document.getElementById('password-check');
 	    const passwordError = document.getElementById('password-error');
-	
-	    function checkPasswordMatch() {
+
+	    const cPassword = document.getElementById('credit-password');
+	    const cPasswordCheck = document.getElementById('credit-password-check');
+	    const cPasswordError = document.getElementById('credit-password-error');
+
+	    function checkMatch(password, passwordCheck, error) {
 	        if (password.value === passwordCheck.value) {
-	        	passwordError.textContent='';
-	        	return true;
+	            error.textContent = '';
+	            return true;
 	        } else {
-	            passwordError.textContent = '비밀번호가 일치하지 않습니다';
-	            passwordError.style.color = 'red';
-	        	return false;
+	            error.textContent = '비밀번호가 일치하지 않습니다';
+	            error.style.color = 'red';
+	            return false;
 	        }
 	    }
-	
-	    password.addEventListener('input', checkPasswordMatch);
-	    passwordCheck.addEventListener('input', checkPasswordMatch);
-	    
-	    form.addEventListener('submit', function(event) {
-	        if (!checkPasswordMatch()) {
+
+	    password.addEventListener('input', () => checkMatch(password, passwordCheck, passwordError));
+	    passwordCheck.addEventListener('input', () => checkMatch(password, passwordCheck, passwordError));
+
+	    cPassword.addEventListener('input', () => checkMatch(cPassword, cPasswordCheck, cPasswordError));
+	    cPasswordCheck.addEventListener('input', () => checkMatch(cPassword, cPasswordCheck, cPasswordError));
+
+	    const form = document.querySelector('form');
+	    form.addEventListener('submit', event => {
+	        const isPasswordValid = checkMatch(password, passwordCheck, passwordError);
+	        const isCPasswordValid = checkMatch(cPassword, cPasswordCheck, cPasswordError);
+	        if (!isPasswordValid || !isCPasswordValid) {
 	            event.preventDefault();
 	        }
 	    });
@@ -99,11 +109,27 @@
                     </div>
                     <div class="col-lg-6 mb-4">
                         <div class="form-floating">
-                            <input type="password" class="form-control form-control-lg light-300" id="password-check" name="pw" placeholder="Password check" />
+                            <input type="password" class="form-control form-control-lg light-300" id="password-check" name="pw" placeholder="Password check"/>
                             <label for="floatingPassword light-300">비밀번호 확인</label>
 							<span class="error" id="password-error"></span>
                         </div>
                     </div><%-- End Input Password --%>
+	
+                    <div class="col-lg-6 mb-4">
+                        <div class="form-floating">
+                            <form:input path="creditPassword" type="password" class="form-control form-control-lg light-300" id="credit-password" name="credit-password" maxlength="6" placeholder="Password"/>
+                            <label for="floatingPassword light-300">결제 비밀번호 (6자리 숫자)</label>
+                            <form:errors path="creditPassword" class="error"/>
+                            <span class="error" id="error-credit-password"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="form-floating">
+                            <input type="password" class="form-control form-control-lg light-300" id="credit-password-check" name="credit-pw" placeholder="credit-Password check"  maxlength="6" />
+                            <label for="floatingPassword light-300">결제 비밀번호 확인  (6자리 숫자)</label>
+							<span class="error" id="credit-password-error"></span>
+                        </div>
+                    </div><%-- End Input Credit Password --%>
 
                     <div class="col-lg-6 mb-4">
                         <div class="form-floating">

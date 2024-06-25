@@ -48,35 +48,35 @@
         <div class="row pb-4 sign-up">
             <%-- Start Contact Form --%>
             <div class="col-lg-8 sign-in-div">
-                <form:form class="contact-form row sign-in-form" method="post" name="form" role="form" modelAttribute="openAcc">
+                <form:form class="contact-form row sign-in-form" method="post" id="form" name="form" role="form" modelAttribute="openAcc">
                     <form:input path="customerId" type="hidden"/>
                     <form:input path="customerName" type="hidden"/>
                     <div class="col-lg-4 mb-4 sign-in-div2">
                         <div class="form-floating">
                             <div class="form-control form-control-lg light-300">${product.productName}</div>
-                            <label for="floatingPassword light-300">Product name</label>
+                            <label for="floatingPassword light-300">상품명</label>
                         </div>
                     </div><%-- 표시용 --%>
 
                     <div class="col-lg-4 mb-4 sign-in-div2">
                         <div class="form-floating">
                             <div class="form-control form-control-lg light-300">${openAcc.customerName}</div>
-                            <label for="floatingPassword light-300">Customer name</label>
+                            <label for="floatingPassword light-300">가입자명</label>
                         </div>
                     </div><%-- 표시용 --%>
 
                     <div class="col-lg-4 mb-4 sign-in-div2">
                         <div class="form-floating">
                             <form:input path="accName" type="text" class="form-control form-control-lg light-300" id="accName" name="accName" placeholder="Account Name" value="통장 별명을 설정해주세요"/>
-                            <label for="floatingname light-300">Account Name</label>
+                            <label for="floatingname light-300">통장명</label>
                             <form:errors path="accName" class="error"/>
                         </div>
                     </div>
 
                     <div class="col-lg-4 mb-4 sign-in-div2">
                         <div class="form-floating">
-                            <input type="password" class="form-control form-control-lg light-300" id="password" name="password" placeholder="Account Password" required="true"/>
-                            <label for="floatingname light-300">Account Password</label>
+                            <input type="password" class="form-control form-control-lg light-300" id="password" name="creditPassword" placeholder="Account Password" required="true"/>
+                            <label for="floatingname light-300">결제 비밀번호</label>
                         </div>
                     </div>
                     
@@ -160,15 +160,16 @@
       
                 $.ajax({
 	                type: 'POST',
-	                url: '/ob/member/password',
-	                data: { password: p },
+	                url: '/ob/member/credit-password',
+	                data: { creditPassword: p },
 	                success: function(result) {
 	                	if(result){
 	                		pChk = true;
+	                		console.log(p)
 	                		$('#form').submit();
 	                		return true;
 	                	}
-	                	else alert('비밀번호가 맞지 않습니다.')
+	                	else alert('결제 비밀번호가 맞지 않습니다.')
 	                }, error: function(error) {
 	                    alert('잘못된 요청입니다');
 	                    console.error(error);

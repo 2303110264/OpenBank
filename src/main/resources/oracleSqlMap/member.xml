@@ -56,10 +56,7 @@ CREATE SEQUENCE test_customer_seq;
 		values(test_customer_seq.nextval, 
 		#{userId}, 
 		#{password}, 
-<!-- 
   		#{creditPassword}, 
- -->
- 		'0000',
 		#{name}, 
 		#{phoneNum}, 
 		#{email}, 
@@ -122,6 +119,9 @@ CREATE SEQUENCE test_customer_seq;
 		<set>
 			<if test="password!=null">
 			password = #{password},
+			</if>
+			<if test="creditPassword!=null">
+			credit_password = #{creditPassword},
 			</if>
 			<if test="phoneNum!=null">
 			phone_num = #{phoneNum},

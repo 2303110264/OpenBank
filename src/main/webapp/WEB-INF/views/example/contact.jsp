@@ -64,10 +64,7 @@
         <h1 class="col-12 col-xl-8 h2 text-left text-primary pt-3">Create success campaign with us!</h1>
         <h2 class="col-12 col-xl-8 h4 text-left regular-400">Elit, sed do eiusmod tempor </h2>
         <p class="col-12 col-xl-8 text-left text-muted pb-5 light-300">
-            Incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices
-            gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. Laboris
-            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-            in voluptate.
+            답신에 최대 일주일이 소요됩니다.
         </p>
 
         <div class="row pb-4">
@@ -80,9 +77,9 @@
                         </div>
                     </div>
                     <ul class="contact-info list-unstyled col-lg-9 col-9  light-300">
-                        <li class="h5 mb-0">Media Contact</li>
-                        <li class="text-muted">Mr. John Doe</li>
-                        <li class="text-muted">010-020-0340</li>
+                        <li class="h5 mb-0">Contact</li>
+                        <li class="text-muted">Mr. Jun</li>
+                        <li class="text-muted">2303110262@office.kopo.ac.kr</li>
                     </ul>
                 </div>
 
@@ -94,8 +91,8 @@
                     </div>
                     <ul class="contact-info list-unstyled col-lg-9 col-9 light-300">
                         <li class="h5 mb-0">Technical Contact</li>
-                        <li class="text-muted">Mr. John Stiles</li>
-                        <li class="text-muted">010-020-0340</li>
+                        <li class="text-muted">Mrs. Hyeon</li>
+                        <li class="text-muted">2303110264@office.kopo.ac.kr</li>
                     </ul>
                 </div>
 
@@ -107,8 +104,8 @@
                     </div>
                     <ul class="contact-info list-unstyled col-lg-9 col-9 light-300">
                         <li class="h5 mb-0">Billing Contact</li>
-                        <li class="text-muted">Mr. Richard Miles</li>
-                        <li class="text-muted">010-020-0340</li>
+                        <li class="text-muted">Mr. Choi</li>
+                        <li class="text-muted">010-111-1111</li>
                     </ul>
                 </div>
 
@@ -117,25 +114,25 @@
 
             <%-- Start Contact Form --%>
             <div class="col-lg-8 ">
-                <form class="contact-form row" method="post" action="#" role="form">
+                <form class="contact-form row" method="post" onsubmit="sendEmail(); return false;" role="form">
 
                     <div class="col-lg-6 mb-4">
                         <div class="form-floating">
-                            <input type="text" class="form-control form-control-lg light-300" id="floatingname" name="inputname" placeholder="Name">
+                            <input type="text" class="form-control form-control-lg light-300" id="floatingname" name="inputname" value="${profile.name}" placeholder="Name">
                             <label for="floatingname light-300">Name</label>
                         </div>
                     </div><%-- End Input Name --%>
 
                     <div class="col-lg-6 mb-4">
                         <div class="form-floating">
-                            <input type="text" class="form-control form-control-lg light-300" id="floatingemail" name="inputemail" placeholder="Email">
+                            <input type="text" class="form-control form-control-lg light-300" id="floatingemail" name="inputemail" value="${profile.email}" placeholder="Email">
                             <label for="floatingemail light-300">Email</label>
                         </div>
                     </div><%-- End Input Email --%>
 
                     <div class="col-lg-6 mb-4">
                         <div class="form-floating">
-                            <input type="text" class="form-control form-control-lg light-300" id="floatingphone" name="inputphone" placeholder="Phone">
+                            <input type="text" class="form-control form-control-lg light-300" id="floatingphone" name="inputphone" value="${profile.phoneNum}" placeholder="Phone">
                             <label for="floatingphone light-300">Phone</label>
                         </div>
                     </div><%-- End Input Phone --%>
@@ -156,7 +153,7 @@
 
                     <div class="col-12">
                         <div class="form-floating mb-3">
-                            <textarea class="form-control light-300" rows="8" placeholder="Message" id="floatingtextarea"></textarea>
+                            <textarea class="form-control light-300" rows="8" placeholder="Message" id="floatingtextarea" name="inputmessage" required></textarea>
                             <label for="floatingtextarea light-300">Message</label>
                         </div>
                     </div><%-- End Textarea Message --%>
@@ -184,5 +181,27 @@
     <script src="${path}/assets/js/templatemo.js"></script>
     <%-- Custom --%>
     <script src="${path}/assets/js/custom.js"></script>
+    <script>
+        function sendEmail() {
+            var name = document.getElementById("floatingname").value;
+            var email = document.getElementById("floatingemail").value;
+            var phone = document.getElementById("floatingphone").value;
+            var company = document.getElementById("floatingcompany").value;
+            var subject = document.getElementById("floatingsubject").value;
+            var message = document.getElementById("floatingtextarea").value;
+
+            var mailtoLink = 'mailto:example@mail.com' +
+                '?subject=' + encodeURIComponent(subject) +
+                '&body=' + encodeURIComponent(
+                    'Name: ' + name + '\n' +
+                    'Email: ' + email + '\n' +
+                    'Phone: ' + phone + '\n' +
+                    'Company: ' + company + '\n\n' +
+                    message
+                );
+
+            window.location.href = mailtoLink;
+        }
+    </script>
 </body>
 </html>

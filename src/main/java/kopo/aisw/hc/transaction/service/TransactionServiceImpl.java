@@ -38,6 +38,16 @@ public class TransactionServiceImpl implements TransactionService{
 	public List<TransactionVO> getTransactionList(long accNum) {
 		return tDao.getTransactionList(accNum);
 	}
+
+	@Override
+	public List<TransactionVO> getTransactionListByDate(TransactionVO t) {
+		return tDao.getTransactionListByDate(t);
+	}
+
+	@Override
+	public long getSumByDate(TransactionVO t) {
+		return tDao.getSumByDate(t);
+	}
 	
 
 

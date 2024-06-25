@@ -66,7 +66,6 @@ public class AccountController {
 		model.addAttribute("product", p);
 		model.addAttribute("openAcc", openAcc);
 		if(res.hasErrors()) return "account/open";
-		//인증 또는 비밀번호 확인 로직이 빠져있음
 		try {
 			MemberVO m = (MemberVO) session.getAttribute("userVO");
 			//임시
@@ -101,11 +100,21 @@ public class AccountController {
 		List<TransactionVO> transaction = ts.getTransactionList(Long.parseLong(accNum));
 		AccountVO account = as.getAccount(accNum);
 		if(userVO.getCustomerId()!=account.getCustomerId()) return "redirect:/account/";
-		model.addAttribute("account", account);
+		session.setAttribute("account", account);
 		model.addAttribute("transaction", transaction);
 		
 		List<AccountVO> list = as.getAccountList(userVO);
 		model.addAttribute("accList", list);
 		return "account/detail";
+	}
+	
+	//계좌해지
+	@PostMapping("/close")
+	public String accountClose(Model model, @RequestParam("withdrawAcc") Long wAcc,
+			@RequestParam("depositAcc") Long dAcc, HttpSession session) {
+		MemberVO userVO = (MemberVO) session.getAttribute("userVO");
+		if(as.getAccount(wAcc+"").getCustomerId()!=userVO.getCustomerId()) return "redirect:/account/";
+		model.addAttribute("result", as.closeAnAccount(wAcc, dAcc));
+		return "account/result";
 	}
 }

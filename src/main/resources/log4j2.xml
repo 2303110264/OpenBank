@@ -33,11 +33,11 @@
         
     </Appenders>
     <Loggers>
-        <Logger name="kopo.aisw.hc.controller" level="info" additivity="false">
+        <Logger name="kopo.aisw.hc.*" level="info" additivity="false">
             <AppenderRef ref="Console"/>
-            <AppenderRef ref="FileAppender"/>
+            <AppenderRef ref="transactions"/>
             <AppenderRef ref="file-log"/>
-            <AppenderRef ref="FileAppender2"/>
+            <AppenderRef ref="test"/>
         </Logger>
         <Logger name="kopo.aisw.hc.controller.TestController" level="info" additivity="false">
             <AppenderRef ref="Console"/>
@@ -45,7 +45,7 @@
         </Logger>
         <Root level="info">
             <AppenderRef ref="Console"/> 
-            <AppenderRef ref="FileAppender2"/> <!-- 파일 출력을 위해 추가 -->
+            <AppenderRef ref="test"/> <!-- 파일 출력을 위해 추가 -->
         </Root>
     </Loggers>
 </Configuration>

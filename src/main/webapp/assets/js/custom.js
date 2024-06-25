@@ -64,11 +64,27 @@
 			})
 		}
 	}
+	let forCPwd = function(id){
+		let inputBox = document.getElementById(id);
+		if(inputBox){
+		    inputBox.addEventListener('input', function(){
+			    this.value = this.value.replace(/[^0-9]/g, '');
+			    let errSpan = document.getElementById("error-"+id);
+			    if (this.value.length !== 6) {
+                	errSpan.textContent = '결제비밀번호는 6자리여야합니다';
+            	} else {
+                	errSpan.textContent = '';
+            }
+			})
+		}
+	}
 	onlyNum('phoneNum');
 	onlyNum('rrn');
 	//onlyNum('wAcc');
 	onlyNum('dAcc');
 	onlyNum('amt');
+	forCPwd('credit-password');
+	onlyNum('credit-password-check');
 
 /**
 	let phoneNum = document.getElementById('phoneNum');

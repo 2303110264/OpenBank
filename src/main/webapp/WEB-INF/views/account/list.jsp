@@ -85,7 +85,7 @@
  --%>
             </div>
         </div>
-        <div class="row accounts gx-lg-5 min-height">
+        <div class="row accounts gx-lg-5 min-height left-16">
          	<c:if test="${accList}==null">
          		소유한 계좌가 없습니다.
          	</c:if>

@@ -65,7 +65,9 @@
                         <div class="form-floating">
                             <form:select path="withdrawAcc" type="text" class="form-control form-control-lg light-300 formSelect" id="wAcc" name="withdrawAcc" placeholder="withdraw Account" required="true">
                             	<c:forEach items="${accList}" var="a">
-                            		<form:option value="${a.accNum}">${a.accName}(${a.accNum})</form:option>
+	                            	<c:if test="${a.avaliable>0}">
+	                            		<form:option value="${a.accNum}">${a.accName}(${a.accNum})</form:option>
+									</c:if>
                             	</c:forEach>
                             </form:select>
                             <label for="floatingID light-300">출금할 계좌</label>

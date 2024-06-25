@@ -73,17 +73,22 @@
                         </div>
                     </div><%-- End Input Password --%>
 
-					<%--???
-                    <div class="col-lg-6 mb-4">
+					<div class="col-lg-6 mb-4">
                         <div class="form-floating">
-                            <form:input path="password" type="password" class="form-control form-control-lg light-300" id="floatingPassword" name="password" placeholder="Password"/>
-                            <label for="floatingPassword light-300">Password</label>
-                            <c:if test="document.form.zipNo.value!=''">
-                            	<form:errors path="password" class="error"/>
-							</c:if>                            
+                            <form:input path="creditPassword" type="password" class="form-control form-control-lg light-300" id="credit-password" name="credit-password" maxlength="6" placeholder="Password"/>
+                            <label for="floatingPassword light-300">결제 비밀번호 (6자리 숫자)</label>
+                            <form:errors path="creditPassword" class="error"/>
+                            <span class="error" id="error-credit-password"></span>
                         </div>
                     </div>
-					 --%>
+                    <div class="col-lg-6 mb-4">
+                        <div class="form-floating">
+                            <input type="password" class="form-control form-control-lg light-300" id="credit-password-check" name="credit-pw" placeholder="credit-Password check"  maxlength="6" />
+                            <label for="floatingPassword light-300">결제 비밀번호 확인 (6자리 숫자)</label>
+							<span class="error" id="credit-password-error"></span>
+                        </div>
+                    </div><%-- End Input Credit Password --%>
+
 
                     <div class="col-lg-6 mb-4">
                         <div class="form-floating">
@@ -131,7 +136,7 @@
 
                     <div class="col-lg-6 mb-4">
                         <div class="form-floating">
-                        	<input type="hidden" id="confmKey" name="confmKey" value=""  >
+                        	<input type="hidden" id="confmKey" name="confmKey" value="" >
                             <form:input  path="zipCode" type="text" class="form-control form-control-lg light-300" id="zipNo" name="zipNo" readonly="true" placeholder="zipCode"/>
                             <label for="floatingZip light-300">우편번호</label>
                             <form:errors path="address" class="error"/>
@@ -177,35 +182,53 @@
     <script src="${path}/assets/js/templatemo.js"></script>
 	<%-- Custom --%>
 	<c:if test="${message}">
+		<script>
+			let profile=${message}
+		</script>
+	</c:if>	
 	<script>
 		document.addEventListener('DOMContentLoaded', function() {
-			var profile = ${message}
 		    const password = document.getElementById('password');
 		    const passwordCheck = document.getElementById('password-check');
 		    const passwordError = document.getElementById('password-error');
 		    
-		    function checkPasswordMatch() {
+		    const cPassword = document.getElementById('credit-password');
+		    const cPasswordCheck = document.getElementById('credit-password-check');
+		    const cPasswordError = document.getElementById('credit-password-error');
+		    
+		    function checkPasswordMatch(password, passwordCheck, error) {
 		        if (password.value === passwordCheck.value) {
-		        	passwordError.textContent='';
+		        	error.textContent='';
 		        	return true;
 		        } else {
-		            passwordError.textContent = '비밀번호가 일치하지 않습니다';
-		            passwordError.style.color = 'red';
+		            error.textContent = '비밀번호가 일치하지 않습니다';
+		            error.style.color = 'red';
 		        	return false;
 		        }
 		    }
-		
-		    password.addEventListener('input', checkPasswordMatch);
-		    passwordCheck.addEventListener('input', checkPasswordMatch);
-		    
+		    password.addEventListener('input', () => checkPasswordMatch(password, passwordCheck, passwordError));
+		    passwordCheck.addEventListener('input', () => checkPasswordMatch(password, passwordCheck, passwordError));
+
+		    cPassword.addEventListener('input', () => checkPasswordMatch(cPassword, cPasswordCheck, cPasswordError));
+		    cPasswordCheck.addEventListener('input', () => checkPasswordMatch(cPassword, cPasswordCheck, cPasswordError));
+			
+		    const form = document.querySelector('form')
 		    form.addEventListener('submit', function(event) {
-		        if (!checkPasswordMatch()) {
+		    	const isPasswordValid = checkPasswordMatch(password, passwordCheck, passwordError);
+		        const isCPasswordValid = checkPasswordMatch(cPassword, cPasswordCheck, cPasswordError);
+		        if (!isPasswordValid){
 		            event.preventDefault();
+		            password.focus();
+		    	}else if(!isCPasswordValid) {
+		            event.preventDefault();
+		            if(cPassword.value.length!==6) alert("결제 비밀번호는 6자리여야 합니다.")
+		            cPassword.focus();
+		        }else{
+		        	console.log("ok");
 		        }
 		    });
 	    });
 	</script>
-	</c:if>	
 	<script src="${path}/assets/js/custom.js"></script>
 </body>
 </html>

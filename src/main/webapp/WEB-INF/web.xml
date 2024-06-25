@@ -37,7 +37,12 @@
 	<!-- ERROR CONTROL -->
 	<error-page>
 		<error-code>400</error-code>
-		<location>/common/bankMain.jsp</location>
+		<location>/error.jsp</location>
+	</error-page>
+	
+	<error-page>
+		<error-code>404</error-code>
+		<location>/error.jsp</location>
 	</error-page>
 	
 	<servlet-mapping>

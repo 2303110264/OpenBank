@@ -16,5 +16,9 @@ public interface TransactionService {
 	
 	//거래내역 출력
 	public List<TransactionVO> getTransactionList(long accNum);
+
+	public List<TransactionVO> getTransactionListByDate(TransactionVO t);
+
+	public long getSumByDate(TransactionVO t);
 	
 }

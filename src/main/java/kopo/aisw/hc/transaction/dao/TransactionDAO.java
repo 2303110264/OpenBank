@@ -19,5 +19,9 @@ public interface TransactionDAO {
 	
 	//거래내역
 	public List<TransactionVO> getTransactionList(long accNum);
+
+	public List<TransactionVO> getTransactionListByDate(TransactionVO t);
+
+	public long getSumByDate(TransactionVO t);
 		
 }

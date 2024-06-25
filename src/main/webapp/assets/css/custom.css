@@ -18,6 +18,10 @@ table{
 .formSelect{
 	height: calc(3.8rem + 2px) !important;
 }
+/* account list*/
+.left-16{
+	left:16% !important;
+}
 
 /*transfer modal*/
 .modal-form{

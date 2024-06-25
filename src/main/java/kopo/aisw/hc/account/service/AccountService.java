@@ -24,7 +24,7 @@ public interface AccountService {
 	public boolean transfer(TransactionVO transaction);
 
 	//계좌 해지하기
-	public boolean closeAnAccount(AccountVO account);
+	public boolean closeAnAccount(Long wAcc, Long dAcc);
 	
 	//임시
 	public AccountVO getAccount(String accNum);

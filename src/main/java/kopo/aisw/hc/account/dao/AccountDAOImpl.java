@@ -57,9 +57,6 @@ public class AccountDAOImpl implements AccountDAO {
 	//계좌 개설-등록 (최근거래일 빼고 다 채워야함)
 	@Override
 	public boolean openAnAccount(AccountVO account, ProductVO product) {
-		//베타 한정 잔액 추가
-		account.setBalance(1000000);
-		
 		//등록일자 세팅
 		LocalDate seoulNow = LocalDate.now(ZoneId.of("Asia/Seoul"));
 		//가입일자 세팅
@@ -120,8 +117,8 @@ public class AccountDAOImpl implements AccountDAO {
 	
 	//계좌 해지
 	@Override
-	public boolean closeAnAccount(AccountVO account) {
-		int a = sqlSession.delete("dao.AccountDAO.closeAnAccount", account);
+	public boolean closeAnAccount(Long wAcc) {
+		int a = sqlSession.update("dao.AccountDAO.closeAnAccount", wAcc);
 		return a==1;
 	}
 

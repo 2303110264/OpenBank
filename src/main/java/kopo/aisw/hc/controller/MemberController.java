@@ -24,7 +24,10 @@ import kopo.aisw.hc.api.Api;
 import kopo.aisw.hc.member.service.MemberService;
 import kopo.aisw.hc.member.vo.MemberVO;
 import kopo.aisw.hc.member.vo.SearchParam;
+import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Controller
 @SessionAttributes({"userVO"})
 @RequestMapping("/member/")
@@ -62,9 +65,12 @@ public class MemberController {
 			//폼에서 display none이나 함수도 괜찮을 거긴 한데...일단은 세션에서 가져오는 것으로
 			if(profileVO.getPassword().length()<8)
 				profileVO.setPassword(null);
+			if(profileVO.getCreditPassword().length()!=6)
+				profileVO.setCreditPassword(null);
 			
 			boolean result = ms.edit(profileVO);
 			model.addAttribute("message", result);
+			log.info(result+" - "+profileVO);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -78,8 +84,9 @@ public class MemberController {
 		if(session.getAttribute("userVO")!=null) return "redirect:/";
 		MemberVO m = new MemberVO();
 		model.addAttribute("m", m);
-		String location = "https://kauth.kakao.com/oauth/authorize?response_type=code&client_id="+api.getKakaoRest()+"&redirect_uri=http://localhost:8008/ob/member/kakao-login";
-        model.addAttribute("location", location);
+		String location = "https://kauth.kakao.com/oauth/authorize?response_type=code&client_id="+api.getKakaoRest()+"&redirect_uri=http://172.31.9.13:8008/ob/member/kakao-login";
+        log.info("카카오 로그인이 기능하지 않을 경우 MemberController - redirect url 확인할것");
+		model.addAttribute("location", location);
         
 		return "user/signIn";
 	}
@@ -152,7 +159,7 @@ public class MemberController {
 	}
 	
 	/**
-	 * 관리자의 회원관
+	 * 관리자의 회원관리
 	 */
 	
 	// 전체 회원 목록 조회

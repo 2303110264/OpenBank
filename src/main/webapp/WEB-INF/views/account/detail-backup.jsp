@@ -104,13 +104,15 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 mx-auto my-4 p-3 width-60">
+                    <form action="#" method="get">
                     <div class="input-group py-3">
                         <div class="form-control form-control-lg rounded-pill rounded-end date-input-container">
                         <input class="no-border" type="date" id="startDate" name="startDate"/>&nbsp;~&nbsp; 
                         <input class="no-border" type="date" id="endDate" name="endDate"/>
                         </div>
-                        <button class="btn btn-secondary text-white btn-lg rounded-pill rounded-start px-lg-4" id="searchBtn" type="submit">내역조회</button>
+                        <button class="btn btn-secondary text-white btn-lg rounded-pill rounded-start px-lg-4" type="submit">내역조회</button>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -136,10 +138,12 @@ accNum,acc_name accName,
 			        <th >출금 금액</th>
 			        <th >잔액</th>
 			    </tr>
-			    <%--
 			    <c:forEach var="t" items="${transaction}">
 			        <tr>
 			            <td>${t.transactionDate}</td>
+			            <%--
+			            <td>${t.transactionType}</td>
+			             --%>
 
 			            <td>${t.withdrawName}</td>
 			        <c:if test="${ t.transactionType.equals('입금')}">
@@ -153,7 +157,6 @@ accNum,acc_name accName,
 						<td>${String.format("%,d", t.WAfterBalance)}</td>
 			        </tr>
 			    </c:forEach>	
-			     --%>
 			</table>	
         </div><!-- End Blog Cover -->
 	</div>
@@ -319,9 +322,6 @@ accNum,acc_name accName,
     <jsp:include page="../footer.jsp"></jsp:include>
     <%-- End Footer --%>
     
-    <script>
-    	const acc = ${account.accNum}
-    </script>
     
     <%-- Bootstrap --%>
     <script src="${path}/assets/js/bootstrap.bundle.min.js"></script>
@@ -332,10 +332,9 @@ accNum,acc_name accName,
     <%-- Load jQuery require for isotope --%>
     <script src="${path}/assets/js/jquery.min.js"></script>
     <%-- Page Script --%>
-    <script src="http://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="${path}/assets/js/accountDetail.js"></script>
-    <%--
     <script>
+    <%--
         $(document).ready(function(){
         	var endDate = document.getElementById("endDate");
         	var startDate = document.getElementById("startDate");
@@ -391,8 +390,8 @@ accNum,acc_name accName,
         		}
     		});
         });
-    </script>
     --%>
+    </script>
 
 </body>
 

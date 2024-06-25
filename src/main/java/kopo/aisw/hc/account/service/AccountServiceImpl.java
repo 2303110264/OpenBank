@@ -69,9 +69,23 @@ public class AccountServiceImpl implements AccountService {
 	
 	//계좌 해지하기
 	@Override
-	public boolean closeAnAccount(AccountVO account) {
-		if(account.getBalance()!=0) return false;
-		return aDao.closeAnAccount(account);
+	public boolean closeAnAccount(Long wAcc, Long dAcc) {
+		if(aDao.getBalance(wAcc)!=0) {
+			try {
+				TransactionVO tran = new TransactionVO();
+				tran.setDepositAcc(dAcc);
+				tran.setWithdrawAcc(wAcc);
+				tran.setAmount(aDao.getBalance(wAcc));
+				tran.setDAfterBalance(aDao.getBalance(dAcc)+tran.getAmount());
+				tran.setDepositName("해지");
+				tran.setWithdrawName("해지");
+				tDao.transfer(tran);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return false;
+			}
+		}
+		return aDao.closeAnAccount(wAcc);
 	}
 
 	//소유계좌조회

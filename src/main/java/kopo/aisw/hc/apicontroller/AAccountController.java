@@ -17,6 +17,7 @@ import kopo.aisw.hc.member.vo.MemberVO;
 import kopo.aisw.hc.product.service.ProductService;
 import kopo.aisw.hc.product.vo.ProductVO;
 import kopo.aisw.hc.transaction.service.TransactionService;
+import kopo.aisw.hc.transaction.vo.TransactionResponseVO;
 import kopo.aisw.hc.transaction.vo.TransactionVO;
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,6 +34,33 @@ public class AAccountController {
 	private ProductService ps;
 	@Autowired
 	private TransactionService ts;
+	
+	// 계좌 거래내역 출력
+	@GetMapping("transaction?")
+	public ResponseEntity<?> getTransaction(@PathVariable(value = "accNum") String accNum
+			,@PathVariable(value="startDate") String stD
+			,@PathVariable(value="endDate") String enD
+			,@PathVariable(value="page") int page
+			,HttpSession session){
+		MemberVO userVO = (MemberVO) session.getAttribute("userVO");
+		AccountVO acc = as.getAccount(accNum);
+		if(acc.getCustomerId()!=userVO.getCustomerId())
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized access");
+		else {
+			TransactionVO t = new TransactionVO();
+			t.setWithdrawAcc(Long.parseLong(accNum));
+			t.setTransactionType(stD);
+			t.setTransactionDate(enD);
+			t.setTransactionId(page);
+			List<TransactionVO> list = ts.getTransactionListByDate(t);
+			TransactionResponseVO tResVO = new TransactionResponseVO();
+			tResVO.setTransaction(list);
+			tResVO.setSize(list.size());
+			tResVO.setAmount(ts.getSumByDate(t));
+			tResVO.setMember(userVO);
+	        return new ResponseEntity<>(new Object[] { tResVO }, HttpStatus.OK);
+		}
+	}
 
 	// 계좌 생성 사전 설정 정보
 	@GetMapping("openAcc/{productNum}")
@@ -90,24 +118,15 @@ public class AAccountController {
 	@PostMapping("detail")
 	public ResponseEntity<?> accountDetail(HttpSession session, @RequestParam("accNum") String accNum) {
 		MemberVO userVO = (MemberVO) session.getAttribute("userVO");
-		if (userVO == null) {
-			return new ResponseEntity<>("잘못된 접근입니다.", HttpStatus.UNAUTHORIZED);
-		}
 		AccountVO account = as.getAccount(accNum);
-		if (userVO.getCustomerId() != account.getCustomerId()) {
+		if (userVO == null||userVO.getCustomerId() != account.getCustomerId()) {
 			return new ResponseEntity<>("잘못된 접근입니다.", HttpStatus.UNAUTHORIZED);
 		}
 		List<TransactionVO> transaction = ts.getTransactionList(Long.parseLong(accNum));
 		return new ResponseEntity<>(new Object[] { account, transaction }, HttpStatus.OK);
 	}
+	
 }
-
-
-
-
-
-
-
 
 
 /*

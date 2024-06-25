@@ -56,7 +56,9 @@ public class TransactionDAOImpl implements TransactionDAO{
 		t.setDepositAcc(account.getAccNum());
 		t.setDepositName("개설기념(베타)");
 		int a = sqlSession.insert("dao.TransactionDAO.deposit", t);
-		return a==1;
+		a+= sqlSession.update("dao.AccountDAO.deposit", t);
+		
+		return a==2;
 	}
 
 	@Override
@@ -67,6 +69,17 @@ public class TransactionDAOImpl implements TransactionDAO{
 			System.out.println(tran.getWAfterBalance());
 		}
 		return list;
+	}
+
+	@Override
+	public List<TransactionVO> getTransactionListByDate(TransactionVO t) {
+		List<TransactionVO> list = sqlSession.selectList("dao.TransactionDAO.viewTranByDate", t);
+		return list;
+	}
+
+	@Override
+	public long getSumByDate(TransactionVO t) {
+		return sqlSession.selectOne("dao.TransactionDAO.getSumByDate", t);
 	}
 
 	

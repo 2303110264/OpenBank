@@ -35,25 +35,16 @@ CREATE TABLE CB_ACCOUNT(
 		insert into CB_ACCOUNT
 		values(#{accNum}, #{accName}, #{productNum},
 		#{customerId}, #{interestRate},
-		#{regDate}, #{retDate}, 1
+		#{regDate}, #{retDate}, 1, 0
 		)
 	</insert>
 	
 	<!-- 고객의 계좌목록 조회 -->
 	<select id="selectAccByCustomer" parameterType="Long" resultType="accountVO">
-		select c.acc_num accNum, c.acc_name accName, c.customer_id customerId
-				, to_char(c.ret_date, 'yyyy-mm-dd') retDate, tn.after_balance balance, c.avaliable avaliable
-		from cb_account c
-		join (
-		    select acc_num, after_balance
-		    from CB_Transaction
-		    where (acc_num, transaction_date) in (
-		        select acc_num, MAX(transaction_date) AS latest_transaction_date
-		        from CB_Transaction
-		        group by acc_num
-		    )
-		) tn on c.acc_num = tn.acc_num
-		where c.customer_id = #{customerId}
+		select acc_num accNum, acc_name accName, customer_id customerId
+				, to_char(ret_date, 'yyyy-mm-dd') retDate, balance balance, avaliable
+		from cb_account
+		where customer_id = #{customerId}
 	</select>
 	
 	<!-- 이체시 대상계좌 확인: 단일계좌 이름체크 -->
@@ -104,7 +95,7 @@ CREATE TABLE CB_ACCOUNT(
 		where acc_num = #{accNum}
 	</delete>
 	 -->
-	<update id="closeAnAccount" parameterType="accountVO">
+	<update id="closeAnAccount" parameterType="Long">
 		update cb_account
 		set AVALIABLE=0
 		where acc_num = #{accNum}
