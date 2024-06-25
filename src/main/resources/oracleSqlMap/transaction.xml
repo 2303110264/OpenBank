@@ -93,8 +93,8 @@
 	</select>
 	
 	<select id="getSumByDate" parameterType="transactionVO" resultType="Long">
-		SELECT (SELECT NVL(sum(amount), 0) FROM CB_TRANSACTION ct WHERE acc_num = #{} AND transaction_date &lt;=#{transactionDate} and transaction_type='입금' )-
-		(SELECT NVL(sum(amount), 0) FROM CB_TRANSACTION ct WHERE acc_num = #{} AND transaction_date &lt;=#{transactionDate} and transaction_type='출금') amount
+		SELECT (SELECT NVL(sum(amount), 0) FROM CB_TRANSACTION ct WHERE acc_num = #{accNum} AND transaction_date &lt;=#{transactionDate} and transaction_type='입금' )-
+		(SELECT NVL(sum(amount), 0) FROM CB_TRANSACTION ct WHERE acc_num = #{accNum} AND transaction_date &lt;=#{transactionDate} and transaction_type='출금') amount
 		FROM dual;
 	</select>
 </mapper>
