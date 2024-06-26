@@ -233,7 +233,7 @@
 				
 				$.ajax({
 	                type: 'GET',
-	                url: '/ob/account/accCheck',
+	                url: '/ob/api/account/accCheck',
 	                data: { accNum: dAcc },
 	                success: function(result) {
 	                	if(result==""){

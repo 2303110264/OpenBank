@@ -84,10 +84,9 @@ public class MemberController {
 		if(session.getAttribute("userVO")!=null) return "redirect:/";
 		MemberVO m = new MemberVO();
 		model.addAttribute("m", m);
-//		String location = "https://kauth.kakao.com/oauth/authorize?response_type=code&client_id="+api.getKakaoRest()
-//						+"&redirect_uri=http://172.31.9.13:8008/ob/member/kakao-login";
 		String location = "https://kauth.kakao.com/oauth/authorize?response_type=code&client_id="+api.getKakaoRest()
-						+"&redirect_uri=http://localhost:8008/ob/member/kakao-login";
+						+"&redirect_uri=http://172.31.9.13:8008/ob/member/kakao-login";
+//						+"&redirect_uri=http://localhost:8008/ob/member/kakao-login";
         log.info("카카오 로그인이 기능하지 않을 경우 MemberController - redirect url 확인할것");
 		model.addAttribute("location", location);
         
