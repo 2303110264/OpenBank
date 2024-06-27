@@ -149,12 +149,6 @@
                     </div>
                     <div class="col-md-12 col-12 m-auto text-center">
                     </div>
-					
-					
-
-
-
-
 <%----------------- --%>
                 </form>
 					      </div>

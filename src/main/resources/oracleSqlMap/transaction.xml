@@ -85,7 +85,7 @@
 		        FROM CB_TRANSACTION
 		        WHERE acc_num = #{withdrawAcc} 
 		        AND 
-		        TRANSACTION_DATE BETWEEN TO_DATE(#{transactionType}, 'YYYY-MM-DD') AND TO_DATE(#{transactionDate}, 'YYYY-MM-DD')
+		        TRANSACTION_DATE BETWEEN TO_DATE(#{transactionType}, 'YYYY-MM-DD') AND TO_DATE(#{transactionDate}, 'YYYY-MM-DD')+.86399
 		        ORDER BY TRANSACTION_DATE DESC
 		    ) t
 		)
