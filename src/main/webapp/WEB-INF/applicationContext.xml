@@ -70,7 +70,7 @@
 	        <mvc:mapping path="/account/**" /> 
 	        <mvc:mapping path="**/api/**" /> 
 	        <mvc:mapping path="/product/view/**" /> 
-	        <mvc:mapping path="/transaction/**" /> 
+	        <mvc:mapping path="**transaction**" /> 
 	        <mvc:mapping path="/member/profile" /> 
 	        <mvc:mapping path="/member/quit" /> 
 	        <mvc:mapping path="**/admin/**" /> 
