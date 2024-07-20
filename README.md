@@ -1,4 +1,4 @@
-# OpenBank - v0.1.1
+# OpenBank - v0.6.0
 ### 사전설치 필요
 > **JDK 17**   
 > **Eclipse 2022-03**   
