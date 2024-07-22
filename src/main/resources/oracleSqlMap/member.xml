@@ -261,6 +261,11 @@ CREATE SEQUENCE test_customer_seq;
             </when>
         </choose>
     </select>
-
+	
+	<select id="getMemberIdByNameAndPhone" parameterType="memberVO" resultType="memberVO">
+		select customer_id as customerId, name
+		from test_customer
+        where name = #{name} and phone_num = #{phoneNum}
+	</select>
 	
 </mapper>

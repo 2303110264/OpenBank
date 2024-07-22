@@ -47,4 +47,7 @@ public interface MemberService {
 	//암호화(임시)
 	public String Hashing(String password);
 	public boolean checkBirth(MemberVO m);
+	
+	
+	public MemberVO getMemberIdByNameAndPhone(MemberVO m);
 }

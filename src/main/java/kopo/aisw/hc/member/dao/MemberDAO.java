@@ -34,4 +34,6 @@ public interface MemberDAO {
 	//비밀번호 암호화
 	public String Hashing(String password);
 	public boolean checkBirth(MemberVO m);
+	
+	public MemberVO getMemberIdByNameAndPhone(MemberVO m);
 }

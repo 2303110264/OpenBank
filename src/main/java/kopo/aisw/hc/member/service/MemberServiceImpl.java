@@ -106,4 +106,9 @@ public class MemberServiceImpl implements MemberService{
 	public boolean checkBirth(MemberVO m) {
 		return mDao.checkBirth(m);
 	}
+
+	@Override
+	public MemberVO getMemberIdByNameAndPhone(MemberVO m) {
+		return mDao.getMemberIdByNameAndPhone(m);
+	}
 }

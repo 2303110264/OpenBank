@@ -129,10 +129,12 @@ public class JsonController {
 			
 			HttpURLConnection conn = (HttpURLConnection) url2.openConnection();
 			conn.setRequestMethod("POST");
-//			conn.setRequestProperty("X-Requested-With", "curl");
-			conn.setRequestProperty("Authorization", "TestAK " + testKey);
 			
-//			conn.setRequestProperty("content-type", "application/json");
+//			conn.setRequestProperty("X-Requested-With", "curl");
+			
+			conn.setRequestProperty("Authorization", "TestAK " + testKey);
+			conn.setRequestProperty("content-type", "application/json");
+			
 //			conn.setDoOutput(true);
 			
 			Charset charset = Charset.forName("UTF-8");
