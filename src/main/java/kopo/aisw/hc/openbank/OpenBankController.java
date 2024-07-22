@@ -38,7 +38,7 @@ public class OpenBankController {
 		else if(yn.toLowerCase().equals("n"))
 			map.put("accountList", as.getAccountList(m));
 		else
-			map.put("responseMessage", "eww...");
+			map.put("responseMessage", "''");
 		list.add(map);
 		
 		return list;
