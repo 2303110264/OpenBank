@@ -101,4 +101,9 @@ public class AccountServiceImpl implements AccountService {
 		return aDao.getAccount(accNum);
 	}
 
+	@Override
+	public List<AccountVO> getAccountListOnlyAvailable(MemberVO m) {
+		return aDao.getAccListOnlyAvailable(m.getCustomerId());
+	}
+
 }

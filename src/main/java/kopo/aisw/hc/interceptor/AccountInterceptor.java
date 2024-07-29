@@ -17,7 +17,7 @@ public class AccountInterceptor implements HandlerInterceptor {
 			MemberVO userVO = (MemberVO) session.getAttribute("userVO");
 			AccountVO acc = (AccountVO) session.getAttribute("account");
 	
-			if(userVO.getCustomerId()!=acc.getCustomerId()&&!acc.getAvaliable().equals("1")) {
+			if(userVO.getCustomerId()!=acc.getCustomerId()&&!acc.getAvailable().equals("1")) {
 				res.sendRedirect("/ob/account/");
 			}
 			return;

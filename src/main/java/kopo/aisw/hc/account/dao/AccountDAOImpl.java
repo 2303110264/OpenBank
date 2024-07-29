@@ -128,5 +128,11 @@ public class AccountDAOImpl implements AccountDAO {
 		Long acc = Long.parseLong(accNum);
 		return sqlSession.selectOne("dao.AccountDAO.getAccount", acc);
 	}
+
+	@Override
+	public List<AccountVO> getAccListOnlyAvailable(long customerId) {
+		List<AccountVO> list = sqlSession.selectList("dao.AccountDAO.selectAccOnlyAvailableByCustomer", customerId);
+		return list;
+	}
 	
 }

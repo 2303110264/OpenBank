@@ -102,8 +102,7 @@
 	</bean>
 	 -->
 	
-	<!-- /**: static 폴더 밑에 하위폴더를 찾아가겠다. 의미 -->
-	<!-- 모르겠어서 보류
+	<!-- 기본 resources 사용중이라 주석처리
      <mvc:resources location="/static" mapping="/**" /> 
 	 -->
 	

@@ -17,7 +17,7 @@ CREATE TABLE CB_ACCOUNT(
 	, REG_DATE DATE DEFAULT sysdate NOT NULL
 	, RET_DATE DATE NOT NULL
 	, BALANCE NUMBER NOT NULL /* 지우고만들고또지우고만들고..... */
-	, AVALIABLE NUMBER(1) NOT NULL  /* 1:활성 0:비활성 */
+	, available NUMBER(1) NOT NULL  /* 1:활성 0:비활성 */
 	, CONSTRAINT FK_CUSTOMER_ID FOREIGN KEY(CUSTOMER_ID) REFERENCES TEST_CUSTOMER(CUSTOMER_ID)
 	, CONSTRAINT FK_PRODUCT_NUM FOREIGN KEY(PRODUCT_NUM) REFERENCES TEST_PRODUCT_LIST(PRODUCT_NUM)
 	);
@@ -42,9 +42,17 @@ CREATE TABLE CB_ACCOUNT(
 	<!-- 고객의 계좌목록 조회 -->
 	<select id="selectAccByCustomer" parameterType="Long" resultType="accountVO">
 		select acc_num accNum, acc_name accName, customer_id customerId
-				, to_char(ret_date, 'yyyy-mm-dd') retDate, balance balance, avaliable
+				, to_char(ret_date, 'yyyy-mm-dd') retDate, balance balance, available
 		from cb_account
 		where customer_id = #{customerId}
+	</select>
+
+	<!-- 고객의 계좌목록 조회(유효한것만) -->
+	<select id="selectAccOnlyAvailableByCustomer" parameterType="Long" resultType="accountVO">
+		select acc_num accNum, acc_name accName, customer_id customerId
+				, to_char(ret_date, 'yyyy-mm-dd') retDate, balance balance, available
+		from cb_account
+		where customer_id = #{customerId} and available = 1
 	</select>
 	
 	<!-- 이체시 대상계좌 확인: 단일계좌 이름체크 -->
@@ -53,7 +61,7 @@ CREATE TABLE CB_ACCOUNT(
 		from cb_account a
 		join test_customer c
 			on a.customer_id = c.customer_id
-		where a.acc_num = #{accNum} and a.avaliable = 1
+		where a.acc_num = #{accNum} and a.available = 1
 	</select>
 	
 	<!-- 근데이거 쓸일이 있는것인? 삭제고민......... -->
@@ -97,7 +105,7 @@ CREATE TABLE CB_ACCOUNT(
 	 -->
 	<update id="closeAnAccount" parameterType="Long">
 		update cb_account
-		set AVALIABLE=0
+		set available=0
 		where acc_num = #{accNum}
 	</update>
 	
@@ -107,7 +115,7 @@ CREATE TABLE CB_ACCOUNT(
 				 t.after_balance balance,
 				c.product_num productNum,
 				to_char(c.reg_date, 'yyyy-mm-dd') regDate,
-				to_char(c.ret_date, 'yyyy-mm-dd') retDate, c.avaliable avaliable
+				to_char(c.ret_date, 'yyyy-mm-dd') retDate, c.available available
 		FROM (
 		    SELECT acc_num, after_balance 
 		    FROM (

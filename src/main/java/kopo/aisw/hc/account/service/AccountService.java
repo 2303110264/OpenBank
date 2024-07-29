@@ -28,4 +28,5 @@ public interface AccountService {
 	
 	//임시
 	public AccountVO getAccount(String accNum);
+	public List<AccountVO> getAccountListOnlyAvailable(MemberVO m);
 }

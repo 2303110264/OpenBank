@@ -34,5 +34,6 @@ public interface AccountDAO {
 	
 	//임시-계좌조회
 	public AccountVO getAccount(String accNum);
+	public List<AccountVO> getAccListOnlyAvailable(long customerId);
 	
 }

@@ -90,7 +90,7 @@
          		소유한 계좌가 없습니다.
          	</c:if>
 			<c:forEach items="${accList}" var="acc">
-				<c:if test="${acc.avaliable.equals('1') }">
+				<c:if test="${acc.available.equals('1') }">
 				<%-- 
 		            <a href="${path}/accDetail/${accList.indexOf(acc)}" class="a-margin col-sm-6 col-lg-4 text-decoration-none account type${acc.productNum }">
 				 --%>

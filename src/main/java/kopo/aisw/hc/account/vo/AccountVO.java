@@ -29,7 +29,7 @@ public class AccountVO {
 	, INTEREST_RATE NUMBER(5,4) NOT NULL
 	, REG_DATE DATE DEFAULT sysdate NOT NULL
 	, RET_DATE DATE NOT NULL
-	, AVALIABLE NUMBER(1) NOT NULL
+	, available NUMBER(1) NOT NULL
 	, CONSTRAINT FK_CUSTOMER_ID FOREIGN KEY(CUSTOMER_ID) REFERENCES TEST_CUSTOMER(CUSTOMER_ID)
 	, CONSTRAINT FK_PRODUCT_NUM FOREIGN KEY(PRODUCT_NUM) REFERENCES TEST_PRODUCT_LIST(PRODUCT_NUM)
 	);
@@ -52,6 +52,6 @@ public class AccountVO {
 	private long balance;
 	private String regDate;
 	private String retDate;
-	private String avaliable;
+	private String available;
 	
 }

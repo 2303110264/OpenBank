@@ -264,7 +264,7 @@ accNum,acc_name accName,
                         <div class="form-floating border-clean">
                             <select class="form-control form-control-lg light-300 formSelect" id="dAcc" name="depositAcc">
                             	<c:forEach items="${accList}" var="a">
-	                            	<c:if test="${a.avaliable>0&&!a.accNum.equals(account.accNum)}">
+	                            	<c:if test="${a.available>0&&!a.accNum.equals(account.accNum)}">
 	                            		<option value="${a.accNum}">${a.accName}(${a.accNum})</option>
 	                            	</c:if>
                             	</c:forEach>
