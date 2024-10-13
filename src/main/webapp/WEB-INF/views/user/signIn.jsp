@@ -52,19 +52,24 @@
 
                     <div class="col-lg-4 mb-4 sign-in-div2">
                         <div class="form-floating">
-                            <form:input path="userId" type="text" class="form-control form-control-lg light-300 " id="floatingID" name="userId" placeholder="ID" required="true"/>
+                            <form:input path="name" type="text" class="form-control form-control-lg light-300 " id="floatingID" name="name" placeholder="이름" required="true"/>
                             <label for="floatingID light-300">ID</label>
-                            <form:errors path="userId" class="error"/>
                         </div>
                     </div><%-- End Input userId --%>
                     <div class="col-lg-4 mb-4 sign-in-div2">
                         <div class="form-floating">
-                            <form:input path="password" type="password" class="form-control form-control-lg light-300 " id="floatingPassword" name="password" placeholder="Password" required="true"/>
+                            <form:input path="phoneNum" type="text" class="form-control form-control-lg light-300" id="phoneNum" name="phoneNum" placeholder="전화번호" maxlength="11"/>
+                            <label for="floatingPhone light-300">전화번호</label>
+                        </div>
+                    </div><%-- End Input phoneNum --%>
+<%--
+                    <div class="col-lg-4 mb-4 sign-in-div2">
+                        <div class="form-floating">
+                            <form:input path="phoneNum" type="password" class="form-control form-control-lg light-300 " id="floatingPassword" name="password" placeholder="Password" required="true"/>
                             <label for="floatingPassword light-300">Password</label>
                             <form:errors path="password" class="error"/>
                         </div>
                     </div><%-- End Input Password --%>
-
                     <div class="col-md-12 col-12 m-auto text-center">
                     	<button type="button" onclick="location.href='/ob/'" class="btn btn-3 rounded-pill px-md-5 px-4 py-2 radius-0 light-300">돌아가기</button>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

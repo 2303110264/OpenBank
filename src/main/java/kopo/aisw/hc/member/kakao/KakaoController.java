@@ -43,10 +43,10 @@ public class KakaoController {
     	String preUrl = (String) session.getAttribute("preUrl");
     	
     	try {
-    		// 기존 회원 체크 - 이름/주민번호/전화번호
+    		// 기존 회원 체크 - 이름/전화번호
     		// 회원이 아니면 가입절차 후 로그인
     		if(ms.humanDoubleCheck(member).getName()==null) ms.signUp(member);
-    		else if(ms.humanDoubleCheck(member).getUserId()==null) ms.updateBankId(member);
+    		else if(ms.humanDoubleCheck(member).getCustomerId()==-1) ms.updateBankId(member);
 	    	member = ms.signIn(member);
 	    	
 	    	ZonedDateTime nowSeoul = ZonedDateTime.now(ZoneId.of("Asia/Seoul"));
@@ -54,7 +54,6 @@ public class KakaoController {
 				m.addAttribute("loginChk", false);
 				log.info("Login fail : "+nowSeoul+"-"+member);
 			}else {
-				member.setPassword(null);
 				log.info("Login Success : "+nowSeoul+"-"+member);
 				m.addAttribute("userVO", member);
 			}

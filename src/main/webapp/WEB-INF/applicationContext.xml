@@ -64,8 +64,9 @@
 		<mvc:jsp prefix="/WEB-INF/views/" suffix=".jsp" />
 	</mvc:view-resolvers>
 
-	<mvc:interceptors>
 		<!-- 크흑 URL이 중구난방이라 일단 다 지정해두는중 ㅠㅠ 정리필요 -->
+	<!-- 
+	<mvc:interceptors>
 		<mvc:interceptor>
 	        <mvc:mapping path="/account/**" /> 
 	        <mvc:mapping path="**/api/**" /> 
@@ -95,6 +96,7 @@
 		</mvc:interceptor>
 		
 	</mvc:interceptors>	
+		 -->
 	<!-- 최대 업로드 파일 사이즈 : 10MB -->
 	<!-- 
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

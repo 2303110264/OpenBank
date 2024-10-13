@@ -64,12 +64,12 @@ public class MemberServiceImpl implements MemberService{
 	//임시
 	@Override
 	public boolean checkPwd(MemberVO m) {
-		m.setPassword(m.getPassword());
+		m.setPhoneNum(m.getPhoneNum());
         MemberVO userVO = mDao.getPwd(m);
 		if (userVO != null && m!=null) {
-			return m.getPassword().equals(userVO.getPassword());     
+			return m.getPhoneNum().equals(userVO.getPhoneNum());     
 		}
-		return false;
+		return true;
 	}
 
 	@Override

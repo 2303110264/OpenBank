@@ -76,7 +76,7 @@
 	</select>
 	
 	<select id="viewTranByDate" parameterType="transactionVO" resultType="transactionVO">
-		SELECT transaction_type transactionType, to_char(transaction_date, 'YYYY-MM-DD') transactionDate, tran_name withdrawName
+		SELECT transaction_type transactionType, to_char(transaction_date, 'YYYY-MM-DD') transactionDate, tran_name print_content
 		, amount amount
 		FROM (
 		    SELECT t.*, ROWNUM AS rnum

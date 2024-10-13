@@ -13,9 +13,11 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class TransactionResponseVO {
+	private String bank_code;
 	private int page;
+	private String accNum;
 	private MemberVO member;
-	private int size;
+	private int page_record_cnt;
 	private long amount;
 	private List<TransactionVO> transaction;
 }

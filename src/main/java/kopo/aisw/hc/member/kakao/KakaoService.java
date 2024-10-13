@@ -49,11 +49,6 @@ public class KakaoService {
 
         KakaoVO kakaoRes = response.getBody();
 
-        log.info(" [Kakao Service] Access Token ------> {}", kakaoRes.getAccessToken());
-        log.info(" [Kakao Service] Refresh Token ------> {}", kakaoRes.getRefreshToken());
-        log.info(" [Kakao Service] Id Token ------> {}", kakaoRes.getIdToken());
-        log.info(" [Kakao Service] Scope ------> {}", kakaoRes.getScope());
-
         return getKakaoUserCode(kakaoRes);
     }
     
@@ -78,28 +73,10 @@ public class KakaoService {
     //회원가입처리용
     public MemberVO kakaoToMember(KakaoVO kakaouser) {
     	MemberVO m = new MemberVO();
-    	m.setUserId(kakaouser.getId()+"");
-    	//수정되어야 할 로직
-    	m.setPassword(mDao.Hashing(m.getUserId()));
     	
     	m.setName(kakaouser.getKakaoAccount().getName());
-    	m.setEmail(kakaouser.getKakaoAccount().getEmail());
     	m.setPhoneNum("0"+kakaouser.getKakaoAccount().getPhoneNumber().substring(4).replace("-",""));
-    	int gender;
-    	if(kakaouser.getKakaoAccount().getGender().equals("female"))
-    		gender = 2;
-    	else
-    		gender = 1;
-    	if(Integer.parseInt(kakaouser.getKakaoAccount().getBirthyear())>1999)
-    		gender++;
     	
-    	m.setRrn(kakaouser.getKakaoAccount().getBirthyear().substring(2)
-    			+kakaouser.getKakaoAccount().getBirthday()
-    			+gender);
-    	
-    	//address not null 에러방지용 로직
-    	m.setAddress("-");
-    	m.setAddressDetail("-");
     	System.out.println(m);
     	return m;
     }

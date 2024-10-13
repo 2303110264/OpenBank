@@ -71,7 +71,7 @@ public class TransactionDAOImpl implements TransactionDAO{
 		return list;
 	}
 
-	@Override
+	@Override //api 사용은 이쪽
 	public List<TransactionVO> getTransactionListByDate(TransactionVO t) {
 		List<TransactionVO> list = sqlSession.selectList("dao.TransactionDAO.viewTranByDate", t);
 		return list;

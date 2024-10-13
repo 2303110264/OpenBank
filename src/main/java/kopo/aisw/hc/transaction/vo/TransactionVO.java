@@ -41,4 +41,6 @@ public class TransactionVO {
 	//현재잔액
 	private long wAfterBalance; 
 	private long dAfterBalance;
+	
+	private String print_content;
 }

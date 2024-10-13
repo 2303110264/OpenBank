@@ -42,26 +42,21 @@ public class AAccountController {
 			,@RequestParam(value="endDate") String enD
 			,@RequestParam(value="page") int page
 			,HttpSession session){
-		
 		TransactionResponseVO tResVO = new TransactionResponseVO();
-		MemberVO userVO = (MemberVO) session.getAttribute("userVO");
 		AccountVO acc = as.getAccount(accNum);
-		if(acc.getCustomerId()!=userVO.getCustomerId())
-			return tResVO;
-		else {
-			TransactionVO t = new TransactionVO();
-			t.setWithdrawAcc(Long.parseLong(accNum));
-			t.setTransactionType(stD);
-			t.setTransactionDate(enD);
-			t.setTransactionId(page);
-			List<TransactionVO> list = ts.getTransactionListByDate(t);
-			tResVO.setTransaction(list);
-			tResVO.setSize(list.size());
-			tResVO.setAmount(ts.getSumByDate(t));
-			tResVO.setMember(userVO);
-			tResVO.setPage(page);
-	        return tResVO;
-		}
+		TransactionVO t = new TransactionVO();
+		t.setWithdrawAcc(Long.parseLong(accNum));
+		t.setTransactionType(stD);
+		t.setTransactionDate(enD);
+		t.setTransactionId(page);
+		List<TransactionVO> list = ts.getTransactionListByDate(t);
+		tResVO.setBank_code("00"); 	// 은행 분리 시 여기 고쳐야함
+		tResVO.setTransaction(list);
+		tResVO.setPage_record_cnt(list.size());
+		tResVO.setAccNum(accNum);
+		tResVO.setAmount(ts.getSumByDate(t));
+		tResVO.setPage(page);
+        return tResVO;
 	}
 
 	// 계좌 생성 사전 설정 정보
@@ -107,8 +102,18 @@ public class AAccountController {
 
 	// 계좌 목록 조회
 	@GetMapping("")
-	public ResponseEntity<List<AccountVO>> accountList(HttpSession session) {
+	public ResponseEntity<List<AccountVO>> accountList(HttpSession session
+			,@RequestParam(value="name") String name
+			,@RequestParam(value="phoneNum") String phoneNum
+			) {
 		MemberVO userVO = (MemberVO) session.getAttribute("userVO");
+		if(userVO==null) {
+			userVO = new MemberVO();
+			userVO.setName(name);
+			userVO.setPhoneNum(phoneNum);
+		}
+		userVO = ms.getProfile(userVO);
+
 		if (userVO == null) {
 			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 		}
@@ -119,28 +124,29 @@ public class AAccountController {
 	// 계좌 상세 조회
 	@PostMapping("detail")
 	public ResponseEntity<?> accountDetail(HttpSession session, @RequestParam("accNum") String accNum) {
-		MemberVO userVO = (MemberVO) session.getAttribute("userVO");
+//		MemberVO userVO = (MemberVO) session.getAttribute("userVO");
 		AccountVO account = as.getAccount(accNum);
-		if (userVO == null||userVO.getCustomerId() != account.getCustomerId()) {
-			return new ResponseEntity<>("잘못된 접근입니다.", HttpStatus.UNAUTHORIZED);
-		}
+
+//		if (userVO == null||userVO.getCustomerId() != account.getCustomerId()) {
+//			return new ResponseEntity<>("잘못된 접근입니다.", HttpStatus.UNAUTHORIZED);
+//		}
 		List<TransactionVO> transaction = ts.getTransactionList(Long.parseLong(accNum));
 		return new ResponseEntity<>(new Object[] { account, transaction }, HttpStatus.OK);
 	}
 	
 	@GetMapping("accCheck")
 	public String accCheck(@RequestParam("accNum") long accNum, HttpSession session) {
-		if(session==null) return "잘못된 접근입니다.";
-		MemberVO userVO = (MemberVO) session.getAttribute("userVO");
-		log.info(userVO.getCustomerId()+" => "+accNum);
+//		if(session==null) return "잘못된 접근입니다.";
+//		MemberVO userVO = (MemberVO) session.getAttribute("userVO");
+//		log.info(userVO.getCustomerId()+" => "+accNum);
 		return as.getOwnerName(accNum);
 	}
 	
 	@GetMapping("info") //지금은 세션으로 체크하지만 ㅠㅠ 나중에는 헤더값 받아오고싶음
 	public AccountVO accInfo(HttpSession session, @RequestParam("accNum") String accNum) {
-		MemberVO userVO = (MemberVO) session.getAttribute("userVO");
+//		MemberVO userVO = (MemberVO) session.getAttribute("userVO");
 		AccountVO acc = as.getAccount(accNum);
-		if(acc.getCustomerId()!=userVO.getCustomerId()) return null;
+//		if(acc.getCustomerId()!=userVO.getCustomerId()) return null;
 		return acc;
 	}
 	

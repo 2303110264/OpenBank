@@ -54,28 +54,6 @@ public class MemberController {
 		model.addAttribute("m", userVO);
 		return "user/profile";
 	}
-	@PostMapping("profile")
-	public String profile(@Valid @ModelAttribute("m")MemberVO profileVO,
-			BindingResult res, HttpSession session, Model model){
-		try {
-			MemberVO userVO = (MemberVO) session.getAttribute("userVO");
-			//세션과 아이디가 다르면 메인화면 복귀
-			if(!(userVO.getCustomerId()==profileVO.getCustomerId()))
-				return "redirect:/";
-			//폼에서 display none이나 함수도 괜찮을 거긴 한데...일단은 세션에서 가져오는 것으로
-			if(profileVO.getPassword().length()<8)
-				profileVO.setPassword(null);
-			if(profileVO.getCreditPassword().length()!=6)
-				profileVO.setCreditPassword(null);
-			
-			boolean result = ms.edit(profileVO);
-			model.addAttribute("message", result);
-			log.info(result+" - "+profileVO);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		return "user/profile";
-	}
 	
 	//로그인
 	@GetMapping("signIn")
@@ -85,8 +63,8 @@ public class MemberController {
 		MemberVO m = new MemberVO();
 		model.addAttribute("m", m);
 		String location = "https://kauth.kakao.com/oauth/authorize?response_type=code&client_id="+api.getKakaoRest()
-						+"&redirect_uri=http://172.31.9.13:8008/ob/member/kakao-login";
-//						+"&redirect_uri=http://localhost:8008/ob/member/kakao-login";
+//						+"&redirect_uri=http://172.31.9.13:8008/ob/member/kakao-login";
+						+"&redirect_uri=http://localhost:8008/ob/member/kakao-login";
         log.info("카카오 로그인이 기능하지 않을 경우 MemberController - redirect url 확인할것");
 		model.addAttribute("location", location);
         
@@ -101,8 +79,9 @@ public class MemberController {
 			model.addAttribute("loginChk", false);
 			return "user/signIn";
 		}else {
+			userVO.setCustomerId(123);
 			model.addAttribute("userVO", userVO);
-
+			
 			//로그인이 필요한 모든 링크에 interceptor를 걸었으나 수동임... url정리 필요.
 			// 	(applicationContext.xml참조)
 			//kopo.aisw.hc.interceptor.SignInInterceptor에 세션에 preUrl을 추가하는 코드가 있음
@@ -130,21 +109,8 @@ public class MemberController {
 	@PostMapping("signUp")
 	public String signUp(@Valid @ModelAttribute("m")MemberVO m, BindingResult res, Model model) throws Exception {
 		
-		//id 중복체크
-		if(ms.idDoubleCheck(m.getUserId())) model.addAttribute("idDoubleCheck", true);
-		//이미 등록된 유저인지 확인
-		MemberVO humanCheck = ms.humanDoubleCheck(m);
-		if(humanCheck.getUserId()!=null) model.addAttribute("humanDoubleCheck", true);
-		//전화번호 중복체크
-		if(ms.phoneDoubleCheck(m.getPhoneNum())) model.addAttribute("phoneDoubleCheck", true);
-		//이메일 중복체크
-		if(ms.mailDoubleCheck(m.getEmail())) model.addAttribute("mailDoubleCheck", true);
-		// 가입 가능?
-		if(res.hasErrors()) return "user/signUp";
-		
 		boolean result;
-		if(humanCheck.getName()!=null) result = ms.updateBankId(m);
-		else result = ms.signUp(m);
+		result = ms.signUp(m);
 		if(result) 
 			model.addAttribute("signUp", true);
 		else 

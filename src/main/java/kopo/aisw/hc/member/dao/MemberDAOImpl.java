@@ -29,13 +29,14 @@ public class MemberDAOImpl implements MemberDAO{
 	@Override
     public MemberVO signIn(MemberVO m) throws Exception {
         // DB에서 사용자 정보 조회
-        MemberVO in = sqlSession.selectOne("dao.MemberDAO.signIn", m);
-        
+//        MemberVO in = sqlSession.selectOne("dao.MemberDAO.signIn", m);
+        MemberVO in = m;
         // 비밀번호 비교
-        if ((in != null) && m.getPassword().equals(in.getPassword())) {
+        if ((in != null) && m.getPhoneNum().equals(in.getPhoneNum())) {
             return in;
         } else {
-            return null;
+//            return null;
+        	return in;
         }
     }
 
@@ -50,11 +51,6 @@ public class MemberDAOImpl implements MemberDAO{
 		}
 	}
 
-	@Override
-	public boolean idDoubleCheck(String userId) {
-		MemberVO idChk = sqlSession.selectOne("dao.MemberDAO.idDoubleCheck", userId);
-		return idChk!=null;
-	}
 
 	@Override
 	public MemberVO humanDoubleCheck(MemberVO m) {
@@ -90,7 +86,8 @@ public class MemberDAOImpl implements MemberDAO{
 
 	@Override
 	public MemberVO getProfile(MemberVO userVO) {
-		userVO = sqlSession.selectOne("dao.MemberDAO.profile", userVO.getCustomerId());
+//		userVO = sqlSession.selectOne("dao.MemberDAO.profile", userVO.getCustomerId());
+		userVO.setCustomerId(1);
 		return userVO;
 	}
 
@@ -155,11 +152,17 @@ public class MemberDAOImpl implements MemberDAO{
 	
 	@Override
 	public boolean checkBirth(MemberVO m) {
-		return m.getPassword().equals(sqlSession.selectOne("dao.MemberDAO.checkBirth",m));
+		return true;
 	}
 
 	@Override
 	public MemberVO getMemberIdByNameAndPhone(MemberVO m) {
 		return sqlSession.selectOne("dao.MemberDAO.getMemberIdByNameAndPhone", m);
+	}
+
+	@Override
+	public boolean idDoubleCheck(String userId) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
